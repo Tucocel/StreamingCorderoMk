@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios Streaming Cordero MK</title>
+    
+    <!-- METADATOS COMPARTICIÓN ESTADOS (OPEN GRAPH CORPORATIVO) -->
+    <meta property="og:title" content="🚀 Servicios Streaming Cordero MK — Taquilla Digital Activa">
+    <meta property="og:description" content="Membresías digitales y televisión premium por IP con estabilidad absoluta y garantía real de servicio bajo el respaldo de Tucocel C.A.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?q=80&w=400&auto=format&fit=crop">
+    <meta property="og:type" content="website">
+
+    <!-- TAILWIND & FONTS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030306; color: #f8fafc; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* EFECTO TAQUILLA PREMIUM CON CONTRASTE MEJORADO */
+        .cinema-card { 
+            background: linear-gradient(145deg, #090912, #131324); 
+            border: 1px solid rgba(255, 255, 255, 0.14); 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .cinema-card:hover, .cinema-card:active { 
+            border-color: rgba(220, 38, 38, 0.6); 
+            box-shadow: 0 0 25px rgba(220, 38, 38, 0.25);
+            transform: translateY(-3px);
+        }
+        .glow-red { text-shadow: 0 0 14px rgba(220, 38, 38, 0.9); }
+        .glow-white { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)); }
+        
+        /* AURA DE LUZ CENTRAL PARA LOGOS INFERIORES */
+        .footer-glow {
+            background: radial-gradient(circle at center, rgba(220, 38, 38, 0.14) 0%, rgba(3, 3, 6, 0) 65%);
+        }
+        /* BANNER ÉPICO ENTRADA */
+        .hero-epic {
+            background: radial-gradient(circle at top, rgba(153, 27, 27, 0.35) 0%, rgba(3, 3, 6, 0) 75%), linear-gradient(180deg, #080810 0%, #030306 100%);
+            border-bottom: 1px solid rgba(220, 38, 38, 0.18);
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden no-scrollbar flex flex-col justify-between">
+
+    <div>
+        <!-- INICIO SESIÓN MÁSTER CENTRAL -->
+        <div id="streaming-modal-login-raiz" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[12000] p-4 flex items-center justify-center hidden">
+            <div class="bg-neutral-900 border border-neutral-800 w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl">
+                <div class="text-center space-y-1">
+                    <div class="w-12 h-12 bg-neutral-800 border border-neutral-700 rounded-2xl flex items-center justify-center mx-auto text-red-500 text-xl"><i class="fa-solid fa-user-shield"></i></div>
+                    <h3 class="font-black text-base text-white uppercase tracking-tight">Acceso Administrativo</h3>
+                    <p class="text-[10px] text-slate-500 uppercase">Servicios Streaming Cordero MK</p>
+                </div>
+                <div class="space-y-3 text-xs">
+                    <input type="text" id="master-user-field" placeholder="Usuario ID" class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-3 rounded-xl font-bold font-mono focus:outline-none focus:border-red-600 uppercase">
+                    <input type="password" id="master-pass-field" placeholder="Clave Maestra" class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-3 rounded-xl font-bold font-mono focus:outline-none focus:border-red-600">
+                    <button onclick="window.validarCredencialesMasterStreaming()" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl uppercase tracking-wider transition-all shadow-lg">Desbloquear Servidor</button>
+                    <button onclick="document.getElementById('streaming-modal-login-raiz').classList.add('hidden')" class="w-full bg-neutral-950 border border-neutral-800 text-slate-400 font-bold py-2 rounded-xl uppercase tracking-wide">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAVBAR EXECUTIVO COMPLETO CORPORATIVO -->
+        <header class="bg-neutral-950/95 border-b border-neutral-900 px-4 py-3.5 sticky top-0 z-50 backdrop-blur-md">
+            <div class="max-w-6xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="text-red-600 text-xs sm:text-base font-black tracking-widest uppercase glow-red"><i class="fa-solid fa-film"></i> Servicios Streaming Cordero MK</span>
+                </div>
+                <div>
+                    <button id="btn-mando-abrir-login" onclick="window.abrirModalLoginStreamingRaiz()" class="bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-slate-300 font-black text-[9px] sm:text-[10px] px-3.5 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-lock text-red-500"></i> <span>Consola Máster</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- ANUNCIO REGLA DE ORO DEGRADADO -->
+        <div class="bg-gradient-to-r from-red-950 via-neutral-950 to-red-950 text-center py-2.5 px-4 border-b border-red-900/30">
+            <p class="text-[9.5px] sm:text-xs font-bold text-slate-200 uppercase tracking-wide">
+                📌 <span class="text-red-500 font-black">Regla de Oro:</span> Todas las membresías tienen una suscripción por 1 mes. Deben pagar un día antes del vencimiento.
+            </p>
+        </div>
+
+        <!-- MÉTODOS DE PAGO BANNER -->
+        <div class="max-w-6xl mx-auto px-3 pt-4">
+            <div class="bg-neutral-950/40 border border-neutral-900 rounded-2xl py-2 px-4 text-center">
+                <p class="text-[9.5px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wide">
+                    💳 <span class="text-white">Múltiples Métodos de Pago Disponibles:</span> Bolívares (Pago Móvil) | Binance USDT | Nequi | PayPal | Zelle
+                </p>
+            </div>
+        </div>
+
+        <!-- ==================== VISTA CLIENTE PÚBLICO ==================== -->
+        <div id="vista-vitrina-publica" class="space-y-6">
+            <!-- BANNER PRINCIPAL ÉPICO DE ENTRADA -->
+            <section class="hero-epic text-center py-10 px-4 space-y-3 shadow-xl">
+                <div class="max-w-3xl mx-auto space-y-2">
+                    <span class="text-[9px] tracking-[0.3em] font-extrabold text-red-500 uppercase bg-red-950/50 border border-red-900/50 px-3 py-1 rounded-full inline-block">TAQUILLA DIGITAL OFICIAL</span>
+                    <h1 class="text-3xl sm:text-5xl font-black tracking-tight uppercase text-white leading-none">
+                        Servicios Streaming <br class="sm:hidden"><span class="text-red-600 glow-red">Cordero MK</span>
+                    </h1>
+                    <div class="h-0.5 w-16 bg-red-600 mx-auto my-3 rounded-full shadow-lg shadow-red-500/50"></div>
+                    <p class="text-[10px] sm:text-xs text-slate-400 max-w-md mx-auto uppercase font-bold tracking-wider leading-relaxed">
+                        ⭐ CALIDAD PREMIUM VIRTUAL | DISPONIBILIDAD INMEDIATA | SOPORTE 24/7
+                    </p>
+                </div>
+            </section>
+
+            <!-- GRID ADAPTATIVO: 2 EN MÓVIL, 4 EN PC -->
+            <main class="max-w-6xl mx-auto px-2.5 sm:px-4 py-2">
+                <section id="mosaico-vitrina-publica-productos" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+                    <!-- Inyección automatizada por JS -->
+                </section>
+            </main>
+        </div>
+
+        <!-- FORMULARIO DE CAPTACIÓN PÚBLICO -->
+        <div id="modal-solicitud-cliente-streaming" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[10000] p-4 hidden flex items-center justify-center">
+            <div class="bg-neutral-900 border border-neutral-800 w-full max-w-md rounded-3xl p-6 space-y-4 shadow-2xl">
+                <div class="flex justify-between items-center border-b border-neutral-800 pb-2">
+                    <h3 class="font-black text-xs uppercase tracking-wider text-white flex items-center gap-1.5 text-red-500"><i class="fa-solid fa-paper-plane"></i> Formulario de Pedido</h3>
+                    <button onclick="document.getElementById('modal-solicitud-cliente-streaming').classList.add('hidden')" class="text-slate-400 hover:text-white bg-neutral-950 border border-neutral-800 w-7 h-7 rounded-xl flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
+                </div>
+                <form onsubmit="event.preventDefault(); window.despacharSolicitudWhatsAppAlDueno();" class="space-y-3 text-xs font-bold text-slate-800">
+                    <input type="text" id="sol-plataforma" readonly class="w-full bg-neutral-950 border border-neutral-800 text-red-500 px-4 py-2.5 rounded-xl text-center font-black uppercase font-mono cursor-not-allowed">
+                    <div>
+                        <label class="text-[9px] text-slate-400 font-black uppercase ml-1 block mb-1">Nombre y Apellido</label>
+                        <input type="text" id="sol-nombre" required placeholder="Su identidad..." class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold focus:outline-none focus:border-neutral-700 uppercase">
+                    </div>
+                    <div>
+                        <label class="text-[9px] text-slate-400 font-black uppercase ml-1 block mb-1">Número de WhatsApp</label>
+                        <input type="text" id="sol-tlf" required placeholder="Ej: 04141234567" class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-2.5 rounded-xl font-mono focus:outline-none focus:border-neutral-700">
+                    </div>
+                    <div>
+                        <label class="text-[9px] text-slate-400 font-black uppercase ml-1 block mb-1">Dirección Corta</label>
+                        <input type="text" id="sol-dir" required placeholder="Sector / Municipio" class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold focus:outline-none focus:border-neutral-700 uppercase">
+                    </div>
+                    <div class="bg-neutral-950 border border-neutral-855 p-3 rounded-xl text-center">
+                        <span class="text-[8.5px] font-black text-red-500 uppercase tracking-widest block">⚠️ REGLA DE ENVÍO</span>
+                        <p class="text-[10px] text-slate-400 leading-tight">Si vas a hacer uso de este envío es porque estás 100% seguro de que deseas contratar la membresía. Este mensaje será enviado directamente al proveedor.</p>
+                    </div>
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl uppercase tracking-wider text-xs">Confirmar y Enviar al WhatsApp</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- ==================== VISTA CONSOLA ADMINISTRATIVA MÁSTER ==================== -->
+        <main id="vista-streaming-admin" class="max-w-6xl mx-auto px-4 py-6 space-y-6 hidden">
+            
+            <!-- CABECERA PRINCIPAL -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-neutral-900 pb-5">
+                <div>
+                    <span class="bg-neutral-900 text-slate-400 border border-neutral-800 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full inline-flex items-center gap-1.5"><i class="fa-solid fa-lock text-red-500"></i> Consola Central de Control</span>
+                    <h2 class="text-2xl font-black text-white mt-1 uppercase">Servidores de Despacho</h2>
+                </div>
+                <div class="bg-neutral-900 border border-neutral-800 p-3 rounded-2xl flex items-center gap-3 font-mono text-xs font-bold w-full sm:w-auto">
+                    <div>
+                        <span class="block text-[8px] text-slate-500 uppercase tracking-wider font-sans">Tasa USDT Binance</span>
+                        <input type="number" id="adm-tasa-cambio" value="40" class="w-20 bg-transparent text-emerald-400 font-black focus:outline-none text-sm" onkeyup="window.recalcularTasasBolivaresAdmin()">
+                    </div>
+                    <div class="border-l border-neutral-800 pl-3">
+                        <span class="block text-[8px] text-slate-500 uppercase tracking-wider font-sans">Suscritos</span>
+                        <span id="lbl-total-activos" class="text-red-500 text-sm font-black">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLERO ALERTAS FIJO ARRIBA -->
+            <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
+                <h3 class="text-[10px] font-black text-amber-500 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Tablero de Alertas Tempranas e Indicadores de Vencimiento</h3>
+                <div id="wrapper-chismoseador-burbujas" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2">
+                    <!-- Burbujas de alerta -->
+                </div>
+            </div>
+
+            <!-- BÚNKER DE FUNCIONES COMPACTO (MÓDULOS DESPLEGABLES CON ACORDEÓN) -->
+            <div class="space-y-2">
+                <!-- ACCORDION 1: LEGO PARSER -->
+                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
+                    <button onclick="window.toggleModuloAcordeon('acc-lego-parser')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
+                        <span><i class="fa-solid fa-paste text-red-500 mr-2"></i> Carga de Clientes e Inyector Lego Parser</span>
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </button>
+                    <div id="acc-lego-parser" class="hidden p-5 border-t border-neutral-855 space-y-4 bg-neutral-950/40">
+                        <div class="space-y-2">
+                            <textarea id="succion-bruta-textarea" rows="3" placeholder="Pegue el bloque de texto bruto del proveedor completo aquí..." class="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded-xl font-mono text-[10px] focus:outline-none focus:border-red-600 no-scrollbar resize-y"></textarea>
+                            <button onclick="window.procesarSuccionLegoInteligenteTexto()" class="w-full bg-neutral-900 border border-neutral-800 hover:border-red-600/30 text-slate-300 font-black text-[10px] py-2 rounded-xl uppercase tracking-wider transition-all">Separar Datos en Planilla ⚡</button>
+                        </div>
+                        <div class="space-y-3 text-xs font-bold text-slate-800">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <div>
+                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Plataforma</label>
+                                    <select id="field-plataforma" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl focus:outline-none"></select>
+                                </div>
+                                <div>
+                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Vigencia Lote</label>
+                                    <select id="field-meses" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl focus:outline-none">
+                                        <option value="1">1 Mes (30 días)</option>
+                                        <option value="2">2 Meses (60 días)</option>
+                                        <option value="3">3 Meses (90 días)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-850 space-y-2">
+                                <span class="text-[8.5px] text-red-500 font-black uppercase tracking-wider block"><i class="fa-solid fa-key"></i> Credenciales de Acceso</span>
+                                <input type="text" id="field-correo" placeholder="Correo / Cuenta ID" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
+                                <input type="text" id="field-clave" placeholder="Contraseña de Acceso" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="text" id="field-perfil" placeholder="Perfil Asignado" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
+                                    <input type="text" id="field-pin" placeholder="PIN Perfil" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
+                                </div>
+                            </div>
+                            <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-850 space-y-2">
+                                <span class="text-[8.5px] text-slate-400 font-black uppercase tracking-wider block"><i class="fa-solid fa-user"></i> Datos del Cliente</span>
+                                <input type="text" id="field-cliente-nombre" placeholder="Nombre Completo del Cliente" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="text" id="field-cliente-tlf" placeholder="Celular (WhatsApp)" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
+                                    <input type="text" id="field-cliente-dir" placeholder="Dirección / Sector" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
+                                </div>
+                            </div>
+                            <button onclick="window.ejecutarCargaPerfilStreamingFirebase()" class="w-full bg-red-600 hover:bg-red-700 text-white text-xs font-black py-3.5 rounded-xl uppercase tracking-wider">Crear Perfil e Inyectar 🔒</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ACCORDION 2: REGULADOR PRECIOS -->
+                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
+                    <button onclick="window.toggleModuloAcordeon('acc-tarifador')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
+                        <span><i class="fa-solid fa-sliders text-red-500 mr-2"></i> Regulador Dinámico de Tarifas Globales Web</span>
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </button>
+                    <div id="acc-tarifador" class="hidden p-4 border-t border-neutral-850 bg-neutral-950/40 space-y-3">
+                        <div id="wrapper-inputs-tarifador-dinamico" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5"></div>
+                        <button onclick="window.salvarTarifasPublicasDinamicas()" class="bg-red-600 hover:bg-red-700 text-white font-black text-[10px] px-5 py-2 rounded-xl uppercase tracking-wider block ml-auto">Actualizar Precios Web</button>
+                    </div>
+                </div>
+
+                <!-- ACCORDION 3: NUEVAS PLATAFORMAS -->
+                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
+                    <button onclick="window.toggleModuloAcordeon('acc-add-plataforma')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
+                        <span><i class="fa-solid fa-square-plus text-red-500 mr-2"></i> Creador Autónomo de Nuevas Plataformas</span>
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </button>
+                    <div id="acc-add-plataforma" class="hidden p-5 border-t border-neutral-850 bg-neutral-950/40 space-y-4 text-xs font-bold text-slate-300">
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                            <div>
+                                <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">ID Único (Ej: VIX, SPOTIFY)</label>
+                                <input type="text" id="new-plat-id" placeholder="ID..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white font-mono uppercase">
+                            </div>
+                            <div>
+                                <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Nombre Comercial</label>
+                                <input type="text" id="new-plat-nombre" placeholder="Ej: Vix Premium..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white">
+                            </div>
+                            <div>
+                                <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Precio USDT</label>
+                                <input type="number" id="new-plat-precio" value="5.00" step="0.1" class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white font-mono">
+                            </div>
+                            <div>
+                                <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">URL Logo (Opcional)</label>
+                                <input type="text" id="new-plat-logo" placeholder="Link de imagen..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white font-mono">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Descripción Corta</label>
+                            <input type="text" id="new-plat-desc" placeholder="Descripción de venta..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white">
+                        </div>
+                        <button onclick="window.ejecutarCreacionAutonomaNuevaPlataforma()" class="bg-red-600 hover:bg-red-700 text-white font-black text-[10px] px-6 py-2.5 rounded-xl uppercase tracking-wider block ml-auto">➕ Inyectar Plataforma al Catálogo</button>
+                    </div>
+                </div>
+
+                <!-- ACCORDION 4: MARKETING GITHUB Y LEYENDAS (TIPO BLOC DE NOTAS EXPANDIBLE) -->
+                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
+                    <button onclick="window.toggleModuloAcordeon('acc-marketing')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
+                        <span><i class="fa-solid fa-link text-red-500 mr-2"></i> Enrutador de Enlaces y Leyendas de Comunicación (GitHub)</span>
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </button>
+                    <div id="acc-marketing" class="hidden p-5 border-t border-neutral-850 bg-neutral-950/40 space-y-4">
+                        <div class="grid grid-cols-1 gap-3">
+                            <div>
+                                <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Link del Proyecto Final (GitHub URL)</label>
+                                <input type="text" id="cfg-link-github-servidor" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono text-xs focus:outline-none">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda para Grupos de WhatsApp (Arrastre la esquina para expandir)</label>
+                                    <textarea id="cfg-leyenda-grupos-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica..."></textarea>
+                                </div>
+                                <div>
+                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda para Estados de WhatsApp (Arrastre la esquina para expandir)</label>
+                                    <textarea id="cfg-leyenda-estados-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="window.salvarConfiguracionDeEnlacesYLeyendas()" class="bg-neutral-950 text-slate-300 border border-neutral-800 hover:border-red-600/30 text-[10px] font-black uppercase px-5 py-2 rounded-xl block ml-auto">Guardar Enrutamiento Comercial</button>
+                    </div>
+                </div>
+
+                <!-- ACCORDION 5: SEGURIDAD MÁSTER -->
+                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
+                    <button onclick="window.toggleModuloAcordeon('acc-seguridad')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
+                        <span><i class="fa-solid fa-shield-halved text-red-500 mr-2"></i> Configuración de Seguridad Administrativa</span>
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </button>
+                    <div id="acc-seguridad" class="hidden p-4 border-t border-neutral-850 bg-neutral-950/40">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                            <input type="text" id="cfg-master-usuario-actual" placeholder="Nuevo Usuario Máster" class="bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono uppercase">
+                            <input type="password" id="cfg-master-clave-actual" placeholder="Nueva Clave Maestra" class="bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono">
+                            <button onclick="window.actualizarCredencialesSeguridadMaster()" class="bg-neutral-950 border border-neutral-800 text-red-500 font-black uppercase text-[10px] py-2 rounded-xl">Guardar Llave de Servidor</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTONERA MARKETING RÁPIDA -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button onclick="window.despacharMarketingMasivoWhatsApp('GRUPOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2"><i class="fa-solid fa-users text-red-500"></i> Compartir Catálogo en Grupos</button>
+                <button onclick="window.despacharMarketingMasivoWhatsApp('ESTADOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2"><i class="fa-solid fa-circle-dot text-emerald-500"></i> Formato para Estados</button>
+            </div>
+
+            <!-- ARCHIVADOR INTELIGENTE POR CARPETAS CON BUSCADOR EN TIEMPO REAL -->
+            <div class="space-y-4 pt-2">
+                <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
+                    <span class="text-[9px] font-black tracking-widest text-slate-400 uppercase block"><i class="fa-solid fa-folder-tree text-red-500 mr-1"></i> Bóveda Central Filtrada de Suscriptores</span>
+                    
+                    <!-- BARRA DE BÚSQUEDA INTEGRADA POR NOMBRE -->
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-xs"><i class="fa-solid fa-magnifying-glass"></i></span>
+                        <input type="text" id="buscador-nombre-input" onkeyup="window.renderizarMonitorMembresiasAdmin()" placeholder="Escribe un nombre para filtrar en tiempo real (Ej: María)..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl font-medium focus:outline-none focus:border-neutral-700 uppercase">
+                    </div>
+
+                    <!-- BOTONERA DE CARPETAS DE PLATAFORMAS -->
+                    <div id="wrapper-carpetas-filtros-botones" class="flex flex-wrap gap-1.5 pt-1"></div>
+                </div>
+                
+                <!-- MOZAICO DE EXPEDIENTES -->
+                <div id="mosaico-streaming-clientes-box" class="space-y-3 max-h-[80vh] overflow-y-auto pr-1 no-scrollbar"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ==================== CINTILLO INFERIOR: ALFOMBRA DE MARCAS CON RESPALDO CORPORATIVO ==================== -->
+    <footer class="footer-glow border-t border-neutral-900/80 mt-16 py-6 px-4 text-center space-y-4 relative z-40">
+        <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-6 sm:gap-10 glow-white">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="h-4 object-contain">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+" class="h-4.5 object-contain">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg" alt="Max" class="h-3.5 object-contain">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg" alt="Prime Video" class="h-3 object-contain">
+            <span class="text-[9.5px] text-white font-extrabold font-mono tracking-widest bg-gradient-to-r from-red-600 to-amber-600 px-2 py-0.5 rounded shadow">CANVA</span>
+            <span class="text-[9.5px] text-white font-extrabold font-mono tracking-widest bg-neutral-800 px-2 py-0.5 rounded border border-neutral-700 shadow">YOUTUBE</span>
+        </div>
+        
+        <!-- FIRMA PIE DE AMIGO Y DERECHOS DE AUTOR ORIGINALES -->
+        <div class="text-white text-[10px] sm:text-xs space-y-1 pt-2 font-bold tracking-wide">
+            <p class="text-slate-200">🔐 © 2026 Tucocel C.A. Todos los derechos reservados.</p>
+            <p class="text-slate-400 font-medium uppercase text-[9px] sm:text-[10px]">
+                📡 Agente Autorizado Movistar Cordero <span class="text-slate-600 mx-1.5">|</span> 💻 Web desarrollada por <span class="text-white font-bold">@publionlinemc</span> (Agencia de Publicidad de Tucocel C.A.)
+            </p>
+        </div>
+    </footer>
+
+    <!-- REGLAS DE LÓGICA CORE DE FIREBASE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyDytP_5UQyyRUT7wPC2bDIYz5t70z_pQV4",
+          authDomain: "tucocel-vitrina.firebaseapp.com",
+          projectId: "tucocel-vitrina",
+          storageBucket: "tucocel-vitrina.firebasestorage.app",
+          messagingSenderId: "1033621613862",
+          appId: "1:1033621613862:web:c279d663418a5cb0c5e5e7"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let catálogoPlataformasEstructura = {
+            NETFLIX: { nombre: "Netflix", precio: 5.00, logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", desc: "Series exclusivas, películas de estreno y documentales en resolución Ultra HD 4K." },
+            TELE_LATINO: { nombre: "Tele Latino", precio: 5.00, logo: "", desc: "Programación en vivo, canales de deportes, series de estreno y películas sin límites." },
+            FLUJO_TV: { nombre: "Flujo TV", precio: 5.00, logo: "", desc: "Parrilla premium fluida de canales de televisión abierta, deportes e infantiles en vivo." },
+            SUPER_TV: { nombre: "Super TV", precio: 5.00, logo: "", desc: "Televisión digital por IP estable con películas, series y eventos especiales continuos." },
+            DISNEY: { nombre: "Disney+", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", desc: "Contenido infantil y familiar de Pixar, Marvel, Star Wars y transmisiones de ESPN." },
+            AMAZON: { nombre: "Amazon Prime", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg", desc: "Series y películas originales de taquilla, deportes y transmisiones exclusivas Prime." },
+            HBO_MAX: { nombre: "HBO Max", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg", desc: "Series mundiales galardonadas, estrenos de cine de Warner Bros y documentales." }
+        };
+
+        let localStreamingClientesArr = [];
+        let esAdminStreamingSession = false;
+        let carpetaFiltroSeleccionadaStr = "TODOS";
+        
+        let masterUsuarioIdDinamico = "TUCOCEL";
+        let masterClaveDinamica = "Razu2020.";
+        let linkServidorGitHubGuardado = "";
+        let leyendaCustomGrupos = "";
+        let leyendaCustomEstados = "";
+
+        const REGLAS_DE_ORO_TEXTO = `*⚠️ REGLAS DE ORO DEL SERVICIO:*\n\n✅ *Renovaciones:* Para garantizar la continuidad de tu pantalla, debes realizar el pago un día antes de tu fecha de activación.\n✅ No cambiar el correo ni la contraseña de la cuenta.\n✅ No crear ni borrar perfiles adicionales.\n✅ No compartir los datos con terceros.\n✅ Entrar únicamente al perfil asignado.\n\nEl incumplimiento de estas reglas puede causar la pérdida de la garantía sin derecho a reembolso.\n\n🌟 ¿Te gustó nuestro servicio? ¡Tu recomendación es nuestro mejor motor! Disfruta tu programación. 🍿🎬`;
+        const LINK_GRUPO_WHATSAPP = `https://chat.whatsapp.com/CcSII6i2HqSLiWDUhNi5ay`;
+        
+        // FIRMA CORPORATIVA FIJA PARA INYECTAR EN MENSAJES Y COMUNICACIONES
+        const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ *CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.*\n📡 *Agente Autorizado Movistar Cordero*\n💻 _Desarrollado corporativamente por nuestra agencia *@publionlinemc*._`;
+
+        window.toggleModuloAcordeon = function(id) {
+            const el = document.getElementById(id);
+            if(el.classList.contains('hidden')) { el.classList.remove('hidden'); }
+            else { el.classList.add('hidden'); }
+        };
+
+        window.abrirModalLoginStreamingRaiz = function() {
+            if(esAdminStreamingSession) { window.conmutarVistaAdminCliente(); } 
+            else { document.getElementById('streaming-modal-login-raiz').classList.remove('hidden'); }
+        };
+
+        window.validarCredencialesMasterStreaming = function() {
+            const user = document.getElementById('master-user-field').value.trim().toUpperCase();
+            const pass = document.getElementById('master-pass-field').value.trim();
+            if(user === masterUsuarioIdDinamico && pass === masterClaveDinamica) {
+                esAdminStreamingSession = true;
+                document.getElementById('streaming-modal-login-raiz').classList.add('hidden');
+                document.getElementById('btn-mando-abrir-login').innerHTML = `<i class="fa-solid fa-user-gear"></i> Consola Central`;
+                window.conmutarVistaAdminCliente();
+            } else { alert("❌ Credenciales incorrectas."); }
+        };
+
+        window.actualizarCredencialesSeguridadMaster = async function() {
+            const nuevoUser = document.getElementById('cfg-master-usuario-actual').value.trim().toUpperCase();
+            const nuevaPass = document.getElementById('cfg-master-clave-actual').value.trim();
+            if(!nuevoUser || !nuevaPass) return alert("Complete los datos.");
+            masterUsuarioIdDinamico = nuevoUser; masterClaveDinamica = nuevaPass;
+            try {
+                await setDoc(doc(db, "tcl_streaming_core", "seguridad_config"), { usuario: masterUsuarioIdDinamico, clave: masterClaveDinamica });
+                alert("💾 Seguridad del servidor actualizada con éxito.");
+            } catch(e) {}
+        };
+
+        window.salvarConfiguracionDeEnlacesYLeyendas = async function() {
+            linkServidorGitHubGuardado = document.getElementById('cfg-link-github-servidor').value.trim();
+            leyendaCustomGrupos = document.getElementById('cfg-leyenda-grupos-custom').value.trim();
+            leyendaCustomEstados = document.getElementById('cfg-leyenda-estados-custom').value.trim();
+            try {
+                await setDoc(doc(db, "tcl_streaming_core", "marketing_config"), { github: linkServidorGitHubGuardado, leyendaGrupos: leyendaCustomGrupos, leyendaEstados: leyendaCustomEstados });
+                alert("💾 Enlaces guardados.");
+            } catch(e) {}
+        };
+
+        window.ejecutarCreacionAutonomaNuevaPlataforma = async function() {
+            const id = document.getElementById('new-plat-id').value.trim().toUpperCase();
+            const nombre = document.getElementById('new-plat-nombre').value.trim();
+            const precio = parseFloat(document.getElementById('new-plat-precio').value) || 5.00;
+            const logo = document.getElementById('new-plat-logo').value.trim();
+            const desc = document.getElementById('new-plat-desc').value.trim();
+
+            if(!id || !nombre || !desc) return alert("Faltan campos.");
+            catálogoPlataformasEstructura[id] = { nombre, precio, logo, desc };
+            try {
+                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), catálogoPlataformasEstructura);
+                alert(`✨ Plataforma [${nombre}] agregada al catálogo.`);
+                window.construirEstructurasDinamicasInterfaces();
+            } catch(e) {}
+        };
+
+        window.conmutarVistaAdminCliente = function() {
+            const vistaCli = document.getElementById('vista-vitrina-publica');
+            const vistaAdm = document.getElementById('vista-streaming-admin');
+            const label = document.getElementById('btn-mando-abrir-login');
+            
+            if(vistaAdm.classList.contains('hidden')) {
+                vistaCli.classList.add('hidden'); vistaAdm.classList.remove('hidden');
+                label.innerHTML = `<i class="fa-solid fa-eye"></i> Ver Vitrina Web`;
+                window.descargarBaseStreamingFirebaseCompleta();
+            } else {
+                vistaAdm.classList.add('hidden'); vistaCli.classList.remove('hidden');
+                label.innerHTML = `<i class="fa-solid fa-user-gear"></i> Consola Central`;
+            }
+        };
+
+        window.construirEstructurasDinamicasInterfaces = function() {
+            const vitrina = document.getElementById('mosaico-vitrina-publica-productos');
+            const selectForm = document.getElementById('field-plataforma');
+            const tarifador = document.getElementById('wrapper-inputs-tarifador-dinamico');
+
+            if(vitrina) vitrina.innerHTML = ""; if(selectForm) selectForm.innerHTML = ""; if(tarifador) tarifador.innerHTML = "";
+
+            Object.keys(catálogoPlataformasEstructura).forEach(k => {
+                const item = catálogoPlataformasEstructura[k];
+                if(vitrina) {
+                    let imgLogo = item.logo ? `<img src="${item.logo}" alt="${item.nombre}" class="h-6 object-contain">` : `<span class="text-white font-black text-xs bg-gradient-to-r from-red-600 to-neutral-700 px-2.5 py-1 rounded uppercase truncate max-w-full">${item.nombre}</span>`;
+                    vitrina.innerHTML += `
+                        <div class="cinema-card rounded-2xl p-4 flex flex-col justify-between min-h-[25px]">
+                            <div class="space-y-2">
+                                <div class="h-10 flex items-center justify-start logo-container">${imgLogo}</div>
+                                <div class="text-amber-400 text-[9px] flex items-center gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                <p class="text-[10.5px] text-slate-400 leading-tight font-medium min-h-[40px]">${item.desc}</p>
+                            </div>
+                            <div class="border-t border-neutral-900/60 pt-2.5 mt-2 flex flex-col justify-end space-y-2">
+                                <div class="space-y-0.5">
+                                    <span class="text-base font-mono font-black text-red-500 block">${item.precio.toFixed(2)} <small class="text-[9px] text-slate-500">USDT</small></span>
+                                    <span class="text-[8.5px] font-bold text-slate-400 block leading-tight">Puedes cancelar en bolívares "a tasa Binance del día", Nequi, PayPal y Zelle.</span>
+                                </div>
+                                <button onclick="window.abrirModalSolicitudStreaming('${item.nombre}')" class="w-full bg-red-600 hover:bg-red-700 text-white font-black text-[9px] py-2 rounded-xl uppercase tracking-wider transition-all text-center">Adquirir</button>
+                            </div>
+                        </div>`;
+                }
+                if(selectForm) selectForm.innerHTML += `<option value="${k}">${item.nombre}</option>`;
+                if(tarifador) {
+                    tarifador.innerHTML += `
+                        <div class="bg-neutral-950 p-2 rounded-xl border border-neutral-800">
+                            <span class="block text-[8.5px] text-slate-500 font-bold uppercase truncate">${item.nombre}</span>
+                            <input type="number" id="cfg-p-${k}" value="${item.precio}" step="0.1" class="w-full bg-transparent font-bold text-xs text-white focus:outline-none" onkeyup="window.recalcularTasasBolivaresAdmin()">
+                            <span class="block text-[8px] text-emerald-500 font-mono mt-0.5" id="bs-p-${k}">0 Bs</span>
+                        </div>`;
+                }
+            });
+            window.recalcularTasasBolivaresAdmin();
+            window.recalcularCarpetasYChismoseadorDinamico();
+        };
+
+        window.recalcularCarpetasYChismoseadorDinamico = function() {
+            const burbujasBox = document.getElementById('wrapper-chismoseador-burbujas');
+            const carpetasBox = document.getElementById('wrapper-carpetas-filtros-botones');
+            if(!burbujasBox || !carpetasBox) return;
+
+            burbujasBox.innerHTML = "";
+            carpetasBox.innerHTML = `<button onclick="window.filtrarCarpetaStreamingAdmin('TODOS')" class="px-3 py-1.5 rounded-xl font-black text-[10px] uppercase transition-all ${carpetaFiltroSeleccionadaStr === 'TODOS' ? 'bg-red-600 text-white' : 'bg-neutral-950 text-slate-400 border border-neutral-800'}">📁 Ver Todos</button>`;
+
+            Object.keys(catálogoPlataformasEstructura).forEach(k => {
+                const nombrePlat = catálogoPlataformasEstructura[k].nombre;
+                const clientesDeEstaPlat = localStreamingClientesArr.filter(c => c.plataforma === k);
+                const vencidosLote = clientesDeEstaPlat.filter(c => c.diasRestantes <= 4).length;
+
+                let colorBurbuja = vencidosLote > 0 ? 'border-amber-500 bg-amber-950/20 text-amber-400 animate-pulse font-black' : 'border-neutral-800 bg-neutral-950/40 text-slate-500';
+                burbujasBox.innerHTML += `
+                    <div onclick="window.filtrarCarpetaStreamingAdmin('${k}')" class="border rounded-xl p-2 text-center cursor-pointer hover:border-neutral-600 transition-all ${colorBurbuja}">
+                        <span class="block text-[8.5px] font-black uppercase truncate">${nombrePlat}</span>
+                        <span class="text-[10px] font-mono block mt-0.5">${vencidosLote > 0 ? `⚠️ ${vencidosLote} Alerta` : '✅ Al Día'}</span>
+                    </div>`;
+
+                let estiloCarpetaBoton = carpetaFiltroSeleccionadaStr === k ? 'bg-red-600 text-white' : 'bg-neutral-950 text-slate-400 border border-neutral-800';
+                carpetasBox.innerHTML += `<button onclick="window.filtrarCarpetaStreamingAdmin('${k}')" class="px-3 py-1.5 rounded-xl font-bold text-[10px] uppercase transition-all ${estiloCarpetaBoton}">${nombrePlat} (${clientesDeEstaPlat.length})</button>`;
+            });
+        };
+
+        window.filtrarCarpetaStreamingAdmin = function(carpeta) {
+            carpetaFiltroSeleccionadaStr = carpeta;
+            window.recalcularCarpetasYChismoseadorDinamico();
+            window.renderizarMonitorMembresiasAdmin();
+        };
+
+        window.procesarSuccionLegoInteligenteTexto = function() {
+            const text = document.getElementById('succion-bruta-textarea').value.trim();
+            if(!text) return alert("Ingrese un bloque de texto bruto.");
+            document.getElementById('field-correo').value = ""; document.getElementById('field-clave').value = "";
+            document.getElementById('field-perfil').value = ""; document.getElementById('field-pin').value = "";
+
+            const correoMatch = text.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/);
+            if(correoMatch) document.getElementById('field-correo').value = correoMatch[0];
+
+            const cuentaMatch = text.match(/(?:Cuenta:|ID:)\s*([0-9]+)/i);
+            const lineas = text.split('\n');
+            lineas.forEach(l => {
+                const clean = l.trim();
+                if(clean.toLowerCase().includes('razu2020') || clean.toLowerCase().includes('clave:') || clean.toLowerCase().includes('contraseña:')) {
+                    document.getElementById('field-clave').value = clean.replace(/(?:clave:|contraseña:)/i, '').trim();
+                }
+                const pinMatch = clean.match(/(?:Pin:)\s*([0-9]{4})/i);
+                if(pinMatch) document.getElementById('field-pin').value = pinMatch[1];
+                if(clean.toLowerCase().includes('perfil') && !clean.toLowerCase().includes('reglas')) {
+                    document.getElementById('field-perfil').value = clean.toUpperCase();
+                }
+            });
+            alert("⚡ Datos separados.");
+        };
+
+        window.ejecutarCargaPerfilStreamingFirebase = async function() {
+            const plataforma = document.getElementById('field-plataforma').value;
+            const meses = parseInt(document.getElementById('field-meses').value);
+            const correo = document.getElementById('field-correo').value.trim();
+            const clave = document.getElementById('field-clave').value.trim();
+            const perfil = document.getElementById('field-perfil').value.trim().toUpperCase();
+            const pin = document.getElementById('field-pin').value.trim();
+            const cNombre = document.getElementById('field-cliente-nombre').value.trim().toUpperCase();
+            const cTlf = document.getElementById('field-cliente-tlf').value.trim();
+            const cDir = document.getElementById('field-cliente-dir').value.trim().toUpperCase();
+
+            if(!clave || !cNombre || !cTlf) return alert("Campos obligatorios vacíos.");
+
+            let coindiceViejo = localStreamingClientesArr.find(x => x.telefono.replace(/\D/g, '') === cTlf.replace(/\D/g, ''));
+            if(coindiceViejo) {
+                if(!confirm(`📝 ¿Desea indexar este nuevo servicio a este cliente?`)) return;
+            }
+
+            const nuevoClienteStreaming = {
+                id: 'str-' + new Date().getTime(), plataforma, meses, correo, clave, perfil, pin,
+                cliente: cNombre, telefono: cTlf, direccion: cDir, fechaActivacion: new Date().toLocaleDateString(), diasRestantes: meses * 30
+            };
+
+            localStreamingClientesArr.push(nuevoClienteStreaming);
+            await window.sincronizarBaseStreamingNube();
+            alert("🔒 Perfil indexado.");
+            
+            document.getElementById('field-correo').value = ""; document.getElementById('field-clave').value = "";
+            document.getElementById('field-perfil').value = ""; document.getElementById('field-pin').value = "";
+            document.getElementById('field-cliente-nombre').value = ""; document.getElementById('field-cliente-tlf').value = "";
+            document.getElementById('field-cliente-dir').value = "";
+            window.construirEstructurasDinamicasInterfaces();
+            window.renderizarMonitorMembresiasAdmin();
+        };
+
+        window.renderizarMonitorMembresiasAdmin = function() {
+            const box = document.getElementById('mosaico-streaming-clientes-box'); if(!box) return;
+            box.innerHTML = "";
+
+            const busquedaQuery = document.getElementById('buscador-nombre-input').value.trim().toUpperCase();
+
+            let listaFiltrada = localStreamingClientesArr;
+            if(carpetaFiltroSeleccionadaStr !== "TODOS") {
+                listaFiltrada = listaFiltrada.filter(c => c.plataforma === carpetaFiltroSeleccionadaStr);
+            }
+            if(busquedaQuery) {
+                listaFiltrada = listaFiltrada.filter(c => c.cliente.includes(busquedaQuery));
+            }
+
+            if(listaFiltrada.length === 0) {
+                box.innerHTML = `<p class="text-center text-slate-500 italic py-8 text-xs">No se encontraron expedientes con los filtros aplicados.</p>`; return;
+            }
+
+            listaFiltrada.forEach(c => {
+                const esAlertaCritica = c.diasRestantes <= 4;
+                box.innerHTML += `
+                    <div class="border rounded-2xl p-4 flex flex-col justify-between ${esAlertaCritica ? 'border-amber-500 bg-amber-950/10' : 'border-neutral-800 bg-neutral-950/40'}">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-red-500 text-[9px] font-black uppercase font-mono">${catálogoPlataformasEstructura[c.plataforma]?.nombre || c.plataforma}</span>
+                                <h4 class="text-white text-sm font-black uppercase mt-0.5">${c.cliente}</h4>
+                                <p class="text-[10px] text-slate-300 font-mono truncate max-w-xs mt-1">Acceso: ${c.correo || 'ID DIRECTO'} | Clave: ${c.clave}</p>
+                                ${c.perfil ? `<p class="text-[10px] text-red-400 font-bold">Perfil: ${c.perfil} ${c.pin ? `| PIN: ${c.pin}` : ''}</p>` : ''}
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-[15px] font-mono font-black ${esAlertaCritica ? 'text-amber-400 animate-pulse' : 'text-slate-200'}">${c.diasRestantes} Días</span>
+                                <span class="text-[8px] text-slate-500 block uppercase font-bold">Lote: ${c.meses} Mes(es)</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 mt-3 border-t border-neutral-900 pt-3">
+                            <button onclick="window.despacharMensajeWhatsAppStreaming('${c.id}', 'ACTIVACION')" class="bg-red-600 hover:bg-red-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase">Activación</button>
+                            <button onclick="window.despacharMensajeWhatsAppStreaming('${c.id}', 'RENOVACION')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-1.5 rounded-lg uppercase">Renovar</button>
+                            <button onclick="window.despacharMensajeWhatsAppStreaming('${c.id}', 'CAMBIO')" class="bg-amber-600 hover:bg-amber-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase">Enviar Cambio</button>
+                            <button onclick="window.abrirEditorPlanillaRapida('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-1.5 rounded-lg uppercase">Editar</button>
+                            <button onclick="window.anularPerfilStreamingDestructivo('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-1.5 rounded-lg uppercase sm:col-span-1 col-span-2">Anular</button>
+                        </div>
+                    </div>`;
+            });
+        };
+
+        window.despacharMensajeWhatsAppStreaming = function(id, tipo) {
+            let match = localStreamingClientesArr.find(c => c.id === id); if(!match) return;
+            let cleanTlf = match.telefono.replace(/\D/g, ''); if(!cleanTlf.startsWith('58')) cleanTlf = '58' + cleanTlf;
+            let text = ""; const fVenc = new Date(); fVenc.setDate(fVenc.getDate() + match.diasRestantes - 1);
+
+            if(tipo === 'ACTIVACION') {
+                text = `🛍️ *SERVICIOS STREAMING CORDERO MK*\n🧾 *COMPROBANTE DE ENTREGA Y ACTIVACIÓN*\n\n👤 *Cliente:* ${match.cliente}\n📺 *Plataforma:* ${match.plataforma}\n`;
+                if(match.correo) text += `📧 *Correo:* \`${match.correo}\`\n`;
+                text += `🔑 *Contraseña / ID:* \`${match.clave}\`\n`;
+                if(match.perfil) text += `👤 *Perfil Asignado:* ${match.perfil}\n`;
+                if(match.pin) text += `📌 *PIN Perfil:* \`${match.pin}\`\n\n`;
+                text += `📅 *Fecha de Activación:* ${match.fechaActivacion}\n✂️ *Fecha de Renovación:* ${fVenc.toLocaleDateString()}\n\n${REGLAS_DE_ORO_TEXTO}\n\n🌐 *Únete a nuestro grupo oficial:* ${LINK_GRUPO_WHATSAPP}${RESPALDO_FIRMA_WHATSAPP}`;
+            }
+            if(tipo === 'RENOVACION') {
+                text = `🔄 *RECORDATORIO DE RENOVACIÓN — CORDERO MK*\n\nHola *${match.cliente}*,\nTu suscripción de *${match.plataforma}* vence este *${fVenc.toLocaleDateString()}*.\n\nPara garantizar la continuidad de tu pantalla, por favor reporta tu pago con un día de anticipación. ¡Muchas gracias! 🍿${RESPALDO_FIRMA_WHATSAPP}`;
+            }
+            if(tipo === 'CAMBIO') {
+                text = `⚡ *🚨 ACTUALIZACIÓN DE CREDENCIALES — CORDERO MK*\n\nEstimado cliente *${match.cliente}*,\nLe informamos que sus datos de acceso de *${match.plataforma}* han sido actualizados por mantenimiento.\n\n🔐 *NUEVOS DATOS DE ACCESO:*\n`;
+                if(match.correo) text += `📧 *Correo:* \`${match.correo}\`\n`;
+                text += `🔑 *Contraseña / ID:* \`${match.clave}\`\n`;
+                if(match.pin) text += `📌 *PIN Perfil:* \`${match.pin}\`\n\n`;
+                text += `⚠️ _Respete las Reglas de Oro del servicio para mantener su garantía activa._${RESPALDO_FIRMA_WHATSAPP}`;
+            }
+            window.open(`https://api.whatsapp.com/send?phone=${cleanTlf}&text=${encodeURIComponent(text)}`, '_blank');
+        };
+
+        window.despacharMarketingMasivoWhatsApp = function(destino) {
+            const urlFinal = linkServidorGitHubGuardado || "https://github.com";
+            let msg = "";
+            if(destino === 'GRUPOS') {
+                if(leyendaCustomGrupos) { msg = leyendaCustomGrupos.replace('[Link_Dinámico_de_GitHub]', urlFinal) + RESPALDO_FIRMA_WHATSAPP; } 
+                else {
+                    msg = `📺 *SERVICIOS STREAMING CORDERO MK — ENTRETENIMIENTO PREMIUM* 📺\n\nLe invitamos a conocer la plataforma más confiable y estable para la adquisición de sus pantallas y membresías digitales. 🚀\n\n🔒 *GARANTÍA Y RESPALDO ABSOLUTO:* Más de 6 años de trayectoria impecable en el mercado regional y nacional avalan la seguridad de nuestro servicio.\n\n🍿 *NUESTRO CATÁLOGO DISPONIBLE:*\n▪️ Netflix Ultra HD 4K\n▪️ Tele Latino, Flujo TV y Super TV\n▪️ Disney+, Amazon Prime Video, Max y mucho más...\n\n💳 *Múltiples Métodos de Pago:* Bolívares (Pago Móvil a tasa Binance), Binance (USDT), Nequi, PayPal y Zelle.\n\n👇 *INGRESA A NUESTRA TAQUILLA DIGITAL Y ADQUIERE TU PANTALLA:*\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
+                }
+            } else {
+                if(leyendaCustomEstados) { msg = leyendaCustomEstados.replace('[Link_Dinámico_de_GitHub]', urlFinal) + RESPALDO_FIRMA_WHATSAPP; } 
+                else {
+                    msg = `🎬 *BIENVENIDOS A LA EXPERIENCIA PREMIUM DE STREAMING — CORDERO MK* 🎬\n🍿 Disfrute de Netflix, Tele Latino, Disney+ y televisión en vivo con la máxima estabilidad.\n\n🔒 Más de 6 años de experiencia y seriedad. Cero interrupciones, soporte real.\n💳 Recibimos Pago Móvil (Tasa Binance), Nequi, PayPal y Zelle.\n\n👇 *VISITE NUESTRA WEB EN VIVO Y ORDENE SU CUENTA AQUÍ:*\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
+                }
+            }
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+        };
+
+        window.abrirEditorPlanillaRapida = function(id) {
+            let match = localStreamingClientesArr.find(c => c.id === id); if(!match) return;
+            let nc = prompt("Modificar Correo / ID:", match.correo || "");
+            let ncl = prompt("Modificar Clave:", match.clave);
+            let np = prompt("Modificar PIN:", match.pin || "");
+            if(ncl !== null) {
+                match.correo = nc; match.clave = ncl; match.pin = np;
+                window.sincronizarBaseStreamingNube().then(() => { window.renderizarMonitorMembresiasAdmin(); window.construirEstructurasDinamicasInterfaces(); });
+            }
+        };
+
+        window.anularPerfilStreamingDestructivo = async function(id) {
+            if(!confirm("¿Desea anular esta suscripción?")) return;
+            let idx = localStreamingClientesArr.findIndex(c => c.id === id);
+            if(idx !== -1) {
+                localStreamingClientesArr.splice(idx, 1);
+                await window.sincronizarBaseStreamingNube(); window.construirEstructurasDinamicasInterfaces(); window.renderizarMonitorMembresiasAdmin();
+            }
+        };
+
+        window.recalcularTasasBolivaresAdmin = function() {
+            const tasa = parseFloat(document.getElementById('adm-tasa-cambio').value) || 40;
+            Object.keys(catálogoPlataformasEstructura).forEach(k => {
+                const input = document.getElementById(`cfg-p-${k}`);
+                const val = input ? parseFloat(input.value) : catálogoPlataformasEstructura[k].precio;
+                const dbBs = document.getElementById(`bs-p-${k}`);
+                if(dbBs) dbBs.innerText = `${(val * tasa).toFixed(2)} Bs`;
+            });
+        };
+
+        window.salvarTarifasPublicasDinamicas = async function() {
+            try {
+                Object.keys(catálogoPlataformasEstructura).forEach(k => {
+                    const input = document.getElementById(`cfg-p-${k}`);
+                    if(input) catálogoPlataformasEstructura[k].precio = parseFloat(input.value) || 5.00;
+                });
+                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), catálogoPlataformasEstructura);
+                window.construirEstructurasDinamicasInterfaces();
+                alert("✨ Tarifas actualizadas en vitrina.");
+            } catch(e) {}
+        };
+
+        window.descargarBaseStreamingFirebaseCompleta = async function() {
+            try {
+                const docSeg = await getDoc(doc(db, "tcl_streaming_core", "seguridad_config"));
+                if(docSeg.exists()) { masterUsuarioIdDinamico = docSeg.data().usuario; masterClaveDinamica = docSeg.data().clave; }
+                const docMkt = await getDoc(doc(db, "tcl_streaming_core", "marketing_config"));
+                if(docMkt.exists()) {
+                    linkServidorGitHubGuardado = docMkt.data().github || ""; leyendaCustomGrupos = docMkt.data().leyendaGrupos || ""; leyendaCustomEstados = docMkt.data().leyendaEstados || "";
+                    document.getElementById('cfg-link-github-servidor').value = linkServidorGitHubGuardado;
+                    document.getElementById('cfg-leyenda-grupos-custom').value = leyendaCustomGrupos; document.getElementById('cfg-leyenda-estados-custom').value = leyendaCustomEstados;
+                }
+                const docTar = await getDoc(doc(db, "tcl_streaming_core", "tarifas_config"));
+                if(docTar.exists()) { catálogoPlataformasEstructura = docTar.data(); }
+                const docCli = await getDoc(doc(db, "tcl_streaming_core", "clientes_activos"));
+                if(docCli.exists()) { localStreamingClientesArr = docCli.data().lista || []; }
+                window.construirEstructurasDinamicasInterfaces();
+                window.renderizarMonitorMembresiasAdmin();
+            } catch(e) {}
+        };
+
+        window.sincronizarBaseStreamingNube = async function() {
+            try { await setDoc(doc(db, "tcl_streaming_core", "clientes_activos"), { lista: localStreamingClientesArr }); } catch(e) {}
+        };
+
+        window.onload = async function() {
+            try {
+                const docTar = await getDoc(doc(db, "tcl_streaming_core", "tarifas_config"));
+                if(docTar.exists()) { catálogoPlataformasEstructura = docTar.data(); }
+                window.construirEstructurasDinamicasInterfaces();
+            } catch(e) {}
+        };
+    </script>
+</body>
+                                          </html>
