@@ -87,11 +87,11 @@
             </p>
         </div>
 
-        <!-- MÉTODOS DE PAGO BANNER -->
+        <!-- MÉTODOS DE PAGO BANNER CON ZINLI -->
         <div class="max-w-6xl mx-auto px-3 pt-4">
             <div class="bg-neutral-950/40 border border-neutral-900 rounded-2xl py-2 px-4 text-center">
                 <p class="text-[9.5px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wide">
-                    💳 <span class="text-white">Múltiples Métodos de Pago Disponibles:</span> Bolívares (Pago Móvil) | Binance USDT | Nequi | PayPal | Zelle
+                    💳 <span class="text-white">Múltiples Métodos de Pago Disponibles:</span> Bolívares (Pago Móvil) | Binance USDT | Zinli | Nequi | PayPal
                 </p>
             </div>
         </div>
@@ -120,7 +120,7 @@
             </main>
         </div>
 
-        <!-- FORMULARIO DE CAPTACIÓN PÚBLICO -->
+        <!-- FORMULARIO DE CAPTACIÓN PÚBLICO CON MÉTODO DE PAGO -->
         <div id="modal-solicitud-cliente-streaming" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[10000] p-4 hidden flex items-center justify-center">
             <div class="bg-neutral-900 border border-neutral-800 w-full max-w-md rounded-3xl p-6 space-y-4 shadow-2xl">
                 <div class="flex justify-between items-center border-b border-neutral-800 pb-2">
@@ -141,9 +141,19 @@
                         <label class="text-[9px] text-slate-400 font-black uppercase ml-1 block mb-1">Dirección Corta</label>
                         <input type="text" id="sol-dir" required placeholder="Sector / Municipio" class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold focus:outline-none focus:border-neutral-700 uppercase">
                     </div>
+                    <div>
+                        <label class="text-[9px] text-slate-400 font-black uppercase ml-1 block mb-1">Método de Pago Preferido</label>
+                        <select id="sol-metodo-pago" required class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold focus:outline-none focus:border-neutral-700 uppercase">
+                            <option value="Pago Móvil (Bolívares Tasa Binance)">Bolívares (Pago Móvil Tasa Binance)</option>
+                            <option value="Binance USDT">Binance USDT</option>
+                            <option value="Zinli">Zinli</option>
+                            <option value="Nequi">Nequi</option>
+                            <option value="PayPal">PayPal</option>
+                        </select>
+                    </div>
                     <div class="bg-neutral-950 border border-neutral-855 p-3 rounded-xl text-center">
                         <span class="text-[8.5px] font-black text-red-500 uppercase tracking-widest block">⚠️ REGLA DE ENVÍO</span>
-                        <p class="text-[10px] text-slate-400 leading-tight">Si vas a hacer uso de este envío es porque estás 100% seguro de que deseas contratar la membresía. Este mensaje será enviado directamente al proveedor.</p>
+                        <p class="text-[10px] text-slate-400 leading-tight">Si vas a hacer uso de este botón es porque estás 100% seguro de que deseas contratar la membresía. Este mensaje será enviado directamente al proveedor.</p>
                     </div>
                     <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl uppercase tracking-wider text-xs">Confirmar y Enviar al WhatsApp</button>
                 </form>
@@ -293,8 +303,8 @@
                                     <textarea id="cfg-leyenda-grupos-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica..."></textarea>
                                 </div>
                                 <div>
-                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda para Estados de WhatsApp (Arrastre la esquina para expandir)</label>
-                                    <textarea id="cfg-leyenda-estados-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica..."></textarea>
+                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda Ultra-Corta para Estados de WhatsApp</label>
+                                    <textarea id="cfg-leyenda-estados-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica corto..."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -321,7 +331,7 @@
             <!-- BOTONERA MARKETING RÁPIDA -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button onclick="window.despacharMarketingMasivoWhatsApp('GRUPOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2"><i class="fa-solid fa-users text-red-500"></i> Compartir Catálogo en Grupos</button>
-                <button onclick="window.despacharMarketingMasivoWhatsApp('ESTADOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2"><i class="fa-solid fa-circle-dot text-emerald-500"></i> Formato para Estados</button>
+                <button onclick="window.despacharMarketingMasivoWhatsApp('ESTADOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2"><i class="fa-solid fa-circle-dot text-emerald-500"></i> Formato Corto para Estados</button>
             </div>
 
             <!-- ARCHIVADOR INTELIGENTE POR CARPETAS CON BUSCADOR EN TIEMPO REAL -->
@@ -345,7 +355,7 @@
         </main>
     </div>
 
-    <!-- ==================== CINTILLO INFERIOR: ALFOMBRA DE MARCAS CON RESPALDO CORPORATIVO ==================== -->
+    <!-- ==================== CINTILLO INFERIOR: ALFOMBRA DE MARCAS CON RESPALDO CORPORATIVO Y PUBLIONLINEMK ==================== -->
     <footer class="footer-glow border-t border-neutral-900/80 mt-16 py-6 px-4 text-center space-y-4 relative z-40">
         <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-6 sm:gap-10 glow-white">
             <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="h-4 object-contain">
@@ -356,11 +366,11 @@
             <span class="text-[9.5px] text-white font-extrabold font-mono tracking-widest bg-neutral-800 px-2 py-0.5 rounded border border-neutral-700 shadow">YOUTUBE</span>
         </div>
         
-        <!-- FIRMA PIE DE AMIGO Y DERECHOS DE AUTOR ORIGINALES -->
+        <!-- FIRMA PIE DE AMIGO Y DERECHOS DE AUTOR CON @publionlinemk -->
         <div class="text-white text-[10px] sm:text-xs space-y-1 pt-2 font-bold tracking-wide">
             <p class="text-slate-200">🔐 © 2026 Tucocel C.A. Todos los derechos reservados.</p>
             <p class="text-slate-400 font-medium uppercase text-[9px] sm:text-[10px]">
-                📡 Agente Autorizado Movistar Cordero <span class="text-slate-600 mx-1.5">|</span> 💻 Web desarrollada por <span class="text-white font-bold">@publionlinemc</span> (Agencia de Publicidad de Tucocel C.A.)
+                📡 Agente Autorizado Movistar Cordero <span class="text-slate-600 mx-1.5">|</span> 💻 Web desarrollada por <span class="text-white font-bold">@publionlinemk</span> (Agencia de Publicidad de Tucocel C.A.)
             </p>
         </div>
     </footer>
@@ -381,6 +391,9 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+
+        // NÚMERO ÚNICO DE CONTACTO Y SALIDA DE OPERACIONES
+        const MI_NUMERO_CELULAR_UNICO = "584147357549";
 
         let catálogoPlataformasEstructura = {
             NETFLIX: { nombre: "Netflix", precio: 5.00, logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", desc: "Series exclusivas, películas de estreno y documentales en resolución Ultra HD 4K." },
@@ -405,8 +418,8 @@
         const REGLAS_DE_ORO_TEXTO = `*⚠️ REGLAS DE ORO DEL SERVICIO:*\n\n✅ *Renovaciones:* Para garantizar la continuidad de tu pantalla, debes realizar el pago un día antes de tu fecha de activación.\n✅ No cambiar el correo ni la contraseña de la cuenta.\n✅ No crear ni borrar perfiles adicionales.\n✅ No compartir los datos con terceros.\n✅ Entrar únicamente al perfil asignado.\n\nEl incumplimiento de estas reglas puede causar la pérdida de la garantía sin derecho a reembolso.\n\n🌟 ¿Te gustó nuestro servicio? ¡Tu recomendación es nuestro mejor motor! Disfruta tu programación. 🍿🎬`;
         const LINK_GRUPO_WHATSAPP = `https://chat.whatsapp.com/CcSII6i2HqSLiWDUhNi5ay`;
         
-        // FIRMA CORPORATIVA FIJA PARA INYECTAR EN MENSAJES Y COMUNICACIONES
-        const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ *CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.*\n📡 *Agente Autorizado Movistar Cordero*\n💻 _Desarrollado corporativamente por nuestra agencia *@publionlinemc*._`;
+        // FIRMA CORPORATIVA FIJA CON @publionlinemk
+        const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ *CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.*\n📡 *Agente Autorizado Movistar Cordero*\n💻 _Desarrollado corporativamente por nuestra agencia *@publionlinemk*._`;
 
         window.toggleModuloAcordeon = function(id) {
             const el = document.getElementById(id);
@@ -494,7 +507,7 @@
                 if(vitrina) {
                     let imgLogo = item.logo ? `<img src="${item.logo}" alt="${item.nombre}" class="h-6 object-contain">` : `<span class="text-white font-black text-xs bg-gradient-to-r from-red-600 to-neutral-700 px-2.5 py-1 rounded uppercase truncate max-w-full">${item.nombre}</span>`;
                     vitrina.innerHTML += `
-                        <div class="cinema-card rounded-2xl p-4 flex flex-col justify-between min-h-[25px]">
+                        <div class="cinema-card rounded-2xl p-4 flex flex-col justify-between min-h-[250px]">
                             <div class="space-y-2">
                                 <div class="h-10 flex items-center justify-start logo-container">${imgLogo}</div>
                                 <div class="text-amber-400 text-[9px] flex items-center gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
@@ -503,7 +516,7 @@
                             <div class="border-t border-neutral-900/60 pt-2.5 mt-2 flex flex-col justify-end space-y-2">
                                 <div class="space-y-0.5">
                                     <span class="text-base font-mono font-black text-red-500 block">${item.precio.toFixed(2)} <small class="text-[9px] text-slate-500">USDT</small></span>
-                                    <span class="text-[8.5px] font-bold text-slate-400 block leading-tight">Puedes cancelar en bolívares "a tasa Binance del día", Nequi, PayPal y Zelle.</span>
+                                    <span class="text-[8.5px] font-bold text-slate-400 block leading-tight">Puedes cancelar en bolívares "a tasa Binance del día", Zinli, Nequi y PayPal.</span>
                                 </div>
                                 <button onclick="window.abrirModalSolicitudStreaming('${item.nombre}')" class="w-full bg-red-600 hover:bg-red-700 text-white font-black text-[9px] py-2 rounded-xl uppercase tracking-wider transition-all text-center">Adquirir</button>
                             </div>
@@ -552,6 +565,24 @@
             carpetaFiltroSeleccionadaStr = carpeta;
             window.recalcularCarpetasYChismoseadorDinamico();
             window.renderizarMonitorMembresiasAdmin();
+        };
+
+        window.abrirModalSolicitudStreaming = function(plataforma) {
+            document.getElementById('sol-plataforma').value = plataforma.toUpperCase();
+            document.getElementById('sol-nombre').value = ""; document.getElementById('sol-tlf').value = ""; document.getElementById('sol-dir').value = "";
+            document.getElementById('modal-solicitud-cliente-streaming').classList.remove('hidden');
+        };
+
+        window.despacharSolicitudWhatsAppAlDueno = function() {
+            const plat = document.getElementById('sol-plataforma').value;
+            const name = document.getElementById('sol-nombre').value.trim().toUpperCase();
+            const tlf = document.getElementById('sol-tlf').value.trim();
+            const dir = document.getElementById('sol-dir').value.trim().toUpperCase();
+            const metodo = document.getElementById('sol-metodo-pago').value;
+
+            let msg = `🎬 *SOLICITUD — CORDERO MK*\n\n📺 *Plataforma:* ${plat}\n👤 *Cliente:* ${name}\n📱 *WhatsApp:* ${tlf}\n📍 *Dirección:* ${dir}\n💳 *Método de Pago:* ${metodo}\n\n⚠️ _Confirmo que estoy 100% seguro de la contratación._`;
+            window.open(`https://api.whatsapp.com/send?phone=${MI_NUMERO_CELULAR_UNICO}&text=${encodeURIComponent(msg)}`, '_blank');
+            document.getElementById('modal-solicitud-cliente-streaming').classList.add('hidden');
         };
 
         window.procesarSuccionLegoInteligenteTexto = function() {
@@ -616,7 +647,7 @@
 
         window.renderizarMonitorMembresiasAdmin = function() {
             const box = document.getElementById('mosaico-streaming-clientes-box'); if(!box) return;
-            box.innerHTML = "";
+            box.innerHTML = ""; document.getElementById('lbl-total-activos').innerText = localStreamingClientesArr.length;
 
             const busquedaQuery = document.getElementById('buscador-nombre-input').value.trim().toUpperCase();
 
@@ -691,12 +722,13 @@
             if(destino === 'GRUPOS') {
                 if(leyendaCustomGrupos) { msg = leyendaCustomGrupos.replace('[Link_Dinámico_de_GitHub]', urlFinal) + RESPALDO_FIRMA_WHATSAPP; } 
                 else {
-                    msg = `📺 *SERVICIOS STREAMING CORDERO MK — ENTRETENIMIENTO PREMIUM* 📺\n\nLe invitamos a conocer la plataforma más confiable y estable para la adquisición de sus pantallas y membresías digitales. 🚀\n\n🔒 *GARANTÍA Y RESPALDO ABSOLUTO:* Más de 6 años de trayectoria impecable en el mercado regional y nacional avalan la seguridad de nuestro servicio.\n\n🍿 *NUESTRO CATÁLOGO DISPONIBLE:*\n▪️ Netflix Ultra HD 4K\n▪️ Tele Latino, Flujo TV y Super TV\n▪️ Disney+, Amazon Prime Video, Max y mucho más...\n\n💳 *Múltiples Métodos de Pago:* Bolívares (Pago Móvil a tasa Binance), Binance (USDT), Nequi, PayPal y Zelle.\n\n👇 *INGRESA A NUESTRA TAQUILLA DIGITAL Y ADQUIERE TU PANTALLA:*\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
+                    msg = `📺 *SERVICIOS STREAMING CORDERO MK — ENTRETENIMIENTO PREMIUM* 📺\n\nLe invitamos a conocer la plataforma más confiable y estable para la adquisición de sus pantallas y membresías digitales. 🚀\n\n🔒 *GARANTÍA Y RESPALDO ABSOLUTO:* Más de 6 años de trayectoria impecable en el mercado regional y nacional avalan la seguridad de nuestro servicio.\n\n🍿 *NUESTRO CATÁLOGO DISPONIBLE:*\n▪️ Netflix Ultra HD 4K\n▪️ Tele Latino, Flujo TV y Super TV\n▪️ Disney+, Amazon Prime Video, Max y mucho más...\n\n💳 *Múltiples Métodos de Pago:* Bolívares (Pago Móvil a tasa Binance), Binance (USDT), Zinli, Nequi y PayPal.\n\n👇 *INGRESA A NUESTRA TAQUILLA DIGITAL Y ADQUIERE TU PANTALLA:*\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
                 }
             } else {
-                if(leyendaCustomEstados) { msg = leyendaCustomEstados.replace('[Link_Dinámico_de_GitHub]', urlFinal) + RESPALDO_FIRMA_WHATSAPP; } 
+                // FORMATO ULTRA CORTO CORREGIDO PARA ESTADOS DE WHATSAPP (SIN LÍMITE DE CARACTERES)
+                if(leyendaCustomEstados) { msg = leyendaCustomEstados.replace('[Link_Dinámico_de_GitHub]', urlFinal); } 
                 else {
-                    msg = `🎬 *BIENVENIDOS A LA EXPERIENCIA PREMIUM DE STREAMING — CORDERO MK* 🎬\n🍿 Disfrute de Netflix, Tele Latino, Disney+ y televisión en vivo con la máxima estabilidad.\n\n🔒 Más de 6 años de experiencia y seriedad. Cero interrupciones, soporte real.\n💳 Recibimos Pago Móvil (Tasa Binance), Nequi, PayPal y Zelle.\n\n👇 *VISITE NUESTRA WEB EN VIVO Y ORDENE SU CUENTA AQUÍ:*\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
+                    msg = `🎬 *PANTALLAS STREAMING PREMIUM CORDERO MK* 🍿\nDisfruta Netflix, Tele Latino, Disney+ y TV en vivo sin caídas. 🚀\n\n👇 *Pide tu pantalla en vivo aquí:*\n🔗 ${urlFinal}`;
                 }
             }
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
@@ -776,4 +808,4 @@
         };
     </script>
 </body>
-                                          </html>
+</html>
