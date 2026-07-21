@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios Streaming Cordero MK</title>
     
-    <!-- METADATOS COMPARTICIÓN ESTADOS (OPEN GRAPH CORPORATIVO) -->
+    <!-- METADATOS COMPARTICIÓN ESTADOS/GRUPOS (WHATSAPP LA MUESTRA AL PEGAR EL LINK) -->
     <meta property="og:title" content="🚀 Servicios Streaming Cordero MK — Taquilla Digital Activa">
-    <meta property="og:description" content="Membresías digitales y televisión premium por IP con estabilidad absoluta y garantía real de servicio bajo el respaldo de Tucocel C.A.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?q=80&w=400&auto=format&fit=crop">
+    <meta property="og:description" content="Membresías digitales y televisión premium por IP con estabilidad absoluta y garantía real bajo el respaldo de Tucocel C.A.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/publionlinemk/streaming/main/imagen%20para%20Streaming%20-clean.jpg">
     <meta property="og:type" content="website">
 
     <!-- TAILWIND & FONTS -->
@@ -20,7 +20,6 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* EFECTO TAQUILLA PREMIUM CON CONTRASTE MEJORADO */
         .cinema-card { 
             background: linear-gradient(145deg, #090912, #131324); 
             border: 1px solid rgba(255, 255, 255, 0.14); 
@@ -35,11 +34,9 @@
         .glow-red { text-shadow: 0 0 14px rgba(220, 38, 38, 0.9); }
         .glow-white { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)); }
         
-        /* AURA DE LUZ CENTRAL PARA LOGOS INFERIORES */
         .footer-glow {
             background: radial-gradient(circle at center, rgba(220, 38, 38, 0.14) 0%, rgba(3, 3, 6, 0) 65%);
         }
-        /* BANNER ÉPICO ENTRADA */
         .hero-epic {
             background: radial-gradient(circle at top, rgba(153, 27, 27, 0.35) 0%, rgba(3, 3, 6, 0) 75%), linear-gradient(180deg, #080810 0%, #030306 100%);
             border-bottom: 1px solid rgba(220, 38, 38, 0.18);
@@ -98,7 +95,7 @@
 
         <!-- ==================== VISTA CLIENTE PÚBLICO ==================== -->
         <div id="vista-vitrina-publica" class="space-y-6">
-            <!-- BANNER PRINCIPAL ÉPICO DE ENTRADA -->
+            <!-- BANNER PRINCIPAL LIMPIO (SIN IMAGEN INTERNA) -->
             <section class="hero-epic text-center py-10 px-4 space-y-3 shadow-xl">
                 <div class="max-w-3xl mx-auto space-y-2">
                     <span class="text-[9px] tracking-[0.3em] font-extrabold text-red-500 uppercase bg-red-950/50 border border-red-900/50 px-3 py-1 rounded-full inline-block">TAQUILLA DIGITAL OFICIAL</span>
@@ -159,7 +156,6 @@
                 </form>
             </div>
         </div>
-
 
         <!-- ==================== VISTA CONSOLA ADMINISTRATIVA MÁSTER ==================== -->
         <main id="vista-streaming-admin" class="max-w-6xl mx-auto px-4 py-6 space-y-6 hidden">
@@ -285,7 +281,7 @@
                     </div>
                 </div>
 
-                <!-- ACCORDION 4: MARKETING GITHUB Y LEYENDAS (TIPO BLOC DE NOTAS EXPANDIBLE) -->
+                <!-- ACCORDION 4: MARKETING GITHUB Y LEYENDAS -->
                 <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
                     <button onclick="window.toggleModuloAcordeon('acc-marketing')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
                         <span><i class="fa-solid fa-link text-red-500 mr-2"></i> Enrutador de Enlaces y Leyendas de Comunicación (GitHub)</span>
@@ -299,7 +295,7 @@
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
-                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda para Grupos de WhatsApp (Arrastre la esquina para expandir)</label>
+                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda para Grupos de WhatsApp</label>
                                     <textarea id="cfg-leyenda-grupos-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica..."></textarea>
                                 </div>
                                 <div>
@@ -339,23 +335,20 @@
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
                     <span class="text-[9px] font-black tracking-widest text-slate-400 uppercase block"><i class="fa-solid fa-folder-tree text-red-500 mr-1"></i> Bóveda Central Filtrada de Suscriptores</span>
                     
-                    <!-- BARRA DE BÚSQUEDA INTEGRADA POR NOMBRE -->
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-xs"><i class="fa-solid fa-magnifying-glass"></i></span>
                         <input type="text" id="buscador-nombre-input" onkeyup="window.renderizarMonitorMembresiasAdmin()" placeholder="Escribe un nombre para filtrar en tiempo real (Ej: María)..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl font-medium focus:outline-none focus:border-neutral-700 uppercase">
                     </div>
 
-                    <!-- BOTONERA DE CARPETAS DE PLATAFORMAS -->
                     <div id="wrapper-carpetas-filtros-botones" class="flex flex-wrap gap-1.5 pt-1"></div>
                 </div>
                 
-                <!-- MOZAICO DE EXPEDIENTES -->
                 <div id="mosaico-streaming-clientes-box" class="space-y-3 max-h-[80vh] overflow-y-auto pr-1 no-scrollbar"></div>
             </div>
         </main>
     </div>
 
-    <!-- ==================== CINTILLO INFERIOR: ALFOMBRA DE MARCAS CON RESPALDO CORPORATIVO Y PUBLIONLINEMK ==================== -->
+    <!-- ==================== CINTILLO INFERIOR ==================== -->
     <footer class="footer-glow border-t border-neutral-900/80 mt-16 py-6 px-4 text-center space-y-4 relative z-40">
         <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-6 sm:gap-10 glow-white">
             <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="h-4 object-contain">
@@ -366,7 +359,6 @@
             <span class="text-[9.5px] text-white font-extrabold font-mono tracking-widest bg-neutral-800 px-2 py-0.5 rounded border border-neutral-700 shadow">YOUTUBE</span>
         </div>
         
-        <!-- FIRMA PIE DE AMIGO Y DERECHOS DE AUTOR CON @publionlinemk -->
         <div class="text-white text-[10px] sm:text-xs space-y-1 pt-2 font-bold tracking-wide">
             <p class="text-slate-200">🔐 © 2026 Tucocel C.A. Todos los derechos reservados.</p>
             <p class="text-slate-400 font-medium uppercase text-[9px] sm:text-[10px]">
@@ -392,7 +384,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // NÚMERO ÚNICO DE CONTACTO Y SALIDA DE OPERACIONES
         const MI_NUMERO_CELULAR_UNICO = "584147357549";
 
         let catálogoPlataformasEstructura = {
@@ -417,8 +408,6 @@
 
         const REGLAS_DE_ORO_TEXTO = `*⚠️ REGLAS DE ORO DEL SERVICIO:*\n\n✅ *Renovaciones:* Para garantizar la continuidad de tu pantalla, debes realizar el pago un día antes de tu fecha de activación.\n✅ No cambiar el correo ni la contraseña de la cuenta.\n✅ No crear ni borrar perfiles adicionales.\n✅ No compartir los datos con terceros.\n✅ Entrar únicamente al perfil asignado.\n\nEl incumplimiento de estas reglas puede causar la pérdida de la garantía sin derecho a reembolso.\n\n🌟 ¿Te gustó nuestro servicio? ¡Tu recomendación es nuestro mejor motor! Disfruta tu programación. 🍿🎬`;
         const LINK_GRUPO_WHATSAPP = `https://chat.whatsapp.com/CcSII6i2HqSLiWDUhNi5ay`;
-        
-        // FIRMA CORPORATIVA FIJA CON @publionlinemk
         const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ *CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.*\n📡 *Agente Autorizado Movistar Cordero*\n💻 _Desarrollado corporativamente por nuestra agencia *@publionlinemk*._`;
 
         window.toggleModuloAcordeon = function(id) {
@@ -594,7 +583,6 @@
             const correoMatch = text.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/);
             if(correoMatch) document.getElementById('field-correo').value = correoMatch[0];
 
-            const cuentaMatch = text.match(/(?:Cuenta:|ID:)\s*([0-9]+)/i);
             const lineas = text.split('\n');
             lineas.forEach(l => {
                 const clean = l.trim();
@@ -725,7 +713,6 @@
                     msg = `📺 *SERVICIOS STREAMING CORDERO MK — ENTRETENIMIENTO PREMIUM* 📺\n\nLe invitamos a conocer la plataforma más confiable y estable para la adquisición de sus pantallas y membresías digitales. 🚀\n\n🔒 *GARANTÍA Y RESPALDO ABSOLUTO:* Más de 6 años de trayectoria impecable en el mercado regional y nacional avalan la seguridad de nuestro servicio.\n\n🍿 *NUESTRO CATÁLOGO DISPONIBLE:*\n▪️ Netflix Ultra HD 4K\n▪️ Tele Latino, Flujo TV y Super TV\n▪️ Disney+, Amazon Prime Video, Max y mucho más...\n\n💳 *Múltiples Métodos de Pago:* Bolívares (Pago Móvil a tasa Binance), Binance (USDT), Zinli, Nequi y PayPal.\n\n👇 *INGRESA A NUESTRA TAQUILLA DIGITAL Y ADQUIERE TU PANTALLA:*\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
                 }
             } else {
-                // FORMATO ULTRA CORTO CORREGIDO PARA ESTADOS DE WHATSAPP (SIN LÍMITE DE CARACTERES)
                 if(leyendaCustomEstados) { msg = leyendaCustomEstados.replace('[Link_Dinámico_de_GitHub]', urlFinal); } 
                 else {
                     msg = `🎬 *PANTALLAS STREAMING PREMIUM CORDERO MK* 🍿\nDisfruta Netflix, Tele Latino, Disney+ y TV en vivo sin caídas. 🚀\n\n👇 *Pide tu pantalla en vivo aquí:*\n🔗 ${urlFinal}`;
