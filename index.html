@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios Streaming Cordero MK & PubliTasaMK Pro</title>
     
-    <!-- METADATOS COMPARTICIÓN ESTADOS/GRUPOS -->
+    <!-- METADATOS COMPARTICIÓN ESTADOS/GRUPOS (VISTA PREVIA TARJETA WHATSAPP) -->
+    <meta property="og:type" content="website">
     <meta property="og:title" content="🚀 Servicios Streaming Cordero MK — Taquilla Digital Activa">
     <meta property="og:description" content="Membresías digitales y televisión premium por IP con estabilidad absoluta y garantía real bajo el respaldo de Tucocel C.A.">
     <meta property="og:image" content="https://raw.githubusercontent.com/publionlinemk/streaming/main/imagen%20para%20Streaming%20-clean.jpg">
-    <meta property="og:type" content="website">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="600">
 
     <!-- CONFIGURACIÓN PWA PARA INSTALACIÓN EN PANTALLA PRINCIPAL -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -102,7 +104,7 @@
         <!-- ANUNCIO REGLA DE ORO DEGRADADO -->
         <div class="bg-gradient-to-r from-red-950 via-neutral-950 to-red-950 text-center py-2.5 px-4 border-b border-red-900/30">
             <p class="text-[9.5px] sm:text-xs font-bold text-slate-200 uppercase tracking-wide">
-                📌 <span class="text-red-500 font-black">Regla de Oro:</span> Todas las membresías tienen una suscripción por 1 mes. Deben pagar un día antes del vencimiento.
+                📌 <span class="text-red-500 font-black">Regla de Oro:</span> Todas las membresías son el alquiler de un servicio mensual. Deben renovarse 1 día antes del vencimiento.
             </p>
         </div>
 
@@ -155,7 +157,7 @@
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
                             <p class="text-[9px] sm:text-[11px] text-slate-300 font-medium leading-tight">
-                                Monitor Económico Oficial Venezolano, Colombiano, Binance USDT y Bitcoin
+                                Todos tus indicadores financieros en tiempo real y en un solo lugar
                             </p>
                         </div>
                     </div>
@@ -253,7 +255,7 @@
         </div>
 
         <!-- ================================================================= -->
-        <!-- VISTA: MONITOR DE INDICADORES EN VIVO (CON REDISEÑO CRIPTO SIMÉTRICO) -->
+        <!-- VISTA: MONITOR DE INDICADORES EN VIVO -->
         <!-- ================================================================= -->
         <div id="vista-publitasa-monitor" class="max-w-4xl mx-auto px-3 sm:px-4 py-6 space-y-6 hidden">
             
@@ -294,7 +296,7 @@
                     <i class="fa-solid fa-triangle-exclamation"></i> AVISO Y REGLA IMPORTANTE DE USO
                 </span>
                 <p class="text-[10.5px] text-slate-300 font-medium leading-relaxed">
-                    Estimado cliente, usted es responsable del uso de esta aplicación. Esta suscripción es individual y <strong>no transferible</strong>. Usted está adquiriendo una membresía mensual (renovable mes a mes), más no está comprando la propiedad intelectual ni la aplicación.
+                    Estimado cliente, esta suscripción es el <strong>alquiler de una membresía mensual</strong>, no constituye la compra del software. La licencia queda vinculada a su dispositivo. Si cambia de equipo, debe solicitar el reset al administrador.
                 </p>
             </div>
 
@@ -360,7 +362,6 @@
                             <span class="text-[9px] text-emerald-400 font-mono font-bold">Sincro En Vivo</span>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                            <!-- CASILLA 1: BINANCE USDT VES -->
                             <div class="bg-neutral-900 p-3 rounded-xl border border-neutral-800 space-y-1">
                                 <span class="text-[9.5px] text-amber-400 uppercase font-black block">Binance USDT (VES P2P)</span>
                                 <div class="flex justify-between items-center font-mono text-xs font-bold pt-1">
@@ -368,7 +369,6 @@
                                     <span class="text-slate-400">Venta: <strong class="text-amber-400 text-sm">121,80 Bs</strong></span>
                                 </div>
                             </div>
-                            <!-- CASILLA 2: BITCOIN BTC USD -->
                             <div class="bg-neutral-900 p-3 rounded-xl border border-neutral-800 space-y-1">
                                 <span class="text-[9.5px] text-amber-400 uppercase font-black block">Bitcoin (BTC / USD Global)</span>
                                 <div class="flex justify-between items-center font-mono text-xs font-bold pt-1">
@@ -580,14 +580,20 @@
                     <button onclick="window.despacharMarketingMasivoWhatsApp('ESTADOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2"><i class="fa-solid fa-circle-dot text-emerald-500"></i> Formato Corto para Estados</button>
                 </div>
 
-                <!-- ARCHIVADOR INTELIGENTE POR CARPETAS CON BUSCADOR EN TIEMPO REAL -->
+                <!-- ARCHIVADOR INTELIGENTE POR CARPETAS CON BUSCADOR Y BÓVEDA DE ANULADOS -->
                 <div class="space-y-4 pt-2">
                     <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
-                        <span class="text-[9px] font-black tracking-widest text-slate-400 uppercase block"><i class="fa-solid fa-folder-tree text-red-500 mr-1"></i> Bóveda Central Filtrada de Suscriptores</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[9px] font-black tracking-widest text-slate-400 uppercase block"><i class="fa-solid fa-folder-tree text-red-500 mr-1"></i> Bóveda Central Filtrada de Suscriptores</span>
+                            <!-- Conmutador de Carpeta de Anulados -->
+                            <button onclick="window.alternarVistaArchivadosStreaming()" id="btn-toggle-anulados-str" class="bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-red-900 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                                📂 Ver Bóveda Anulados
+                            </button>
+                        </div>
                         
                         <div class="relative">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-xs"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="buscador-nombre-input" onkeyup="window.renderizarMonitorMembresiasAdmin()" placeholder="Escribe un nombre para filtrar en tiempo real (Ej: María)..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl font-medium focus:outline-none focus:border-neutral-700 uppercase">
+                            <input type="text" id="buscador-nombre-input" onkeyup="window.renderizarMonitorMembresiasAdmin()" placeholder="Escribe un nombre o teléfono para filtrar en tiempo real..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl font-medium focus:outline-none focus:border-neutral-700 uppercase">
                         </div>
 
                         <div id="wrapper-carpetas-filtros-botones" class="flex flex-wrap gap-1.5 pt-1"></div>
@@ -618,15 +624,23 @@
                     </div>
                 </div>
 
-                <!-- ACCESO RÁPIDO A PREVISUALIZACIÓN DEL MONITOR -->
+                <!-- ACCESO RÁPIDO Y BOTONERA PUBLICITARIA DE PUBLITASA PRO -->
                 <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-3">
                     <div class="space-y-0.5 text-center sm:text-left">
-                        <span class="text-amber-400 font-black text-xs uppercase block">👁️ Vista Previa del Monitor en Vivo</span>
-                        <p class="text-[10px] text-slate-400">Verifica cómo se despliegan los indicadores para los clientes suscritos.</p>
+                        <span class="text-amber-400 font-black text-xs uppercase block">👁️ Difusión y Vista Previa del Monitor</span>
+                        <p class="text-[10px] text-slate-400">Compartir publicidad directa en grupos o estados de WhatsApp.</p>
                     </div>
-                    <button onclick="window.abrirVistaMonitorDirecto()" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-xs px-5 py-2.5 rounded-xl uppercase tracking-wider transition-all">
-                        Abrir Monitor
-                    </button>
+                    <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                        <button onclick="window.despacharPublicidadPubliTasa('GRUPOS')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-black text-xs px-3.5 py-2 rounded-xl uppercase tracking-wider hover:border-amber-500/40 transition-all flex items-center gap-1.5">
+                            <i class="fa-solid fa-users"></i> Pub. Grupos
+                        </button>
+                        <button onclick="window.despacharPublicidadPubliTasa('ESTADOS')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-black text-xs px-3.5 py-2 rounded-xl uppercase tracking-wider hover:border-amber-500/40 transition-all flex items-center gap-1.5">
+                            <i class="fa-solid fa-mobile-screen"></i> Pub. Estado
+                        </button>
+                        <button onclick="window.abrirVistaMonitorDirecto()" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-xs px-4 py-2 rounded-xl uppercase tracking-wider transition-all">
+                            Abrir Monitor
+                        </button>
+                    </div>
                 </div>
 
                 <!-- 1. CONTROL RÁPIDO DE CASAS DE CAMBIO (FRONTERA) -->
@@ -706,16 +720,21 @@
                     </div>
                 </div>
 
-                <!-- 3. BÓVEDA CENTRAL Y CONTROL DE LICENCIAS ACTIVAS -->
+                <!-- 3. BÓVEDA CENTRAL Y CONTROL DE LICENCIAS ACTIVAS E INACTIVAS -->
                 <div class="space-y-3">
                     <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
                         <div class="flex justify-between items-center">
                             <span class="text-[9px] font-black tracking-widest text-amber-400 uppercase flex items-center gap-1.5">
                                 <i class="fa-solid fa-address-book"></i> Bóveda Licencias PubliTasa Pro
                             </span>
-                            <span id="lbl-total-publitasa" class="bg-neutral-950 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold">
-                                0 Activos
-                            </span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="window.alternarVistaArchivadosPubliTasa()" id="btn-toggle-anulados-pt" class="bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-amber-500/40 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                                    📂 Ver Bóveda Anulados
+                                </button>
+                                <span id="lbl-total-publitasa" class="bg-neutral-950 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold">
+                                    0 Activos
+                                </span>
+                            </div>
                         </div>
                         
                         <div class="relative">
@@ -787,6 +806,8 @@
         let localPubliTasaClientesArr = [];
         let esAdminStreamingSession = false;
         let carpetaFiltroSeleccionadaStr = "TODOS";
+        let verArchivadosStreamingBool = false;
+        let verArchivadosPubliTasaBool = false;
         let deferredPromptPWA = null;
         let publiTasaProEstadoActivoBool = true;
         
@@ -796,7 +817,15 @@
         let leyendaCustomGrupos = "";
         let leyendaCustomEstados = "";
 
-        const REGLAS_DE_ORO_TEXTO = `*⚠️ REGLAS DE ORO DEL SERVICIO:*\n\n✅ *Renovaciones:* Para garantizar la continuidad de tu pantalla, debes realizar el pago un día antes de tu fecha de activación.\n✅ No cambiar el correo ni la contraseña de la cuenta.\n✅ No crear ni borrar perfiles adicionales.\n✅ No compartir los datos con terceros.\n✅ Entrar únicamente al perfil asignado.\n\nEl incumplimiento de estas reglas puede causar la pérdida de la garantía sin derecho a reembolso.\n\n🌟 ¿Te gustó nuestro servicio? ¡Tu recomendación es nuestro mejor motor! Disfruta tu programación. 🍿🎬`;
+        const REGLAS_DE_ORO_TEXTO = `*⚠️ REGLAS DE ORO Y CONDICIONES:*
+✅ *Suscripción:* Esta membresía es un alquiler mensual. Para garantizar la continuidad de tu pantalla, debes realizar el pago un día antes del vencimiento.
+✅ No cambiar el correo ni la contraseña de la cuenta.
+✅ No crear ni borrar perfiles adicionales.
+✅ Entrar únicamente al perfil asignado.
+✅ Su acceso está vinculado a su dispositivo. Si cambia de teléfono, notifique al administrador.
+
+El incumplimiento de estas reglas causará la pérdida de la garantía sin derecho a reembolso. Disfruta tu servicio. 🍿🎬`;
+
         const LINK_GRUPO_WHATSAPP = `https://chat.whatsapp.com/CcSII6i2HqSLiWDUhNi5ay`;
         const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ *CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.*\n📡 *Agente Autorizado Movistar Cordero*\n💻 _Desarrollado corporativamente por nuestra agencia *@publionlinemk*._`;
 
@@ -1019,28 +1048,36 @@
             window.recalcularCarpetasYChismoseadorDinamico();
         };
 
-        /* RECALCULO DE CARPETAS CON LA BURBUJA DE PUBLITASA PRO EN EL TABLERO */
+        /* RECALCULO DE CARPETAS CON LA BURBUJA Y BOTÓN FILTRO DE PUBLITASA PRO INTEGRADAS EN LA BÓVEDA CENTRAL */
         window.recalcularCarpetasYChismoseadorDinamico = function() {
             const burbujasBox = document.getElementById('wrapper-chismoseador-burbujas');
             const carpetasBox = document.getElementById('wrapper-carpetas-filtros-botones');
             if(!burbujasBox || !carpetasBox) return;
 
             burbujasBox.innerHTML = "";
-            carpetasBox.innerHTML = `<button onclick="window.filtrarCarpetaStreamingAdmin('TODOS')" class="px-3 py-1.5 rounded-xl font-black text-[10px] uppercase transition-all ${carpetaFiltroSeleccionadaStr === 'TODOS' ? 'bg-red-600 text-white' : 'bg-neutral-950 text-slate-400 border border-neutral-800'}">📁 Ver Todos</button>`;
+            
+            // Botón VER TODOS inicial
+            let htmlCarpetas = `<button onclick="window.filtrarCarpetaStreamingAdmin('TODOS')" class="px-3 py-1.5 rounded-xl font-black text-[10px] uppercase transition-all ${carpetaFiltroSeleccionadaStr === 'TODOS' ? 'bg-red-600 text-white' : 'bg-neutral-950 text-slate-400 border border-neutral-800'}">📁 Ver Todos</button>`;
 
-            // 1. BURBUJA PUBLITASA PRO EN EL TABLERO DE ALERTAS
-            const vencidosPubliTasa = localPubliTasaClientesArr.filter(c => c.diasRestantes <= 5).length;
+            // 1. BURBUJA Y BOTÓN FILTRO DE PUBLITASA PRO
+            const activosPubliTasa = localPubliTasaClientesArr.filter(c => (c.estado || 'ACTIVO') === 'ACTIVO');
+            const vencidosPubliTasa = activosPubliTasa.filter(c => c.diasRestantes <= 5).length;
+            
             let colorBurbujaPT = vencidosPubliTasa > 0 ? 'border-amber-500 bg-amber-950/30 text-amber-400 animate-pulse font-black' : 'border-amber-500/40 bg-neutral-950/60 text-amber-400';
+            
             burbujasBox.innerHTML += `
                 <div onclick="window.cambiarParticionAdmin('publitasa')" class="border rounded-xl p-2 text-center cursor-pointer hover:border-amber-400 transition-all ${colorBurbujaPT}">
                     <span class="block text-[8.5px] font-black uppercase truncate">PubliTasa Pro</span>
                     <span class="text-[10px] font-mono block mt-0.5">${vencidosPubliTasa > 0 ? `⚠️ ${vencidosPubliTasa} Alerta` : '✅ Al Día'}</span>
                 </div>`;
 
-            // 2. BURBUJAS DE LAS DEMÁS PLATAFORMAS DE STREAMING
+            let estiloBotonPT = carpetaFiltroSeleccionadaStr === 'PUBLITASA_PRO' ? 'bg-amber-500 text-neutral-950 font-black' : 'bg-neutral-950 text-amber-400 border border-amber-500/40 hover:border-amber-400';
+            htmlCarpetas += `<button onclick="window.filtrarCarpetaStreamingAdmin('PUBLITASA_PRO')" class="px-3 py-1.5 rounded-xl font-bold text-[10px] uppercase transition-all ${estiloBotonPT}">📊 PubliTasa Pro (${activosPubliTasa.length})</button>`;
+
+            // 2. BURBUJAS Y BOTONES FILTRO DE LAS DEMÁS PLATAFORMAS DE STREAMING
             Object.keys(catálogoPlataformasEstructura).forEach(k => {
                 const nombrePlat = catálogoPlataformasEstructura[k].nombre;
-                const clientesDeEstaPlat = localStreamingClientesArr.filter(c => c.plataforma === k);
+                const clientesDeEstaPlat = localStreamingClientesArr.filter(c => (c.estado || 'ACTIVO') === 'ACTIVO' && c.plataforma === k);
                 const vencidosLote = clientesDeEstaPlat.filter(c => c.diasRestantes <= 4).length;
 
                 let colorBurbuja = vencidosLote > 0 ? 'border-amber-500 bg-amber-950/20 text-amber-400 animate-pulse font-black' : 'border-neutral-800 bg-neutral-950/40 text-slate-500';
@@ -1050,15 +1087,43 @@
                         <span class="text-[10px] font-mono block mt-0.5">${vencidosLote > 0 ? `⚠️ ${vencidosLote} Alerta` : '✅ Al Día'}</span>
                     </div>`;
 
-                let estiloCarpetaBoton = carpetaFiltroSeleccionadaStr === k ? 'bg-red-600 text-white' : 'bg-neutral-950 text-slate-400 border border-neutral-800';
-                carpetasBox.innerHTML += `<button onclick="window.filtrarCarpetaStreamingAdmin('${k}')" class="px-3 py-1.5 rounded-xl font-bold text-[10px] uppercase transition-all ${estiloCarpetaBoton}">${nombrePlat} (${clientesDeEstaPlat.length})</button>`;
+                let estiloCarpetaBoton = carpetaFiltroSeleccionadaStr === k ? 'bg-red-600 text-white font-black' : 'bg-neutral-950 text-slate-400 border border-neutral-800';
+                htmlCarpetas += `<button onclick="window.filtrarCarpetaStreamingAdmin('${k}')" class="px-3 py-1.5 rounded-xl font-bold text-[10px] uppercase transition-all ${estiloCarpetaBoton}">${nombrePlat} (${clientesDeEstaPlat.length})</button>`;
             });
+
+            carpetasBox.innerHTML = htmlCarpetas;
         };
 
         window.filtrarCarpetaStreamingAdmin = function(carpeta) {
             carpetaFiltroSeleccionadaStr = carpeta;
             window.recalcularCarpetasYChismoseadorDinamico();
             window.renderizarMonitorMembresiasAdmin();
+        };
+
+        window.alternarVistaArchivadosStreaming = function() {
+            verArchivadosStreamingBool = !verArchivadosStreamingBool;
+            const btn = document.getElementById('btn-toggle-anulados-str');
+            if(verArchivadosStreamingBool) {
+                btn.className = "bg-red-600 text-white text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider";
+                btn.innerHTML = "🟢 Ver Clientes Activos";
+            } else {
+                btn.className = "bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-red-900 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider";
+                btn.innerHTML = "📂 Ver Bóveda Anulados";
+            }
+            window.renderizarMonitorMembresiasAdmin();
+        };
+
+        window.alternarVistaArchivadosPubliTasa = function() {
+            verArchivadosPubliTasaBool = !verArchivadosPubliTasaBool;
+            const btn = document.getElementById('btn-toggle-anulados-pt');
+            if(verArchivadosPubliTasaBool) {
+                btn.className = "bg-amber-500 text-neutral-950 font-black text-[9px] px-3 py-1 rounded-full uppercase tracking-wider";
+                btn.innerHTML = "🟢 Ver Licencias Activas";
+            } else {
+                btn.className = "bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-amber-500/40 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider";
+                btn.innerHTML = "📂 Ver Bóveda Anulados";
+            }
+            window.renderizarBovedaPubliTasaPro();
         };
 
         window.abrirModalSolicitudStreaming = function(plataforma) {
@@ -1137,7 +1202,8 @@
 
             const nuevoClienteStreaming = {
                 id: 'str-' + new Date().getTime(), plataforma, meses, correo, clave, perfil, pin,
-                cliente: cNombre, telefono: cTlf, direccion: cDir, fechaActivacion: new Date().toLocaleDateString(), diasRestantes: meses * 30
+                cliente: cNombre, telefono: cTlf, direccion: cDir, fechaActivacion: new Date().toLocaleDateString(), 
+                diasRestantes: meses * 30, estado: 'ACTIVO'
             };
 
             localStreamingClientesArr.push(nuevoClienteStreaming);
@@ -1154,44 +1220,97 @@
 
         window.renderizarMonitorMembresiasAdmin = function() {
             const box = document.getElementById('mosaico-streaming-clientes-box'); if(!box) return;
-            box.innerHTML = ""; document.getElementById('lbl-total-activos').innerText = localStreamingClientesArr.length;
+            box.innerHTML = ""; 
+            
+            const activosTotales = localStreamingClientesArr.filter(c => (c.estado || 'ACTIVO') === 'ACTIVO');
+            document.getElementById('lbl-total-activos').innerText = activosTotales.length;
 
             const busquedaQuery = document.getElementById('buscador-nombre-input').value.trim().toUpperCase();
 
-            let listaFiltrada = localStreamingClientesArr;
+            // CASO ESPECIAL: FILTRO DE PUBLITASA PRO SELECCIONADO EN BÓVEDA CENTRAL
+            if(carpetaFiltroSeleccionadaStr === "PUBLITASA_PRO") {
+                let listaPT = localPubliTasaClientesArr.filter(c => verArchivadosStreamingBool ? c.estado === 'INACTIVO' : (c.estado || 'ACTIVO') === 'ACTIVO');
+                if(busquedaQuery) {
+                    listaPT = listaPT.filter(c => c.cliente.includes(busquedaQuery) || c.telefono.includes(busquedaQuery));
+                }
+                if(listaPT.length === 0) {
+                    box.innerHTML = `<p class="text-center text-slate-500 italic py-8 text-xs">No hay suscriptores PubliTasa Pro en ${verArchivadosStreamingBool ? 'Bóveda de Anulados' : 'Clientes Activos'}.</p>`; return;
+                }
+                listaPT.forEach(c => {
+                    const esAlerta = c.diasRestantes <= 5;
+                    const esInactivo = c.estado === 'INACTIVO';
+                    box.innerHTML += `
+                        <div class="border-2 border-amber-500/60 rounded-2xl p-4 flex flex-col justify-between ${esInactivo ? 'border-red-900/40 bg-red-950/10' : (esAlerta ? 'bg-amber-950/20' : 'bg-[#00112b]/80')} shadow-xl">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="text-amber-400 text-[9px] font-black uppercase tracking-wider">LICENCIA PRO: ${c.tokenLicencia}</span>
+                                    <h4 class="text-white text-sm font-black uppercase mt-[#0.5px]">${c.cliente}</h4>
+                                    <p class="text-[10px] text-slate-300 font-mono mt-0.5"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono} &bull; ${c.direccion || 'TÁCHIRA'}</p>
+                                    <p class="text-[10px] text-emerald-400 font-bold mt-1"><i class="fa-solid fa-mobile-screen"></i> Equipos: ${c.equiposRegistrados.length} / ${c.maxEquipos} Máx</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="block text-base font-mono font-black ${esInactivo ? 'text-red-500' : (esAlerta ? 'text-amber-400 animate-pulse' : 'text-slate-200')}">${c.diasRestantes} Días</span>
+                                    <span class="text-[8px] text-slate-500 block uppercase font-bold">${esInactivo ? 'ANULADO' : 'Plan: ' + c.meses + ' Mes(es)'}</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mt-3 border-t border-neutral-900 pt-3">
+                                ${!esInactivo ? `
+                                    <button onclick="window.enviarBienvenidaPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase">📲 Enviar Acceso</button>
+                                    <button onclick="window.notificarPagoPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-bold text-[9px] py-2 rounded-lg uppercase">🔔 Notificar</button>
+                                    <button onclick="window.resetearEquiposPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-2 rounded-lg uppercase">🔄 Reset</button>
+                                    <button onclick="window.abrirEditorPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-2 rounded-lg uppercase">✏️ Editar</button>
+                                    <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-2 rounded-lg uppercase col-span-2 sm:col-span-4">🚫 Anular Licencia</button>
+                                ` : `
+                                    <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase col-span-2 sm:col-span-4">♻️ Reactivar Licencia Pro</button>
+                                `}
+                            </div>
+                        </div>`;
+                });
+                return;
+            }
+
+            // LISTADO DE PLATAFORMAS DE STREAMING CORDERO MK
+            let listaFiltrada = localStreamingClientesArr.filter(c => verArchivadosStreamingBool ? c.estado === 'INACTIVO' : (c.estado || 'ACTIVO') === 'ACTIVO');
+            
             if(carpetaFiltroSeleccionadaStr !== "TODOS") {
                 listaFiltrada = listaFiltrada.filter(c => c.plataforma === carpetaFiltroSeleccionadaStr);
             }
             if(busquedaQuery) {
-                listaFiltrada = listaFiltrada.filter(c => c.cliente.includes(busquedaQuery));
+                listaFiltrada = listaFiltrada.filter(c => c.cliente.includes(busquedaQuery) || c.telefono.includes(busquedaQuery));
             }
 
             if(listaFiltrada.length === 0) {
-                box.innerHTML = `<p class="text-center text-slate-500 italic py-8 text-xs">No se encontraron expedientes con los filtros aplicados.</p>`; return;
+                box.innerHTML = `<p class="text-center text-slate-500 italic py-8 text-xs">No se encontraron expedientes en ${verArchivadosStreamingBool ? 'Bóveda de Anulados' : 'Clientes Activos'}.</p>`; return;
             }
 
             listaFiltrada.forEach(c => {
                 const esAlertaCritica = c.diasRestantes <= 4;
+                const esInactivo = c.estado === 'INACTIVO';
+
                 box.innerHTML += `
-                    <div class="border rounded-2xl p-4 flex flex-col justify-between ${esAlertaCritica ? 'border-amber-500 bg-amber-950/10' : 'border-neutral-800 bg-neutral-950/40'}">
+                    <div class="border rounded-2xl p-4 flex flex-col justify-between ${esInactivo ? 'border-red-900/40 bg-red-950/10' : (esAlertaCritica ? 'border-amber-500 bg-amber-950/10' : 'border-neutral-800 bg-neutral-950/40')}">
                         <div class="flex justify-between items-start">
                             <div>
                                 <span class="text-red-500 text-[9px] font-black uppercase font-mono">${catálogoPlataformasEstructura[c.plataforma]?.nombre || c.plataforma}</span>
                                 <h4 class="text-white text-sm font-black uppercase mt-0.5">${c.cliente}</h4>
-                                <p class="text-[10px] text-slate-300 font-mono truncate max-w-xs mt-1">Acceso: ${c.correo || 'ID DIRECTO'} | Clave: ${c.clave}</p>
-                                ${c.perfil ? `<p class="text-[10px] text-red-400 font-bold">Perfil: ${c.perfil} ${c.pin ? `| PIN: ${c.pin}` : ''}</p>` : ''}
+                                <p class="text-[10px] text-slate-300 font-mono truncate max-w-xs mt-1"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono} | Acceso: ${c.correo || 'ID'}</p>
+                                <p class="text-[10px] text-slate-400 font-mono">Clave: ${c.clave} ${c.perfil ? `| Perfil: ${c.perfil}` : ''} ${c.pin ? `| PIN: ${c.pin}` : ''}</p>
                             </div>
                             <div class="text-right">
-                                <span class="block text-[15px] font-mono font-black ${esAlertaCritica ? 'text-amber-400 animate-pulse' : 'text-slate-200'}">${c.diasRestantes} Días</span>
-                                <span class="text-[8px] text-slate-500 block uppercase font-bold">Lote: ${c.meses} Mes(es)</span>
+                                <span class="block text-[15px] font-mono font-black ${esInactivo ? 'text-red-500' : (esAlertaCritica ? 'text-amber-400 animate-pulse' : 'text-slate-200')}">${c.diasRestantes} Días</span>
+                                <span class="text-[8px] text-slate-500 block uppercase font-bold">${esInactivo ? 'ANULADO' : 'Lote: ' + c.meses + ' Mes(es)'}</span>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 mt-3 border-t border-neutral-900 pt-3">
-                            <button onclick="window.despacharMensajeWhatsAppStreaming('${c.id}', 'ACTIVACION')" class="bg-red-600 hover:bg-red-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase">Activación</button>
-                            <button onclick="window.despacharMensajeWhatsAppStreaming('${c.id}', 'RENOVACION')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-1.5 rounded-lg uppercase">Renovar</button>
-                            <button onclick="window.despacharMensajeWhatsAppStreaming('${c.id}', 'CAMBIO')" class="bg-amber-600 hover:bg-amber-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase">Enviar Cambio</button>
-                            <button onclick="window.abrirEditorPlanillaRapida('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-1.5 rounded-lg uppercase">Editar</button>
-                            <button onclick="window.anularPerfilStreamingDestructivo('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-1.5 rounded-lg uppercase sm:col-span-1 col-span-2">Anular</button>
+                            ${!esInactivo ? `
+                                <button onclick="window.despacharMensajeWhatsAppStreaming('${c.id}', 'ACTIVACION')" class="bg-red-600 hover:bg-red-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase">Activación</button>
+                                <button onclick="window.despacharMensajeWhatsAppStreaming('${c.id}', 'NOTIFICAR')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-bold text-[9px] py-1.5 rounded-lg uppercase">Notificar Pago</button>
+                                <button onclick="window.despacharMensajeWhatsAppStreaming('${c.id}', 'RENOVACION')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-1.5 rounded-lg uppercase">Renovar</button>
+                                <button onclick="window.abrirEditorPlanillaRapida('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-1.5 rounded-lg uppercase">Editar</button>
+                                <button onclick="window.anularPerfilStreaming('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-1.5 rounded-lg uppercase">Anular</button>
+                            ` : `
+                                <button onclick="window.reactivarPerfilStreaming('${c.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase col-span-5">♻️ Reactivar Cliente en Sistema</button>
+                            `}
                         </div>
                     </div>`;
             });
@@ -1210,21 +1329,17 @@
                 if(match.pin) text += `📌 *PIN Perfil:* \`${match.pin}\`\n\n`;
                 text += `📅 *Fecha de Activación:* ${match.fechaActivacion}\n✂️ *Fecha de Renovación:* ${fVenc.toLocaleDateString()}\n\n${REGLAS_DE_ORO_TEXTO}\n\n🌐 *Únete a nuestro grupo oficial:* ${LINK_GRUPO_WHATSAPP}${RESPALDO_FIRMA_WHATSAPP}`;
             }
-            if(tipo === 'RENOVACION') {
-                text = `🔄 *RECORDATORIO DE RENOVACIÓN — CORDERO MK*\n\nHola *${match.cliente}*,\nTu suscripción de *${match.plataforma}* vence este *${fVenc.toLocaleDateString()}*.\n\nPara garantizar la continuidad de tu pantalla, por favor reporta tu pago con un día de anticipación. ¡Muchas gracias! 🍿${RESPALDO_FIRMA_WHATSAPP}`;
+            if(tipo === 'NOTIFICAR') {
+                text = `🔔 *Recordatorio de Vencimiento — Streaming Cordero MK* 🎞️📺\n\n¡Saludos, *${match.cliente}*! 👋✨\n\nTe saludamos de Streaming Cordero MK. Pasamos por aquí para recordarte que tu suscripción de *${match.plataforma}* vence MAÑANA (*${fVenc.toLocaleDateString()}*). 📅\n\n⚠️ *Nota importante:* Para garantizar que tu servicio no se interrumpa y puedas seguir disfrutando sin cortes, te recordamos realizar tu pago de renovación el día de HOY. 🍿🎬\n\n📸 *Síguenos en Instagram:*\nhttps://www.instagram.com/streamingcorderomk\n\n¡Estamos a tu orden! 🫡${RESPALDO_FIRMA_WHATSAPP}`;
             }
-            if(tipo === 'CAMBIO') {
-                text = `⚡ *🚨 ACTUALIZACIÓN DE CREDENCIALES — CORDERO MK*\n\nEstimado cliente *${match.cliente}*,\nLe informamos que sus datos de acceso de *${match.plataforma}* han sido actualizados por mantenimiento.\n\n🔐 *NUEVOS DATOS DE ACCESO:*\n`;
-                if(match.correo) text += `📧 *Correo:* \`${match.correo}\`\n`;
-                text += `🔑 *Contraseña / ID:* \`${match.clave}\`\n`;
-                if(match.pin) text += `📌 *PIN Perfil:* \`${match.pin}\`\n\n`;
-                text += `⚠️ _Respete las Reglas de Oro del servicio para mantener su garantía activa._${RESPALDO_FIRMA_WHATSAPP}`;
+            if(tipo === 'RENOVACION') {
+                text = `🔄 *RENOVACIÓN EXITOSA — CORDERO MK* 🍿\n\nHola *${match.cliente}*, tu pantalla de *${match.plataforma}* ha sido renovada con éxito.\n\n✂️ *Nueva Fecha de Vencimiento:* ${fVenc.toLocaleDateString()}\n👤 *Perfil:* ${match.perfil || 'General'} | 📌 *PIN:* \`${match.pin || 'N/A'}\`\n🔑 *Acceso:* \`${match.correo || match.clave}\` | *Clave:* \`${match.clave}\`\n\n🍿 *¡Gracias por mantener tu servicio al día! Disfruta tu programación.*${RESPALDO_FIRMA_WHATSAPP}`;
             }
             window.open(`https://api.whatsapp.com/send?phone=${cleanTlf}&text=${encodeURIComponent(text)}`, '_blank');
         };
 
         window.despacharMarketingMasivoWhatsApp = function(destino) {
-            const urlFinal = linkServidorGitHubGuardado || "https://github.com";
+            const urlFinal = linkServidorGitHubGuardado || window.location.href;
             let msg = "";
             if(destino === 'GRUPOS') {
                 if(leyendaCustomGrupos) { msg = leyendaCustomGrupos.replace('[Link_Dinámico_de_GitHub]', urlFinal) + RESPALDO_FIRMA_WHATSAPP; } 
@@ -1242,21 +1357,41 @@
 
         window.abrirEditorPlanillaRapida = function(id) {
             let match = localStreamingClientesArr.find(c => c.id === id); if(!match) return;
+            let nt = prompt("Modificar Teléfono WhatsApp:", match.telefono || "");
             let nc = prompt("Modificar Correo / ID:", match.correo || "");
             let ncl = prompt("Modificar Clave:", match.clave);
             let np = prompt("Modificar PIN:", match.pin || "");
             if(ncl !== null) {
+                if(nt) match.telefono = nt;
                 match.correo = nc; match.clave = ncl; match.pin = np;
                 window.sincronizarBaseStreamingNube().then(() => { window.renderizarMonitorMembresiasAdmin(); window.construirEstructurasDinamicasInterfaces(); });
             }
         };
 
-        window.anularPerfilStreamingDestructivo = async function(id) {
-            if(!confirm("¿Desea anular esta suscripción?")) return;
-            let idx = localStreamingClientesArr.findIndex(c => c.id === id);
-            if(idx !== -1) {
-                localStreamingClientesArr.splice(idx, 1);
-                await window.sincronizarBaseStreamingNube(); window.construirEstructurasDinamicasInterfaces(); window.renderizarMonitorMembresiasAdmin();
+        window.anularPerfilStreaming = async function(id) {
+            if(!confirm("¿Deseas enviar este cliente a la Bóveda de Anulados?")) return;
+            let match = localStreamingClientesArr.find(c => c.id === id);
+            if(match) {
+                match.estado = 'INACTIVO';
+                await window.sincronizarBaseStreamingNube(); 
+                window.construirEstructurasDinamicasInterfaces(); 
+                window.renderizarMonitorMembresiasAdmin();
+            }
+        };
+
+        window.reactivarPerfilStreaming = async function(id) {
+            let match = localStreamingClientesArr.find(c => c.id === id);
+            if(match) {
+                let nuevosMeses = parseInt(prompt("Ingrese los meses a renovar (1, 2, 3...):", match.meses || 1));
+                if(nuevosMeses) {
+                    match.meses = nuevosMeses;
+                    match.diasRestantes = nuevosMeses * 30;
+                    match.estado = 'ACTIVO';
+                    match.fechaActivacion = new Date().toLocaleDateString();
+                    await window.sincronizarBaseStreamingNube();
+                    window.renderizarMonitorMembresiasAdmin();
+                    alert("♻️ Cliente reactivado con éxito.");
+                }
             }
         };
 
@@ -1309,6 +1444,17 @@
         /* FUNCIONALIDAD EXCLUSIVA: PARTICIÓN PUBLITASA PRO (FIREBASE AISLADO) */
         /* ================================================================= */
 
+        window.despacharPublicidadPubliTasa = function(tipo) {
+            const urlFinal = linkServidorGitHubGuardado || window.location.href;
+            let msg = "";
+            if(tipo === 'GRUPOS') {
+                msg = `📊 *¡TODOS TUS INDICADORES EN UN SOLO LUGAR Y EN TIEMPO REAL!* 🚀\n\nOlvídate de abrir múltiples páginas o calcular a mano. Visualiza en una sola pantalla:\n\n🇻🇪 *Venezuela:* Dólar y Euro BCV\n🇨🇴 *Colombia:* TRM y Casas de Cambio en Cúcuta\n🌐 *Cripto / Digital:* Binance P2P (USDT) y Bitcoin\n\n⚡ *100% Fuentes Oficiales y Mercado Real al Instante.*\n\n📲 *Pruébalo ahora y solicita tu acceso desde $5 / Mes:*\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
+            } else {
+                msg = `📊 *MONITOR FINANCIERO EN TIEMPO REAL* 🚀\n\n🛑 100% Fuentes Oficiales y Mercado Real\n🇻🇪 BCV (Dólar y Euro)\n🇨🇴 Cúcuta y TRM\n🌐 Binance P2P (USDT) y Bitcoin\n\n📲 Prueba tu pantalla desde $5 / Mes:\n🔗 ${urlFinal}`;
+            }
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+        };
+
         window.guardarTasaFronteraPubliTasa = async function() {
             const compra = parseFloat(document.getElementById('pt-adm-compra').value) || 0;
             const venta = parseFloat(document.getElementById('pt-adm-venta').value) || 0;
@@ -1330,7 +1476,7 @@
 
             if(!cliente || !tlf) return alert("Por favor completa el Nombre y Teléfono.");
 
-            const tokenLicencia = 'PTPRO-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+            const tokenLicencia = 'PUBLITASA-' + Math.floor(1000 + Math.random() * 9000);
 
             const nuevoClientePro = {
                 id: 'pt-' + new Date().getTime(),
@@ -1358,24 +1504,27 @@
             if(!box) return;
             
             box.innerHTML = "";
-            document.getElementById('lbl-total-publitasa').innerText = `${localPubliTasaClientesArr.length} Activos`;
+            const activosTotales = localPubliTasaClientesArr.filter(c => (c.estado || 'ACTIVO') === 'ACTIVO');
+            document.getElementById('lbl-total-publitasa').innerText = `${activosTotales.length} Activos`;
 
             const q = document.getElementById('pt-buscar-input').value.trim().toUpperCase();
-            let lista = localPubliTasaClientesArr;
+            let lista = localPubliTasaClientesArr.filter(c => verArchivadosPubliTasaBool ? c.estado === 'INACTIVO' : (c.estado || 'ACTIVO') === 'ACTIVO');
 
             if(q) {
                 lista = lista.filter(c => c.cliente.includes(q) || c.telefono.includes(q));
             }
 
             if(lista.length === 0) {
-                box.innerHTML = `<p class="text-center text-slate-500 italic py-6 text-xs">No hay suscriptores Pro registrados en la base de datos.</p>`;
+                box.innerHTML = `<p class="text-center text-slate-500 italic py-6 text-xs">No hay suscriptores Pro en ${verArchivadosPubliTasaBool ? 'Bóveda de Anulados' : 'Licencias Activas'}.</p>`;
                 return;
             }
 
             lista.forEach(c => {
                 const esAlerta = c.diasRestantes <= 5;
+                const esInactivo = c.estado === 'INACTIVO';
+
                 box.innerHTML += `
-                    <div class="border rounded-2xl p-4 flex flex-col justify-between ${esAlerta ? 'border-amber-500 bg-amber-950/20' : 'border-neutral-800 bg-neutral-950/60'} shadow-lg">
+                    <div class="border rounded-2xl p-4 flex flex-col justify-between ${esInactivo ? 'border-red-900/40 bg-red-950/10' : (esAlerta ? 'border-amber-500 bg-amber-950/20' : 'border-neutral-800 bg-neutral-950/60')} shadow-lg">
                         <div class="flex justify-between items-start">
                             <div>
                                 <span class="text-amber-400 text-[9px] font-black uppercase tracking-wider">LICENCIA: ${c.tokenLicencia}</span>
@@ -1384,24 +1533,55 @@
                                 <p class="text-[10px] text-emerald-400 font-bold mt-1"><i class="fa-solid fa-mobile-screen"></i> Equipos: ${c.equiposRegistrados.length} / ${c.maxEquipos} Máx</p>
                             </div>
                             <div class="text-right">
-                                <span class="block text-base font-mono font-black ${esAlerta ? 'text-amber-400 animate-pulse' : 'text-slate-200'}">${c.diasRestantes} Días</span>
-                                <span class="text-[8px] text-slate-500 block uppercase font-bold">Plan: ${c.meses} Mes(es)</span>
+                                <span class="block text-base font-mono font-black ${esInactivo ? 'text-red-500' : (esAlerta ? 'text-amber-400 animate-pulse' : 'text-slate-200')}">${c.diasRestantes} Días</span>
+                                <span class="text-[8px] text-slate-500 block uppercase font-bold">${esInactivo ? 'ANULADO' : 'Plan: ' + c.meses + ' Mes(es)'}</span>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-3 gap-2 mt-3 border-t border-neutral-900 pt-3">
-                            <button onclick="window.enviarBienvenidaPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase">
-                                📲 Enviar Acceso
-                            </button>
-                            <button onclick="window.resetearEquiposPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-2 rounded-lg uppercase">
-                                🔄 Reset Equipos
-                            </button>
-                            <button onclick="window.eliminarSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-2 rounded-lg uppercase">
-                                Anular
-                            </button>
+                        <div class="grid grid-cols-2 gap-1.5 mt-3 border-t border-neutral-900 pt-3">
+                            ${!esInactivo ? `
+                                <button onclick="window.enviarBienvenidaPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase">
+                                    📲 Enviar Acceso
+                                </button>
+                                <button onclick="window.notificarPagoPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-bold text-[9px] py-2 rounded-lg uppercase">
+                                    🔔 Notificar
+                                </button>
+                                <button onclick="window.resetearEquiposPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-2 rounded-lg uppercase">
+                                    🔄 Reset
+                                </button>
+                                <button onclick="window.abrirEditorPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-2 rounded-lg uppercase">
+                                    ✏️ Editar
+                                </button>
+                                <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-2 rounded-lg uppercase col-span-2">
+                                    🚫 Anular
+                                </button>
+                            ` : `
+                                <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase col-span-2">
+                                    ♻️ Reactivar Licencia Pro
+                                </button>
+                            `}
                         </div>
                     </div>`;
             });
+        };
+
+        window.abrirEditorPubliTasa = function(id) {
+            let match = localPubliTasaClientesArr.find(c => c.id === id);
+            if(!match) return;
+            let nuevoNombre = prompt("Modificar Nombre / Comercio:", match.cliente || "");
+            let nuevoTlf = prompt("Modificar Teléfono (WhatsApp):", match.telefono || "");
+            let nuevaDir = prompt("Modificar Ubicación / Sector:", match.direccion || "");
+            
+            if(nuevoNombre !== null && nuevoTlf !== null) {
+                if(nuevoNombre) match.cliente = nuevoNombre.toUpperCase();
+                if(nuevoTlf) match.telefono = nuevoTlf;
+                if(nuevaDir) match.direccion = nuevaDir.toUpperCase();
+                
+                window.sincronizarPubliTasaNube().then(() => { 
+                    window.renderizarBovedaPubliTasaPro(); 
+                    window.recalcularCarpetasYChismoseadorDinamico();
+                });
+            }
         };
 
         window.enviarBienvenidaPubliTasa = function(id) {
@@ -1411,9 +1591,23 @@
             let cleanTlf = c.telefono.replace(/\D/g, '');
             if(!cleanTlf.startsWith('58')) cleanTlf = '58' + cleanTlf;
 
-            const linkApp = window.location.href;
+            const linkApp = linkServidorGitHubGuardado || window.location.href;
 
-            const msg = `📊 *BIENVENIDO A PUBLI-TASA-MK PRO*\n\nHola *${c.cliente}*,\nSe ha activado con éxito tu suscripción ejecutiva al monitor financiero de la región.\n\n🔑 *TU TOKEN DE LICENCIA:* \`${c.tokenLicencia}\`\n📱 *Límite de Dispositivos:* ${c.maxEquipos} Teléfono(s)\n📅 *Días Contratados:* ${c.diasRestantes} Días\n\n👇 *INGRESA A TU PLATAFORMA PRO AQUÍ:*\n🔗 ${linkApp}\n\n⚠️ _Su licencia está vinculada a su dispositivo. No comparta su token de acceso._\n\n🏛️ *CON EL RESPALDO DE TUCOCEL C.A.*`;
+            const msg = `📊 *BIENVENIDO A PUBLI-TASA-MK PRO*\n\nHola *${c.cliente}*,\nSe ha activado con éxito tu suscripción ejecutiva al monitor financiero.\n\n🔑 *TU LICENCIA / AKEY:* \`${c.tokenLicencia}\`\n📱 *Equipos Autorizados:* ${c.maxEquipos} Dispositivo(s)\n📅 *Período Contratado:* ${c.diasRestantes} Días\n\n📌 *REGLAS Y AVISO IMPORTANTE DE USO:*\n• Esta suscripción es el *alquiler de una membresía mensual*, no constituye la compra del software.\n• Para garantizar la continuidad de tu pantalla, debes realizar la renovación *un día antes del vencimiento*.\n• Su licencia está vinculada a su dispositivo. Si cambia de teléfono, notifique al administrador.\n\n👇 *INGRESA A TU PLATAFORMA PRO AQUÍ:*\n🔗 ${linkApp}\n\n🏛️ *CON EL RESPALDO DE TUCOCEL C.A.*`;
+
+            window.open(`https://api.whatsapp.com/send?phone=${cleanTlf}&text=${encodeURIComponent(msg)}`, '_blank');
+        };
+
+        window.notificarPagoPubliTasa = function(id) {
+            const c = localPubliTasaClientesArr.find(x => x.id === id);
+            if(!c) return;
+
+            let cleanTlf = c.telefono.replace(/\D/g, '');
+            if(!cleanTlf.startsWith('58')) cleanTlf = '58' + cleanTlf;
+
+            const fVenc = new Date(); fVenc.setDate(fVenc.getDate() + c.diasRestantes - 1);
+
+            const msg = `🔔 *Recordatorio de Vencimiento — PubliTasa Pro* 📊\n\n¡Saludos, *${c.cliente}*! 👋✨\n\nTe saludamos de PubliTasa Pro. Pasamos por aquí para recordarte que tu membresía ejecutiva (Licencia: \`${c.tokenLicencia}\`) vence MAÑANA (*${fVenc.toLocaleDateString()}*). 📅\n\n⚠️ *Nota importante:* Para garantizar la continuidad de tus indicadores financieros y evitar el bloqueo automático del monitor, te recordamos realizar tu pago de renovación el día de HOY. 📈\n\n¡Estamos a tu orden! 🫡${RESPALDO_FIRMA_WHATSAPP}`;
 
             window.open(`https://api.whatsapp.com/send?phone=${cleanTlf}&text=${encodeURIComponent(msg)}`, '_blank');
         };
@@ -1429,12 +1623,32 @@
             }
         };
 
-        window.eliminarSuscriptorPubliTasa = async function(id) {
-            if(!confirm("¿Deseas eliminar esta suscripción Pro?")) return;
-            localPubliTasaClientesArr = localPubliTasaClientesArr.filter(x => x.id !== id);
-            await window.sincronizarPubliTasaNube();
-            window.renderizarBovedaPubliTasaPro();
-            window.recalcularCarpetasYChismoseadorDinamico();
+        window.anularSuscriptorPubliTasa = async function(id) {
+            if(!confirm("¿Deseas mover esta licencia a la Bóveda de Anulados?")) return;
+            const c = localPubliTasaClientesArr.find(x => x.id === id);
+            if(c) {
+                c.estado = 'INACTIVO';
+                await window.sincronizarPubliTasaNube();
+                window.renderizarBovedaPubliTasaPro();
+                window.recalcularCarpetasYChismoseadorDinamico();
+            }
+        };
+
+        window.reactivarSuscriptorPubliTasa = async function(id) {
+            const c = localPubliTasaClientesArr.find(x => x.id === id);
+            if(c) {
+                let nuevosMeses = parseInt(prompt("Ingrese los meses a renovar (1, 2, 3...):", c.meses || 1));
+                if(nuevosMeses) {
+                    c.meses = nuevosMeses;
+                    c.diasRestantes = nuevosMeses * 30;
+                    c.estado = 'ACTIVO';
+                    c.fechaActivacion = new Date().toLocaleDateString();
+                    await window.sincronizarPubliTasaNube();
+                    window.renderizarBovedaPubliTasaPro();
+                    window.recalcularCarpetasYChismoseadorDinamico();
+                    alert("♻️ Licencia Reactivada con éxito.");
+                }
+            }
         };
 
         window.sincronizarPubliTasaNube = async function() {
@@ -1484,4 +1698,4 @@
         };
     </script>
 </body>
-                    </html>
+                </html>
