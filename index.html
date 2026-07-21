@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios Streaming Cordero MK</title>
     
-    <!-- METADATOS COMPARTICIÓN GRUPOS (DINÁMICO DESDE CONSOLA) -->
+    <!-- METADATOS COMPARTICIÓN GRUPOS (FLYER OFICIAL PRECONFIGURADO) -->
     <meta property="og:title" content="🚀 Servicios Streaming Cordero MK — Taquilla Digital Activa">
     <meta property="og:description" content="Membresías digitales y televisión premium por IP con estabilidad absoluta y garantía real bajo el respaldo de Tucocel C.A.">
-    <meta id="og-image-tag" property="og:image" content="https://raw.githubusercontent.com/publionlinemk/streaming/main/imagen%20para%20Streaming%20-clean.jpg">
+    <meta property="og:image" content="https://raw.githubusercontent.com/publionlinemk/streaming/main/imagen%20para%20Streaming%20-clean.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:type" content="website">
 
     <!-- TAILWIND & FONTS -->
@@ -274,27 +277,20 @@
                     </div>
                 </div>
 
-                <!-- ACCORDION 4: MARKETING Y CARGADOR AUTÓNOMO DE FLYER DESDE GALERÍA -->
+                <!-- ACCORDION 4: ENRUTADOR Y LEYENDAS -->
                 <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
                     <button onclick="window.toggleModuloAcordeon('acc-marketing')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
-                        <span><i class="fa-solid fa-link text-red-500 mr-2"></i> Enrutador, Leyendas y Carga de Flyer desde Galería</span>
+                        <span><i class="fa-solid fa-link text-red-500 mr-2"></i> Enrutador de Enlaces y Leyendas Comercial</span>
                         <i class="fa-solid fa-chevron-down text-xs"></i>
                     </button>
                     <div id="acc-marketing" class="hidden p-5 border-t border-neutral-850 bg-neutral-950/40 space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div>
-                                <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Link de la Web (GitHub URL)</label>
-                                <input type="text" id="cfg-link-github-servidor" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono text-xs focus:outline-none" placeholder="https://tucocel.github.io/StreamingCorderoMK/">
-                            </div>
-                            <div>
-                                <label class="text-[8.5px] text-slate-500 uppercase block mb-1">🖼️ Cargar Flyer Oficial desde Mi Galería</label>
-                                <input type="file" id="cfg-file-flyer-local" accept="image/*" class="w-full bg-neutral-950 border border-neutral-800 text-slate-300 p-2 rounded-xl text-xs focus:outline-none file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-black file:bg-red-600 file:text-white hover:file:bg-red-700 cursor-pointer">
-                                <span id="lbl-status-upload-flyer" class="text-[8px] font-mono text-emerald-400 block mt-1"></span>
-                            </div>
+                        <div>
+                            <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Link de la Web (GitHub URL)</label>
+                            <input type="text" id="cfg-link-github-servidor" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono text-xs focus:outline-none" placeholder="https://tucocel.github.io/StreamingCorderoMK/">
                         </div>
                         <div>
-                            <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda para Grupos de WhatsApp</label>
-                            <textarea id="cfg-leyenda-grupos-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica..."></textarea>
+                            <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda Personalizada para Grupos</label>
+                            <textarea id="cfg-leyenda-grupos-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar la leyenda corporativa por defecto..."></textarea>
                         </div>
                         <button onclick="window.salvarConfiguracionDeEnlacesYLeyendas()" class="bg-neutral-950 text-slate-300 border border-neutral-800 hover:border-red-600/30 text-[10px] font-black uppercase px-5 py-2 rounded-xl block ml-auto">Guardar Configuración Comercial</button>
                     </div>
@@ -359,11 +355,10 @@
         </div>
     </footer>
 
-    <!-- REGLAS DE LÓGICA CORE DE FIREBASE & STORAGE -->
+    <!-- REGLAS DE LÓGICA CORE DE FIREBASE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyDytP_5UQyyRUT7wPC2bDIYz5t70z_pQV4",
@@ -376,7 +371,6 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        const storage = getStorage(app);
 
         const MI_NUMERO_CELULAR_UNICO = "584147357549";
 
@@ -397,7 +391,6 @@
         let masterUsuarioIdDinamico = "TUCOCEL";
         let masterClaveDinamica = "Razu2020.";
         let linkServidorGitHubGuardado = "";
-        let urlFlyerPromocionalCustom = "";
         let leyendaCustomGrupos = "";
 
         const REGLAS_DE_ORO_TEXTO = `⚠️ REGLAS DE ORO DEL SERVICIO:\n\n✅ Renovaciones: Para garantizar la continuidad de tu pantalla, debes realizar el pago un día antes de tu fecha de activación.\n✅ No cambiar el correo ni la contraseña de la cuenta.\n✅ No crear ni borrar perfiles adicionales.\n✅ No compartir los datos con terceros.\n✅ Entrar únicamente al perfil asignado.\n\nEl incumplimiento de estas reglas puede causar la pérdida de la garantía sin derecho a reembolso.\n\n🌟 ¿Te gustó nuestro servicio? ¡Tu recomendación es nuestro mejor motor! Disfruta tu programación. 🍿🎬`;
@@ -440,30 +433,10 @@
         window.salvarConfiguracionDeEnlacesYLeyendas = async function() {
             linkServidorGitHubGuardado = document.getElementById('cfg-link-github-servidor').value.trim();
             leyendaCustomGrupos = document.getElementById('cfg-leyenda-grupos-custom').value.trim();
-            const fileInput = document.getElementById('cfg-file-flyer-local');
-            const lblStatus = document.getElementById('lbl-status-upload-flyer');
-
-            if(fileInput.files.length > 0) {
-                lblStatus.innerText = "⏳ Subiendo flyer desde tu galería a Firebase...";
-                const file = fileInput.files[0];
-                const storageRef = ref(storage, 'flyers/flyer_oficial_' + new Date().getTime() + '.jpg');
-                
-                try {
-                    const snapshot = await uploadBytes(storageRef, file);
-                    urlFlyerPromocionalCustom = await getDownloadURL(snapshot.ref);
-                    lblStatus.innerText = "✅ Flyer actualizado exitosamente en nube.";
-                    
-                    const tagImg = document.getElementById('og-image-tag');
-                    if(tagImg) tagImg.setAttribute('content', urlFlyerPromocionalCustom);
-                } catch(err) {
-                    lblStatus.innerText = "❌ Error al subir imagen.";
-                }
-            }
 
             try {
                 await setDoc(doc(db, "tcl_streaming_core", "marketing_config"), { 
                     github: linkServidorGitHubGuardado, 
-                    flyerUrl: urlFlyerPromocionalCustom,
                     leyendaGrupos: leyendaCustomGrupos 
                 });
                 alert("💾 Configuración comercial guardada con éxito.");
@@ -730,7 +703,7 @@
         };
 
         window.despacharMarketingMasivoWhatsApp = function(tipoApp) {
-            const urlFinal = linkServidorGitHubGuardado || "https://github.com";
+            const urlFinal = linkServidorGitHubGuardado || "https://tucocel.github.io/StreamingCorderoMK/";
             let msg = "";
             if(leyendaCustomGrupos) { 
                 msg = leyendaCustomGrupos.replace('[Link_Dinámico_de_GitHub]', urlFinal) + RESPALDO_FIRMA_WHATSAPP; 
@@ -796,16 +769,10 @@
                 const docMkt = await getDoc(doc(db, "tcl_streaming_core", "marketing_config"));
                 if(docMkt.exists()) {
                     linkServidorGitHubGuardado = docMkt.data().github || ""; 
-                    urlFlyerPromocionalCustom = docMkt.data().flyerUrl || "";
                     leyendaCustomGrupos = docMkt.data().leyendaGrupos || ""; 
                     
                     document.getElementById('cfg-link-github-servidor').value = linkServidorGitHubGuardado;
                     document.getElementById('cfg-leyenda-grupos-custom').value = leyendaCustomGrupos;
-                    
-                    if(urlFlyerPromocionalCustom) {
-                        const tagImg = document.getElementById('og-image-tag');
-                        if(tagImg) tagImg.setAttribute('content', urlFlyerPromocionalCustom);
-                    }
                 }
                 const docTar = await getDoc(doc(db, "tcl_streaming_core", "tarifas_config"));
                 if(docTar.exists()) { catálogoPlataformasEstructura = docTar.data(); }
@@ -829,4 +796,4 @@
         };
     </script>
 </body>
-    </html>
+</html>
