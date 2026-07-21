@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios Streaming Cordero MK & PubliTasaMK Pro</title>
     
-    <!-- METADATOS COMPARTICIÓN ESTADOS/GRUPOS (VISTA PREVIA TARJETA WHATSAPP) -->
+    <!-- METADATOS COMPARTICIÓN ESTADOS/GRUPOS (VISTA PREVIA TARJETA ELEGANTE WHATSAPP) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="🚀 Servicios Streaming Cordero MK — Taquilla Digital Activa">
     <meta property="og:description" content="Membresías digitales y televisión premium por IP con estabilidad absoluta y garantía real bajo el respaldo de Tucocel C.A.">
@@ -320,7 +320,7 @@
                 </button>
             </div>
 
-            <!-- BLOQUE DE INDICADORES (EN VIVO VÍA APIS REALES) -->
+            <!-- BLOQUE DE INDICADORES (EN VIVO CON MARCAS DE TIEMPO INDEPENDIENTES) -->
             <div id="wrapper-indicadores-pantalla" class="space-y-4 hidden">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     
@@ -333,12 +333,15 @@
                         <div class="space-y-1 pt-1">
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slate-400">Dólar BCV:</span>
-                                <span id="val-bcv-usd" class="text-lg font-mono font-black text-amber-400">118,50 Bs</span>
+                                <span id="val-bcv-usd" class="text-lg font-mono font-black text-amber-400">Cargando...</span>
                             </div>
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slate-400">Euro BCV:</span>
-                                <span id="val-bcv-eur" class="text-lg font-mono font-black text-amber-300">128,10 Bs</span>
+                                <span id="val-bcv-eur" class="text-lg font-mono font-black text-amber-300">Cargando...</span>
                             </div>
+                        </div>
+                        <div class="border-t border-neutral-900/60 pt-2 text-right">
+                            <span id="time-bcv" class="text-[8.5px] text-slate-400 font-mono">Última actualización: En espera...</span>
                         </div>
                     </div>
 
@@ -348,9 +351,12 @@
                             <span class="text-xs font-bold text-slate-300">🇨🇴 Oficial TRM Colombia</span>
                             <span class="text-[9px] text-emerald-400 font-mono font-bold"><i class="fa-solid fa-circle-dot animate-pulse"></i> SFC Oficial</span>
                         </div>
-                        <div class="flex justify-between items-center pt-3">
+                        <div class="flex justify-between items-center pt-2">
                             <span class="text-xs font-bold text-slate-400">Tasa TRM (COP):</span>
-                            <span id="val-trm-cop" class="text-xl font-mono font-black text-amber-400">4.080 COP</span>
+                            <span id="val-trm-cop" class="text-xl font-mono font-black text-amber-400">Cargando...</span>
+                        </div>
+                        <div class="border-t border-neutral-900/60 pt-2 text-right">
+                            <span id="time-trm" class="text-[8.5px] text-slate-400 font-mono">Última actualización: En espera...</span>
                         </div>
                     </div>
 
@@ -370,9 +376,12 @@
                                 <span id="val-frontera-venta" class="text-2xl font-mono font-black text-amber-400">3.370</span>
                             </div>
                         </div>
+                        <div class="border-t border-neutral-900/60 pt-2 text-right">
+                            <span id="time-frontera" class="text-[8.5px] text-amber-400/90 font-mono font-bold">Última actualización en consola: Hoy</span>
+                        </div>
                     </div>
 
-                    <!-- CRIPTO MERCADO REAL: BINANCE USDT + BITCOIN BTC -->
+                    <!-- CRIPTO MERCADO REAL: BINANCE USDT + BITCOIN BTC CON "JALÓN" EN VIVO -->
                     <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-2 sm:col-span-2">
                         <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
                             <span class="text-xs font-bold text-slate-300">🪙 Mercado Cripto (Binance P2P & Global)</span>
@@ -382,17 +391,20 @@
                             <div class="bg-neutral-900 p-3 rounded-xl border border-neutral-800 space-y-1">
                                 <span class="text-[9.5px] text-amber-400 uppercase font-black block">Binance USDT (VES P2P)</span>
                                 <div class="flex justify-between items-center font-mono text-xs font-bold pt-1">
-                                    <span class="text-slate-400">Compra: <strong id="val-usdt-compra" class="text-emerald-400 text-sm">121,20 Bs</strong></span>
-                                    <span class="text-slate-400">Venta: <strong id="val-usdt-venta" class="text-amber-400 text-sm">121,80 Bs</strong></span>
+                                    <span class="text-slate-400">Compra: <strong id="val-usdt-compra" class="text-emerald-400 text-sm">Cargando...</strong></span>
+                                    <span class="text-slate-400">Venta: <strong id="val-usdt-venta" class="text-amber-400 text-sm">Cargando...</strong></span>
                                 </div>
                             </div>
                             <div class="bg-neutral-900 p-3 rounded-xl border border-neutral-800 space-y-1">
                                 <span class="text-[9.5px] text-amber-400 uppercase font-black block">Bitcoin (BTC / USD Global)</span>
                                 <div class="flex justify-between items-center font-mono text-xs font-bold pt-1">
                                     <span class="text-slate-400">Cotización:</span>
-                                    <span id="val-btc-usd" class="text-sm font-black text-emerald-400">$66.387 USD</span>
+                                    <span id="val-btc-usd" class="text-sm font-black text-emerald-400">Cargando...</span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="border-t border-neutral-900/60 pt-2 text-right">
+                            <span id="time-binance" class="text-[8.5px] text-emerald-400 font-mono font-bold">Sincronizado en vivo: Hace un momento</span>
                         </div>
                     </div>
 
@@ -491,9 +503,9 @@
                                     <div>
                                         <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Vigencia Lote</label>
                                         <select id="field-meses" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl focus:outline-none">
-                                            <option value="1">1 Mes (30 días)</option>
-                                            <option value="2">2 Meses (60 días)</option>
-                                            <option value="3">3 Meses (90 días)</option>
+                                            <option value="1">1 Mes (Calendario)</option>
+                                            <option value="2">2 Meses (Calendario)</option>
+                                            <option value="3">3 Meses (Calendario)</option>
                                         </select>
                                     </div>
                                 </div>
@@ -729,10 +741,10 @@
                             <div>
                                 <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Ciclo de Suscripción (Meses)</label>
                                 <select id="pt-cli-meses" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 px-4 py-2.5 rounded-xl uppercase focus:outline-none">
-                                    <option value="1">1 Mes (30 Días)</option>
-                                    <option value="2">2 Meses (60 Días)</option>
-                                    <option value="3">3 Meses (90 Días)</option>
-                                    <option value="6">6 Meses (180 Días)</option>
+                                    <option value="1">1 Mes (Calendario)</option>
+                                    <option value="2">2 Meses (Calendario)</option>
+                                    <option value="3">3 Meses (Calendario)</option>
+                                    <option value="6">6 Meses (Calendario)</option>
                                     <option value="12">12 Meses (Año Completo)</option>
                                 </select>
                             </div>
@@ -820,6 +832,36 @@
         const db = getFirestore(app);
 
         const MI_NUMERO_CELULAR_UNICO = "584147357549";
+        const URL_VITRINA_OFICIAL = "https://tucocel.github.io/StreamingCorderoMk/";
+
+        /* FUNCION CENTRAL DE ENRUTAMIENTO FORZADO A WHATSAPP PERSONAL (com.whatsapp) */
+        function abrirWhatsAppPersonal(phoneTarget, mensajeTexto) {
+            let cleanTlf = (phoneTarget || "").replace(/\D/g, '');
+            if (cleanTlf && !cleanTlf.startsWith('58')) cleanTlf = '58' + cleanTlf;
+            
+            const textoCodificado = encodeURIComponent(mensajeTexto);
+            const isAndroid = /Android/i.test(navigator.userAgent);
+
+            if (isAndroid) {
+                // INTENT DIRECTO DE ANDROID: OBLIGA A ABRIR EL PAQUETE "com.whatsapp" (PERSONAL)
+                let intentUrl = "";
+                if (cleanTlf) {
+                    intentUrl = `intent://send?phone=${cleanTlf}&text=${textoCodificado}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
+                } else {
+                    intentUrl = `intent://send?text=${textoCodificado}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
+                }
+                window.location.href = intentUrl;
+            } else {
+                // FALLBACK ESTÁNDAR PARA NAVEGADORES PC / OTROS
+                let webUrl = "";
+                if (cleanTlf) {
+                    webUrl = `https://api.whatsapp.com/send?phone=${cleanTlf}&text=${textoCodificado}`;
+                } else {
+                    webUrl = `https://api.whatsapp.com/send?text=${textoCodificado}`;
+                }
+                window.open(webUrl, '_blank');
+            }
+        }
 
         let catálogoPlataformasEstructura = {
             NETFLIX: { nombre: "Netflix", precio: 5.00, logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", desc: "Series exclusivas, películas de estreno y documentales en resolución Ultra HD 4K." },
@@ -855,8 +897,44 @@
 
 El incumplimiento de estas reglas causará la pérdida de la garantía sin derecho a reembolso. Disfruta tu servicio. 🍿🎬`;
 
-        const LINK_GRUPO_WHATSAPP = `https://chat.whatsapp.com/CcSII6i2HqSLiWDUhNi5ay`;
         const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ *CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.*\n📡 *Agente Autorizado Movistar Cordero*\n💻 _Desarrollado corporativamente por nuestra agencia *@publionlinemk*._`;
+
+        /* LÓGICA DE MES CALENDARIO EXACTO PARA RENOVACIÓN (REGLA DE ORO) */
+        function calcularFechaRenovacionExacta(fechaOrigenStr, mesesASumar) {
+            let partes = fechaOrigenStr.split('/');
+            let dia = parseInt(partes[0]);
+            let mes = parseInt(partes[1]) - 1; 
+            let ano = parseInt(partes[2]);
+
+            let fechaObj = new Date(ano, mes, dia);
+            fechaObj.setMonth(fechaObj.getMonth() + mesesASumar);
+
+            // Regla de Oro: Un día antes de la misma fecha del mes siguiente
+            fechaObj.setDate(fechaObj.getDate() - 1);
+
+            return fechaObj.toLocaleDateString('es-ES');
+        }
+
+        /* DÍAS RESTANTES BASADOS EN EL CALENDARIO */
+        function calcularDiasRestantesReales(fechaOrigenStr, mesesTotales) {
+            let partes = fechaOrigenStr.split('/');
+            let dia = parseInt(partes[0]);
+            let mes = parseInt(partes[1]) - 1; 
+            let ano = parseInt(partes[2]);
+
+            let fechaVenc = new Date(ano, mes, dia);
+            fechaVenc.setMonth(fechaVenc.getMonth() + mesesTotales);
+            fechaVenc.setDate(fechaVenc.getDate() - 1);
+
+            let hoy = new Date();
+            hoy.setHours(0,0,0,0);
+            fechaVenc.setHours(0,0,0,0);
+
+            let difMs = fechaVenc.getTime() - hoy.getTime();
+            let difDias = Math.ceil(difMs / (1000 * 60 * 60 * 24));
+
+            return difDias > 0 ? difDias : 0;
+        }
 
         /* RELOJ Y FECHA EN TIEMPO REAL */
         function iniciarRelojDigitalDinamico() {
@@ -874,26 +952,33 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }, 1000);
         }
 
-        /* CONEXIÓN CON REINTENTOS AISLADOS PARA APIS EN VIVO */
+        /* CONEXIÓN CON JALONES EN VIVO Y MARCAS DE TIEMPO INDEPENDIENTES */
         async function sincronizarIndicadoresMercadoEnVivo() {
-            // 1. Dólar y Euro BCV (Aislado)
+            const ahoraHora = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+            // 1. Dólar y Euro BCV
             try {
                 const resBcv = await fetch('https://ve.dolarapi.com/v1/dolares/oficial');
                 if (resBcv.ok) {
                     const dataBcv = await resBcv.json();
-                    if(dataBcv.promedio) document.getElementById('val-bcv-usd').innerText = `${dataBcv.promedio.toFixed(2)} Bs`;
+                    if(dataBcv.promedio) {
+                        document.getElementById('val-bcv-usd').innerText = `${dataBcv.promedio.toFixed(2)} Bs`;
+                        document.getElementById('time-bcv').innerText = `Oficial BCV — Sincronizado: ${ahoraHora}`;
+                    }
                 }
-            } catch (e) { document.getElementById('val-bcv-usd').innerText = "118,50 Bs"; }
+            } catch (e) {}
 
             try {
                 const resEur = await fetch('https://ve.dolarapi.com/v1/euros/oficial');
                 if (resEur.ok) {
                     const dataEur = await resEur.json();
-                    if(dataEur.promedio) document.getElementById('val-bcv-eur').innerText = `${dataEur.promedio.toFixed(2)} Bs`;
+                    if(dataEur.promedio) {
+                        document.getElementById('val-bcv-eur').innerText = `${dataEur.promedio.toFixed(2)} Bs`;
+                    }
                 }
-            } catch (e) { document.getElementById('val-bcv-eur').innerText = "128,10 Bs"; }
+            } catch (e) {}
 
-            // 2. TRM Colombia (Aislado)
+            // 2. TRM Colombia
             try {
                 const resTrm = await fetch('https://www.datos.gov.co/resource/ceyp-9c7c.json?$limit=1&$order=vigenciahasta%20DESC');
                 if (resTrm.ok) {
@@ -901,32 +986,44 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     if(dataTrm && dataTrm[0]) {
                         const valorTrm = parseFloat(dataTrm[0].valor);
                         document.getElementById('val-trm-cop').innerText = `${valorTrm.toLocaleString('es-CO')} COP`;
+                        document.getElementById('time-trm').innerText = `SFC Oficial — Sincronizado: ${ahoraHora}`;
                     }
                 }
-            } catch (e) { document.getElementById('val-trm-cop').innerText = "4.080 COP"; }
+            } catch (e) {}
 
-            // 3. Binance USDT (Aislado con fallback multi-servidor)
+            // 3. Binance USDT P2P (JALÓN EN VIVO POR ENTRADA)
             try {
-                let usdtCargado = false;
+                let usdtExito = false;
                 const resUsdt = await fetch('https://ve.dolarapi.com/v1/dolares/cripto');
                 if (resUsdt.ok) {
                     const dataUsdt = await resUsdt.json();
                     if(dataUsdt.promedio) {
-                        document.getElementById('val-usdt-compra').innerText = `${(dataUsdt.promedio * 0.995).toFixed(2)} Bs`;
-                        document.getElementById('val-usdt-venta').innerText = `${dataUsdt.promedio.toFixed(2)} Bs`;
-                        usdtCargado = true;
+                        const prom = parseFloat(dataUsdt.promedio);
+                        document.getElementById('val-usdt-compra').innerText = `${(prom * 0.995).toFixed(2)} Bs`;
+                        document.getElementById('val-usdt-venta').innerText = `${prom.toFixed(2)} Bs`;
+                        usdtExito = true;
                     }
                 }
-                if(!usdtCargado) {
-                    document.getElementById('val-usdt-compra').innerText = "121,20 Bs";
-                    document.getElementById('val-usdt-venta').innerText = "121,80 Bs";
+                
+                if(!usdtExito) {
+                    const resUsdt2 = await fetch('https://pydolarvenezuela-api.vercel.app/api/v1/dollar?page=binance');
+                    if(resUsdt2.ok) {
+                        const data2 = await resUsdt2.json();
+                        if(data2 && data2.monitors && data2.monitors.binance) {
+                            const p = parseFloat(data2.monitors.binance.price);
+                            document.getElementById('val-usdt-compra').innerText = `${(p * 0.995).toFixed(2)} Bs`;
+                            document.getElementById('val-usdt-venta').innerText = `${p.toFixed(2)} Bs`;
+                            usdtExito = true;
+                        }
+                    }
                 }
-            } catch (e) {
-                document.getElementById('val-usdt-compra').innerText = "121,20 Bs";
-                document.getElementById('val-usdt-venta').innerText = "121,80 Bs";
-            }
 
-            // 4. Bitcoin Global (Aislado)
+                if(usdtExito) {
+                    document.getElementById('time-binance').innerText = `⚡ Sincronizado en vivo P2P: ${ahoraHora}`;
+                }
+            } catch (e) {}
+
+            // 4. Bitcoin Global
             try {
                 const resBtc = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
                 if (resBtc.ok) {
@@ -934,7 +1031,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     const btcPrecio = parseFloat(dataBtc.price);
                     document.getElementById('val-btc-usd').innerText = `$${btcPrecio.toLocaleString('en-US', {maximumFractionDigits: 0})} USD`;
                 }
-            } catch (e) { document.getElementById('val-btc-usd').innerText = "$66.387 USD"; }
+            } catch (e) {}
         }
 
         /* CAPTURA Y DISPARO DIRECTO PWA */
@@ -1270,7 +1367,8 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
 
             let msg = `🎬 *SOLICITUD — CORDERO MK*\n\n📺 *Plataforma:* ${plat}${extraInfo}\n👤 *Cliente:* ${name}\n📱 *WhatsApp:* ${tlf}\n📍 *Dirección:* ${dir}\n💳 *Método de Pago:* ${metodo}\n\n⚠️ _Confirmo que estoy 100% seguro de la contratación._`;
-            window.open(`https://api.whatsapp.com/send?phone=${MI_NUMERO_CELULAR_UNICO}&text=${encodeURIComponent(msg)}`, '_blank');
+            
+            abrirWhatsAppPersonal(MI_NUMERO_CELULAR_UNICO, msg);
             document.getElementById('modal-solicitud-cliente-streaming').classList.add('hidden');
         };
 
@@ -1316,10 +1414,12 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 if(!confirm(`📝 ¿Desea indexar este nuevo servicio a este cliente?`)) return;
             }
 
+            const fechaHoyStr = new Date().toLocaleDateString('es-ES');
+
             const nuevoClienteStreaming = {
                 id: 'str-' + new Date().getTime(), plataforma, meses, correo, clave, perfil, pin,
-                cliente: cNombre, telefono: cTlf, direccion: cDir, fechaActivacion: new Date().toLocaleDateString(), 
-                diasRestantes: meses * 30, estado: 'ACTIVO'
+                cliente: cNombre, telefono: cTlf, direccion: cDir, fechaActivacion: fechaHoyStr, 
+                diasRestantes: calcularDiasRestantesReales(fechaHoyStr, meses), estado: 'ACTIVO'
             };
 
             localStreamingClientesArr.push(nuevoClienteStreaming);
@@ -1338,6 +1438,12 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const box = document.getElementById('mosaico-streaming-clientes-box'); if(!box) return;
             box.innerHTML = ""; 
             
+            localStreamingClientesArr.forEach(c => {
+                if(c.fechaActivacion && c.meses) {
+                    c.diasRestantes = calcularDiasRestantesReales(c.fechaActivacion, c.meses);
+                }
+            });
+
             const activosTotales = localStreamingClientesArr.filter(c => (c.estado || 'ACTIVO') === 'ACTIVO');
             document.getElementById('lbl-total-activos').innerText = activosTotales.length;
 
@@ -1432,43 +1538,47 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
         window.despacharMensajeWhatsAppStreaming = function(id, tipo) {
             let match = localStreamingClientesArr.find(c => c.id === id); if(!match) return;
-            let cleanTlf = match.telefono.replace(/\D/g, ''); if(!cleanTlf.startsWith('58')) cleanTlf = '58' + cleanTlf;
-            let text = ""; const fVenc = new Date(); fVenc.setDate(fVenc.getDate() + match.diasRestantes - 1);
+            
+            let fAct = match.fechaActivacion || new Date().toLocaleDateString('es-ES');
+            let fVencExacta = calcularFechaRenovacionExacta(fAct, match.meses || 1);
+
+            let text = "";
 
             if(tipo === 'ACTIVACION') {
-                text = `🛍️ *SERVICIOS STREAMING CORDERO MK*\n🧾 *COMPROBANTE DE ENTREGA Y ACTIVACIÓN*\n\n👤 *Cliente:* ${match.cliente}\n📺 *Plataforma:* ${match.plataforma}\n`;
+                text = `🛍️ *SERVICIOS STREAMING CORDERO MK*\n🧾 *COMPROBANTE DE ENTREGA Y ACTIVACIÓN*\n\n👤 *Cliente:* ${match.cliente}\n📺 *Plataforma:* ${catálogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma}\n`;
                 if(match.correo) text += `📧 *Correo:* \`${match.correo}\`\n`;
                 text += `🔑 *Contraseña / ID:* \`${match.clave}\`\n`;
                 if(match.perfil) text += `👤 *Perfil Asignado:* ${match.perfil}\n`;
                 if(match.pin) text += `📌 *PIN Perfil:* \`${match.pin}\`\n\n`;
-                text += `📅 *Fecha de Activación:* ${match.fechaActivacion}\n✂️ *Fecha de Renovación:* ${fVenc.toLocaleDateString()}\n\n${REGLAS_DE_ORO_TEXTO}\n\n🌐 *Únete a nuestro grupo oficial:* ${LINK_GRUPO_WHATSAPP}${RESPALDO_FIRMA_WHATSAPP}`;
+                text += `📅 *Fecha de Activación:* ${fAct}\n✂️ *Fecha de Renovación:* ${fVencExacta}\n\n${REGLAS_DE_ORO_TEXTO}\n\n🍿 *¿Deseas adquirir otra pantalla o consultar nuestros indicadores en vivo?*\n🔗 *Visita nuestra Vitrina Digital Oficial:*\n${URL_VITRINA_OFICIAL}${RESPALDO_FIRMA_WHATSAPP}`;
             }
             if(tipo === 'NOTIFICAR') {
-                text = `🔔 *Recordatorio de Vencimiento — Streaming Cordero MK* 🎞️📺\n\n¡Saludos, *${match.cliente}*! 👋✨\n\nTe saludamos de Streaming Cordero MK. Pasamos por aquí para recordarte que tu suscripción de *${match.plataforma}* vence MAÑANA (*${fVenc.toLocaleDateString()}*). 📅\n\n⚠️ *Nota importante:* Para garantizar que tu servicio no se interrumpa y puedas seguir disfrutando sin cortes, te recordamos realizar tu pago de renovación el día de HOY. 🍿🎬\n\n📸 *Síguenos en Instagram:*\nhttps://www.instagram.com/streamingcorderomk\n\n¡Estamos a tu orden! 🫡${RESPALDO_FIRMA_WHATSAPP}`;
+                text = `🔔 *Recordatorio de Vencimiento — Streaming Cordero MK* 🎞️📺\n\n¡Saludos, *${match.cliente}*! 👋✨\n\nTe saludamos de Streaming Cordero MK. Pasamos por aquí para recordarte que tu suscripción de *${catálogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma}* vence MAÑANA (*${fVencExacta}*). 📅\n\n⚠️ *Nota importante:* Para garantizar que tu servicio no se interrumpa y puedas seguir disfrutando sin cortes, te recordamos realizar tu pago de renovación el día de HOY. 🍿🎬\n\n🔗 *Visita nuestra Vitrina Digital Oficial:*\n${URL_VITRINA_OFICIAL}\n\n¡Estamos a tu orden! 🫡${RESPALDO_FIRMA_WHATSAPP}`;
             }
             if(tipo === 'RENOVACION') {
-                text = `🔄 *RENOVACIÓN EXITOSA — CORDERO MK* 🍿\n\nHola *${match.cliente}*, tu pantalla de *${match.plataforma}* ha sido renovada con éxito.\n\n✂️ *Nueva Fecha de Vencimiento:* ${fVenc.toLocaleDateString()}\n👤 *Perfil:* ${match.perfil || 'General'} | 📌 *PIN:* \`${match.pin || 'N/A'}\`\n🔑 *Acceso:* \`${match.correo || match.clave}\` | *Clave:* \`${match.clave}\`\n\n🍿 *¡Gracias por mantener tu servicio al día! Disfruta tu programación.*${RESPALDO_FIRMA_WHATSAPP}`;
+                text = `🔄 *RENOVACIÓN EXITOSA — CORDERO MK* 🍿\n\nHola *${match.cliente}*, tu pantalla de *${catálogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma}* ha sido renovada con éxito.\n\n✂️ *Nueva Fecha de Vencimiento:* ${fVencExacta}\n👤 *Perfil:* ${match.perfil || 'General'} | 📌 *PIN:* \`${match.pin || 'N/A'}\`\n🔑 *Acceso:* \`${match.correo || match.clave}\` | *Clave:* \`${match.clave}\`\n\n🍿 *¡Gracias por mantener tu servicio al día! Disfruta tu programación.*\n🔗 ${URL_VITRINA_OFICIAL}${RESPALDO_FIRMA_WHATSAPP}`;
             }
-            window.open(`https://api.whatsapp.com/send?phone=${cleanTlf}&text=${encodeURIComponent(text)}`, '_blank');
+
+            abrirWhatsAppPersonal(match.telefono, text);
         };
 
         window.despacharMarketingMasivoWhatsApp = function(destino) {
-            const urlFinal = linkServidorGitHubGuardado || window.location.href;
+            const urlFinal = linkServidorGitHubGuardado || URL_VITRINA_OFICIAL;
             let msg = "";
             if(destino === 'GRUPOS') {
                 if(leyendaCustomGrupos) { msg = leyendaCustomGrupos.replace('[Link_Dinámico_de_GitHub]', urlFinal) + RESPALDO_FIRMA_WHATSAPP; } 
                 else {
                     msg = `📺 *SERVICIOS STREAMING CORDERO MK — ENTRETENIMIENTO PREMIUM* 📺\n\nLe invitamos a conocer la plataforma más confiable y estable para la adquisición de sus pantallas y membresías digitales. 🚀\n\n🔒 *GARANTÍA Y RESPALDO ABSOLUTO:* Más de 6 años de trayectoria impecable en el mercado regional y nacional avalan la seguridad de nuestro servicio.\n\n🍿 *NUESTRO CATÁLOGO DISPONIBLE:*\n▪️ Netflix Ultra HD 4K\n▪️ Tele Latino, Flujo TV y Xuper TV\n▪️ Disney+, Amazon Prime Video, Max y mucho más...\n\n💳 *Múltiples Métodos de Pago:* Bolívares (Pago Móvil a tasa Binance), Binance (USDT), Zinli, Nequi y PayPal.\n\n👇 *INGRESA A NUESTRA TAQUILLA DIGITAL Y ADQUIERE TU PANTALLA:*\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
                 }
-                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+                abrirWhatsAppPersonal('', msg);
             } else {
                 if(leyendaCustomEstados) { msg = leyendaCustomEstados.replace('[Link_Dinámico_de_GitHub]', urlFinal); } 
                 else {
                     msg = `🎬 *PANTALLAS STREAMING PREMIUM CORDERO MK* 🍿\nDisfruta Netflix, Tele Latino, Disney+ y TV en vivo sin caídas. 🚀\n\n👇 *Pide tu pantalla en vivo aquí:*\n🔗 ${urlFinal}`;
                 }
                 navigator.clipboard.writeText(msg).then(() => {
-                    alert("📋 ¡Texto publicitario copiado con éxito!\n\nSe abrirá WhatsApp para que crees tu Estado, elijas tu imagen de la galería y pegues la leyenda encima.");
-                    window.open('https://api.whatsapp.com/send', '_blank');
+                    alert("📋 ¡Texto publicitario copiado con éxito!\n\nSe abrirá WhatsApp Personal para que crees tu Estado, elijas tu imagen de la galería y pegues la leyenda encima.");
+                    abrirWhatsAppPersonal('', '');
                 });
             }
         };
@@ -1502,10 +1612,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(match) {
                 let nuevosMeses = parseInt(prompt("Ingrese los meses a renovar (1, 2, 3...):", match.meses || 1));
                 if(nuevosMeses) {
+                    let fechaHoyStr = new Date().toLocaleDateString('es-ES');
                     match.meses = nuevosMeses;
-                    match.diasRestantes = nuevosMeses * 30;
+                    match.fechaActivacion = fechaHoyStr;
+                    match.diasRestantes = calcularDiasRestantesReales(fechaHoyStr, nuevosMeses);
                     match.estado = 'ACTIVO';
-                    match.fechaActivacion = new Date().toLocaleDateString();
                     await window.sincronizarBaseStreamingNube();
                     window.renderizarMonitorMembresiasAdmin();
                     alert("♻️ Cliente reactivado con éxito.");
@@ -1563,16 +1674,16 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         /* ================================================================= */
 
         window.despacharPublicidadPubliTasa = function(tipo) {
-            const urlFinal = (linkServidorGitHubGuardado || window.location.href).split('#')[0] + '#publitasa';
+            const urlFinal = (linkServidorGitHubGuardado || URL_VITRINA_OFICIAL).split('#')[0] + '#publitasa';
             let msg = "";
             if(tipo === 'GRUPOS') {
                 msg = `📊 *¡TODOS TUS INDICADORES EN UN SOLO LUGAR Y EN TIEMPO REAL!* 🚀\n\nOlvídate de abrir múltiples páginas o calcular a mano. Visualiza en una sola pantalla:\n\n🇻🇪 *Venezuela:* Dólar y Euro BCV\n🇨🇴 *Colombia:* TRM y Casas de Cambio en Cúcuta\n🌐 *Cripto / Digital:* Binance P2P (USDT) y Bitcoin\n\n⚡ *100% Fuentes Oficiales y Mercado Real al Instante.*\n\n📲 *Pruébalo ahora y solicita tu acceso desde $5 / Mes:*\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
-                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+                abrirWhatsAppPersonal('', msg);
             } else {
                 msg = `📊 *MONITOR FINANCIERO EN TIEMPO REAL* 🚀\n\n🛑 100% Fuentes Oficiales y Mercado Real\n🇻🇪 BCV (Dólar y Euro)\n🇨🇴 Cúcuta y TRM\n🌐 Binance P2P (USDT) y Bitcoin\n\n📲 Prueba tu pantalla desde $5 / Mes:\n🔗 ${urlFinal}`;
                 navigator.clipboard.writeText(msg).then(() => {
-                    alert("📋 ¡Texto publicitario de PubliTasa Pro copiado con éxito!\n\nSe abrirá WhatsApp para que crees tu Estado, elijas la foto dorada de tu galería y pegues la leyenda encima.");
-                    window.open('https://api.whatsapp.com/send', '_blank');
+                    alert("📋 ¡Texto publicitario de PubliTasa Pro copiado con éxito!\n\nSe abrirá WhatsApp Personal para que crees tu Estado, elijas la foto dorada de tu galería y pegues la leyenda encima.");
+                    abrirWhatsAppPersonal('', '');
                 });
             }
         };
@@ -1580,12 +1691,14 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         window.guardarTasaFronteraPubliTasa = async function() {
             const compra = parseFloat(document.getElementById('pt-adm-compra').value) || 0;
             const venta = parseFloat(document.getElementById('pt-adm-venta').value) || 0;
+            const timeStampConsola = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', hour12: true });
             
             try {
-                await setDoc(doc(db, "tcl_publitasa_pro", "frontera_config"), { compra, venta, ultimaActualizacion: new Date().toLocaleString() });
+                await setDoc(doc(db, "tcl_publitasa_pro", "frontera_config"), { compra, venta, ultimaActualizacion: timeStampConsola });
                 alert("🚀 Tasas de Frontera (Cúcuta) publicadas con éxito.");
                 document.getElementById('val-frontera-compra').innerText = compra.toLocaleString('es-CO');
                 document.getElementById('val-frontera-venta').innerText = venta.toLocaleString('es-CO');
+                document.getElementById('time-frontera').innerText = `Última actualización en consola: Hoy a las ${timeStampConsola}`;
             } catch(e) { alert("Error al guardar tasas."); }
         };
 
@@ -1599,13 +1712,14 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(!cliente || !tlf) return alert("Por favor completa el Nombre y Teléfono.");
 
             const tokenLicencia = 'PUBLITASA-' + Math.floor(1000 + Math.random() * 9000);
+            const fechaHoyStr = new Date().toLocaleDateString('es-ES');
 
             const nuevoClientePro = {
                 id: 'pt-' + new Date().getTime(),
                 cliente, telefono: tlf, direccion: dir, meses,
                 maxEquipos, equiposRegistrados: [],
-                tokenLicencia, fechaActivacion: new Date().toLocaleDateString(),
-                diasRestantes: meses * 30, estado: 'ACTIVO'
+                tokenLicencia, fechaActivacion: fechaHoyStr,
+                diasRestantes: calcularDiasRestantesReales(fechaHoyStr, meses), estado: 'ACTIVO'
             };
 
             localPubliTasaClientesArr.push(nuevoClientePro);
@@ -1626,6 +1740,13 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(!box) return;
             
             box.innerHTML = "";
+
+            localPubliTasaClientesArr.forEach(c => {
+                if(c.fechaActivacion && c.meses) {
+                    c.diasRestantes = calcularDiasRestantesReales(c.fechaActivacion, c.meses);
+                }
+            });
+
             const activosTotales = localPubliTasaClientesArr.filter(c => (c.estado || 'ACTIVO') === 'ACTIVO');
             document.getElementById('lbl-total-publitasa').innerText = `${activosTotales.length} Activos`;
 
@@ -1710,28 +1831,23 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const c = localPubliTasaClientesArr.find(x => x.id === id);
             if(!c) return;
 
-            let cleanTlf = c.telefono.replace(/\D/g, '');
-            if(!cleanTlf.startsWith('58')) cleanTlf = '58' + cleanTlf;
-
-            const linkApp = (linkServidorGitHubGuardado || window.location.href).split('#')[0] + '#publitasa';
+            const linkApp = (linkServidorGitHubGuardado || URL_VITRINA_OFICIAL).split('#')[0] + '#publitasa';
 
             const msg = `📊 *BIENVENIDO A PUBLI-TASA-MK PRO*\n\nHola *${c.cliente}*,\nSe ha activado con éxito tu suscripción ejecutiva al monitor financiero.\n\n🔑 *TU LICENCIA / AKEY:* \`${c.tokenLicencia}\`\n📱 *Equipos Autorizados:* ${c.maxEquipos} Dispositivo(s)\n📅 *Período Contratado:* ${c.diasRestantes} Días\n\n📌 *REGLAS Y AVISO IMPORTANTE DE USO:*\n• Esta suscripción es el *alquiler de una membresía mensual*, no constituye la compra del software.\n• Para garantizar la continuidad de tu pantalla, debes realizar la renovación *un día antes del vencimiento*.\n• Su licencia está vinculada a su dispositivo. Si cambia de teléfono, notifique al administrador.\n\n👇 *INGRESA A TU PLATAFORMA PRO AQUÍ:*\n🔗 ${linkApp}\n\n🏛️ *CON EL RESPALDO DE TUCOCEL C.A.*`;
 
-            window.open(`https://api.whatsapp.com/send?phone=${cleanTlf}&text=${encodeURIComponent(msg)}`, '_blank');
+            abrirWhatsAppPersonal(c.telefono, msg);
         };
 
         window.notificarPagoPubliTasa = function(id) {
             const c = localPubliTasaClientesArr.find(x => x.id === id);
             if(!c) return;
 
-            let cleanTlf = c.telefono.replace(/\D/g, '');
-            if(!cleanTlf.startsWith('58')) cleanTlf = '58' + cleanTlf;
+            let fAct = c.fechaActivacion || new Date().toLocaleDateString('es-ES');
+            let fVencExacta = calcularFechaRenovacionExacta(fAct, c.meses || 1);
 
-            const fVenc = new Date(); fVenc.setDate(fVenc.getDate() + c.diasRestantes - 1);
+            const msg = `🔔 *Recordatorio de Vencimiento — PubliTasa Pro* 📊\n\n¡Saludos, *${c.cliente}*! 👋✨\n\nTe saludamos de PubliTasa Pro. Pasamos por aquí para recordarte que tu membresía ejecutiva (Licencia: \`${c.tokenLicencia}\`) vence MAÑANA (*${fVencExacta}*). 📅\n\n⚠️ *Nota importante:* Para garantizar la continuidad de tus indicadores financieros y evitar el bloqueo automático del monitor, te recordamos realizar tu pago de renovación el día de HOY. 📈\n\n¡Estamos a tu orden! 🫡${RESPALDO_FIRMA_WHATSAPP}`;
 
-            const msg = `🔔 *Recordatorio de Vencimiento — PubliTasa Pro* 📊\n\n¡Saludos, *${c.cliente}*! 👋✨\n\nTe saludamos de PubliTasa Pro. Pasamos por aquí para recordarte que tu membresía ejecutiva (Licencia: \`${c.tokenLicencia}\`) vence MAÑANA (*${fVenc.toLocaleDateString()}*). 📅\n\n⚠️ *Nota importante:* Para garantizar la continuidad de tus indicadores financieros y evitar el bloqueo automático del monitor, te recordamos realizar tu pago de renovación el día de HOY. 📈\n\n¡Estamos a tu orden! 🫡${RESPALDO_FIRMA_WHATSAPP}`;
-
-            window.open(`https://api.whatsapp.com/send?phone=${cleanTlf}&text=${encodeURIComponent(msg)}`, '_blank');
+            abrirWhatsAppPersonal(c.telefono, msg);
         };
 
         window.resetearEquiposPubliTasa = async function(id) {
@@ -1761,10 +1877,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(c) {
                 let nuevosMeses = parseInt(prompt("Ingrese los meses a renovar (1, 2, 3...):", c.meses || 1));
                 if(nuevosMeses) {
+                    let fechaHoyStr = new Date().toLocaleDateString('es-ES');
                     c.meses = nuevosMeses;
-                    c.diasRestantes = nuevosMeses * 30;
+                    c.fechaActivacion = fechaHoyStr;
+                    c.diasRestantes = calcularDiasRestantesReales(fechaHoyStr, nuevosMeses);
                     c.estado = 'ACTIVO';
-                    c.fechaActivacion = new Date().toLocaleDateString();
                     await window.sincronizarPubliTasaNube();
                     window.renderizarBovedaPubliTasaPro();
                     window.recalcularCarpetasYChismoseadorDinamico();
@@ -1785,10 +1902,12 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 if(docFrontera.exists()) {
                     const c = docFrontera.data().compra || 3320;
                     const v = docFrontera.data().venta || 3370;
+                    const u = docFrontera.data().ultimaActualizacion || "Hoy";
                     document.getElementById('pt-adm-compra').value = c;
                     document.getElementById('pt-adm-venta').value = v;
                     document.getElementById('val-frontera-compra').innerText = c.toLocaleString('es-CO');
                     document.getElementById('val-frontera-venta').innerText = v.toLocaleString('es-CO');
+                    document.getElementById('time-frontera').innerText = `Última actualización en consola: ${u.includes(':') ? 'Hoy a las ' + u : u}`;
                 }
                 const docEst = await getDoc(doc(db, "tcl_publitasa_pro", "estado_config"));
                 if(docEst.exists()) {
@@ -1826,4 +1945,4 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
     </script>
 </body>
-                                </html>
+    </html>
