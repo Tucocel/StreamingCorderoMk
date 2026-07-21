@@ -738,14 +738,13 @@
                 msg = `📺 SERVICIOS STREAMING CORDERO MK — ENTRETENIMIENTO PREMIUM 📺\n\nLe invitamos a conocer la plataforma más confiable y estable para la adquisición de sus pantallas y membresías digitales. 🚀\n\n🔒 GARANTÍA Y RESPALDO ABSOLUTO: Más de 6 años de trayectoria impecable en el mercado regional y nacional avalan la seguridad de nuestro servicio.\n\n🍿 NUESTRO CATÁLOGO DISPONIBLE:\n▪️ Netflix Ultra HD 4K\n▪️ Tele Latino, Flujo TV y Super TV\n▪️ Disney+, Amazon Prime Video, Max y mucho más...\n\n💳 Múltiples Métodos de Pago: Bolívares (Pago Móvil a tasa Binance), Binance (USDT), Zinli, Nequi y PayPal.\n\n👇 INGRESA A NUESTRA TAQUILLA DIGITAL Y ADQUIERE TU PANTALLA:\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
             }
             
-            let targetUrl = "";
-            if(tipoApp === 'BUSINESS') {
-                targetUrl = `intent://send?text=${encodeURIComponent(msg)}#Intent;scheme=smsto;package=com.whatsapp.w4b;end`;
-            } else {
-                targetUrl = `intent://send?text=${encodeURIComponent(msg)}#Intent;scheme=smsto;package=com.whatsapp;end`;
-            }
+            let url = `whatsapp://send?text=${encodeURIComponent(msg)}`;
             
-            window.location.href = targetUrl;
+            if(tipoApp === 'BUSINESS') {
+                window.location.href = `intent://send?text=${encodeURIComponent(msg)}#Intent;package=com.whatsapp.w4b;scheme=whatsapp;end`;
+            } else {
+                window.location.href = url;
+            }
         };
 
         window.abrirEditorPlanillaRapida = function(id) {
@@ -830,4 +829,4 @@
         };
     </script>
 </body>
-</html>
+    </html>
