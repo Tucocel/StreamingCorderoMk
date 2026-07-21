@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios Streaming Cordero MK</title>
+    <title>Servicios Streaming Cordero MK & PubliTasaMK Pro</title>
     
-    <!-- METADATOS COMPARTICIÓN GRUPOS (FLYER OFICIAL PRECONFIGURADO) -->
+    <!-- METADATOS COMPARTICIÓN ESTADOS/GRUPOS -->
     <meta property="og:title" content="🚀 Servicios Streaming Cordero MK — Taquilla Digital Activa">
     <meta property="og:description" content="Membresías digitales y televisión premium por IP con estabilidad absoluta y garantía real bajo el respaldo de Tucocel C.A.">
     <meta property="og:image" content="https://raw.githubusercontent.com/publionlinemk/streaming/main/imagen%20para%20Streaming%20-clean.jpg">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
     <meta property="og:type" content="website">
+
+    <!-- CONFIGURACIÓN PWA PARA INSTALACIÓN EN PANTALLA PRINCIPAL -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="PubliTasa Pro">
+    <meta name="theme-color" content="#00112b">
 
     <!-- TAILWIND & FONTS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,6 +36,20 @@
             box-shadow: 0 0 25px rgba(220, 38, 38, 0.25);
             transform: translateY(-3px);
         }
+        
+        /* ESTILO EXCLUSIVO TARJETA PUBLITASA PRO (ESTILO DORADO/AZUL IMPERIAL) */
+        .publitasa-pro-card {
+            background: linear-gradient(145deg, #00112b, #001f4d);
+            border: 2px solid #d4af37;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .publitasa-pro-card:hover {
+            border-color: #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.35);
+            transform: translateY(-3px);
+        }
+
         .glow-red { text-shadow: 0 0 14px rgba(220, 38, 38, 0.9); }
         .glow-white { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)); }
         
@@ -72,7 +88,10 @@
                 <div class="flex items-center gap-2">
                     <span class="text-red-600 text-xs sm:text-base font-black tracking-widest uppercase glow-red"><i class="fa-solid fa-film"></i> Servicios Streaming Cordero MK</span>
                 </div>
-                <div>
+                <div class="flex items-center gap-2">
+                    <button onclick="window.abrirVistaMonitorDirecto()" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 font-black text-[9px] sm:text-[10px] px-3 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all">
+                        <i class="fa-solid fa-chart-line"></i> <span class="hidden sm:inline">Monitor</span> Pro
+                    </button>
                     <button id="btn-mando-abrir-login" onclick="window.abrirModalLoginStreamingRaiz()" class="bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-slate-300 font-black text-[9px] sm:text-[10px] px-3.5 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all">
                         <i class="fa-solid fa-lock text-red-500"></i> <span>Consola Máster</span>
                     </button>
@@ -98,6 +117,7 @@
 
         <!-- ==================== VISTA CLIENTE PÚBLICO ==================== -->
         <div id="vista-vitrina-publica" class="space-y-6">
+            <!-- BANNER PRINCIPAL LIMPIO -->
             <section class="hero-epic text-center py-10 px-4 space-y-3 shadow-xl">
                 <div class="max-w-3xl mx-auto space-y-2">
                     <span class="text-[9px] tracking-[0.3em] font-extrabold text-red-500 uppercase bg-red-950/50 border border-red-900/50 px-3 py-1 rounded-full inline-block">TAQUILLA DIGITAL OFICIAL</span>
@@ -111,11 +131,65 @@
                 </div>
             </section>
 
+            <!-- TARJETA PUBLITASA PRO PROTAGONISTA CON ESTRELLAS Y PRECIO EN USDT -->
+            <div class="max-w-6xl mx-auto px-2.5 sm:px-4">
+                <div onclick="window.gestionarClicTarjetaPubliTasaPublica()" class="publitasa-pro-card rounded-2xl p-4 sm:p-5 flex items-center justify-between cursor-pointer">
+                    <div class="flex items-center gap-3.5 sm:gap-4">
+                        <!-- Emblema oficial "P" con Flecha -->
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 rounded-full flex items-center justify-center border-2 border-white shadow-lg shadow-amber-500/30 flex-shrink-0">
+                            <i class="fa-solid fa-arrow-trend-up text-neutral-950 text-xl sm:text-2xl"></i>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <span id="badge-publitasa-estado" class="bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-[8px] sm:text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-flex items-center gap-1">
+                                    <i class="fa-solid fa-bolt text-emerald-400"></i> SERVICIO EN VIVO
+                                </span>
+                                <span class="bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[8px] sm:text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider font-mono">
+                                    Desde 5,00 USDT
+                                </span>
+                            </div>
+                            <h3 class="text-base sm:text-xl font-extrabold uppercase text-white tracking-wide bg-gradient-to-r from-white via-amber-200 to-amber-400 bg-clip-text text-transparent">
+                                PUBLI-TASA-MK PRO
+                            </h3>
+                            <div class="text-amber-400 text-[9px] flex items-center gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-[9px] sm:text-[11px] text-slate-300 font-medium leading-tight">
+                                Monitor Económico Oficial Venezolano, Colombiano, Binance USDT y Bitcoin
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-amber-400 text-lg sm:text-xl pl-2">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRID ADAPTATIVO: 2 EN MÓVIL, 4 EN PC -->
             <main class="max-w-6xl mx-auto px-2.5 sm:px-4 py-2">
                 <section id="mosaico-vitrina-publica-productos" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
                     <!-- Inyección automatizada por JS -->
                 </section>
             </main>
+        </div>
+
+        <!-- MODAL EN CONSTRUCCIÓN PUBLITASA MK PRO -->
+        <div id="modal-publitasa-construccion" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[11000] p-4 hidden flex items-center justify-center">
+            <div class="bg-neutral-950 border-2 border-amber-500/80 w-full max-w-sm rounded-3xl p-6 text-center space-y-4 shadow-2xl shadow-amber-500/20">
+                <div class="w-16 h-16 bg-neutral-900 border border-amber-500/40 rounded-2xl flex items-center justify-center mx-auto text-amber-400 text-3xl">
+                    <i class="fa-solid fa-screwdriver-wrench animate-bounce"></i>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="font-black text-lg text-white uppercase tracking-tight">SERVICIO EN MANTENIMIENTO</h3>
+                    <p class="text-xs text-slate-300 font-medium leading-relaxed">
+                        Estamos realizando ajustes de infraestructura y sincronización de indicadores en <strong>PubliTasaMK Pro</strong>.<br><br>
+                        En breve el servicio estará disponible nuevamente con el respaldo de <strong>Tucocel C.A.</strong>
+                    </p>
+                </div>
+                <button onclick="document.getElementById('modal-publitasa-construccion').classList.add('hidden')" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black py-3 rounded-xl uppercase tracking-wider text-xs transition-all shadow-lg">
+                    Entendido
+                </button>
+            </div>
         </div>
 
         <!-- FORMULARIO DE CAPTACIÓN PÚBLICO CON MÉTODO DE PAGO -->
@@ -125,7 +199,7 @@
                     <h3 class="font-black text-xs uppercase tracking-wider text-white flex items-center gap-1.5 text-red-500"><i class="fa-solid fa-paper-plane"></i> Formulario de Pedido</h3>
                     <button onclick="document.getElementById('modal-solicitud-cliente-streaming').classList.add('hidden')" class="text-slate-400 hover:text-white bg-neutral-950 border border-neutral-800 w-7 h-7 rounded-xl flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
                 </div>
-                <form onsubmit="event.preventDefault(); window.despacharSolicitudWhatsAppAlDueno('PERSONAL');" class="space-y-3 text-xs font-bold text-slate-800">
+                <form onsubmit="event.preventDefault(); window.despacharSolicitudWhatsAppAlDueno();" class="space-y-3 text-xs font-bold text-slate-800">
                     <input type="text" id="sol-plataforma" readonly class="w-full bg-neutral-950 border border-neutral-800 text-red-500 px-4 py-2.5 rounded-xl text-center font-black uppercase font-mono cursor-not-allowed">
                     <div>
                         <label class="text-[9px] text-slate-400 font-black uppercase ml-1 block mb-1">Nombre y Apellido</label>
@@ -138,6 +212,26 @@
                     <div>
                         <label class="text-[9px] text-slate-400 font-black uppercase ml-1 block mb-1">Dirección Corta</label>
                         <input type="text" id="sol-dir" required placeholder="Sector / Municipio" class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold focus:outline-none focus:border-neutral-700 uppercase">
+                    </div>
+                    <div id="wrapper-extra-publitasa-solicitud" class="hidden space-y-3">
+                        <div>
+                            <label class="text-[9px] text-amber-400 font-black uppercase ml-1 block mb-1">Equipos Autorizados (Límite Anti-Share)</label>
+                            <select id="sol-pt-equipos" class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold focus:outline-none focus:border-neutral-700 uppercase">
+                                <option value="1 Dispositivo">1 Dispositivo Autorizado</option>
+                                <option value="2 Dispositivos">2 Dispositivos Autorizados</option>
+                                <option value="3 Dispositivos">3 Dispositivos Autorizados</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[9px] text-amber-400 font-black uppercase ml-1 block mb-1">Meses por Adelantado (Base Mensual)</label>
+                            <select id="sol-pt-meses" class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-2.5 rounded-xl font-bold focus:outline-none focus:border-neutral-700 uppercase">
+                                <option value="1 Mes">1 Mes</option>
+                                <option value="2 Meses">2 Meses</option>
+                                <option value="3 Meses">3 Meses</option>
+                                <option value="6 Meses">6 Meses</option>
+                                <option value="12 Meses (Año Completo)">12 Meses (Año Completo)</option>
+                            </select>
+                        </div>
                     </div>
                     <div>
                         <label class="text-[9px] text-slate-400 font-black uppercase ml-1 block mb-1">Método de Pago Preferido</label>
@@ -153,19 +247,173 @@
                         <span class="text-[8.5px] font-black text-red-500 uppercase tracking-widest block">⚠️ REGLA DE ENVÍO</span>
                         <p class="text-[10px] text-slate-400 leading-tight">Si vas a hacer uso de este botón es porque estás 100% seguro de que deseas contratar la membresía. Este mensaje será enviado directamente al proveedor.</p>
                     </div>
-                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl uppercase tracking-wider text-xs">Confirmar y Enviar Pedido</button>
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl uppercase tracking-wider text-xs">Confirmar y Enviar al WhatsApp</button>
                 </form>
             </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- VISTA: MONITOR DE INDICADORES EN VIVO (CON REDISEÑO CRIPTO SIMÉTRICO) -->
+        <!-- ================================================================= -->
+        <div id="vista-publitasa-monitor" class="max-w-4xl mx-auto px-3 sm:px-4 py-6 space-y-6 hidden">
+            
+            <!-- ENCABEZADO CORPORATIVO CON LOGO Y BOTÓN DE INSTALACIÓN -->
+            <div class="bg-gradient-to-b from-[#001f4d] to-[#00112b] border-2 border-amber-500/60 rounded-3xl p-5 text-center space-y-3 shadow-2xl relative overflow-hidden">
+                <div class="flex justify-between items-center border-b border-amber-500/20 pb-3">
+                    <button onclick="window.cerrarVistaMonitorDirecto()" class="text-slate-400 hover:text-white text-xs font-bold bg-neutral-900 border border-neutral-800 px-3 py-1.5 rounded-xl">
+                        <i class="fa-solid fa-arrow-left"></i> Volver
+                    </button>
+                    <span class="bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sincronizado en Vivo
+                    </span>
+                </div>
+
+                <!-- EMBLEMA PUBLITASA -->
+                <div class="w-16 h-16 bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 rounded-full flex items-center justify-center border-2 border-white shadow-xl mx-auto">
+                    <i class="fa-solid fa-arrow-trend-up text-neutral-950 text-3xl"></i>
+                </div>
+                
+                <div>
+                    <h2 class="text-2xl font-black uppercase tracking-wider text-white bg-gradient-to-r from-white via-amber-200 to-amber-400 bg-clip-text text-transparent">
+                        PUBLI-TASA-MK PRO
+                    </h2>
+                    <p class="text-[11px] text-slate-300 font-medium mt-1">
+                        Monitor Económico Oficial Venezolano, Colombiano, USDT Binance y Bitcoin
+                    </p>
+                </div>
+
+                <!-- BOTÓN PWA: INSTALAR EN PANTALLA PRINCIPAL -->
+                <button onclick="window.ejecutarInstalacionPWA()" id="btn-pwa-instalar" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black px-6 py-2.5 rounded-2xl text-xs uppercase tracking-wider shadow-lg transition-all inline-flex items-center gap-2">
+                    <i class="fa-solid fa-mobile-screen-button text-base"></i> Instalar Aplicación en Pantalla Principal
+                </button>
+            </div>
+
+            <!-- ADVERTENCIA LEGAL Y REGLA DE USO (PERMANENTE SIEMPRE) -->
+            <div class="bg-neutral-950 border border-amber-500/40 p-4 rounded-2xl space-y-1.5 text-center shadow-lg">
+                <span class="text-amber-400 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-triangle-exclamation"></i> AVISO Y REGLA IMPORTANTE DE USO
+                </span>
+                <p class="text-[10.5px] text-slate-300 font-medium leading-relaxed">
+                    Estimado cliente, usted es responsable del uso de esta aplicación. Esta suscripción es individual y <strong>no transferible</strong>. Usted está adquiriendo una membresía mensual (renovable mes a mes), más no está comprando la propiedad intelectual ni la aplicación.
+                </p>
+            </div>
+
+            <!-- PANEL DE LOGUEO UNIVERSAL (MÁSTER / TOKEN CLIENTE) -->
+            <div id="wrapper-login-monitor-pro" class="bg-neutral-900 border border-neutral-800 p-5 rounded-3xl space-y-3 text-center max-w-sm mx-auto">
+                <h3 class="text-white font-black uppercase text-xs tracking-wider">Validar Acceso Pro</h3>
+                <input type="password" id="pt-token-input" placeholder="Ingrese Licencia o Clave Máster..." class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 font-mono text-center text-sm px-4 py-2.5 rounded-xl uppercase focus:outline-none focus:border-amber-500">
+                <button onclick="window.autenticarClienteMonitorPro()" class="w-full bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black py-2.5 rounded-xl uppercase text-xs tracking-wider">
+                    Desbloquear Indicadores 🔓
+                </button>
+            </div>
+
+            <!-- BLOQUE DE INDICADORES (OCULTO HASTA VALIDAR) -->
+            <div id="wrapper-indicadores-pantalla" class="space-y-4 hidden">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    
+                    <!-- VENEZUELA BCV -->
+                    <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-2">
+                        <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
+                            <span class="text-xs font-bold text-slate-300">🇻🇪 Oficial BCV (Bolívares)</span>
+                            <span class="text-[9px] text-emerald-400 font-mono font-bold">API En Vivo</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-1">
+                            <span class="text-xs font-bold text-slate-400">Dólar Oficial:</span>
+                            <span id="val-bcv-usd" class="text-xl font-mono font-black text-amber-400">118,50 Bs</span>
+                        </div>
+                    </div>
+
+                    <!-- COLOMBIA TRM -->
+                    <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-2">
+                        <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
+                            <span class="text-xs font-bold text-slate-300">🇨🇴 Oficial TRM Colombia</span>
+                            <span class="text-[9px] text-emerald-400 font-mono font-bold">SFC Oficial</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-1">
+                            <span class="text-xs font-bold text-slate-400">Tasa TRM (COP):</span>
+                            <span id="val-trm-cop" class="text-xl font-mono font-black text-amber-400">4.080 COP</span>
+                        </div>
+                    </div>
+
+                    <!-- FRONTERA CÚCUTA MANUAL -->
+                    <div class="bg-neutral-950 border-2 border-amber-500/40 p-4 rounded-2xl space-y-2 sm:col-span-2">
+                        <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
+                            <span class="text-xs font-bold text-amber-400 uppercase">💱 Casa de Cambio Frontera (Cúcuta / La Parada)</span>
+                            <span class="text-[9px] text-slate-400 font-mono">Referencia Comercial</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 pt-1 text-center">
+                            <div class="bg-neutral-900 p-2.5 rounded-xl border border-neutral-800">
+                                <span class="text-[9px] text-slate-400 uppercase block font-bold">Compramos Dólar (COP)</span>
+                                <span id="val-frontera-compra" class="text-2xl font-mono font-black text-emerald-400">3.320</span>
+                            </div>
+                            <div class="bg-neutral-900 p-2.5 rounded-xl border border-neutral-800">
+                                <span class="text-[9px] text-slate-400 uppercase block font-bold">Vendemos Dólar (COP)</span>
+                                <span id="val-frontera-venta" class="text-2xl font-mono font-black text-amber-400">3.370</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE CRIPTO SIMÉTRICO: BINANCE USDT + BITCOIN BTC -->
+                    <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-2 sm:col-span-2">
+                        <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
+                            <span class="text-xs font-bold text-slate-300">🪙 Mercado Cripto (Binance P2P & Global)</span>
+                            <span class="text-[9px] text-emerald-400 font-mono font-bold">Sincro En Vivo</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                            <!-- CASILLA 1: BINANCE USDT VES -->
+                            <div class="bg-neutral-900 p-3 rounded-xl border border-neutral-800 space-y-1">
+                                <span class="text-[9.5px] text-amber-400 uppercase font-black block">Binance USDT (VES P2P)</span>
+                                <div class="flex justify-between items-center font-mono text-xs font-bold pt-1">
+                                    <span class="text-slate-400">Compra: <strong class="text-emerald-400 text-sm">121,20 Bs</strong></span>
+                                    <span class="text-slate-400">Venta: <strong class="text-amber-400 text-sm">121,80 Bs</strong></span>
+                                </div>
+                            </div>
+                            <!-- CASILLA 2: BITCOIN BTC USD -->
+                            <div class="bg-neutral-900 p-3 rounded-xl border border-neutral-800 space-y-1">
+                                <span class="text-[9.5px] text-amber-400 uppercase font-black block">Bitcoin (BTC / USD Global)</span>
+                                <div class="flex justify-between items-center font-mono text-xs font-bold pt-1">
+                                    <span class="text-slate-400">Cotización:</span>
+                                    <span id="val-btc-usd" class="text-sm font-black text-emerald-400">$64.500 USD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PIE DE PÁGINA Y DERECHOS DE AUTOR -->
+            <div class="text-center space-y-1 pt-4 border-t border-neutral-900">
+                <p class="text-[10px] text-slate-400 font-bold">
+                    🔐 © 2026 PubliTasaMK Pro. Todos los derechos reservados.
+                </p>
+                <p class="text-[9px] text-slate-500 font-medium uppercase">
+                    Sistema probado y avalado por <span class="text-slate-300 font-bold">Tucocel C.A.</span> &bull; Desarrollado por <span class="text-amber-400 font-bold">@publionlinemk</span> (Agencia de Publicidad de Tucocel C.A.)
+                </p>
+            </div>
+
         </div>
 
         <!-- ==================== VISTA CONSOLA ADMINISTRATIVA MÁSTER ==================== -->
         <main id="vista-streaming-admin" class="max-w-6xl mx-auto px-4 py-6 space-y-6 hidden">
             
+            <!-- CABECERA PRINCIPAL CON CONMUTADOR DE PARTICIONES -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-neutral-900 pb-5">
                 <div>
                     <span class="bg-neutral-900 text-slate-400 border border-neutral-800 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full inline-flex items-center gap-1.5"><i class="fa-solid fa-lock text-red-500"></i> Consola Central de Control</span>
                     <h2 class="text-2xl font-black text-white mt-1 uppercase">Servidores de Despacho</h2>
                 </div>
+
+                <!-- SWITCHER DE PARTICIÓN EN CONSOLA MÁSTER -->
+                <div class="bg-neutral-950 border border-neutral-800 p-1.5 rounded-2xl flex gap-2 w-full sm:w-auto">
+                    <button onclick="window.cambiarParticionAdmin('streaming')" id="btn-particion-streaming" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-red-600 text-white transition-all">
+                        🎬 Streaming
+                    </button>
+                    <button onclick="window.cambiarParticionAdmin('publitasa')" id="btn-particion-publitasa" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-neutral-900 text-amber-400 border border-neutral-800 hover:border-amber-500/50 transition-all">
+                        📊 PubliTasa Pro
+                    </button>
+                </div>
+
                 <div class="bg-neutral-900 border border-neutral-800 p-3 rounded-2xl flex items-center gap-3 font-mono text-xs font-bold w-full sm:w-auto">
                     <div>
                         <span class="block text-[8px] text-slate-500 uppercase tracking-wider font-sans">Tasa USDT Binance</span>
@@ -178,161 +426,312 @@
                 </div>
             </div>
 
-            <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
-                <h3 class="text-[10px] font-black text-amber-500 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Tablero de Alertas Tempranas e Indicadores de Vencimiento</h3>
-                <div id="wrapper-chismoseador-burbujas" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2"></div>
-            </div>
-
-            <div class="space-y-2">
-                <!-- ACCORDION 1: LEGO PARSER -->
-                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
-                    <button onclick="window.toggleModuloAcordeon('acc-lego-parser')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
-                        <span><i class="fa-solid fa-paste text-red-500 mr-2"></i> Carga de Clientes e Inyector Lego Parser</span>
-                        <i class="fa-solid fa-chevron-down text-xs"></i>
-                    </button>
-                    <div id="acc-lego-parser" class="hidden p-5 border-t border-neutral-855 space-y-4 bg-neutral-950/40">
-                        <div class="space-y-2">
-                            <textarea id="succion-bruta-textarea" rows="3" placeholder="Pegue el bloque de texto bruto del proveedor completo aquí..." class="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded-xl font-mono text-[10px] focus:outline-none focus:border-red-600 no-scrollbar resize-y"></textarea>
-                            <button onclick="window.procesarSuccionLegoInteligenteTexto()" class="w-full bg-neutral-900 border border-neutral-800 hover:border-red-600/30 text-slate-300 font-black text-[10px] py-2 rounded-xl uppercase tracking-wider transition-all">Separar Datos en Planilla ⚡</button>
-                        </div>
-                        <div class="space-y-3 text-xs font-bold text-slate-800">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                <div>
-                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Plataforma</label>
-                                    <select id="field-plataforma" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl focus:outline-none"></select>
-                                </div>
-                                <div>
-                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Vigencia Lote</label>
-                                    <select id="field-meses" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl focus:outline-none">
-                                        <option value="1">1 Mes (30 días)</option>
-                                        <option value="2">2 Meses (60 días)</option>
-                                        <option value="3">3 Meses (90 días)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-850 space-y-2">
-                                <span class="text-[8.5px] text-red-500 font-black uppercase tracking-wider block"><i class="fa-solid fa-key"></i> Credenciales de Acceso</span>
-                                <input type="text" id="field-correo" placeholder="Correo / Cuenta ID" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
-                                <input type="text" id="field-clave" placeholder="Contraseña de Acceso" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
-                                <div class="grid grid-cols-2 gap-2">
-                                    <input type="text" id="field-perfil" placeholder="Perfil Asignado" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
-                                    <input type="text" id="field-pin" placeholder="PIN Perfil" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
-                                </div>
-                            </div>
-                            <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-850 space-y-2">
-                                <span class="text-[8.5px] text-slate-400 font-black uppercase tracking-wider block"><i class="fa-solid fa-user"></i> Datos del Cliente</span>
-                                <input type="text" id="field-cliente-nombre" placeholder="Nombre Completo del Cliente" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
-                                <div class="grid grid-cols-2 gap-2">
-                                    <input type="text" id="field-cliente-tlf" placeholder="Celular (WhatsApp)" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
-                                    <input type="text" id="field-cliente-dir" placeholder="Dirección / Sector" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
-                                </div>
-                            </div>
-                            <button onclick="window.ejecutarCargaPerfilStreamingFirebase()" class="w-full bg-red-600 hover:bg-red-700 text-white text-xs font-black py-3.5 rounded-xl uppercase tracking-wider">Crear Perfil e Inyectar 🔒</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ACCORDION 2: REGULADOR PRECIOS -->
-                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
-                    <button onclick="window.toggleModuloAcordeon('acc-tarifador')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
-                        <span><i class="fa-solid fa-sliders text-red-500 mr-2"></i> Regulador Dinámico de Tarifas Globales Web</span>
-                        <i class="fa-solid fa-chevron-down text-xs"></i>
-                    </button>
-                    <div id="acc-tarifador" class="hidden p-4 border-t border-neutral-850 bg-neutral-950/40 space-y-3">
-                        <div id="wrapper-inputs-tarifador-dinamico" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5"></div>
-                        <button onclick="window.salvarTarifasPublicasDinamicas()" class="bg-red-600 hover:bg-red-700 text-white font-black text-[10px] px-5 py-2 rounded-xl uppercase tracking-wider block ml-auto">Actualizar Precios Web</button>
-                    </div>
-                </div>
-
-                <!-- ACCORDION 3: NUEVAS PLATAFORMAS -->
-                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
-                    <button onclick="window.toggleModuloAcordeon('acc-add-plataforma')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
-                        <span><i class="fa-solid fa-square-plus text-red-500 mr-2"></i> Creador Autónomo de Nuevas Plataformas</span>
-                        <i class="fa-solid fa-chevron-down text-xs"></i>
-                    </button>
-                    <div id="acc-add-plataforma" class="hidden p-5 border-t border-neutral-850 bg-neutral-950/40 space-y-4 text-xs font-bold text-slate-300">
-                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                            <div>
-                                <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">ID Único (Ej: VIX, SPOTIFY)</label>
-                                <input type="text" id="new-plat-id" placeholder="ID..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white font-mono uppercase">
-                            </div>
-                            <div>
-                                <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Nombre Comercial</label>
-                                <input type="text" id="new-plat-nombre" placeholder="Ej: Vix Premium..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white">
-                            </div>
-                            <div>
-                                <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Precio USDT</label>
-                                <input type="number" id="new-plat-precio" value="5.00" step="0.1" class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white font-mono">
-                            </div>
-                            <div>
-                                <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">URL Logo (Opcional)</label>
-                                <input type="text" id="new-plat-logo" placeholder="Link de imagen..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white font-mono">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Descripción Corta</label>
-                            <input type="text" id="new-plat-desc" placeholder="Descripción de venta..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white">
-                        </div>
-                        <button onclick="window.ejecutarCreacionAutonomaNuevaPlataforma()" class="bg-red-600 hover:bg-red-700 text-white font-black text-[10px] px-6 py-2.5 rounded-xl uppercase tracking-wider block ml-auto">➕ Inyectar Plataforma al Catálogo</button>
-                    </div>
-                </div>
-
-                <!-- ACCORDION 4: ENRUTADOR Y LEYENDAS -->
-                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
-                    <button onclick="window.toggleModuloAcordeon('acc-marketing')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
-                        <span><i class="fa-solid fa-link text-red-500 mr-2"></i> Enrutador de Enlaces y Leyendas Comercial</span>
-                        <i class="fa-solid fa-chevron-down text-xs"></i>
-                    </button>
-                    <div id="acc-marketing" class="hidden p-5 border-t border-neutral-850 bg-neutral-950/40 space-y-4">
-                        <div>
-                            <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Link de la Web (GitHub URL)</label>
-                            <input type="text" id="cfg-link-github-servidor" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono text-xs focus:outline-none" placeholder="https://tucocel.github.io/StreamingCorderoMK/">
-                        </div>
-                        <div>
-                            <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda Personalizada para Grupos</label>
-                            <textarea id="cfg-leyenda-grupos-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar la leyenda corporativa por defecto..."></textarea>
-                        </div>
-                        <button onclick="window.salvarConfiguracionDeEnlacesYLeyendas()" class="bg-neutral-950 text-slate-300 border border-neutral-800 hover:border-red-600/30 text-[10px] font-black uppercase px-5 py-2 rounded-xl block ml-auto">Guardar Configuración Comercial</button>
-                    </div>
-                </div>
-
-                <!-- ACCORDION 5: SEGURIDAD MÁSTER -->
-                <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
-                    <button onclick="window.toggleModuloAcordeon('acc-seguridad')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
-                        <span><i class="fa-solid fa-shield-halved text-red-500 mr-2"></i> Configuración de Seguridad Administrativa</span>
-                        <i class="fa-solid fa-chevron-down text-xs"></i>
-                    </button>
-                    <div id="acc-seguridad" class="hidden p-4 border-t border-neutral-850 bg-neutral-950/40">
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                            <input type="text" id="cfg-master-usuario-actual" placeholder="Nuevo Usuario Máster" class="bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono uppercase">
-                            <input type="password" id="cfg-master-clave-actual" placeholder="Nueva Clave Maestra" class="bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono">
-                            <button onclick="window.actualizarCredencialesSeguridadMaster()" class="bg-neutral-950 border border-neutral-800 text-red-500 font-black uppercase text-[10px] py-2 rounded-xl">Guardar Llave de Servidor</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- BOTONERA DE MARKETING MÁSIVO CON SELECTOR DE WHATSAPP -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <button onclick="window.despacharMarketingMasivoWhatsApp('PERSONAL')" class="bg-neutral-950 border border-neutral-800 hover:border-emerald-600/50 text-white font-black p-4 rounded-2xl uppercase tracking-wider text-xs flex items-center justify-center gap-2 transition-all"><i class="fa-brands fa-whatsapp text-emerald-500 text-lg"></i> Difundir por WhatsApp Personal</button>
-                <button onclick="window.despacharMarketingMasivoWhatsApp('BUSINESS')" class="bg-neutral-950 border border-neutral-800 hover:border-blue-600/50 text-white font-black p-4 rounded-2xl uppercase tracking-wider text-xs flex items-center justify-center gap-2 transition-all"><i class="fa-solid fa-briefcase text-blue-500 text-lg"></i> Difundir por WhatsApp Business</button>
-            </div>
-
-            <!-- ARCHIVADOR INTELIGENTE POR CARPETAS CON BUSCADOR EN TIEMPO REAL -->
-            <div class="space-y-4 pt-2">
+            <!-- BLOQUE DE STREAMING (PARTICIÓN 1) -->
+            <div id="bloque-admin-particion-streaming" class="space-y-6">
+                <!-- TABLERO ALERTAS FIJO ARRIBA CON BURBUJA DE PUBLITASA PRO INTEGRADAS -->
                 <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
-                    <span class="text-[9px] font-black tracking-widest text-slate-400 uppercase block"><i class="fa-solid fa-folder-tree text-red-500 mr-1"></i> Bóveda Central Filtrada de Suscriptores</span>
-                    
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-xs"><i class="fa-solid fa-magnifying-glass"></i></span>
-                        <input type="text" id="buscador-nombre-input" onkeyup="window.renderizarMonitorMembresiasAdmin()" placeholder="Escribe un nombre para filtrar en tiempo real (Ej: María)..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl font-medium focus:outline-none focus:border-neutral-700 uppercase">
+                    <h3 class="text-[10px] font-black text-amber-500 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Tablero de Alertas Tempranas e Indicadores de Vencimiento</h3>
+                    <div id="wrapper-chismoseador-burbujas" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2">
+                        <!-- Burbujas de alerta inyectadas dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- BÚNKER DE FUNCIONES COMPACTO -->
+                <div class="space-y-2">
+                    <!-- ACCORDION 1: LEGO PARSER -->
+                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
+                        <button onclick="window.toggleModuloAcordeon('acc-lego-parser')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
+                            <span><i class="fa-solid fa-paste text-red-500 mr-2"></i> Carga de Clientes e Inyector Lego Parser</span>
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="acc-lego-parser" class="hidden p-5 border-t border-neutral-855 space-y-4 bg-neutral-950/40">
+                            <div class="space-y-2">
+                                <textarea id="succion-bruta-textarea" rows="3" placeholder="Pegue el bloque de texto bruto del proveedor completo aquí..." class="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded-xl font-mono text-[10px] focus:outline-none focus:border-red-600 no-scrollbar resize-y"></textarea>
+                                <button onclick="window.procesarSuccionLegoInteligenteTexto()" class="w-full bg-neutral-900 border border-neutral-800 hover:border-red-600/30 text-slate-300 font-black text-[10px] py-2 rounded-xl uppercase tracking-wider transition-all">Separar Datos en Planilla ⚡</button>
+                            </div>
+                            <div class="space-y-3 text-xs font-bold text-slate-800">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Plataforma</label>
+                                        <select id="field-plataforma" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl focus:outline-none"></select>
+                                    </div>
+                                    <div>
+                                        <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Vigencia Lote</label>
+                                        <select id="field-meses" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl focus:outline-none">
+                                            <option value="1">1 Mes (30 días)</option>
+                                            <option value="2">2 Meses (60 días)</option>
+                                            <option value="3">3 Meses (90 días)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-850 space-y-2">
+                                    <span class="text-[8.5px] text-red-500 font-black uppercase tracking-wider block"><i class="fa-solid fa-key"></i> Credenciales de Acceso</span>
+                                    <input type="text" id="field-correo" placeholder="Correo / Cuenta ID" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
+                                    <input type="text" id="field-clave" placeholder="Contraseña de Acceso" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <input type="text" id="field-perfil" placeholder="Perfil Asignado" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
+                                        <input type="text" id="field-pin" placeholder="PIN Perfil" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
+                                    </div>
+                                </div>
+                                <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-850 space-y-2">
+                                    <span class="text-[8.5px] text-slate-400 font-black uppercase tracking-wider block"><i class="fa-solid fa-user"></i> Datos del Cliente</span>
+                                    <input type="text" id="field-cliente-nombre" placeholder="Nombre Completo del Cliente" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <input type="text" id="field-cliente-tlf" placeholder="Celular (WhatsApp)" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
+                                        <input type="text" id="field-cliente-dir" placeholder="Dirección / Sector" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
+                                    </div>
+                                </div>
+                                <button onclick="window.ejecutarCargaPerfilStreamingFirebase()" class="w-full bg-red-600 hover:bg-red-700 text-white text-xs font-black py-3.5 rounded-xl uppercase tracking-wider">Crear Perfil e Inyectar 🔒</button>
+                            </div>
+                        </div>
                     </div>
 
-                    <div id="wrapper-carpetas-filtros-botones" class="flex flex-wrap gap-1.5 pt-1"></div>
+                    <!-- ACCORDION 2: REGULADOR PRECIOS -->
+                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
+                        <button onclick="window.toggleModuloAcordeon('acc-tarifador')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
+                            <span><i class="fa-solid fa-sliders text-red-500 mr-2"></i> Regulador Dinámico de Tarifas Globales Web</span>
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="acc-tarifador" class="hidden p-4 border-t border-neutral-850 bg-neutral-950/40 space-y-3">
+                            <div id="wrapper-inputs-tarifador-dinamico" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5"></div>
+                            <button onclick="window.salvarTarifasPublicasDinamicas()" class="bg-red-600 hover:bg-red-700 text-white font-black text-[10px] px-5 py-2 rounded-xl uppercase tracking-wider block ml-auto">Actualizar Precios Web</button>
+                        </div>
+                    </div>
+
+                    <!-- ACCORDION 3: NUEVAS PLATAFORMAS -->
+                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
+                        <button onclick="window.toggleModuloAcordeon('acc-add-plataforma')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
+                            <span><i class="fa-solid fa-square-plus text-red-500 mr-2"></i> Creador Autónomo de Nuevas Plataformas</span>
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="acc-add-plataforma" class="hidden p-5 border-t border-neutral-850 bg-neutral-950/40 space-y-4 text-xs font-bold text-slate-300">
+                            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">ID Único (Ej: VIX, SPOTIFY)</label>
+                                    <input type="text" id="new-plat-id" placeholder="ID..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white font-mono uppercase">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Nombre Comercial</label>
+                                    <input type="text" id="new-plat-nombre" placeholder="Ej: Vix Premium..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Precio USDT</label>
+                                    <input type="number" id="new-plat-precio" value="5.00" step="0.1" class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white font-mono">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">URL Logo (Opcional)</label>
+                                    <input type="text" id="new-plat-logo" placeholder="Link de imagen..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white font-mono">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Descripción Corta</label>
+                                <input type="text" id="new-plat-desc" placeholder="Descripción de venta..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white">
+                            </div>
+                            <button onclick="window.ejecutarCreacionAutonomaNuevaPlataforma()" class="bg-red-600 hover:bg-red-700 text-white font-black text-[10px] px-6 py-2.5 rounded-xl uppercase tracking-wider block ml-auto">➕ Inyectar Plataforma al Catálogo</button>
+                        </div>
+                    </div>
+
+                    <!-- ACCORDION 4: MARKETING GITHUB Y LEYENDAS -->
+                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
+                        <button onclick="window.toggleModuloAcordeon('acc-marketing')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
+                            <span><i class="fa-solid fa-link text-red-500 mr-2"></i> Enrutador de Enlaces y Leyendas de Comunicación (GitHub)</span>
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="acc-marketing" class="hidden p-5 border-t border-neutral-850 bg-neutral-950/40 space-y-4">
+                            <div class="grid grid-cols-1 gap-3">
+                                <div>
+                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Link del Proyecto Final (GitHub URL)</label>
+                                    <input type="text" id="cfg-link-github-servidor" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono text-xs focus:outline-none">
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda para Grupos de WhatsApp</label>
+                                        <textarea id="cfg-leyenda-grupos-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica..."></textarea>
+                                    </div>
+                                    <div>
+                                        <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda Ultra-Corta para Estados de WhatsApp</label>
+                                        <textarea id="cfg-leyenda-estados-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica corto..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onclick="window.salvarConfiguracionDeEnlacesYLeyendas()" class="bg-neutral-950 text-slate-300 border border-neutral-800 hover:border-red-600/30 text-[10px] font-black uppercase px-5 py-2 rounded-xl block ml-auto">Guardar Enrutamiento Comercial</button>
+                        </div>
+                    </div>
+
+                    <!-- ACCORDION 5: SEGURIDAD MÁSTER -->
+                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
+                        <button onclick="window.toggleModuloAcordeon('acc-seguridad')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
+                            <span><i class="fa-solid fa-shield-halved text-red-500 mr-2"></i> Configuración de Seguridad Administrativa</span>
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="acc-seguridad" class="hidden p-4 border-t border-neutral-850 bg-neutral-950/40">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                                <input type="text" id="cfg-master-usuario-actual" placeholder="Nuevo Usuario Máster" class="bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono uppercase">
+                                <input type="password" id="cfg-master-clave-actual" placeholder="Nueva Clave Maestra" class="bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono">
+                                <button onclick="window.actualizarCredencialesSeguridadMaster()" class="bg-neutral-950 border border-neutral-800 text-red-500 font-black uppercase text-[10px] py-2 rounded-xl">Guardar Llave de Servidor</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div id="mosaico-streaming-clientes-box" class="space-y-3 max-h-[80vh] overflow-y-auto pr-1 no-scrollbar"></div>
+
+                <!-- BOTONERA MARKETING RÁPIDA -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button onclick="window.despacharMarketingMasivoWhatsApp('GRUPOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2"><i class="fa-solid fa-users text-red-500"></i> Compartir Catálogo en Grupos</button>
+                    <button onclick="window.despacharMarketingMasivoWhatsApp('ESTADOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2"><i class="fa-solid fa-circle-dot text-emerald-500"></i> Formato Corto para Estados</button>
+                </div>
+
+                <!-- ARCHIVADOR INTELIGENTE POR CARPETAS CON BUSCADOR EN TIEMPO REAL -->
+                <div class="space-y-4 pt-2">
+                    <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
+                        <span class="text-[9px] font-black tracking-widest text-slate-400 uppercase block"><i class="fa-solid fa-folder-tree text-red-500 mr-1"></i> Bóveda Central Filtrada de Suscriptores</span>
+                        
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-xs"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" id="buscador-nombre-input" onkeyup="window.renderizarMonitorMembresiasAdmin()" placeholder="Escribe un nombre para filtrar en tiempo real (Ej: María)..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl font-medium focus:outline-none focus:border-neutral-700 uppercase">
+                        </div>
+
+                        <div id="wrapper-carpetas-filtros-botones" class="flex flex-wrap gap-1.5 pt-1"></div>
+                    </div>
+                    
+                    <div id="mosaico-streaming-clientes-box" class="space-y-3 max-h-[80vh] overflow-y-auto pr-1 no-scrollbar"></div>
+                </div>
             </div>
+
+            <!-- BLOQUE DE PUBLITASA PRO (PARTICIÓN 2 - PANEL MÁSTER COMPLETO) -->
+            <div id="bloque-admin-particion-publitasa" class="hidden space-y-6">
+
+                <!-- BOTÓN INTERRACTIVO MÁSTER: ACTIVAR / DESACTIVAR PUBLITASA PRO -->
+                <div class="bg-neutral-950 border-2 border-amber-500/60 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-3 shadow-xl">
+                    <div class="space-y-0.5 text-center sm:text-left">
+                        <span class="text-white font-black text-xs uppercase block flex items-center gap-1.5 justify-center sm:justify-start">
+                            <i class="fa-solid fa-power-off text-amber-400"></i> Estado del Servicio PubliTasa Pro en Web
+                        </span>
+                        <p id="lbl-estado-publitasa-mando" class="text-[10px] text-amber-400 font-bold">Estado Actual: SERVICIO EN VIVO</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="window.alternarEstadoServicioPubliTasa(true)" id="btn-sw-publitasa-on" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[10px] px-4 py-2 rounded-xl uppercase tracking-wider transition-all">
+                            Activar Pro (En Vivo)
+                        </button>
+                        <button onclick="window.alternarEstadoServicioPubliTasa(false)" id="btn-sw-publitasa-off" class="bg-neutral-900 border border-red-500/50 text-red-500 font-black text-[10px] px-4 py-2 rounded-xl uppercase tracking-wider transition-all">
+                            Desactivar (Mantenimiento)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ACCESO RÁPIDO A PREVISUALIZACIÓN DEL MONITOR -->
+                <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-3">
+                    <div class="space-y-0.5 text-center sm:text-left">
+                        <span class="text-amber-400 font-black text-xs uppercase block">👁️ Vista Previa del Monitor en Vivo</span>
+                        <p class="text-[10px] text-slate-400">Verifica cómo se despliegan los indicadores para los clientes suscritos.</p>
+                    </div>
+                    <button onclick="window.abrirVistaMonitorDirecto()" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-xs px-5 py-2.5 rounded-xl uppercase tracking-wider transition-all">
+                        Abrir Monitor
+                    </button>
+                </div>
+
+                <!-- 1. CONTROL RÁPIDO DE CASAS DE CAMBIO (FRONTERA) -->
+                <div class="bg-neutral-950 border-2 border-amber-500/40 p-5 rounded-3xl space-y-4 shadow-xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-neutral-950 text-xl font-black">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-extrabold uppercase text-sm">Control de Casas de Cambio (Frontera)</h3>
+                            <p class="text-[10px] text-slate-400 uppercase">Actualización Manual Instantánea &bull; PubliTasaMK Pro</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
+                        <div>
+                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Compra Dólar Efectivo (COP)</label>
+                            <input type="number" id="pt-adm-compra" value="3320" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Venta Dólar Efectivo (COP)</label>
+                            <input type="number" id="pt-adm-venta" value="3370" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500">
+                        </div>
+                    </div>
+                    <button onclick="window.guardarTasaFronteraPubliTasa()" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-lg transition-all">
+                        🚀 Publicar Tasas en App en Vivo
+                    </button>
+                </div>
+
+                <!-- 2. REGISTRO DE NUEVO SUSCRIPTOR PUBLITASA PRO -->
+                <div class="bg-neutral-900 border border-neutral-800 p-5 rounded-3xl space-y-4 shadow-xl">
+                    <div class="flex items-center gap-2 border-b border-neutral-800 pb-3">
+                        <i class="fa-solid fa-user-plus text-amber-400 text-lg"></i>
+                        <h3 class="text-white font-black uppercase text-xs tracking-wider">Crear Nueva Licencia / Suscriptor Pro</h3>
+                    </div>
+                    
+                    <div class="space-y-3 text-xs font-bold">
+                        <div>
+                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Nombre Comercial / Cliente</label>
+                            <input type="text" id="pt-cli-nombre" placeholder="Ej: Comercial La 5ta C.A." class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-2.5 rounded-xl uppercase focus:outline-none focus:border-amber-500">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">WhatsApp (Con Código País)</label>
+                                <input type="text" id="pt-cli-tlf" placeholder="Ej: 584147357549" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500">
+                            </div>
+                            <div>
+                                <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Ubicación / Sector</label>
+                                <input type="text" id="pt-cli-dir" placeholder="Ej: Táriba / Cordero" class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-2.5 rounded-xl uppercase focus:outline-none focus:border-amber-500">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Ciclo de Suscripción (Meses)</label>
+                                <select id="pt-cli-meses" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 px-4 py-2.5 rounded-xl uppercase focus:outline-none">
+                                    <option value="1">1 Mes (30 Días)</option>
+                                    <option value="2">2 Meses (60 Días)</option>
+                                    <option value="3">3 Meses (90 Días)</option>
+                                    <option value="6">6 Meses (180 Días)</option>
+                                    <option value="12">12 Meses (Año Completo)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Límite Dispositivos (Anti-Share)</label>
+                                <select id="pt-cli-limite-equipos" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 px-4 py-2.5 rounded-xl uppercase focus:outline-none">
+                                    <option value="1">1 Teléfono Autorizado</option>
+                                    <option value="2">2 Teléfonos Autorizados</option>
+                                    <option value="3">3 Teléfonos Autorizados</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button onclick="window.crearSuscriptorPubliTasaPro()" class="w-full bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black py-3.5 rounded-xl uppercase tracking-wider text-xs shadow-lg transition-all mt-2">
+                            ➕ Generar Licencia e Inyectar a Firebase 🔒
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. BÓVEDA CENTRAL Y CONTROL DE LICENCIAS ACTIVAS -->
+                <div class="space-y-3">
+                    <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[9px] font-black tracking-widest text-amber-400 uppercase flex items-center gap-1.5">
+                                <i class="fa-solid fa-address-book"></i> Bóveda Licencias PubliTasa Pro
+                            </span>
+                            <span id="lbl-total-publitasa" class="bg-neutral-950 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold">
+                                0 Activos
+                            </span>
+                        </div>
+                        
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-xs"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" id="pt-buscar-input" onkeyup="window.renderizarBovedaPubliTasaPro()" placeholder="Buscar comercio o teléfono..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl uppercase focus:outline-none focus:border-amber-500">
+                        </div>
+                    </div>
+
+                    <!-- Mosaico donde se cargan los clientes de PubliTasa -->
+                    <div id="mosaico-publitasa-clientes-box" class="space-y-3 max-h-[70vh] overflow-y-auto pr-1 no-scrollbar">
+                        <!-- Inyección por JS desde Firebase -->
+                    </div>
+                </div>
+
+            </div>
+
         </main>
     </div>
 
@@ -378,24 +777,128 @@
             NETFLIX: { nombre: "Netflix", precio: 5.00, logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", desc: "Series exclusivas, películas de estreno y documentales en resolución Ultra HD 4K." },
             TELE_LATINO: { nombre: "Tele Latino", precio: 5.00, logo: "", desc: "Programación en vivo, canales de deportes, series de estreno y películas sin límites." },
             FLUJO_TV: { nombre: "Flujo TV", precio: 5.00, logo: "", desc: "Parrilla premium fluida de canales de televisión abierta, deportes e infantiles en vivo." },
-            SUPER_TV: { nombre: "Super TV", precio: 5.00, logo: "", desc: "Televisión digital por IP estable con películas, series y eventos especiales continuos." },
+            XUPER_TV: { nombre: "Xuper TV", precio: 5.00, logo: "", desc: "Televisión digital por IP estable con películas, series y eventos especiales continuos." },
             DISNEY: { nombre: "Disney+", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", desc: "Contenido infantil y familiar de Pixar, Marvel, Star Wars y transmisiones de ESPN." },
             AMAZON: { nombre: "Amazon Prime", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg", desc: "Series y películas originales de taquilla, deportes y transmisiones exclusivas Prime." },
             HBO_MAX: { nombre: "HBO Max", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg", desc: "Series mundiales galardonadas, estrenos de cine de Warner Bros y documentales." }
         };
 
         let localStreamingClientesArr = [];
+        let localPubliTasaClientesArr = [];
         let esAdminStreamingSession = false;
         let carpetaFiltroSeleccionadaStr = "TODOS";
+        let deferredPromptPWA = null;
+        let publiTasaProEstadoActivoBool = true;
         
         let masterUsuarioIdDinamico = "TUCOCEL";
         let masterClaveDinamica = "Razu2020.";
         let linkServidorGitHubGuardado = "";
         let leyendaCustomGrupos = "";
+        let leyendaCustomEstados = "";
 
-        const REGLAS_DE_ORO_TEXTO = `⚠️ REGLAS DE ORO DEL SERVICIO:\n\n✅ Renovaciones: Para garantizar la continuidad de tu pantalla, debes realizar el pago un día antes de tu fecha de activación.\n✅ No cambiar el correo ni la contraseña de la cuenta.\n✅ No crear ni borrar perfiles adicionales.\n✅ No compartir los datos con terceros.\n✅ Entrar únicamente al perfil asignado.\n\nEl incumplimiento de estas reglas puede causar la pérdida de la garantía sin derecho a reembolso.\n\n🌟 ¿Te gustó nuestro servicio? ¡Tu recomendación es nuestro mejor motor! Disfruta tu programación. 🍿🎬`;
+        const REGLAS_DE_ORO_TEXTO = `*⚠️ REGLAS DE ORO DEL SERVICIO:*\n\n✅ *Renovaciones:* Para garantizar la continuidad de tu pantalla, debes realizar el pago un día antes de tu fecha de activación.\n✅ No cambiar el correo ni la contraseña de la cuenta.\n✅ No crear ni borrar perfiles adicionales.\n✅ No compartir los datos con terceros.\n✅ Entrar únicamente al perfil asignado.\n\nEl incumplimiento de estas reglas puede causar la pérdida de la garantía sin derecho a reembolso.\n\n🌟 ¿Te gustó nuestro servicio? ¡Tu recomendación es nuestro mejor motor! Disfruta tu programación. 🍿🎬`;
         const LINK_GRUPO_WHATSAPP = `https://chat.whatsapp.com/CcSII6i2HqSLiWDUhNi5ay`;
-        const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.\n📡 Agente Autorizado Movistar Cordero\n💻 Desarrollado corporativamente por nuestra agencia @publionlinemk.`;
+        const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ *CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.*\n📡 *Agente Autorizado Movistar Cordero*\n💻 _Desarrollado corporativamente por nuestra agencia *@publionlinemk*._`;
+
+        /* CAPTURA EVENTO PWA PARA INSTALACIÓN EN PANTALLA PRINCIPAL */
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPromptPWA = e;
+        });
+
+        window.ejecutarInstalacionPWA = function() {
+            if (deferredPromptPWA) {
+                deferredPromptPWA.prompt();
+                deferredPromptPWA.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Cliente aceptó la instalación PWA.');
+                    }
+                    deferredPromptPWA = null;
+                });
+            } else {
+                alert("📌 Para instalar esta aplicación en tu pantalla principal:\n\n• En Android (Chrome): Toca los 3 puntos superiores y selecciona 'Añadir a la pantalla de inicio'.\n• En iPhone (Safari): Toca el botón 'Compartir' y selecciona 'Añadir a la pantalla de inicio'.");
+            }
+        };
+
+        window.gestionarClicTarjetaPubliTasaPublica = function() {
+            if(publiTasaProEstadoActivoBool) {
+                window.abrirModalSolicitudStreaming('PUBLITASA_PRO');
+            } else {
+                document.getElementById('modal-publitasa-construccion').classList.remove('hidden');
+            }
+        };
+
+        window.alternarEstadoServicioPubliTasa = async function(estado) {
+            publiTasaProEstadoActivoBool = estado;
+            try {
+                await setDoc(doc(db, "tcl_publitasa_pro", "estado_config"), { activo: estado });
+                window.actualizarInterfazEstadoPubliTasa();
+                alert(estado ? "🟢 PubliTasa Pro ACTIVADO (En Vivo)" : "🔴 PubliTasa Pro DESACTIVADO (En Mantenimiento)");
+            } catch(e) {}
+        };
+
+        window.actualizarInterfazEstadoPubliTasa = function() {
+            const badge = document.getElementById('badge-publitasa-estado');
+            const lblMando = document.getElementById('lbl-estado-publitasa-mando');
+            
+            if(publiTasaProEstadoActivoBool) {
+                if(badge) badge.innerHTML = `<i class="fa-solid fa-bolt text-emerald-400"></i> SERVICIO EN VIVO`;
+                if(badge) badge.className = "bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-[8px] sm:text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-flex items-center gap-1";
+                if(lblMando) {
+                    lblMando.innerText = "Estado Actual: SERVICIO EN VIVO (ACCESO ACCESIBLE)";
+                    lblMando.className = "text-[10px] text-emerald-400 font-bold";
+                }
+            } else {
+                if(badge) badge.innerHTML = `<i class="fa-solid fa-wrench text-amber-400"></i> EN MANTENIMIENTO`;
+                if(badge) badge.className = "bg-amber-950/80 text-amber-400 border border-amber-500/40 text-[8px] sm:text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-flex items-center gap-1";
+                if(lblMando) {
+                    lblMando.innerText = "Estado Actual: MANTENIMIENTO / EN CONSTRUCCIÓN";
+                    lblMando.className = "text-[10px] text-amber-400 font-bold";
+                }
+            }
+        };
+
+        window.abrirVistaMonitorDirecto = function() {
+            document.getElementById('vista-vitrina-publica').classList.add('hidden');
+            document.getElementById('vista-streaming-admin').classList.add('hidden');
+            document.getElementById('vista-publitasa-monitor').classList.remove('hidden');
+            window.descargarBasePubliTasaFirebaseCompleta();
+        };
+
+        window.cerrarVistaMonitorDirecto = function() {
+            document.getElementById('vista-publitasa-monitor').classList.add('hidden');
+            document.getElementById('vista-vitrina-publica').classList.remove('hidden');
+        };
+
+        window.autenticarClienteMonitorPro = function() {
+            const token = document.getElementById('pt-token-input').value.trim().toUpperCase();
+            if(token === masterClaveDinamica.toUpperCase() || token === "TUCOCEL" || localPubliTasaClientesArr.some(x => x.tokenLicencia === token)) {
+                document.getElementById('wrapper-login-monitor-pro').classList.add('hidden');
+                document.getElementById('wrapper-indicadores-pantalla').classList.remove('hidden');
+            } else {
+                alert("❌ Licencia o Clave no válida.");
+            }
+        };
+
+        window.cambiarParticionAdmin = function(particion) {
+            const blockStreaming = document.getElementById('bloque-admin-particion-streaming');
+            const blockPubliTasa = document.getElementById('bloque-admin-particion-publitasa');
+            const btnStreaming = document.getElementById('btn-particion-streaming');
+            const btnPubliTasa = document.getElementById('btn-particion-publitasa');
+
+            if(particion === 'publitasa') {
+                blockStreaming.classList.add('hidden');
+                blockPubliTasa.classList.remove('hidden');
+                btnPubliTasa.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-amber-500 text-neutral-950 transition-all";
+                btnStreaming.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-neutral-900 text-slate-400 border border-neutral-800 hover:border-slate-700 transition-all";
+                window.descargarBasePubliTasaFirebaseCompleta();
+            } else {
+                blockPubliTasa.classList.add('hidden');
+                blockStreaming.classList.remove('hidden');
+                btnStreaming.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-red-600 text-white transition-all";
+                btnPubliTasa.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-neutral-900 text-amber-400 border border-neutral-800 hover:border-amber-500/50 transition-all";
+            }
+        };
 
         window.toggleModuloAcordeon = function(id) {
             const el = document.getElementById(id);
@@ -433,13 +936,10 @@
         window.salvarConfiguracionDeEnlacesYLeyendas = async function() {
             linkServidorGitHubGuardado = document.getElementById('cfg-link-github-servidor').value.trim();
             leyendaCustomGrupos = document.getElementById('cfg-leyenda-grupos-custom').value.trim();
-
+            leyendaCustomEstados = document.getElementById('cfg-leyenda-estados-custom').value.trim();
             try {
-                await setDoc(doc(db, "tcl_streaming_core", "marketing_config"), { 
-                    github: linkServidorGitHubGuardado, 
-                    leyendaGrupos: leyendaCustomGrupos 
-                });
-                alert("💾 Configuración comercial guardada con éxito.");
+                await setDoc(doc(db, "tcl_streaming_core", "marketing_config"), { github: linkServidorGitHubGuardado, leyendaGrupos: leyendaCustomGrupos, leyendaEstados: leyendaCustomEstados });
+                alert("💾 Enlaces guardados.");
             } catch(e) {}
         };
 
@@ -462,14 +962,18 @@
         window.conmutarVistaAdminCliente = function() {
             const vistaCli = document.getElementById('vista-vitrina-publica');
             const vistaAdm = document.getElementById('vista-streaming-admin');
+            const vistaMon = document.getElementById('vista-publitasa-monitor');
             const label = document.getElementById('btn-mando-abrir-login');
             
             if(vistaAdm.classList.contains('hidden')) {
-                vistaCli.classList.add('hidden'); vistaAdm.classList.remove('hidden');
+                vistaCli.classList.add('hidden'); 
+                vistaMon.classList.add('hidden');
+                vistaAdm.classList.remove('hidden');
                 label.innerHTML = `<i class="fa-solid fa-eye"></i> Ver Vitrina Web`;
                 window.descargarBaseStreamingFirebaseCompleta();
             } else {
-                vistaAdm.classList.add('hidden'); vistaCli.classList.remove('hidden');
+                vistaAdm.classList.add('hidden'); 
+                vistaCli.classList.remove('hidden');
                 label.innerHTML = `<i class="fa-solid fa-user-gear"></i> Consola Central`;
             }
         };
@@ -515,6 +1019,7 @@
             window.recalcularCarpetasYChismoseadorDinamico();
         };
 
+        /* RECALCULO DE CARPETAS CON LA BURBUJA DE PUBLITASA PRO EN EL TABLERO */
         window.recalcularCarpetasYChismoseadorDinamico = function() {
             const burbujasBox = document.getElementById('wrapper-chismoseador-burbujas');
             const carpetasBox = document.getElementById('wrapper-carpetas-filtros-botones');
@@ -523,6 +1028,16 @@
             burbujasBox.innerHTML = "";
             carpetasBox.innerHTML = `<button onclick="window.filtrarCarpetaStreamingAdmin('TODOS')" class="px-3 py-1.5 rounded-xl font-black text-[10px] uppercase transition-all ${carpetaFiltroSeleccionadaStr === 'TODOS' ? 'bg-red-600 text-white' : 'bg-neutral-950 text-slate-400 border border-neutral-800'}">📁 Ver Todos</button>`;
 
+            // 1. BURBUJA PUBLITASA PRO EN EL TABLERO DE ALERTAS
+            const vencidosPubliTasa = localPubliTasaClientesArr.filter(c => c.diasRestantes <= 5).length;
+            let colorBurbujaPT = vencidosPubliTasa > 0 ? 'border-amber-500 bg-amber-950/30 text-amber-400 animate-pulse font-black' : 'border-amber-500/40 bg-neutral-950/60 text-amber-400';
+            burbujasBox.innerHTML += `
+                <div onclick="window.cambiarParticionAdmin('publitasa')" class="border rounded-xl p-2 text-center cursor-pointer hover:border-amber-400 transition-all ${colorBurbujaPT}">
+                    <span class="block text-[8.5px] font-black uppercase truncate">PubliTasa Pro</span>
+                    <span class="text-[10px] font-mono block mt-0.5">${vencidosPubliTasa > 0 ? `⚠️ ${vencidosPubliTasa} Alerta` : '✅ Al Día'}</span>
+                </div>`;
+
+            // 2. BURBUJAS DE LAS DEMÁS PLATAFORMAS DE STREAMING
             Object.keys(catálogoPlataformasEstructura).forEach(k => {
                 const nombrePlat = catálogoPlataformasEstructura[k].nombre;
                 const clientesDeEstaPlat = localStreamingClientesArr.filter(c => c.plataforma === k);
@@ -547,28 +1062,34 @@
         };
 
         window.abrirModalSolicitudStreaming = function(plataforma) {
-            document.getElementById('sol-plataforma').value = plataforma.toUpperCase();
+            const extraPT = document.getElementById('wrapper-extra-publitasa-solicitud');
+            if(plataforma === 'PUBLITASA_PRO') {
+                document.getElementById('sol-plataforma').value = "PUBLITASA MK PRO";
+                if(extraPT) extraPT.classList.remove('hidden');
+            } else {
+                document.getElementById('sol-plataforma').value = plataforma.toUpperCase();
+                if(extraPT) extraPT.classList.add('hidden');
+            }
             document.getElementById('sol-nombre').value = ""; document.getElementById('sol-tlf').value = ""; document.getElementById('sol-dir').value = "";
             document.getElementById('modal-solicitud-cliente-streaming').classList.remove('hidden');
         };
 
-        window.despacharSolicitudWhatsAppAlDueno = function(tipoApp) {
+        window.despacharSolicitudWhatsAppAlDueno = function() {
             const plat = document.getElementById('sol-plataforma').value;
             const name = document.getElementById('sol-nombre').value.trim().toUpperCase();
             const tlf = document.getElementById('sol-tlf').value.trim();
             const dir = document.getElementById('sol-dir').value.trim().toUpperCase();
             const metodo = document.getElementById('sol-metodo-pago').value;
 
-            let msg = `🎬 SOLICITUD — CORDERO MK\n\n📺 Plataforma: ${plat}\n👤 Cliente: ${name}\n📱 WhatsApp: ${tlf}\n📍 Dirección: ${dir}\n💳 Método de Pago: ${metodo}\n\n⚠️ Confirmo que estoy 100% seguro de la contratación.`;
-            
-            let url = "";
-            if(tipoApp === 'BUSINESS') {
-                url = `intent://send?phone=${MI_NUMERO_CELULAR_UNICO}&text=${encodeURIComponent(msg)}#Intent;scheme=smsto;package=com.whatsapp.w4b;end`;
-            } else {
-                url = `intent://send?phone=${MI_NUMERO_CELULAR_UNICO}&text=${encodeURIComponent(msg)}#Intent;scheme=smsto;package=com.whatsapp;end`;
+            let extraInfo = "";
+            if(plat === "PUBLITASA MK PRO") {
+                const eq = document.getElementById('sol-pt-equipos').value;
+                const ms = document.getElementById('sol-pt-meses').value;
+                extraInfo = `\n📱 *Equipos Solicitados:* ${eq}\n📅 *Tiempo a Cancelar:* ${ms}`;
             }
-            
-            window.location.href = url;
+
+            let msg = `🎬 *SOLICITUD — CORDERO MK*\n\n📺 *Plataforma:* ${plat}${extraInfo}\n👤 *Cliente:* ${name}\n📱 *WhatsApp:* ${tlf}\n📍 *Dirección:* ${dir}\n💳 *Método de Pago:* ${metodo}\n\n⚠️ _Confirmo que estoy 100% seguro de la contratación._`;
+            window.open(`https://api.whatsapp.com/send?phone=${MI_NUMERO_CELULAR_UNICO}&text=${encodeURIComponent(msg)}`, '_blank');
             document.getElementById('modal-solicitud-cliente-streaming').classList.add('hidden');
         };
 
@@ -682,42 +1203,41 @@
             let text = ""; const fVenc = new Date(); fVenc.setDate(fVenc.getDate() + match.diasRestantes - 1);
 
             if(tipo === 'ACTIVACION') {
-                text = `🛍️ SERVICIOS STREAMING CORDERO MK\n🧾 COMPROBANTE DE ENTREGA Y ACTIVACIÓN\n\n👤 Cliente: ${match.cliente}\n📺 Plataforma: ${match.plataforma}\n`;
-                if(match.correo) text += `📧 Correo: ${match.correo}\n`;
-                text += `🔑 Contraseña / ID: ${match.clave}\n`;
-                if(match.perfil) text += `👤 Perfil Asignado: ${match.perfil}\n`;
-                if(match.pin) text += `📌 PIN Perfil: ${match.pin}\n\n`;
-                text += `📅 Fecha de Activación: ${match.fechaActivacion}\n✂️ Fecha de Renovación: ${fVenc.toLocaleDateString()}\n\n${REGLAS_DE_ORO_TEXTO}\n\n🌐 Únete a nuestro grupo oficial: ${LINK_GRUPO_WHATSAPP}${RESPALDO_FIRMA_WHATSAPP}`;
+                text = `🛍️ *SERVICIOS STREAMING CORDERO MK*\n🧾 *COMPROBANTE DE ENTREGA Y ACTIVACIÓN*\n\n👤 *Cliente:* ${match.cliente}\n📺 *Plataforma:* ${match.plataforma}\n`;
+                if(match.correo) text += `📧 *Correo:* \`${match.correo}\`\n`;
+                text += `🔑 *Contraseña / ID:* \`${match.clave}\`\n`;
+                if(match.perfil) text += `👤 *Perfil Asignado:* ${match.perfil}\n`;
+                if(match.pin) text += `📌 *PIN Perfil:* \`${match.pin}\`\n\n`;
+                text += `📅 *Fecha de Activación:* ${match.fechaActivacion}\n✂️ *Fecha de Renovación:* ${fVenc.toLocaleDateString()}\n\n${REGLAS_DE_ORO_TEXTO}\n\n🌐 *Únete a nuestro grupo oficial:* ${LINK_GRUPO_WHATSAPP}${RESPALDO_FIRMA_WHATSAPP}`;
             }
             if(tipo === 'RENOVACION') {
-                text = `🔄 RECORDATORIO DE RENOVACIÓN — CORDERO MK\n\nHola ${match.cliente},\nTu suscripción de ${match.plataforma} vence este ${fVenc.toLocaleDateString()}.\n\nPara garantizar la continuidad de tu pantalla, por favor reporta tu pago con un día de anticipación. ¡Muchas gracias! 🍿${RESPALDO_FIRMA_WHATSAPP}`;
+                text = `🔄 *RECORDATORIO DE RENOVACIÓN — CORDERO MK*\n\nHola *${match.cliente}*,\nTu suscripción de *${match.plataforma}* vence este *${fVenc.toLocaleDateString()}*.\n\nPara garantizar la continuidad de tu pantalla, por favor reporta tu pago con un día de anticipación. ¡Muchas gracias! 🍿${RESPALDO_FIRMA_WHATSAPP}`;
             }
             if(tipo === 'CAMBIO') {
-                text = `⚡ 🚨 ACTUALIZACIÓN DE CREDENCIALES — CORDERO MK\n\nEstimado cliente ${match.cliente},\nLe informamos que sus datos de acceso de ${match.plataforma} han sido actualizados por mantenimiento.\n\n🔐 NUEVOS DATOS DE ACCESO:\n`;
-                if(match.correo) text += `📧 Correo: ${match.correo}\n`;
-                text += `🔑 Contraseña / ID: ${match.clave}\n`;
-                if(match.pin) text += `📌 PIN Perfil: ${match.pin}\n\n`;
-                text += `⚠️ Respete las Reglas de Oro del servicio para mantener su garantía activa.${RESPALDO_FIRMA_WHATSAPP}`;
+                text = `⚡ *🚨 ACTUALIZACIÓN DE CREDENCIALES — CORDERO MK*\n\nEstimado cliente *${match.cliente}*,\nLe informamos que sus datos de acceso de *${match.plataforma}* han sido actualizados por mantenimiento.\n\n🔐 *NUEVOS DATOS DE ACCESO:*\n`;
+                if(match.correo) text += `📧 *Correo:* \`${match.correo}\`\n`;
+                text += `🔑 *Contraseña / ID:* \`${match.clave}\`\n`;
+                if(match.pin) text += `📌 *PIN Perfil:* \`${match.pin}\`\n\n`;
+                text += `⚠️ _Respete las Reglas de Oro del servicio para mantener su garantía activa._${RESPALDO_FIRMA_WHATSAPP}`;
             }
             window.open(`https://api.whatsapp.com/send?phone=${cleanTlf}&text=${encodeURIComponent(text)}`, '_blank');
         };
 
-        window.despacharMarketingMasivoWhatsApp = function(tipoApp) {
-            const urlFinal = linkServidorGitHubGuardado || "https://tucocel.github.io/StreamingCorderoMK/";
+        window.despacharMarketingMasivoWhatsApp = function(destino) {
+            const urlFinal = linkServidorGitHubGuardado || "https://github.com";
             let msg = "";
-            if(leyendaCustomGrupos) { 
-                msg = leyendaCustomGrupos.replace('[Link_Dinámico_de_GitHub]', urlFinal) + RESPALDO_FIRMA_WHATSAPP; 
+            if(destino === 'GRUPOS') {
+                if(leyendaCustomGrupos) { msg = leyendaCustomGrupos.replace('[Link_Dinámico_de_GitHub]', urlFinal) + RESPALDO_FIRMA_WHATSAPP; } 
+                else {
+                    msg = `📺 *SERVICIOS STREAMING CORDERO MK — ENTRETENIMIENTO PREMIUM* 📺\n\nLe invitamos a conocer la plataforma más confiable y estable para la adquisición de sus pantallas y membresías digitales. 🚀\n\n🔒 *GARANTÍA Y RESPALDO ABSOLUTO:* Más de 6 años de trayectoria impecable en el mercado regional y nacional avalan la seguridad de nuestro servicio.\n\n🍿 *NUESTRO CATÁLOGO DISPONIBLE:*\n▪️ Netflix Ultra HD 4K\n▪️ Tele Latino, Flujo TV y Xuper TV\n▪️ Disney+, Amazon Prime Video, Max y mucho más...\n\n💳 *Múltiples Métodos de Pago:* Bolívares (Pago Móvil a tasa Binance), Binance (USDT), Zinli, Nequi y PayPal.\n\n👇 *INGRESA A NUESTRA TAQUILLA DIGITAL Y ADQUIERE TU PANTALLA:*\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
+                }
             } else {
-                msg = `📺 SERVICIOS STREAMING CORDERO MK — ENTRETENIMIENTO PREMIUM 📺\n\nLe invitamos a conocer la plataforma más confiable y estable para la adquisición de sus pantallas y membresías digitales. 🚀\n\n🔒 GARANTÍA Y RESPALDO ABSOLUTO: Más de 6 años de trayectoria impecable en el mercado regional y nacional avalan la seguridad de nuestro servicio.\n\n🍿 NUESTRO CATÁLOGO DISPONIBLE:\n▪️ Netflix Ultra HD 4K\n▪️ Tele Latino, Flujo TV y Super TV\n▪️ Disney+, Amazon Prime Video, Max y mucho más...\n\n💳 Múltiples Métodos de Pago: Bolívares (Pago Móvil a tasa Binance), Binance (USDT), Zinli, Nequi y PayPal.\n\n👇 INGRESA A NUESTRA TAQUILLA DIGITAL Y ADQUIERE TU PANTALLA:\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
+                if(leyendaCustomEstados) { msg = leyendaCustomEstados.replace('[Link_Dinámico_de_GitHub]', urlFinal); } 
+                else {
+                    msg = `🎬 *PANTALLAS STREAMING PREMIUM CORDERO MK* 🍿\nDisfruta Netflix, Tele Latino, Disney+ y TV en vivo sin caídas. 🚀\n\n👇 *Pide tu pantalla en vivo aquí:*\n🔗 ${urlFinal}`;
+                }
             }
-            
-            let url = `whatsapp://send?text=${encodeURIComponent(msg)}`;
-            
-            if(tipoApp === 'BUSINESS') {
-                window.location.href = `intent://send?text=${encodeURIComponent(msg)}#Intent;package=com.whatsapp.w4b;scheme=whatsapp;end`;
-            } else {
-                window.location.href = url;
-            }
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
         };
 
         window.abrirEditorPlanillaRapida = function(id) {
@@ -768,11 +1288,9 @@
                 if(docSeg.exists()) { masterUsuarioIdDinamico = docSeg.data().usuario; masterClaveDinamica = docSeg.data().clave; }
                 const docMkt = await getDoc(doc(db, "tcl_streaming_core", "marketing_config"));
                 if(docMkt.exists()) {
-                    linkServidorGitHubGuardado = docMkt.data().github || ""; 
-                    leyendaCustomGrupos = docMkt.data().leyendaGrupos || ""; 
-                    
+                    linkServidorGitHubGuardado = docMkt.data().github || ""; leyendaCustomGrupos = docMkt.data().leyendaGrupos || ""; leyendaCustomEstados = docMkt.data().leyendaEstados || "";
                     document.getElementById('cfg-link-github-servidor').value = linkServidorGitHubGuardado;
-                    document.getElementById('cfg-leyenda-grupos-custom').value = leyendaCustomGrupos;
+                    document.getElementById('cfg-leyenda-grupos-custom').value = leyendaCustomGrupos; document.getElementById('cfg-leyenda-estados-custom').value = leyendaCustomEstados;
                 }
                 const docTar = await getDoc(doc(db, "tcl_streaming_core", "tarifas_config"));
                 if(docTar.exists()) { catálogoPlataformasEstructura = docTar.data(); }
@@ -787,13 +1305,183 @@
             try { await setDoc(doc(db, "tcl_streaming_core", "clientes_activos"), { lista: localStreamingClientesArr }); } catch(e) {}
         };
 
+        /* ================================================================= */
+        /* FUNCIONALIDAD EXCLUSIVA: PARTICIÓN PUBLITASA PRO (FIREBASE AISLADO) */
+        /* ================================================================= */
+
+        window.guardarTasaFronteraPubliTasa = async function() {
+            const compra = parseFloat(document.getElementById('pt-adm-compra').value) || 0;
+            const venta = parseFloat(document.getElementById('pt-adm-venta').value) || 0;
+            
+            try {
+                await setDoc(doc(db, "tcl_publitasa_pro", "frontera_config"), { compra, venta, ultimaActualizacion: new Date().toLocaleString() });
+                alert("🚀 Tasas de Frontera (Cúcuta) publicadas con éxito.");
+                document.getElementById('val-frontera-compra').innerText = compra.toLocaleString('es-CO');
+                document.getElementById('val-frontera-venta').innerText = venta.toLocaleString('es-CO');
+            } catch(e) { alert("Error al guardar tasas."); }
+        };
+
+        window.crearSuscriptorPubliTasaPro = async function() {
+            const cliente = document.getElementById('pt-cli-nombre').value.trim().toUpperCase();
+            const tlf = document.getElementById('pt-cli-tlf').value.trim();
+            const dir = document.getElementById('pt-cli-dir').value.trim().toUpperCase();
+            const meses = parseInt(document.getElementById('pt-cli-meses').value);
+            const maxEquipos = parseInt(document.getElementById('pt-cli-limite-equipos').value);
+
+            if(!cliente || !tlf) return alert("Por favor completa el Nombre y Teléfono.");
+
+            const tokenLicencia = 'PTPRO-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+
+            const nuevoClientePro = {
+                id: 'pt-' + new Date().getTime(),
+                cliente, telefono: tlf, direccion: dir, meses,
+                maxEquipos, equiposRegistrados: [],
+                tokenLicencia, fechaActivacion: new Date().toLocaleDateString(),
+                diasRestantes: meses * 30, estado: 'ACTIVO'
+            };
+
+            localPubliTasaClientesArr.push(nuevoClientePro);
+            await window.sincronizarPubliTasaNube();
+            
+            alert(`✅ Licencia Creada con éxito.\nToken: ${tokenLicencia}`);
+            
+            document.getElementById('pt-cli-nombre').value = "";
+            document.getElementById('pt-cli-tlf').value = "";
+            document.getElementById('pt-cli-dir').value = "";
+            
+            window.renderizarBovedaPubliTasaPro();
+            window.recalcularCarpetasYChismoseadorDinamico();
+        };
+
+        window.renderizarBovedaPubliTasaPro = function() {
+            const box = document.getElementById('mosaico-publitasa-clientes-box');
+            if(!box) return;
+            
+            box.innerHTML = "";
+            document.getElementById('lbl-total-publitasa').innerText = `${localPubliTasaClientesArr.length} Activos`;
+
+            const q = document.getElementById('pt-buscar-input').value.trim().toUpperCase();
+            let lista = localPubliTasaClientesArr;
+
+            if(q) {
+                lista = lista.filter(c => c.cliente.includes(q) || c.telefono.includes(q));
+            }
+
+            if(lista.length === 0) {
+                box.innerHTML = `<p class="text-center text-slate-500 italic py-6 text-xs">No hay suscriptores Pro registrados en la base de datos.</p>`;
+                return;
+            }
+
+            lista.forEach(c => {
+                const esAlerta = c.diasRestantes <= 5;
+                box.innerHTML += `
+                    <div class="border rounded-2xl p-4 flex flex-col justify-between ${esAlerta ? 'border-amber-500 bg-amber-950/20' : 'border-neutral-800 bg-neutral-950/60'} shadow-lg">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-amber-400 text-[9px] font-black uppercase tracking-wider">LICENCIA: ${c.tokenLicencia}</span>
+                                <h4 class="text-white text-sm font-black uppercase mt-0.5">${c.cliente}</h4>
+                                <p class="text-[10px] text-slate-400 font-mono mt-0.5"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono} &bull; ${c.direccion || 'TÁCHIRA'}</p>
+                                <p class="text-[10px] text-emerald-400 font-bold mt-1"><i class="fa-solid fa-mobile-screen"></i> Equipos: ${c.equiposRegistrados.length} / ${c.maxEquipos} Máx</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-base font-mono font-black ${esAlerta ? 'text-amber-400 animate-pulse' : 'text-slate-200'}">${c.diasRestantes} Días</span>
+                                <span class="text-[8px] text-slate-500 block uppercase font-bold">Plan: ${c.meses} Mes(es)</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2 mt-3 border-t border-neutral-900 pt-3">
+                            <button onclick="window.enviarBienvenidaPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase">
+                                📲 Enviar Acceso
+                            </button>
+                            <button onclick="window.resetearEquiposPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-2 rounded-lg uppercase">
+                                🔄 Reset Equipos
+                            </button>
+                            <button onclick="window.eliminarSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-2 rounded-lg uppercase">
+                                Anular
+                            </button>
+                        </div>
+                    </div>`;
+            });
+        };
+
+        window.enviarBienvenidaPubliTasa = function(id) {
+            const c = localPubliTasaClientesArr.find(x => x.id === id);
+            if(!c) return;
+
+            let cleanTlf = c.telefono.replace(/\D/g, '');
+            if(!cleanTlf.startsWith('58')) cleanTlf = '58' + cleanTlf;
+
+            const linkApp = window.location.href;
+
+            const msg = `📊 *BIENVENIDO A PUBLI-TASA-MK PRO*\n\nHola *${c.cliente}*,\nSe ha activado con éxito tu suscripción ejecutiva al monitor financiero de la región.\n\n🔑 *TU TOKEN DE LICENCIA:* \`${c.tokenLicencia}\`\n📱 *Límite de Dispositivos:* ${c.maxEquipos} Teléfono(s)\n📅 *Días Contratados:* ${c.diasRestantes} Días\n\n👇 *INGRESA A TU PLATAFORMA PRO AQUÍ:*\n🔗 ${linkApp}\n\n⚠️ _Su licencia está vinculada a su dispositivo. No comparta su token de acceso._\n\n🏛️ *CON EL RESPALDO DE TUCOCEL C.A.*`;
+
+            window.open(`https://api.whatsapp.com/send?phone=${cleanTlf}&text=${encodeURIComponent(msg)}`, '_blank');
+        };
+
+        window.resetearEquiposPubliTasa = async function(id) {
+            const c = localPubliTasaClientesArr.find(x => x.id === id);
+            if(!c) return;
+            if(confirm(`¿Deseas desvincular los teléfonos registrados de ${c.cliente}?`)) {
+                c.equiposRegistrados = [];
+                await window.sincronizarPubliTasaNube();
+                window.renderizarBovedaPubliTasaPro();
+                alert("🔄 Dispositivos desvinculados.");
+            }
+        };
+
+        window.eliminarSuscriptorPubliTasa = async function(id) {
+            if(!confirm("¿Deseas eliminar esta suscripción Pro?")) return;
+            localPubliTasaClientesArr = localPubliTasaClientesArr.filter(x => x.id !== id);
+            await window.sincronizarPubliTasaNube();
+            window.renderizarBovedaPubliTasaPro();
+            window.recalcularCarpetasYChismoseadorDinamico();
+        };
+
+        window.sincronizarPubliTasaNube = async function() {
+            try {
+                await setDoc(doc(db, "tcl_publitasa_pro", "clientes_activos"), { lista: localPubliTasaClientesArr });
+            } catch(e) { console.error("Error al sincronizar PubliTasa:", e); }
+        };
+
+        window.descargarBasePubliTasaFirebaseCompleta = async function() {
+            try {
+                const docFrontera = await getDoc(doc(db, "tcl_publitasa_pro", "frontera_config"));
+                if(docFrontera.exists()) {
+                    const c = docFrontera.data().compra || 3320;
+                    const v = docFrontera.data().venta || 3370;
+                    document.getElementById('pt-adm-compra').value = c;
+                    document.getElementById('pt-adm-venta').value = v;
+                    document.getElementById('val-frontera-compra').innerText = c.toLocaleString('es-CO');
+                    document.getElementById('val-frontera-venta').innerText = v.toLocaleString('es-CO');
+                }
+                const docEst = await getDoc(doc(db, "tcl_publitasa_pro", "estado_config"));
+                if(docEst.exists()) {
+                    publiTasaProEstadoActivoBool = docEst.data().activo !== undefined ? docEst.data().activo : true;
+                }
+                window.actualizarInterfazEstadoPubliTasa();
+
+                const docCli = await getDoc(doc(db, "tcl_publitasa_pro", "clientes_activos"));
+                if(docCli.exists()) { localPubliTasaClientesArr = docCli.data().lista || []; }
+                window.renderizarBovedaPubliTasaPro();
+                window.recalcularCarpetasYChismoseadorDinamico();
+            } catch(e) {}
+        };
+
         window.onload = async function() {
             try {
                 const docTar = await getDoc(doc(db, "tcl_streaming_core", "tarifas_config"));
                 if(docTar.exists()) { catálogoPlataformasEstructura = docTar.data(); }
                 window.construirEstructurasDinamicasInterfaces();
+                
+                const docEst = await getDoc(doc(db, "tcl_publitasa_pro", "estado_config"));
+                if(docEst.exists()) { publiTasaProEstadoActivoBool = docEst.data().activo !== undefined ? docEst.data().activo : true; }
+                window.actualizarInterfazEstadoPubliTasa();
+                
+                const docCliPT = await getDoc(doc(db, "tcl_publitasa_pro", "clientes_activos"));
+                if(docCliPT.exists()) { localPubliTasaClientesArr = docCliPT.data().lista || []; }
+                window.recalcularCarpetasYChismoseadorDinamico();
             } catch(e) {}
         };
     </script>
 </body>
-</html>
+                    </html>
