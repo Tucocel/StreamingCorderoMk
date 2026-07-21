@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios Streaming Cordero MK</title>
     
-    <!-- METADATOS COMPARTICIÓN ESTADOS/GRUPOS (WHATSAPP LA MUESTRA AL PEGAR EL LINK) -->
+    <!-- METADATOS COMPARTICIÓN GRUPOS (DINÁMICO DESDE CONSOLA) -->
     <meta property="og:title" content="🚀 Servicios Streaming Cordero MK — Taquilla Digital Activa">
     <meta property="og:description" content="Membresías digitales y televisión premium por IP con estabilidad absoluta y garantía real bajo el respaldo de Tucocel C.A.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/publionlinemk/streaming/main/imagen%20para%20Streaming%20-clean.jpg">
+    <meta id="og-image-tag" property="og:image" content="https://raw.githubusercontent.com/publionlinemk/streaming/main/imagen%20para%20Streaming%20-clean.jpg">
     <meta property="og:type" content="website">
 
     <!-- TAILWIND & FONTS -->
@@ -95,7 +95,6 @@
 
         <!-- ==================== VISTA CLIENTE PÚBLICO ==================== -->
         <div id="vista-vitrina-publica" class="space-y-6">
-            <!-- BANNER PRINCIPAL LIMPIO (SIN IMAGEN INTERNA) -->
             <section class="hero-epic text-center py-10 px-4 space-y-3 shadow-xl">
                 <div class="max-w-3xl mx-auto space-y-2">
                     <span class="text-[9px] tracking-[0.3em] font-extrabold text-red-500 uppercase bg-red-950/50 border border-red-900/50 px-3 py-1 rounded-full inline-block">TAQUILLA DIGITAL OFICIAL</span>
@@ -109,7 +108,6 @@
                 </div>
             </section>
 
-            <!-- GRID ADAPTATIVO: 2 EN MÓVIL, 4 EN PC -->
             <main class="max-w-6xl mx-auto px-2.5 sm:px-4 py-2">
                 <section id="mosaico-vitrina-publica-productos" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
                     <!-- Inyección automatizada por JS -->
@@ -124,7 +122,7 @@
                     <h3 class="font-black text-xs uppercase tracking-wider text-white flex items-center gap-1.5 text-red-500"><i class="fa-solid fa-paper-plane"></i> Formulario de Pedido</h3>
                     <button onclick="document.getElementById('modal-solicitud-cliente-streaming').classList.add('hidden')" class="text-slate-400 hover:text-white bg-neutral-950 border border-neutral-800 w-7 h-7 rounded-xl flex items-center justify-center"><i class="fa-solid fa-xmark text-xs"></i></button>
                 </div>
-                <form onsubmit="event.preventDefault(); window.despacharSolicitudWhatsAppAlDueno();" class="space-y-3 text-xs font-bold text-slate-800">
+                <form onsubmit="event.preventDefault(); window.despacharSolicitudWhatsAppAlDueno('PERSONAL');" class="space-y-3 text-xs font-bold text-slate-800">
                     <input type="text" id="sol-plataforma" readonly class="w-full bg-neutral-950 border border-neutral-800 text-red-500 px-4 py-2.5 rounded-xl text-center font-black uppercase font-mono cursor-not-allowed">
                     <div>
                         <label class="text-[9px] text-slate-400 font-black uppercase ml-1 block mb-1">Nombre y Apellido</label>
@@ -152,7 +150,7 @@
                         <span class="text-[8.5px] font-black text-red-500 uppercase tracking-widest block">⚠️ REGLA DE ENVÍO</span>
                         <p class="text-[10px] text-slate-400 leading-tight">Si vas a hacer uso de este botón es porque estás 100% seguro de que deseas contratar la membresía. Este mensaje será enviado directamente al proveedor.</p>
                     </div>
-                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl uppercase tracking-wider text-xs">Confirmar y Enviar al WhatsApp</button>
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-3 rounded-xl uppercase tracking-wider text-xs">Confirmar y Enviar Pedido</button>
                 </form>
             </div>
         </div>
@@ -160,7 +158,6 @@
         <!-- ==================== VISTA CONSOLA ADMINISTRATIVA MÁSTER ==================== -->
         <main id="vista-streaming-admin" class="max-w-6xl mx-auto px-4 py-6 space-y-6 hidden">
             
-            <!-- CABECERA PRINCIPAL -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-neutral-900 pb-5">
                 <div>
                     <span class="bg-neutral-900 text-slate-400 border border-neutral-800 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full inline-flex items-center gap-1.5"><i class="fa-solid fa-lock text-red-500"></i> Consola Central de Control</span>
@@ -178,15 +175,11 @@
                 </div>
             </div>
 
-            <!-- TABLERO ALERTAS FIJO ARRIBA -->
             <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
                 <h3 class="text-[10px] font-black text-amber-500 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Tablero de Alertas Tempranas e Indicadores de Vencimiento</h3>
-                <div id="wrapper-chismoseador-burbujas" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2">
-                    <!-- Burbujas de alerta -->
-                </div>
+                <div id="wrapper-chismoseador-burbujas" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2"></div>
             </div>
 
-            <!-- BÚNKER DE FUNCIONES COMPACTO (MÓDULOS DESPLEGABLES CON ACORDEÓN) -->
             <div class="space-y-2">
                 <!-- ACCORDION 1: LEGO PARSER -->
                 <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
@@ -281,30 +274,29 @@
                     </div>
                 </div>
 
-                <!-- ACCORDION 4: MARKETING GITHUB Y LEYENDAS -->
+                <!-- ACCORDION 4: MARKETING Y CARGADOR AUTÓNOMO DE FLYER DESDE GALERÍA -->
                 <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
                     <button onclick="window.toggleModuloAcordeon('acc-marketing')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all">
-                        <span><i class="fa-solid fa-link text-red-500 mr-2"></i> Enrutador de Enlaces y Leyendas de Comunicación (GitHub)</span>
+                        <span><i class="fa-solid fa-link text-red-500 mr-2"></i> Enrutador, Leyendas y Carga de Flyer desde Galería</span>
                         <i class="fa-solid fa-chevron-down text-xs"></i>
                     </button>
                     <div id="acc-marketing" class="hidden p-5 border-t border-neutral-850 bg-neutral-950/40 space-y-4">
-                        <div class="grid grid-cols-1 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
-                                <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Link del Proyecto Final (GitHub URL)</label>
-                                <input type="text" id="cfg-link-github-servidor" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono text-xs focus:outline-none">
+                                <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Link de la Web (GitHub URL)</label>
+                                <input type="text" id="cfg-link-github-servidor" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono text-xs focus:outline-none" placeholder="https://tucocel.github.io/StreamingCorderoMK/">
                             </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                <div>
-                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda para Grupos de WhatsApp</label>
-                                    <textarea id="cfg-leyenda-grupos-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica..."></textarea>
-                                </div>
-                                <div>
-                                    <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda Ultra-Corta para Estados de WhatsApp</label>
-                                    <textarea id="cfg-leyenda-estados-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica corto..."></textarea>
-                                </div>
+                            <div>
+                                <label class="text-[8.5px] text-slate-500 uppercase block mb-1">🖼️ Cargar Flyer Oficial desde Mi Galería</label>
+                                <input type="file" id="cfg-file-flyer-local" accept="image/*" class="w-full bg-neutral-950 border border-neutral-800 text-slate-300 p-2 rounded-xl text-xs focus:outline-none file:mr-3 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-black file:bg-red-600 file:text-white hover:file:bg-red-700 cursor-pointer">
+                                <span id="lbl-status-upload-flyer" class="text-[8px] font-mono text-emerald-400 block mt-1"></span>
                             </div>
                         </div>
-                        <button onclick="window.salvarConfiguracionDeEnlacesYLeyendas()" class="bg-neutral-950 text-slate-300 border border-neutral-800 hover:border-red-600/30 text-[10px] font-black uppercase px-5 py-2 rounded-xl block ml-auto">Guardar Enrutamiento Comercial</button>
+                        <div>
+                            <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda para Grupos de WhatsApp</label>
+                            <textarea id="cfg-leyenda-grupos-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica..."></textarea>
+                        </div>
+                        <button onclick="window.salvarConfiguracionDeEnlacesYLeyendas()" class="bg-neutral-950 text-slate-300 border border-neutral-800 hover:border-red-600/30 text-[10px] font-black uppercase px-5 py-2 rounded-xl block ml-auto">Guardar Configuración Comercial</button>
                     </div>
                 </div>
 
@@ -324,10 +316,10 @@
                 </div>
             </div>
 
-            <!-- BOTONERA MARKETING RÁPIDA -->
+            <!-- BOTONERA DE MARKETING MÁSIVO CON SELECTOR DE WHATSAPP -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <button onclick="window.despacharMarketingMasivoWhatsApp('GRUPOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2"><i class="fa-solid fa-users text-red-500"></i> Compartir Catálogo en Grupos</button>
-                <button onclick="window.despacharMarketingMasivoWhatsApp('ESTADOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2"><i class="fa-solid fa-circle-dot text-emerald-500"></i> Formato Corto para Estados</button>
+                <button onclick="window.despacharMarketingMasivoWhatsApp('PERSONAL')" class="bg-neutral-950 border border-neutral-800 hover:border-emerald-600/50 text-white font-black p-4 rounded-2xl uppercase tracking-wider text-xs flex items-center justify-center gap-2 transition-all"><i class="fa-brands fa-whatsapp text-emerald-500 text-lg"></i> Difundir por WhatsApp Personal</button>
+                <button onclick="window.despacharMarketingMasivoWhatsApp('BUSINESS')" class="bg-neutral-950 border border-neutral-800 hover:border-blue-600/50 text-white font-black p-4 rounded-2xl uppercase tracking-wider text-xs flex items-center justify-center gap-2 transition-all"><i class="fa-solid fa-briefcase text-blue-500 text-lg"></i> Difundir por WhatsApp Business</button>
             </div>
 
             <!-- ARCHIVADOR INTELIGENTE POR CARPETAS CON BUSCADOR EN TIEMPO REAL -->
@@ -367,10 +359,11 @@
         </div>
     </footer>
 
-    <!-- REGLAS DE LÓGICA CORE DE FIREBASE -->
+    <!-- REGLAS DE LÓGICA CORE DE FIREBASE & STORAGE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyDytP_5UQyyRUT7wPC2bDIYz5t70z_pQV4",
@@ -383,6 +376,7 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+        const storage = getStorage(app);
 
         const MI_NUMERO_CELULAR_UNICO = "584147357549";
 
@@ -403,12 +397,12 @@
         let masterUsuarioIdDinamico = "TUCOCEL";
         let masterClaveDinamica = "Razu2020.";
         let linkServidorGitHubGuardado = "";
+        let urlFlyerPromocionalCustom = "";
         let leyendaCustomGrupos = "";
-        let leyendaCustomEstados = "";
 
-        const REGLAS_DE_ORO_TEXTO = `*⚠️ REGLAS DE ORO DEL SERVICIO:*\n\n✅ *Renovaciones:* Para garantizar la continuidad de tu pantalla, debes realizar el pago un día antes de tu fecha de activación.\n✅ No cambiar el correo ni la contraseña de la cuenta.\n✅ No crear ni borrar perfiles adicionales.\n✅ No compartir los datos con terceros.\n✅ Entrar únicamente al perfil asignado.\n\nEl incumplimiento de estas reglas puede causar la pérdida de la garantía sin derecho a reembolso.\n\n🌟 ¿Te gustó nuestro servicio? ¡Tu recomendación es nuestro mejor motor! Disfruta tu programación. 🍿🎬`;
+        const REGLAS_DE_ORO_TEXTO = `⚠️ REGLAS DE ORO DEL SERVICIO:\n\n✅ Renovaciones: Para garantizar la continuidad de tu pantalla, debes realizar el pago un día antes de tu fecha de activación.\n✅ No cambiar el correo ni la contraseña de la cuenta.\n✅ No crear ni borrar perfiles adicionales.\n✅ No compartir los datos con terceros.\n✅ Entrar únicamente al perfil asignado.\n\nEl incumplimiento de estas reglas puede causar la pérdida de la garantía sin derecho a reembolso.\n\n🌟 ¿Te gustó nuestro servicio? ¡Tu recomendación es nuestro mejor motor! Disfruta tu programación. 🍿🎬`;
         const LINK_GRUPO_WHATSAPP = `https://chat.whatsapp.com/CcSII6i2HqSLiWDUhNi5ay`;
-        const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ *CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.*\n📡 *Agente Autorizado Movistar Cordero*\n💻 _Desarrollado corporativamente por nuestra agencia *@publionlinemk*._`;
+        const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.\n📡 Agente Autorizado Movistar Cordero\n💻 Desarrollado corporativamente por nuestra agencia @publionlinemk.`;
 
         window.toggleModuloAcordeon = function(id) {
             const el = document.getElementById(id);
@@ -446,10 +440,33 @@
         window.salvarConfiguracionDeEnlacesYLeyendas = async function() {
             linkServidorGitHubGuardado = document.getElementById('cfg-link-github-servidor').value.trim();
             leyendaCustomGrupos = document.getElementById('cfg-leyenda-grupos-custom').value.trim();
-            leyendaCustomEstados = document.getElementById('cfg-leyenda-estados-custom').value.trim();
+            const fileInput = document.getElementById('cfg-file-flyer-local');
+            const lblStatus = document.getElementById('lbl-status-upload-flyer');
+
+            if(fileInput.files.length > 0) {
+                lblStatus.innerText = "⏳ Subiendo flyer desde tu galería a Firebase...";
+                const file = fileInput.files[0];
+                const storageRef = ref(storage, 'flyers/flyer_oficial_' + new Date().getTime() + '.jpg');
+                
+                try {
+                    const snapshot = await uploadBytes(storageRef, file);
+                    urlFlyerPromocionalCustom = await getDownloadURL(snapshot.ref);
+                    lblStatus.innerText = "✅ Flyer actualizado exitosamente en nube.";
+                    
+                    const tagImg = document.getElementById('og-image-tag');
+                    if(tagImg) tagImg.setAttribute('content', urlFlyerPromocionalCustom);
+                } catch(err) {
+                    lblStatus.innerText = "❌ Error al subir imagen.";
+                }
+            }
+
             try {
-                await setDoc(doc(db, "tcl_streaming_core", "marketing_config"), { github: linkServidorGitHubGuardado, leyendaGrupos: leyendaCustomGrupos, leyendaEstados: leyendaCustomEstados });
-                alert("💾 Enlaces guardados.");
+                await setDoc(doc(db, "tcl_streaming_core", "marketing_config"), { 
+                    github: linkServidorGitHubGuardado, 
+                    flyerUrl: urlFlyerPromocionalCustom,
+                    leyendaGrupos: leyendaCustomGrupos 
+                });
+                alert("💾 Configuración comercial guardada con éxito.");
             } catch(e) {}
         };
 
@@ -562,15 +579,23 @@
             document.getElementById('modal-solicitud-cliente-streaming').classList.remove('hidden');
         };
 
-        window.despacharSolicitudWhatsAppAlDueno = function() {
+        window.despacharSolicitudWhatsAppAlDueno = function(tipoApp) {
             const plat = document.getElementById('sol-plataforma').value;
             const name = document.getElementById('sol-nombre').value.trim().toUpperCase();
             const tlf = document.getElementById('sol-tlf').value.trim();
             const dir = document.getElementById('sol-dir').value.trim().toUpperCase();
             const metodo = document.getElementById('sol-metodo-pago').value;
 
-            let msg = `🎬 *SOLICITUD — CORDERO MK*\n\n📺 *Plataforma:* ${plat}\n👤 *Cliente:* ${name}\n📱 *WhatsApp:* ${tlf}\n📍 *Dirección:* ${dir}\n💳 *Método de Pago:* ${metodo}\n\n⚠️ _Confirmo que estoy 100% seguro de la contratación._`;
-            window.open(`https://api.whatsapp.com/send?phone=${MI_NUMERO_CELULAR_UNICO}&text=${encodeURIComponent(msg)}`, '_blank');
+            let msg = `🎬 SOLICITUD — CORDERO MK\n\n📺 Plataforma: ${plat}\n👤 Cliente: ${name}\n📱 WhatsApp: ${tlf}\n📍 Dirección: ${dir}\n💳 Método de Pago: ${metodo}\n\n⚠️ Confirmo que estoy 100% seguro de la contratación.`;
+            
+            let url = "";
+            if(tipoApp === 'BUSINESS') {
+                url = `intent://send?phone=${MI_NUMERO_CELULAR_UNICO}&text=${encodeURIComponent(msg)}#Intent;scheme=smsto;package=com.whatsapp.w4b;end`;
+            } else {
+                url = `intent://send?phone=${MI_NUMERO_CELULAR_UNICO}&text=${encodeURIComponent(msg)}#Intent;scheme=smsto;package=com.whatsapp;end`;
+            }
+            
+            window.location.href = url;
             document.getElementById('modal-solicitud-cliente-streaming').classList.add('hidden');
         };
 
@@ -684,41 +709,43 @@
             let text = ""; const fVenc = new Date(); fVenc.setDate(fVenc.getDate() + match.diasRestantes - 1);
 
             if(tipo === 'ACTIVACION') {
-                text = `🛍️ *SERVICIOS STREAMING CORDERO MK*\n🧾 *COMPROBANTE DE ENTREGA Y ACTIVACIÓN*\n\n👤 *Cliente:* ${match.cliente}\n📺 *Plataforma:* ${match.plataforma}\n`;
-                if(match.correo) text += `📧 *Correo:* \`${match.correo}\`\n`;
-                text += `🔑 *Contraseña / ID:* \`${match.clave}\`\n`;
-                if(match.perfil) text += `👤 *Perfil Asignado:* ${match.perfil}\n`;
-                if(match.pin) text += `📌 *PIN Perfil:* \`${match.pin}\`\n\n`;
-                text += `📅 *Fecha de Activación:* ${match.fechaActivacion}\n✂️ *Fecha de Renovación:* ${fVenc.toLocaleDateString()}\n\n${REGLAS_DE_ORO_TEXTO}\n\n🌐 *Únete a nuestro grupo oficial:* ${LINK_GRUPO_WHATSAPP}${RESPALDO_FIRMA_WHATSAPP}`;
+                text = `🛍️ SERVICIOS STREAMING CORDERO MK\n🧾 COMPROBANTE DE ENTREGA Y ACTIVACIÓN\n\n👤 Cliente: ${match.cliente}\n📺 Plataforma: ${match.plataforma}\n`;
+                if(match.correo) text += `📧 Correo: ${match.correo}\n`;
+                text += `🔑 Contraseña / ID: ${match.clave}\n`;
+                if(match.perfil) text += `👤 Perfil Asignado: ${match.perfil}\n`;
+                if(match.pin) text += `📌 PIN Perfil: ${match.pin}\n\n`;
+                text += `📅 Fecha de Activación: ${match.fechaActivacion}\n✂️ Fecha de Renovación: ${fVenc.toLocaleDateString()}\n\n${REGLAS_DE_ORO_TEXTO}\n\n🌐 Únete a nuestro grupo oficial: ${LINK_GRUPO_WHATSAPP}${RESPALDO_FIRMA_WHATSAPP}`;
             }
             if(tipo === 'RENOVACION') {
-                text = `🔄 *RECORDATORIO DE RENOVACIÓN — CORDERO MK*\n\nHola *${match.cliente}*,\nTu suscripción de *${match.plataforma}* vence este *${fVenc.toLocaleDateString()}*.\n\nPara garantizar la continuidad de tu pantalla, por favor reporta tu pago con un día de anticipación. ¡Muchas gracias! 🍿${RESPALDO_FIRMA_WHATSAPP}`;
+                text = `🔄 RECORDATORIO DE RENOVACIÓN — CORDERO MK\n\nHola ${match.cliente},\nTu suscripción de ${match.plataforma} vence este ${fVenc.toLocaleDateString()}.\n\nPara garantizar la continuidad de tu pantalla, por favor reporta tu pago con un día de anticipación. ¡Muchas gracias! 🍿${RESPALDO_FIRMA_WHATSAPP}`;
             }
             if(tipo === 'CAMBIO') {
-                text = `⚡ *🚨 ACTUALIZACIÓN DE CREDENCIALES — CORDERO MK*\n\nEstimado cliente *${match.cliente}*,\nLe informamos que sus datos de acceso de *${match.plataforma}* han sido actualizados por mantenimiento.\n\n🔐 *NUEVOS DATOS DE ACCESO:*\n`;
-                if(match.correo) text += `📧 *Correo:* \`${match.correo}\`\n`;
-                text += `🔑 *Contraseña / ID:* \`${match.clave}\`\n`;
-                if(match.pin) text += `📌 *PIN Perfil:* \`${match.pin}\`\n\n`;
-                text += `⚠️ _Respete las Reglas de Oro del servicio para mantener su garantía activa._${RESPALDO_FIRMA_WHATSAPP}`;
+                text = `⚡ 🚨 ACTUALIZACIÓN DE CREDENCIALES — CORDERO MK\n\nEstimado cliente ${match.cliente},\nLe informamos que sus datos de acceso de ${match.plataforma} han sido actualizados por mantenimiento.\n\n🔐 NUEVOS DATOS DE ACCESO:\n`;
+                if(match.correo) text += `📧 Correo: ${match.correo}\n`;
+                text += `🔑 Contraseña / ID: ${match.clave}\n`;
+                if(match.pin) text += `📌 PIN Perfil: ${match.pin}\n\n`;
+                text += `⚠️ Respete las Reglas de Oro del servicio para mantener su garantía activa.${RESPALDO_FIRMA_WHATSAPP}`;
             }
             window.open(`https://api.whatsapp.com/send?phone=${cleanTlf}&text=${encodeURIComponent(text)}`, '_blank');
         };
 
-        window.despacharMarketingMasivoWhatsApp = function(destino) {
+        window.despacharMarketingMasivoWhatsApp = function(tipoApp) {
             const urlFinal = linkServidorGitHubGuardado || "https://github.com";
             let msg = "";
-            if(destino === 'GRUPOS') {
-                if(leyendaCustomGrupos) { msg = leyendaCustomGrupos.replace('[Link_Dinámico_de_GitHub]', urlFinal) + RESPALDO_FIRMA_WHATSAPP; } 
-                else {
-                    msg = `📺 *SERVICIOS STREAMING CORDERO MK — ENTRETENIMIENTO PREMIUM* 📺\n\nLe invitamos a conocer la plataforma más confiable y estable para la adquisición de sus pantallas y membresías digitales. 🚀\n\n🔒 *GARANTÍA Y RESPALDO ABSOLUTO:* Más de 6 años de trayectoria impecable en el mercado regional y nacional avalan la seguridad de nuestro servicio.\n\n🍿 *NUESTRO CATÁLOGO DISPONIBLE:*\n▪️ Netflix Ultra HD 4K\n▪️ Tele Latino, Flujo TV y Super TV\n▪️ Disney+, Amazon Prime Video, Max y mucho más...\n\n💳 *Múltiples Métodos de Pago:* Bolívares (Pago Móvil a tasa Binance), Binance (USDT), Zinli, Nequi y PayPal.\n\n👇 *INGRESA A NUESTRA TAQUILLA DIGITAL Y ADQUIERE TU PANTALLA:*\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
-                }
+            if(leyendaCustomGrupos) { 
+                msg = leyendaCustomGrupos.replace('[Link_Dinámico_de_GitHub]', urlFinal) + RESPALDO_FIRMA_WHATSAPP; 
             } else {
-                if(leyendaCustomEstados) { msg = leyendaCustomEstados.replace('[Link_Dinámico_de_GitHub]', urlFinal); } 
-                else {
-                    msg = `🎬 *PANTALLAS STREAMING PREMIUM CORDERO MK* 🍿\nDisfruta Netflix, Tele Latino, Disney+ y TV en vivo sin caídas. 🚀\n\n👇 *Pide tu pantalla en vivo aquí:*\n🔗 ${urlFinal}`;
-                }
+                msg = `📺 SERVICIOS STREAMING CORDERO MK — ENTRETENIMIENTO PREMIUM 📺\n\nLe invitamos a conocer la plataforma más confiable y estable para la adquisición de sus pantallas y membresías digitales. 🚀\n\n🔒 GARANTÍA Y RESPALDO ABSOLUTO: Más de 6 años de trayectoria impecable en el mercado regional y nacional avalan la seguridad de nuestro servicio.\n\n🍿 NUESTRO CATÁLOGO DISPONIBLE:\n▪️ Netflix Ultra HD 4K\n▪️ Tele Latino, Flujo TV y Super TV\n▪️ Disney+, Amazon Prime Video, Max y mucho más...\n\n💳 Múltiples Métodos de Pago: Bolívares (Pago Móvil a tasa Binance), Binance (USDT), Zinli, Nequi y PayPal.\n\n👇 INGRESA A NUESTRA TAQUILLA DIGITAL Y ADQUIERE TU PANTALLA:\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
             }
-            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+            
+            let targetUrl = "";
+            if(tipoApp === 'BUSINESS') {
+                targetUrl = `intent://send?text=${encodeURIComponent(msg)}#Intent;scheme=smsto;package=com.whatsapp.w4b;end`;
+            } else {
+                targetUrl = `intent://send?text=${encodeURIComponent(msg)}#Intent;scheme=smsto;package=com.whatsapp;end`;
+            }
+            
+            window.location.href = targetUrl;
         };
 
         window.abrirEditorPlanillaRapida = function(id) {
@@ -769,9 +796,17 @@
                 if(docSeg.exists()) { masterUsuarioIdDinamico = docSeg.data().usuario; masterClaveDinamica = docSeg.data().clave; }
                 const docMkt = await getDoc(doc(db, "tcl_streaming_core", "marketing_config"));
                 if(docMkt.exists()) {
-                    linkServidorGitHubGuardado = docMkt.data().github || ""; leyendaCustomGrupos = docMkt.data().leyendaGrupos || ""; leyendaCustomEstados = docMkt.data().leyendaEstados || "";
+                    linkServidorGitHubGuardado = docMkt.data().github || ""; 
+                    urlFlyerPromocionalCustom = docMkt.data().flyerUrl || "";
+                    leyendaCustomGrupos = docMkt.data().leyendaGrupos || ""; 
+                    
                     document.getElementById('cfg-link-github-servidor').value = linkServidorGitHubGuardado;
-                    document.getElementById('cfg-leyenda-grupos-custom').value = leyendaCustomGrupos; document.getElementById('cfg-leyenda-estados-custom').value = leyendaCustomEstados;
+                    document.getElementById('cfg-leyenda-grupos-custom').value = leyendaCustomGrupos;
+                    
+                    if(urlFlyerPromocionalCustom) {
+                        const tagImg = document.getElementById('og-image-tag');
+                        if(tagImg) tagImg.setAttribute('content', urlFlyerPromocionalCustom);
+                    }
                 }
                 const docTar = await getDoc(doc(db, "tcl_streaming_core", "tarifas_config"));
                 if(docTar.exists()) { catálogoPlataformasEstructura = docTar.data(); }
