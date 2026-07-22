@@ -1036,7 +1036,7 @@
         let leyendaCustomGrupos = "";
         let leyendaCustomEstados = "";
 
-        // REGISTROS HISTÓRICOS PARA FLECHAS DE TENDENCIA (⬆️ ⬇️ ➖)
+        // REGISTROS HISTÓRICOS PARA FLECHAS DE TENDENCIA (⬆️ ⬇️ ↔️)
         let historicoPrecios = JSON.parse(localStorage.getItem('tcl_historico_precios')) || {};
 
         function obtenerSimboloTendenciaTexto(key, nuevoValor) {
@@ -1047,7 +1047,7 @@
             localStorage.setItem('tcl_historico_precios', JSON.stringify(historicoPrecios));
 
             if (!anterior || anterior === nuevoValor) {
-                return `➖`;
+                return `↔️`;
             } else if (nuevoValor > anterior) {
                 return `⬆️`;
             } else {
@@ -1214,7 +1214,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             } catch (e) {}
         }
 
-        /* DESPACHO DEL REPORTE DIARIO DE INDICADORES A GRUPOS / COMUNIDAD */
+        /* DESPACHO DEL REPORTE DIARIO CON EL ORDEN Y FORMATO EXACTO SOLICITADO */
         window.despacharReporteDiarioWhatsApp = function() {
             const fechaHoyStr = new Date().toLocaleDateString('es-ES');
             const linkDirectoPro = (linkServidorGitHubGuardado || URL_VITRINA_OFICIAL).split('#')[0] + '#publitasa';
@@ -1234,36 +1234,38 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const tUsdt = obtenerSimboloTendenciaTexto('binance_usdt', parseFloat(usdtCompra));
             const tBtc = obtenerSimboloTendenciaTexto('btc_usd', parseFloat(btcUsd.replace(/\D/g, '')));
 
-            const msg = `.. 📊 *Así cierran los indicadores económicos el día* 📈
-📅 *Fecha:* ${fechaHoyStr}
+            const msg = `📊 Así cierran los indicadores económicos el día 📈
 
-🇻🇪 *Tasas Oficiales BCV:*
-Dólar BCV: ${usdBcv} ${tUsd}  
-Euro BCV:  ${eurBcv}  ${tEur}  
+📅 Fecha: ${fechaHoyStr}
 
-🇨🇴 *Frontera:*
+🇻🇪 Tasas Oficiales BCV:
+Dólar BCV: ${usdBcv} ${tUsd}
+Euro BCV: ${eurBcv} ${tEur}
+
+🇨🇴 Frontera:
 Dólar casa de cambio Cúcuta:
-${cucutaVenta} Cop. ${tFrontera} 
+${cucutaVenta} Cop. ${tFrontera}
+🇨🇴 Colombia:
+Dólar oficial TRM:
+${trmCop} ${tTrm}
 
-🇨🇴 *Colombia:*
-Dólar oficial TRM: 
-${trmCop} ${tTrm} 
+🪙 Cripto:
+USDT Binance Venezuela:
+${usdtCompra}/${usdtVenta} Bs. ${tUsdt}
 
-🪙 *Cripto:*
-USDT Binance Venezuela: 
-${usdtCompra}/${usdtVenta} Bs. ${tUsdt} 
-Bitcoin Global: 
-${btcUsd} ${tBtc} 
+Bitcoin Global:
+${btcUsd} ${tBtc}
 
-📢 *Somos Publi-Tasa-Mk*
+📢 Somos Publi-Tasa-Mk
 
-📱 *¿Deseas consultar estos indicadores las 24 horas del día en tiempo real desde tu teléfono, tablet, PC y desde tu negocio o desde donde sea?*
-⚡ *Prueba nuestra plataforma ejecutiva PubliTasaMK Pro:* activa tu membresía ahora mismo.
-🔗 ${linkDirectoPro}
+⚠️ Solo somos un medio de información. No vendemos ni compramos divisas, criptomonedas ni bolívares.
+${LINK_COMUNIDAD_WHATSAPP}
 
-⚠️ *Solo somos un medio de información. No vendemos ni compramos divisas, criptomonedas ni bolívares.*
+📱 ¿Deseas consultar estos indicadores las 24 horas del día en tiempo real desde tu teléfono, tablet, PC y desde tu negocio o desde donde sea?
 
-${LINK_COMUNIDAD_WHATSAPP}`;
+⚡ Prueba nuestra plataforma ejecutiva PubliTasaMK Pro: activa tu membresía ahora mismo.
+
+🔗 ${linkDirectoPro}`;
 
             abrirWhatsAppPersonal('', msg);
         };
