@@ -724,6 +724,37 @@
                     </div>
                 </div>
 
+                <!-- CONTROL TASA OFICIAL BCV (VENEZUELA CENTRALIZADA) -->
+                <div class="bg-neutral-950 border-2 border-amber-500/60 p-5 rounded-3xl space-y-4 shadow-xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center text-neutral-950 text-xl font-black">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-extrabold uppercase text-sm">Control Banco Central de Venezuela (BCV)</h3>
+                            <p class="text-[10px] text-slate-400 uppercase">Sincronización Automática con Servidor Firebase Centralizado</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
+                        <div>
+                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Tasa Dólar BCV (Bs)</label>
+                            <input type="number" id="pt-adm-bcv-usd" step="0.01" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500" placeholder="Ej: 36.50">
+                        </div>
+                        <div>
+                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Tasa Euro BCV (Bs)</label>
+                            <input type="number" id="pt-adm-bcv-eur" step="0.01" class="w-full bg-neutral-900 border border-neutral-800 text-amber-300 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500" placeholder="Ej: 39.80">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <button onclick="window.sincronizarAutonomaBcvEnVivo()" class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-lg transition-all btn-interactive">
+                            ⚡ Sincronizar Tasa BCV Oficial
+                        </button>
+                        <button onclick="window.guardarTasaBcvManualPubliTasa()" class="bg-neutral-900 border border-amber-500/50 hover:bg-neutral-850 text-amber-400 font-black py-3 rounded-xl uppercase tracking-wider text-xs transition-all btn-interactive">
+                            💾 Guardar Ajuste Manual BCV
+                        </button>
+                    </div>
+                </div>
+
                 <!-- 1. CONTROL MANUAL RANGO BINANCE USDT P2P -->
                 <div class="bg-neutral-950 border-2 border-emerald-500/40 p-5 rounded-3xl space-y-4 shadow-xl">
                     <div class="flex items-center gap-3">
@@ -1077,7 +1108,7 @@
         </div>
     </footer>
 
-    <!-- LÓGICA CORE FIREBASE & APIS EN VIVO BLINDADAS -->
+    <!-- LÓGICA CORE FIREBASE & APIS EN VIVO BLINDADAS (OPCIÓN A INTEGRADAS) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -1280,6 +1311,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             } catch(e) {}
         }
 
+        /* FUNCIÓN AUXILIAR DE PETICIÓN MULTI-SERVIDOR ULTRA-RÁPIDA */
         async function realizarPeticionConRespaldo(urls) {
             for (const url of urls) {
                 try {
@@ -1290,23 +1322,69 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             return null;
         }
 
-        async function sincronizarIndicadoresMercadoEnVivo() {
-            const ahoraHora = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-            const timeAntiCache = Date.now();
-            let histTasas = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
+        /* OPCIÓN A: FUNCIÓN DE LECTURA BCV CENTRALIZADA DESDE FIREBASE */
+        async function sincronizarBcvDesdeFirebase() {
+            try {
+                const docBcv = await getDoc(doc(db, "tcl_publitasa_pro", "bcv_config"));
+                if(docBcv.exists()) {
+                    const data = docBcv.data();
+                    const valUsd = parseFloat(data.usd);
+                    const valEur = parseFloat(data.eur);
+                    const fechaTxt = data.fechaEmision || new Date().toLocaleDateString('es-ES');
+                    const prevUsd = parseFloat(data.prevUsd) || valUsd;
+                    const prevEur = parseFloat(data.prevEur) || valEur;
 
+                    let histTasas = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
+                    histTasas.bcvUsd = valUsd;
+                    histTasas.bcvEur = valEur;
+                    localStorage.setItem('tcl_hist_tasas', JSON.stringify(histTasas));
+
+                    const htmlTrendUsd = generarIconoTendenciaHTML(valUsd, prevUsd);
+                    const htmlTrendEur = generarIconoTendenciaHTML(valEur, prevEur);
+
+                    const txtUsd = `${valUsd.toFixed(2)} Bs`;
+                    const txtEur = `${valEur.toFixed(2)} Bs`;
+
+                    document.getElementById('val-bcv-usd').innerText = txtUsd;
+                    document.getElementById('trend-bcv-usd').innerHTML = htmlTrendUsd;
+                    document.getElementById('val-bcv-eur').innerText = txtEur;
+                    document.getElementById('trend-bcv-eur').innerHTML = htmlTrendEur;
+
+                    document.getElementById('flyer-val-bcv-usd').innerText = txtUsd;
+                    document.getElementById('flyer-trend-bcv-usd').innerHTML = htmlTrendUsd;
+                    document.getElementById('flyer-val-bcv-eur').innerText = txtEur;
+                    document.getElementById('flyer-trend-bcv-eur').innerHTML = htmlTrendEur;
+
+                    document.getElementById('time-bcv').innerText = `Oficial BCV — Emisión Valor: ${fechaTxt}`;
+
+                    const inUsd = document.getElementById('pt-adm-bcv-usd');
+                    const inEur = document.getElementById('pt-adm-bcv-eur');
+                    if(inUsd) inUsd.value = valUsd.toFixed(2);
+                    if(inEur) inEur.value = valEur.toFixed(2);
+
+                    return true;
+                }
+            } catch(e) {}
+            return false;
+        }
+
+        /* OPCIÓN A: OBTENER TASA VÍA APIS MULTI-SERVIDOR Y SINCRO A FIREBASE */
+        window.sincronizarAutonomaBcvEnVivo = async function() {
+            const timeAntiCache = Date.now();
             let bcvUsdObtenido = null;
             let bcvEurObtenido = null;
             let fechaEmisionBcv = null;
 
             const urlsBcvUsd = [
                 `https://ve.dolarapi.com/v1/dolares/oficial?_t=${timeAntiCache}`,
-                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/dolares/oficial')}`
+                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/dolares/oficial')}`,
+                `https://corsproxy.io/?${encodeURIComponent('https://ve.dolarapi.com/v1/dolares/oficial')}`
             ];
 
             const urlsBcvEur = [
                 `https://ve.dolarapi.com/v1/euros/oficial?_t=${timeAntiCache}`,
-                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/euros/oficial')}`
+                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/euros/oficial')}`,
+                `https://corsproxy.io/?${encodeURIComponent('https://ve.dolarapi.com/v1/euros/oficial')}`
             ];
 
             const dataBcv = await realizarPeticionConRespaldo(urlsBcvUsd);
@@ -1335,36 +1413,87 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 }
             }
 
-            if (!bcvUsdObtenido && histTasas.bcvUsd) bcvUsdObtenido = histTasas.bcvUsd;
-            if (!bcvEurObtenido && histTasas.bcvEur) bcvEurObtenido = histTasas.bcvEur;
+            if(bcvUsdObtenido && bcvEurObtenido) {
+                const fechaFinal = fechaEmisionBcv || new Date().toLocaleDateString('es-ES');
+                
+                let prevUsd = bcvUsdObtenido;
+                let prevEur = bcvEurObtenido;
+                try {
+                    const docPrev = await getDoc(doc(db, "tcl_publitasa_pro", "bcv_config"));
+                    if(docPrev.exists()) {
+                        prevUsd = parseFloat(docPrev.data().usd) || bcvUsdObtenido;
+                        prevEur = parseFloat(docPrev.data().eur) || bcvEurObtenido;
+                    }
+                } catch(e) {}
 
-            if (bcvUsdObtenido) {
-                const prevUsd = histTasas.bcvUsd || bcvUsdObtenido;
-                histTasas.bcvUsd = bcvUsdObtenido;
-                const htmlTrendUsd = generarIconoTendenciaHTML(bcvUsdObtenido, prevUsd);
-                const txtUsd = `${bcvUsdObtenido.toFixed(2)} Bs`;
+                await setDoc(doc(db, "tcl_publitasa_pro", "bcv_config"), {
+                    usd: bcvUsdObtenido,
+                    eur: bcvEurObtenido,
+                    prevUsd, prevEur,
+                    fechaEmision: fechaFinal,
+                    ultimaSincro: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
+                });
 
-                document.getElementById('val-bcv-usd').innerText = txtUsd;
-                document.getElementById('trend-bcv-usd').innerHTML = htmlTrendUsd;
-                document.getElementById('flyer-val-bcv-usd').innerText = txtUsd;
-                document.getElementById('flyer-trend-bcv-usd').innerHTML = htmlTrendUsd;
+                await sincronizarBcvDesdeFirebase();
+                alert(`⚡ ¡Tasa BCV Sincronizada y Guardada en Firebase con éxito!\n\nDólar: ${bcvUsdObtenido.toFixed(2)} Bs.\nEuro: ${bcvEurObtenido.toFixed(2)} Bs.`);
+            } else {
+                alert("⚠️ No se pudo obtener la tasa automática del BCV en este momento. Puede usar el botón 'Guardar Ajuste Manual BCV'.");
+            }
+        };
+
+        /* AJUSTE MANUAL Y GUARDADO EN FIREBASE DE TASAS BCV */
+        window.guardarTasaBcvManualPubliTasa = async function() {
+            const usd = parseFloat(document.getElementById('pt-adm-bcv-usd').value);
+            const eur = parseFloat(document.getElementById('pt-adm-bcv-eur').value);
+
+            if(!usd || !eur) return alert("Por favor complete los montos de Dólar y Euro.");
+
+            const fechaHoyStr = new Date().toLocaleDateString('es-ES');
+            let prevUsd = usd;
+            let prevEur = eur;
+
+            try {
+                const docPrev = await getDoc(doc(db, "tcl_publitasa_pro", "bcv_config"));
+                if(docPrev.exists()) {
+                    prevUsd = parseFloat(docPrev.data().usd) || usd;
+                    prevEur = parseFloat(docPrev.data().eur) || eur;
+                }
+            } catch(e) {}
+
+            try {
+                await setDoc(doc(db, "tcl_publitasa_pro", "bcv_config"), {
+                    usd, eur, prevUsd, prevEur,
+                    fechaEmision: fechaHoyStr,
+                    ultimaSincro: new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
+                });
+
+                await sincronizarBcvDesdeFirebase();
+                alert("🚀 Tasa manual del BCV publicada en la Nube con éxito.");
+            } catch(e) {
+                alert("Error al guardar la tasa manual.");
+            }
+        };
+
+        async function sincronizarIndicadoresMercadoEnVivo() {
+            const ahoraHora = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+            const timeAntiCache = Date.now();
+            let histTasas = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
+
+            /* 1. LECTURA CENTRALIZADA BCV FIREBASE CON FALLBACK AUTOMÁTICO */
+            const exitoBcvNube = await sincronizarBcvDesdeFirebase();
+            if(!exitoBcvNube) {
+                if (histTasas.bcvUsd && histTasas.bcvEur) {
+                    const txtUsd = `${histTasas.bcvUsd.toFixed(2)} Bs`;
+                    const txtEur = `${histTasas.bcvEur.toFixed(2)} Bs`;
+                    document.getElementById('val-bcv-usd').innerText = txtUsd;
+                    document.getElementById('val-bcv-eur').innerText = txtEur;
+                    document.getElementById('flyer-val-bcv-usd').innerText = txtUsd;
+                    document.getElementById('flyer-val-bcv-eur').innerText = txtEur;
+                    document.getElementById('time-bcv').innerText = `Oficial BCV — Referencia en Caché`;
+                }
             }
 
-            if (bcvEurObtenido) {
-                const prevEur = histTasas.bcvEur || bcvEurObtenido;
-                histTasas.bcvEur = bcvEurObtenido;
-                const htmlTrendEur = generarIconoTendenciaHTML(bcvEurObtenido, prevEur);
-                const txtEur = `${bcvEurObtenido.toFixed(2)} Bs`;
-
-                document.getElementById('val-bcv-eur').innerText = txtEur;
-                document.getElementById('trend-bcv-eur').innerHTML = htmlTrendEur;
-                document.getElementById('flyer-val-bcv-eur').innerText = txtEur;
-                document.getElementById('flyer-trend-bcv-eur').innerHTML = htmlTrendEur;
-            }
-
-            const fechaFinalTxt = fechaEmisionBcv || new Date().toLocaleDateString('es-ES');
-            document.getElementById('time-bcv').innerText = `Oficial BCV — Emisión Valor: ${fechaFinalTxt}`;
-
+            /* 2. COLOMBIA TRM Y EURO EN VIVO */
             let valTrmColombia = 0;
             const urlsTrm = [
                 `https://www.datos.gov.co/resource/ceyp-9c7c.json?$limit=1&$order=vigenciahasta%20DESC&_t=${timeAntiCache}`,
@@ -1411,6 +1540,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 document.getElementById('flyer-trend-eur-cop').innerHTML = htmlTrend;
             }
 
+            /* 3. BINANCE USDT Y BITCOIN EN VIVO CON MULTI-PROXY ANTI-CORS */
             await sincronizarBinanceDesdeFirebase();
 
             const urlsBtc = [
