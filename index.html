@@ -1180,18 +1180,27 @@
             return `${parseInt(partes[2])}/${parseInt(partes[1])}/${partes[0]}`;
         }
 
-        /* ENRUTADOR INTELIGENTE DE WHATSAPP */
+        /* ENRUTADOR ESTRICTO PARA FORZAR SIEMPRE WHATSAPP NORMAL (com.whatsapp) */
         function abrirWhatsAppPersonal(phoneTarget, mensajeTexto) {
             const textoCodificado = encodeURIComponent(mensajeTexto);
             let cleanTlf = phoneTarget ? phoneTarget.replace(/\D/g, '') : '';
-            
-            // Si tiene número de cliente explícito, va directo a ese cliente
-            if (cleanTlf) {
-                if (!cleanTlf.startsWith('58') && cleanTlf.length === 10) cleanTlf = '58' + cleanTlf;
-                window.open(`https://api.whatsapp.com/send?phone=${cleanTlf}&text=${textoCodificado}`, '_blank');
+            if (cleanTlf && !cleanTlf.startsWith('58') && cleanTlf.length === 10) cleanTlf = '58' + cleanTlf;
+
+            const isAndroid = /Android/i.test(navigator.userAgent);
+
+            if (isAndroid) {
+                // FORZADO EXPLICITO DE PAQUETE: com.whatsapp (WhatsApp Normal, NUNCA WhatsApp Business)
+                let intentUrl = cleanTlf 
+                    ? `intent://send?phone=${cleanTlf}&text=${textoCodificado}#Intent;scheme=whatsapp;package=com.whatsapp;end`
+                    : `intent://send?text=${textoCodificado}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
+                
+                window.location.href = intentUrl;
             } else {
-                // Si NO hay número (difusión general, reportes, cotizaciones), abre el selector libre de contactos/grupos
-                window.open(`https://api.whatsapp.com/send?text=${textoCodificado}`, '_blank');
+                // FALLBACK PARA PC O IPHONE
+                let webUrl = cleanTlf
+                    ? `https://api.whatsapp.com/send?phone=${cleanTlf}&text=${textoCodificado}`
+                    : `https://api.whatsapp.com/send?text=${textoCodificado}`;
+                window.open(webUrl, '_blank');
             }
         }
 
@@ -2768,4 +2777,4 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
     </script>
 </body>
-                        </html>
+    </html>
