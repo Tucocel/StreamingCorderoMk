@@ -73,7 +73,7 @@
             touch-action: manipulation;
         }
 
-        /* PLANTILLA HD MEJORADA PARA VOLAR SIN PARCHES BLANCOS */
+        /* PLANTILLA HD FLYER PARA ESTADOS */
         .flyer-estado-render-hd {
             width: 720px;
             background-color: #00112b;
@@ -103,24 +103,24 @@
             </div>
         </div>
 
-        <!-- NAVBAR CORPORATIVO DUAL (ADAPTADO CLIENTE VS MÁSTER) -->
+        <!-- NAVBAR CORPORATIVO -->
         <header class="bg-neutral-950/95 border-b border-neutral-900 px-4 py-3.5 sticky top-0 z-50 backdrop-blur-md">
             <div class="max-w-6xl mx-auto flex justify-between items-center">
                 <div class="flex items-center gap-2">
                     <span class="text-red-600 text-xs sm:text-base font-black tracking-widest uppercase glow-red"><i class="fa-solid fa-film"></i> Servicios Streaming Cordero MK</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <!-- BOTÓN NAVEGACIÓN CLIENTE EN MONITOR -->
+                    <!-- BOTÓN VISITAR VITRINA SOLO VISIBLE PARA CLIENTE EN MONITOR -->
                     <button id="btn-nav-visitar-vitrina" onclick="window.cerrarVistaMonitorDirecto()" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 font-black text-[9px] sm:text-[10px] px-3 py-2 rounded-xl uppercase tracking-wider hidden flex items-center gap-1.5 transition-all hover:bg-amber-500/20 btn-interactive">
                         <i class="fa-solid fa-store"></i> <span>Visitar Vitrina Streaming</span>
                     </button>
 
-                    <!-- BOTÓN NAVEGACIÓN MONITOR PRO -->
+                    <!-- BOTÓN ACCESO PRO (MANTENIDO INTACTO) -->
                     <button id="btn-nav-abrir-monitor" onclick="window.abrirVistaMonitorDirecto()" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 font-black text-[9px] sm:text-[10px] px-3 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all hover:bg-amber-500/20 btn-interactive">
                         <i class="fa-solid fa-chart-line"></i> <span class="hidden sm:inline">Monitor</span> Pro
                     </button>
 
-                    <!-- BOTÓN MÁSTER / LLAVE CENTRAL -->
+                    <!-- BOTÓN CONSOLA MÁSTER / VER VITRINA -->
                     <button id="btn-mando-abrir-login" onclick="window.abrirModalLoginStreamingRaiz()" class="bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-slate-300 font-black text-[9px] sm:text-[10px] px-3.5 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all btn-interactive">
                         <i class="fa-solid fa-lock text-red-500"></i> <span>Consola Máster</span>
                     </button>
@@ -271,7 +271,7 @@
             <div class="bg-gradient-to-b from-[#001f4d] to-[#00112b] border-2 border-amber-500/60 rounded-3xl p-5 text-center space-y-3 shadow-2xl relative overflow-hidden">
                 <div class="flex justify-between items-center border-b border-amber-500/20 pb-3">
                     <button onclick="window.cerrarVistaMonitorDirecto()" class="text-slate-400 hover:text-white text-xs font-bold bg-neutral-900 border border-neutral-800 px-3 py-1.5 rounded-xl btn-interactive">
-                        <i class="fa-solid fa-arrow-left"></i> Volver
+                        <i class="fa-solid fa-arrow-left"></i> Volver a Vitrina
                     </button>
                     <span class="bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sincronizado en Vivo
@@ -292,7 +292,7 @@
                     </p>
                 </div>
 
-                <!-- PANEL DINÁMICO DE FECHA Y RELOJ DIGITAL EN VIVO (HORA 12H AM/PM) -->
+                <!-- PANEL DINÁMICO DE FECHA Y RELOJ DIGITAL EN VIVO -->
                 <div class="bg-neutral-950/80 border border-amber-500/30 rounded-2xl py-2.5 px-4 max-w-sm mx-auto flex justify-between items-center text-amber-400 font-mono text-xs">
                     <div class="flex items-center gap-1.5 font-bold">
                         <i class="fa-regular fa-calendar-days text-slate-400"></i>
@@ -304,13 +304,13 @@
                     </div>
                 </div>
 
-                <!-- BOTÓN PWA BLINDADO CON CONFIGURACIÓN DE ACCESO DIRECTO -->
+                <!-- BOTÓN PWA -->
                 <button onclick="window.ejecutarInstalacionPWA()" id="btn-pwa-instalar" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black px-6 py-2.5 rounded-2xl text-xs uppercase tracking-wider shadow-lg transition-all inline-flex items-center gap-2 btn-interactive">
                     <i class="fa-solid fa-mobile-screen-button text-base"></i> Instalar Aplicación en Pantalla Principal
                 </button>
             </div>
 
-            <!-- ADVERTENCIA LEGAL Y REGLA DE USO -->
+            <!-- ADVERTENCIA LEGAL -->
             <div class="bg-neutral-950 border border-amber-500/40 p-4 rounded-2xl space-y-1.5 text-center shadow-lg">
                 <span class="text-amber-400 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-1.5">
                     <i class="fa-solid fa-triangle-exclamation"></i> AVISO Y REGLA IMPORTANTE DE USO
@@ -320,7 +320,7 @@
                 </p>
             </div>
 
-            <!-- PANEL DE LOGUEO OBLIGATORIO + BOTÓN PROMINENTE DE ADQUISICIÓN -->
+            <!-- PANEL DE LOGUEO OBLIGATORIO -->
             <div id="wrapper-login-monitor-pro" class="bg-neutral-900 border border-neutral-800 p-5 rounded-3xl space-y-4 text-center max-w-sm mx-auto shadow-2xl">
                 <div class="space-y-2">
                     <h3 class="text-white font-black uppercase text-xs tracking-wider">Validar Acceso Pro</h3>
@@ -342,7 +342,7 @@
             <div id="wrapper-indicadores-pantalla" class="space-y-4 hidden">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     
-                    <!-- VENEZUELA BCV REAL Y LEYENDA LEGAL OFICIAL -->
+                    <!-- VENEZUELA BCV REAL -->
                     <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-2">
                         <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
                             <span class="text-xs font-bold text-slate-300">🇻🇪 Oficial BCV (Bolívares)</span>
@@ -370,7 +370,7 @@
                         </div>
                     </div>
 
-                    <!-- COLOMBIA TRM Y EURO REAL DIRECTO -->
+                    <!-- COLOMBIA TRM Y EURO REAL -->
                     <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-2">
                         <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
                             <span class="text-xs font-bold text-slate-300">🇨🇴 Oficial Colombia</span>
@@ -421,7 +421,7 @@
                         </div>
                     </div>
 
-                    <!-- CRIPTO MERCADO: BINANCE USDT Y BITCOIN BTC CON FUENTES DESTACADAS DE GRAN TAMAÑO -->
+                    <!-- CRIPTO MERCADO: BINANCE USDT Y BITCOIN BTC -->
                     <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-3 sm:col-span-2">
                         <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
                             <span class="text-xs font-bold text-slate-300">🪙 Mercado Cripto (Binance P2P & Global)</span>
@@ -436,7 +436,7 @@
                                         <span class="text-[10px] text-slate-400 block mb-0.5 font-bold">Se cotiza en este momento entre:</span>
                                         <div class="flex items-center gap-1.5">
                                             <span id="trend-usdt-binance" class="text-sm font-bold">•</span>
-                                            <strong id="val-usdt-rango" class="text-emerald-400 text-lg sm:text-2xl font-black font-mono">8.90 / 9.00 Bs.</strong>
+                                            <strong id="val-usdt-rango" class="text-emerald-400 text-lg sm:text-2xl font-black font-mono">800 / 812 Bs.</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -466,30 +466,18 @@
                 </div>
             </div>
 
-            <!-- CENEFA FINANCIERA Y PIE DE PÁGINA PUBLITASA PRO -->
+            <!-- FOOTER PUBLITASA -->
             <div class="pt-6 border-t border-amber-500/20 mt-8 text-center space-y-4">
                 <div class="flex flex-wrap justify-center items-center gap-6 sm:gap-10 opacity-80 hover:opacity-100 transition-all">
-                    <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1">
-                        <i class="fa-solid fa-building-columns"></i> BCV
-                    </span>
-                    <span class="text-[10px] font-black text-amber-300 uppercase tracking-widest bg-yellow-500/10 border border-yellow-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1">
-                        <i class="fa-solid fa-landmark"></i> BANCOLOMBIA
-                    </span>
-                    <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1">
-                        <i class="fa-solid fa-coins"></i> BINANCE
-                    </span>
-                    <span class="text-[10px] font-black text-emerald-400 uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1">
-                        <i class="fa-solid fa-circle-dollar-to-slot text-emerald-400"></i> USDT
-                    </span>
-                    <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1">
-                        <i class="fa-solid fa-store"></i> FRONTERA
-                    </span>
+                    <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-building-columns"></i> BCV</span>
+                    <span class="text-[10px] font-black text-amber-300 uppercase tracking-widest bg-yellow-500/10 border border-yellow-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-landmark"></i> BANCOLOMBIA</span>
+                    <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-coins"></i> BINANCE</span>
+                    <span class="text-[10px] font-black text-emerald-400 uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-circle-dollar-to-slot text-emerald-400"></i> USDT</span>
+                    <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-store"></i> FRONTERA</span>
                 </div>
 
                 <div class="space-y-1">
-                    <p class="text-[10px] text-white font-bold">
-                        🔐 © 2026 PubliTasaMK Pro. Todos los derechos reservados.
-                    </p>
+                    <p class="text-[10px] text-white font-bold">🔐 © 2026 PubliTasaMK Pro. Todos los derechos reservados.</p>
                     <p class="text-[9px] text-slate-300 font-semibold uppercase tracking-wide">
                         Sistema probado y avalado por <span class="text-white font-black">Tucocel C.A.</span> &bull; Desarrollado corporativamente por <span class="text-amber-400 font-black">@publionlinemk</span> (Agencia de Publicidad de Tucocel C.A.)
                     </p>
@@ -501,7 +489,7 @@
         <!-- ==================== VISTA CONSOLA ADMINISTRATIVA MÁSTER ==================== -->
         <main id="vista-streaming-admin" class="max-w-6xl mx-auto px-4 py-6 space-y-6 hidden">
             
-            <!-- CABECERA PRINCIPAL -->
+            <!-- CABECERA PRINCIPAL CONSOLA -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-neutral-900 pb-5">
                 <div>
                     <span class="bg-neutral-900 text-slate-400 border border-neutral-800 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full inline-flex items-center gap-1.5"><i class="fa-solid fa-lock text-red-500"></i> Consola Central de Control</span>
@@ -684,19 +672,14 @@
                     <button onclick="window.despacharMarketingMasivoWhatsApp('ESTADOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2 btn-interactive"><i class="fa-solid fa-copy text-emerald-500"></i> Copiar Texto para Estado</button>
                 </div>
 
-                <!-- ARCHIVADOR INTELIGENTE POR CARPETAS (REORGANIZADO CON BOTÓN CERRAR TODO) -->
+                <!-- ARCHIVADOR INTELIGENTE POR CARPETAS STREAMING -->
                 <div class="space-y-4 pt-2">
                     <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
                         <div class="flex justify-between items-center">
                             <span class="text-[9px] font-black tracking-widest text-slate-400 uppercase block"><i class="fa-solid fa-folder-tree text-red-500 mr-1"></i> Bóveda Central Filtrada de Suscriptores</span>
-                            <div class="flex items-center gap-2">
-                                <button onclick="window.cerrarTodoListaMembresiasStreaming()" class="bg-neutral-950 text-amber-400 border border-amber-500/40 hover:border-amber-400 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider btn-interactive">
-                                    📁 CERRAR TODO
-                                </button>
-                                <button onclick="window.alternarVistaArchivadosStreaming()" id="btn-toggle-anulados-str" class="bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-red-900 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider btn-interactive">
-                                    📂 Ver Bóveda Anulados
-                                </button>
-                            </div>
+                            <button onclick="window.alternarVistaArchivadosStreaming()" id="btn-toggle-anulados-str" class="bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-red-900 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider btn-interactive">
+                                📂 Ver Bóveda Anulados
+                            </button>
                         </div>
                         
                         <div class="relative">
@@ -704,7 +687,7 @@
                             <input type="text" id="buscador-nombre-input" onkeyup="window.renderizarMonitorMembresiasAdmin()" placeholder="Escribe un nombre o teléfono para filtrar en tiempo real..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl font-medium focus:outline-none focus:border-neutral-700 uppercase">
                         </div>
 
-                        <!-- REJILLA ALINEADA UNIFORME DE CARPETAS -->
+                        <!-- REJILLA ALINEADA DE CARPETAS -->
                         <div id="wrapper-carpetas-filtros-botones" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 pt-1"></div>
                     </div>
                     
@@ -715,7 +698,7 @@
             <!-- BLOQUE DE PUBLITASA PRO (PARTICIÓN 2 - PANEL MÁSTER) -->
             <div id="bloque-admin-particion-publitasa" class="hidden space-y-6">
 
-                <!-- BOTONERA PUBLICITARIA Y ACCESO A GENERACIÓN DE IMAGEN PARA ESTADOS DE WHATSAPP -->
+                <!-- BOTONERA PUBLICITARIA -->
                 <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-3">
                     <div class="space-y-0.5 text-center sm:text-left">
                         <span class="text-amber-400 font-black text-xs uppercase block">👁️ Difusión y Vista Previa del Monitor</span>
@@ -740,7 +723,7 @@
                     </div>
                 </div>
 
-                <!-- CONTROL TASA OFICIAL BCV (VENEZUELA CENTRALIZADA) -->
+                <!-- CONTROL TASA OFICIAL BCV -->
                 <div class="bg-neutral-950 border-2 border-amber-500/60 p-5 rounded-3xl space-y-4 shadow-xl">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center text-neutral-950 text-xl font-black">
@@ -748,7 +731,7 @@
                         </div>
                         <div>
                             <h3 class="text-white font-extrabold uppercase text-sm">Control Banco Central de Venezuela (BCV)</h3>
-                            <p class="text-[10px] text-slate-400 uppercase">Sincronización Automática con Servidor Firebase Centralizado</p>
+                            <p class="text-[10px] text-slate-400 uppercase">Sincronización Automática o Edición Manual Directa</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
@@ -771,7 +754,7 @@
                     </div>
                 </div>
 
-                <!-- 1. CONTROL MANUAL RANGO BINANCE USDT P2P -->
+                <!-- 1. CONTROL MANUAL BINANCE USDT P2P (+12 BS) -->
                 <div class="bg-neutral-950 border-2 border-emerald-500/40 p-5 rounded-3xl space-y-4 shadow-xl">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-neutral-950 text-xl font-black">
@@ -779,17 +762,17 @@
                         </div>
                         <div>
                             <h3 class="text-white font-extrabold uppercase text-sm">Ajuste Manual Tasa Binance USDT (P2P)</h3>
-                            <p class="text-[10px] text-slate-400 uppercase">Se cotiza entre la Base y el Estimado superior (+10 pts)</p>
+                            <p class="text-[10px] text-slate-400 uppercase">SE COTIZA ENTRE LA BASE Y EL ESTIMADO SUPERIOR (+12 BS)</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
                         <div>
                             <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Tasa Base USDT (Bs)</label>
-                            <input type="number" id="pt-adm-usdt-compra" value="8.90" step="0.01" oninput="window.calcularVentaBinanceAuto()" class="w-full bg-neutral-900 border border-neutral-800 text-emerald-400 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-emerald-500" placeholder="Ej: 8.90">
+                            <input type="number" id="pt-adm-usdt-compra" value="800" step="1" oninput="window.calcularVentaBinanceAuto()" class="w-full bg-neutral-900 border border-neutral-800 text-emerald-400 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-emerald-500" placeholder="Ej: 800">
                         </div>
                         <div>
-                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Tasa Estimada Superior (+10 Pts Auto)</label>
-                            <input type="number" id="pt-adm-usdt-venta" value="9.00" step="0.01" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500" placeholder="Ej: 9.00">
+                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">TASA ESTIMADA SUPERIOR (+12 BS AUTO)</label>
+                            <input type="number" id="pt-adm-usdt-venta" value="812" step="1" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500" placeholder="Ej: 812">
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -802,7 +785,7 @@
                     </div>
                 </div>
 
-                <!-- 2. CONTROL DE CASAS DE CAMBIO (FRONTERA) -->
+                <!-- 2. CONTROL FRONTERA -->
                 <div class="bg-neutral-950 border-2 border-amber-500/40 p-5 rounded-3xl space-y-4 shadow-xl">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-neutral-950 text-xl font-black">
@@ -828,7 +811,7 @@
                     </button>
                 </div>
 
-                <!-- 3. REGULADOR DINÁMICO DE TARIFAS PUBLITASA PRO -->
+                <!-- 3. REGULADOR TARIFAS PUBLITASA PRO -->
                 <div class="bg-neutral-950 border-2 border-amber-500/60 rounded-3xl overflow-hidden shadow-xl">
                     <button onclick="window.toggleModuloAcordeon('acc-publitasa-tarifador')" class="w-full flex justify-between items-center px-5 py-4 font-black text-xs sm:text-sm uppercase tracking-wide text-white bg-neutral-900/80 hover:bg-neutral-900 transition-all border-b border-amber-500/20 btn-interactive">
                         <div class="flex items-center gap-2.5">
@@ -955,7 +938,7 @@
                     </div>
                 </div>
 
-                <!-- 5. BÓVEDA CENTRAL -->
+                <!-- 5. BÓVEDA CENTRAL PUBLITASA CON NUEVO BOTÓN ACORDEÓN DESPLEGABLE -->
                 <div class="space-y-3">
                     <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
                         <div class="flex justify-between items-center">
@@ -976,6 +959,12 @@
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-xs"><i class="fa-solid fa-magnifying-glass"></i></span>
                             <input type="text" id="pt-buscar-input" onkeyup="window.renderizarBovedaPubliTasaPro()" placeholder="Buscar comercio o teléfono..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl uppercase focus:outline-none focus:border-amber-500">
                         </div>
+
+                        <!-- BOTÓN ESTILO ACORDEÓN COMPACTO / EXPANDIDO -->
+                        <button onclick="window.toggleAcordeonPubliTasaPro()" id="btn-acordeon-publitasa-desplegar" class="w-full bg-neutral-950 border border-amber-500/50 hover:border-amber-400 text-amber-400 font-black text-[10.5px] py-2.5 rounded-2xl uppercase tracking-wider flex items-center justify-center gap-2 transition-all btn-interactive">
+                            <span>📊 VER LICENCIAS ACTIVAS PUBLITASA PRO</span>
+                            <i id="ico-acordeon-pt" class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
                     </div>
 
                     <div id="mosaico-publitasa-clientes-box" class="space-y-3 max-h-[70vh] overflow-y-auto pr-1 no-scrollbar"></div>
@@ -986,7 +975,7 @@
         </main>
     </div>
 
-    <!-- PLANTILLA OCULTA DEL FLYER EN HD (CORREGIDO PARCHE BLANCO Y FECHA) -->
+    <!-- PLANTILLA OCULTA DEL FLYER EN HD -->
     <div class="fixed -left-[9999px] top-0 overflow-hidden">
         <div id="plantilla-flyer-render-nube" class="flyer-estado-render-hd rounded-3xl p-6 space-y-4 relative overflow-hidden">
             
@@ -995,7 +984,6 @@
                     <i class="fa-solid fa-arrow-trend-up text-neutral-950 text-2xl"></i>
                 </div>
                 
-                <!-- TÍTULO EN DORADO VECTORIAL SÓLIDO SIN PARCHES BLANCOS -->
                 <h1 class="text-2xl font-black uppercase tracking-wider text-[#FFD700] drop-shadow-md">
                     PUBLI-TASA-MK PRO
                 </h1>
@@ -1077,7 +1065,7 @@
                         <span class="text-slate-400 text-xs">Binance USDT:</span>
                         <span class="flex items-center gap-1">
                             <span id="flyer-trend-usdt-binance" class="text-xs font-bold text-emerald-400">•</span>
-                            <span id="flyer-val-usdt-rango" class="text-emerald-400 font-black text-sm">8.90 / 9.00 Bs</span>
+                            <span id="flyer-val-usdt-rango" class="text-emerald-400 font-black text-sm">800 / 812 Bs</span>
                         </span>
                     </div>
                     <div class="flex justify-between font-mono font-bold">
@@ -1232,7 +1220,8 @@
         let localStreamingClientesArr = JSON.parse(localStorage.getItem('tcl_str_cache')) || [];
         let localPubliTasaClientesArr = JSON.parse(localStorage.getItem('tcl_pt_cache')) || [];
         let esAdminStreamingSession = false;
-        let carpetaFiltroSeleccionadaStr = "TODOS";
+        let carpetaFiltroSeleccionadaStr = "NINGUNA"; // STREAMING CERRADO POR DEFECTO
+        let mostrarListaPubliTasaBool = false; // PUBLITASA PRO CERRADO POR DEFECTO
         let verArchivadosStreamingBool = false;
         let verArchivadosPubliTasaBool = false;
         
@@ -1302,10 +1291,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }, 1000);
         }
 
+        /* FÓRMULA REAJUSTADA A +12 BS ENTEROS AUTOMÁTICO */
         window.calcularVentaBinanceAuto = function() {
             const compra = parseFloat(document.getElementById('pt-adm-usdt-compra').value) || 0;
             if(compra > 0) {
-                document.getElementById('pt-adm-usdt-venta').value = (compra + 0.10).toFixed(2);
+                document.getElementById('pt-adm-usdt-venta').value = Math.round(compra + 12);
             }
         };
 
@@ -1314,21 +1304,21 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 const docBinance = await getDoc(doc(db, "tcl_publitasa_pro", "binance_config"));
                 if(docBinance.exists()) {
                     const dataB = docBinance.data();
-                    const baseVal = parseFloat(dataB.compra) || 8.90;
-                    const estVal = parseFloat(dataB.venta) || (baseVal + 0.10);
+                    const baseVal = parseFloat(dataB.compra) || 800;
+                    const estVal = parseFloat(dataB.venta) || (baseVal + 12);
                     const timeTxt = dataB.ultimaActualizacion || "Hoy";
                     const prevBaseVal = parseFloat(dataB.prevCompra) || baseVal;
                     
                     const htmlTrend = generarIconoTendenciaHTML(baseVal, prevBaseVal);
 
-                    document.getElementById('val-usdt-rango').innerText = `${baseVal.toFixed(2)} / ${estVal.toFixed(2)} Bs.`;
+                    document.getElementById('val-usdt-rango').innerText = `${Math.round(baseVal)} / ${Math.round(estVal)} Bs.`;
                     document.getElementById('trend-usdt-binance').innerHTML = htmlTrend;
                     document.getElementById('time-binance').innerText = `⚡ Última actualización: Hoy a las ${timeTxt}`;
                     
-                    document.getElementById('pt-adm-usdt-compra').value = baseVal.toFixed(2);
-                    document.getElementById('pt-adm-usdt-venta').value = estVal.toFixed(2);
+                    document.getElementById('pt-adm-usdt-compra').value = Math.round(baseVal);
+                    document.getElementById('pt-adm-usdt-venta').value = Math.round(estVal);
 
-                    document.getElementById('flyer-val-usdt-rango').innerText = `${baseVal.toFixed(2)} / ${estVal.toFixed(2)} Bs`;
+                    document.getElementById('flyer-val-usdt-rango').innerText = `${Math.round(baseVal)} / ${Math.round(estVal)} Bs`;
                     document.getElementById('flyer-trend-usdt-binance').innerHTML = htmlTrend;
                 }
             } catch(e) {}
@@ -1493,13 +1483,12 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
         };
 
-        /* REPARACIÓN DIRECTA DE COLOMBIA (TRM) SIN PROXIES QUE LA BLOQUEEN */
         async function sincronizarIndicadoresMercadoEnVivo() {
             const ahoraHora = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
             const timeAntiCache = Date.now();
             let histTasas = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
 
-            /* 1. LECTURA CENTRALIZADA BCV FIREBASE */
+            /* 1. BCV FIREBASE */
             const exitoBcvNube = await sincronizarBcvDesdeFirebase();
             if(!exitoBcvNube) {
                 if (histTasas.bcvUsd && histTasas.bcvEur) {
@@ -1513,7 +1502,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 }
             }
 
-            /* 2. COLOMBIA TRM DIRECTO SIN PROXY BLOQUEANTE */
+            /* 2. COLOMBIA TRM DIRECTO */
             let valTrmColombia = 0;
             try {
                 const resTrmDirecto = await fetch(`https://www.datos.gov.co/resource/ceyp-9c7c.json?$limit=1&$order=vigenciahasta%20DESC&_t=${timeAntiCache}`, { cache: 'no-store' });
@@ -1613,7 +1602,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             localStorage.setItem('tcl_hist_tasas', JSON.stringify(histTasas));
         }
 
-        /* OVERHAUL DEL FLYER EN HD (SIN RECUDROS BLANCOS Y CARGA OBLIGATORIA DE FECHA) */
         window.generarYCompartirImagenEstadoWhatsApp = async function() {
             const diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
             const ahora = new Date();
@@ -1693,9 +1681,9 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             document.getElementById('vista-streaming-admin').classList.add('hidden');
             document.getElementById('footer-general-streaming').classList.add('hidden');
             document.getElementById('vista-publitasa-monitor').classList.remove('hidden');
-            
+
             const btnVisitarVit = document.getElementById('btn-nav-visitar-vitrina');
-            if(btnVisitarVit) btnVisitarVit.classList.remove('hidden');
+            if(btnVisitarVit && !esAdminStreamingSession) btnVisitarVit.classList.remove('hidden');
 
             window.descargarBasePubliTasaFirebaseCompleta();
             sincronizarIndicadoresMercadoEnVivo();
@@ -1706,12 +1694,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             document.getElementById('vista-publitasa-monitor').classList.add('hidden');
             document.getElementById('vista-vitrina-publica').classList.remove('hidden');
             document.getElementById('footer-general-streaming').classList.remove('hidden');
-            
+
             const btnVisitarVit = document.getElementById('btn-nav-visitar-vitrina');
             if(btnVisitarVit) btnVisitarVit.classList.add('hidden');
         };
 
-        /* AUTENTICACIÓN OBLIGATORIA CON LICENCIA / TOKEN PARA CLIENTES */
         window.autenticarClienteMonitorPro = async function() {
             const token = document.getElementById('pt-token-input').value.trim().toUpperCase();
             
@@ -1772,6 +1759,12 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             else { el.classList.add('hidden'); }
         };
 
+        /* ACORDEÓN ESPECIAL PUBLITASA PRO */
+        window.toggleAcordeonPubliTasaPro = function() {
+            mostrarListaPubliTasaBool = !mostrarListaPubliTasaBool;
+            window.renderizarBovedaPubliTasaPro();
+        };
+
         window.abrirModalLoginStreamingRaiz = function() {
             if(esAdminStreamingSession) { window.conmutarVistaAdminCliente(); } 
             else { document.getElementById('streaming-modal-login-raiz').classList.remove('hidden'); }
@@ -1783,6 +1776,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(user === masterUsuarioIdDinamico && pass === masterClaveDinamica) {
                 esAdminStreamingSession = true;
                 document.getElementById('streaming-modal-login-raiz').classList.add('hidden');
+                
+                const btnVisitarVit = document.getElementById('btn-nav-visitar-vitrina');
+                if(btnVisitarVit) btnVisitarVit.classList.add('hidden');
+
                 document.getElementById('btn-mando-abrir-login').innerHTML = `<i class="fa-solid fa-user-gear"></i> Consola Central`;
                 window.conmutarVistaAdminCliente();
             } else { alert("❌ Credenciales incorrectas."); }
@@ -1894,7 +1891,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             window.recalcularCarpetasYChismoseadorDinamico();
         };
 
-        /* REORGANIZACIÓN ALINEADA DE BÓVEDA CON BOTÓN CERRAR TODO */
         window.recalcularCarpetasYChismoseadorDinamico = function() {
             const burbujasBox = document.getElementById('wrapper-chismoseador-burbujas');
             const carpetasBox = document.getElementById('wrapper-carpetas-filtros-botones');
@@ -1937,16 +1933,13 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
 
         window.filtrarCarpetaStreamingAdmin = function(carpeta) {
-            carpetaFiltroSeleccionadaStr = carpeta;
+            if (carpetaFiltroSeleccionadaStr === carpeta) {
+                carpetaFiltroSeleccionadaStr = "NINGUNA";
+            } else {
+                carpetaFiltroSeleccionadaStr = carpeta;
+            }
             window.recalcularCarpetasYChismoseadorDinamico();
             window.renderizarMonitorMembresiasAdmin();
-        };
-
-        window.cerrarTodoListaMembresiasStreaming = function() {
-            carpetaFiltroSeleccionadaStr = "NINGUNA";
-            window.recalcularCarpetasYChismoseadorDinamico();
-            const box = document.getElementById('mosaico-streaming-clientes-box');
-            if(box) box.innerHTML = `<p class="text-center text-slate-500 italic py-6 text-xs bg-neutral-950/40 border border-neutral-900 rounded-2xl">📁 Panel de membresías plegado. Presiona cualquier carpeta superior para desplegar clientes.</p>`;
         };
 
         window.alternarVistaArchivadosStreaming = function() {
@@ -1972,6 +1965,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 btn.className = "bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-amber-500/40 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider btn-interactive";
                 btn.innerHTML = "📂 Ver Bóveda Anulados";
             }
+            mostrarListaPubliTasaBool = true;
             window.renderizarBovedaPubliTasaPro();
         };
 
@@ -2075,8 +2069,12 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
         window.renderizarMonitorMembresiasAdmin = function() {
             const box = document.getElementById('mosaico-streaming-clientes-box'); if(!box) return;
-            if(carpetaFiltroSeleccionadaStr === "NINGUNA") return;
             
+            if(carpetaFiltroSeleccionadaStr === "NINGUNA") {
+                box.innerHTML = `<p class="text-center text-slate-500 italic py-6 text-xs bg-neutral-950/40 border border-neutral-900 rounded-2xl">📁 Panel de suscriptores plegado. Presiona una carpeta para desplegar.</p>`;
+                return;
+            }
+
             box.innerHTML = ""; 
             
             localStreamingClientesArr.forEach(c => {
@@ -2440,12 +2438,12 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
 
         window.guardarTasaBinanceManualPubliTasa = async function(esSoloMantener = false) {
-            const compra = parseFloat(document.getElementById('pt-adm-usdt-compra').value) || 8.90;
+            const compra = parseFloat(document.getElementById('pt-adm-usdt-compra').value) || 800;
             let venta = parseFloat(document.getElementById('pt-adm-usdt-venta').value);
             
             if(!venta || venta <= compra) {
-                venta = compra + 0.10;
-                document.getElementById('pt-adm-usdt-venta').value = venta.toFixed(2);
+                venta = compra + 12;
+                document.getElementById('pt-adm-usdt-venta').value = Math.round(venta);
             }
 
             const timeStampConsola = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
@@ -2465,10 +2463,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 });
                 
                 const htmlTrend = generarIconoTendenciaHTML(compra, prevCompraVal);
-                document.getElementById('val-usdt-rango').innerText = `${compra.toFixed(2)} / ${venta.toFixed(2)} Bs.`;
+                document.getElementById('val-usdt-rango').innerText = `${Math.round(compra)} / ${Math.round(venta)} Bs.`;
                 document.getElementById('trend-usdt-binance').innerHTML = htmlTrend;
                 document.getElementById('time-binance').innerText = `⚡ Última actualización: Hoy a las ${timeStampConsola}`;
-                document.getElementById('flyer-val-usdt-rango').innerText = `${compra.toFixed(2)} / ${venta.toFixed(2)} Bs`;
+                document.getElementById('flyer-val-usdt-rango').innerText = `${Math.round(compra)} / ${Math.round(venta)} Bs`;
                 document.getElementById('flyer-trend-usdt-binance').innerHTML = htmlTrend;
 
                 alert(esSoloMantener ? `– Tasa marcada como 'Se Mantiene' (Hora: ${timeStampConsola})` : `🚀 Nueva Tasa de USDT publicada (Hora: ${timeStampConsola})`);
@@ -2522,12 +2520,16 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             document.getElementById('pt-cli-dir').value = "";
             document.getElementById('pt-cli-fecha-activacion-str').value = obtenerFechaHoyISO();
             
+            mostrarListaPubliTasaBool = true;
             window.renderizarBovedaPubliTasaPro();
             window.recalcularCarpetasYChismoseadorDinamico();
         };
 
+        /* RENDERIZADO DE BÓVEDA CON CONTROL DE ACORDEÓN */
         window.renderizarBovedaPubliTasaPro = function() {
             const box = document.getElementById('mosaico-publitasa-clientes-box'); if(!box) return;
+            const btnAcordeon = document.getElementById('btn-acordeon-publitasa-desplegar');
+            const icoAcordeon = document.getElementById('ico-acordeon-pt');
             box.innerHTML = "";
 
             localPubliTasaClientesArr.forEach(c => {
@@ -2540,6 +2542,22 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             document.getElementById('lbl-total-publitasa').innerText = `${activosTotales.length} Activos`;
 
             const q = document.getElementById('pt-buscar-input').value.trim().toUpperCase();
+
+            // Si hay búsqueda activa, forzar apertura
+            if (q) {
+                mostrarListaPubliTasaBool = true;
+            }
+
+            // Actualizar etiqueta del botón
+            if (btnAcordeon) {
+                btnAcordeon.innerHTML = `<span>📊 VER LICENCIAS ACTIVAS PUBLITASA PRO (${activosTotales.length})</span> <i id="ico-acordeon-pt" class="fa-solid fa-chevron-${mostrarListaPubliTasaBool ? 'up' : 'down'} text-xs"></i>`;
+            }
+
+            if (!mostrarListaPubliTasaBool) {
+                box.innerHTML = `<p class="text-center text-slate-500 italic py-6 text-xs bg-neutral-950/40 border border-neutral-900 rounded-2xl">📁 Panel de licencias plegado. Presiona el botón de arriba para desplegar o escribe un nombre.</p>`;
+                return;
+            }
+
             let lista = localPubliTasaClientesArr.filter(c => verArchivadosPubliTasaBool ? c.estado === 'INACTIVO' : (c.estado || 'ACTIVO') === 'ACTIVO');
 
             if(q) { lista = lista.filter(c => c.cliente.includes(q) || c.telefono.includes(q)); }
@@ -2752,4 +2770,4 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
     </script>
 </body>
-</html>
+    </html>
