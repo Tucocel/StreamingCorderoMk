@@ -13,14 +13,14 @@
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="600">
 
-    <!-- CONFIGURACIÓN PWA Y MANIFIESTO EMBEBIDO -->
+    <!-- CONFIGURACIÓN PWA Y MANIFIESTO -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="PubliTasa Pro">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#00112b">
 
-    <link rel="manifest" href='data:application/manifest+json,{"name":"PubliTasaMK Pro","short_name":"PubliTasa Pro","start_url":"./index.html%23publitasa","display":"standalone","background_color":"%23030306","theme_color":"%2300112b","icons":[{"src":"https://raw.githubusercontent.com/publionlinemk/streaming/main/imagen%20para%20Streaming%20-clean.jpg","sizes":"192x192","type":"image/jpeg"},{"src":"https://raw.githubusercontent.com/publionlinemk/streaming/main/imagen%20para%20Streaming%20-clean.jpg","sizes":"512x512","type":"image/jpeg"}]}'>
+    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22PubliTasaMK%20Pro%22%2C%22short_name%22%3A%22PubliTasa%20Pro%22%2C%22start_url%22%3A%22.%2Findex.html%23publitasa%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23030306%22%2C%22theme_color%22%3A%22%2300112b%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fpublionlinemk%2Fstreaming%2Fmain%2Fimagen%2520para%2520Streaming%2520-clean.jpg%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fjpeg%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fpublionlinemk%2Fstreaming%2Fmain%2Fimagen%2520para%2520Streaming%2520-clean.jpg%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fjpeg%22%7D%5D%7D">
 
     <!-- TAILWIND, FONTS Y LIBRERÍA HTML2CANVAS PARA RENDERIZAR FLYER -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -73,7 +73,6 @@
             touch-action: manipulation;
         }
 
-        /* DISEÑO DE LA PLANTILLA DEL FLYER OMNIPRESENTE PARA ESTADOS CON FONDO SÓLIDO */
         .flyer-estado-render {
             width: 380px;
             background-color: #00112b;
@@ -940,13 +939,10 @@
         </main>
     </div>
 
-    <!-- ================================================================= -->
-    <!-- PLANTILLA OCULTA DEL FLYER (LO QUE SE DIBUJA AL COMPARTIR IMAGEN) -->
-    <!-- ================================================================= -->
+    <!-- PLANTILLA OCULTA DEL FLYER PARA ESTADOS DE WHATSAPP -->
     <div class="fixed -left-[9999px] top-0 overflow-hidden">
         <div id="plantilla-flyer-render-nube" class="flyer-estado-render rounded-3xl p-4 space-y-3 relative overflow-hidden">
             
-            <!-- CABECERA DINÁMICA CON TITULAR DÍA Y FECHA -->
             <div class="text-center space-y-1 border-b border-amber-500/30 pb-2.5">
                 <div class="w-10 h-10 bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 rounded-full flex items-center justify-center border-2 border-white mx-auto shadow-md">
                     <i class="fa-solid fa-arrow-trend-up text-neutral-950 text-lg"></i>
@@ -962,7 +958,6 @@
                 </div>
             </div>
 
-            <!-- CUERPO DE INDICADORES EN VIVO -->
             <div class="space-y-2 text-xs">
                 <div class="bg-neutral-950 border border-neutral-800 p-2.5 rounded-2xl space-y-1">
                     <div class="flex justify-between items-center border-b border-neutral-900 pb-1">
@@ -1042,7 +1037,6 @@
                 </div>
             </div>
 
-            <!-- FOOTER PUBLICITARIO RESALTADO CON LETRAS BLANCAS Y NÍTIDAS -->
             <div class="border-t border-amber-500/40 pt-2 text-center space-y-1.5 bg-neutral-950 -mx-4 -mb-4 p-3">
                 <div class="bg-gradient-to-r from-amber-500/20 via-amber-500/35 to-amber-500/20 border-2 border-amber-400 p-2 rounded-2xl shadow-lg">
                     <p class="text-[11px] font-black text-amber-300 uppercase leading-tight tracking-wide">
@@ -1104,14 +1098,12 @@
         const URL_VITRINA_OFICIAL = "https://tucocel.github.io/StreamingCorderoMk/";
         const LINK_COMUNIDAD_WHATSAPP = "https://chat.whatsapp.com/H2R94IHBLQhBEthrZcxUHK";
 
-        /* CAPTURA DEL EVENTO DE INSTALACIÓN PWA */
         let deferredPromptPWA = null;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPromptPWA = e;
         });
 
-        /* SERVICE WORKER EMBEBIDO */
         if ('serviceWorker' in navigator) {
             const swContent = `
                 self.addEventListener('install', (e) => self.skipWaiting());
@@ -1123,7 +1115,6 @@
             navigator.serviceWorker.register(swUrl).catch(() => {});
         }
 
-        /* HUELLA DIGITAL / BROWSER FINGERPRINT */
         function obtenerOClonarBrowserUUID() {
             let uuid = localStorage.getItem('tcl_device_uuid');
             if(!uuid) {
@@ -1133,7 +1124,6 @@
             return uuid;
         }
 
-        /* AUXILIARES FECHA MÓVIL */
         function obtenerFechaHoyISO() {
             const hoy = new Date();
             const yyyy = hoy.getFullYear();
@@ -1164,7 +1154,6 @@
             }
         }
 
-        /* FUNCIÓN AUXILIAR PARA FORMATEAR TENDENCIA SIN SIGNOS MENOS CONFUSOS */
         function generarIconoTendenciaHTML(valActual, valPrevio) {
             if (!valPrevio || valPrevio === 0 || valActual === valPrevio) {
                 return '<span class="text-amber-400 font-bold text-[11px]">•</span>';
@@ -1175,7 +1164,7 @@
             return '<span class="text-red-500 font-black text-xs">▼</span>';
         }
 
-        let catálogoPlataformasEstructura = {
+        let catalogoPlataformasEstructura = {
             NETFLIX: { nombre: "Netflix", precio: 5.00, logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", desc: "Series exclusivas, películas de estreno y documentales en resolución Ultra HD 4K." },
             TELE_LATINO: { nombre: "Tele Latino", precio: 5.00, logo: "", desc: "Programación en vivo, canales de deportes, series de estreno y películas sin límites." },
             FLUJO_TV: { nombre: "Flujo TV", precio: 5.00, logo: "", desc: "Parrilla premium fluida de canales de televisión abierta, deportes e infantiles en vivo." },
@@ -1285,140 +1274,181 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     document.getElementById('pt-adm-usdt-compra').value = baseVal.toFixed(2);
                     document.getElementById('pt-adm-usdt-venta').value = estVal.toFixed(2);
 
-                    // Sincronizar plantilla flyer
                     document.getElementById('flyer-val-usdt-rango').innerText = `${baseVal.toFixed(2)} / ${estVal.toFixed(2)} Bs`;
                     document.getElementById('flyer-trend-usdt-binance').innerHTML = htmlTrend;
                 }
             } catch(e) {}
         }
 
+        async function realizarPeticionConRespaldo(urls) {
+            for (const url of urls) {
+                try {
+                    const res = await fetch(url, { cache: 'no-store' });
+                    if (res.ok) return await res.json();
+                } catch (e) {}
+            }
+            return null;
+        }
+
         async function sincronizarIndicadoresMercadoEnVivo() {
             const ahoraHora = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
             const timeAntiCache = Date.now();
-
             let histTasas = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
 
-            try {
-                const resBcv = await fetch(`https://ve.dolarapi.com/v1/dolares/oficial?_t=${timeAntiCache}`, { cache: 'no-store' });
-                if (resBcv.ok) {
-                    const dataBcv = await resBcv.json();
-                    if(dataBcv.promedio) {
-                        const valUsd = parseFloat(dataBcv.promedio);
-                        const prevUsd = histTasas.bcvUsd || valUsd;
-                        histTasas.bcvUsd = valUsd;
-                        
-                        const htmlTrend = generarIconoTendenciaHTML(valUsd, prevUsd);
-                        const txt = `${valUsd.toFixed(2)} Bs`;
+            let bcvUsdObtenido = null;
+            let bcvEurObtenido = null;
+            let fechaEmisionBcv = null;
 
-                        document.getElementById('val-bcv-usd').innerText = txt;
-                        document.getElementById('trend-bcv-usd').innerHTML = htmlTrend;
-                        
-                        document.getElementById('flyer-val-bcv-usd').innerText = txt;
-                        document.getElementById('flyer-trend-bcv-usd').innerHTML = htmlTrend;
+            const urlsBcvUsd = [
+                `https://ve.dolarapi.com/v1/dolares/oficial?_t=${timeAntiCache}`,
+                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/dolares/oficial')}`
+            ];
 
-                        let fechaValorTxt = dataBcv.fechaActualizacion ? new Date(dataBcv.fechaActualizacion).toLocaleDateString('es-ES') : new Date().toLocaleDateString('es-ES');
-                        document.getElementById('time-bcv').innerText = `Oficial BCV — Emisión Valor: ${fechaValorTxt}`;
-                    }
+            const urlsBcvEur = [
+                `https://ve.dolarapi.com/v1/euros/oficial?_t=${timeAntiCache}`,
+                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/euros/oficial')}`
+            ];
+
+            const dataBcv = await realizarPeticionConRespaldo(urlsBcvUsd);
+            if (dataBcv && dataBcv.promedio) {
+                bcvUsdObtenido = parseFloat(dataBcv.promedio);
+                if (dataBcv.fechaActualizacion) {
+                    fechaEmisionBcv = new Date(dataBcv.fechaActualizacion).toLocaleDateString('es-ES');
                 }
-            } catch (e) {}
+            }
 
-            try {
-                const resEur = await fetch(`https://ve.dolarapi.com/v1/euros/oficial?_t=${timeAntiCache}`, { cache: 'no-store' });
-                if (resEur.ok) {
-                    const dataEur = await resEur.json();
-                    if(dataEur.promedio) {
-                        const valEur = parseFloat(dataEur.promedio);
-                        const prevEur = histTasas.bcvEur || valEur;
-                        histTasas.bcvEur = valEur;
+            const dataEur = await realizarPeticionConRespaldo(urlsBcvEur);
+            if (dataEur && dataEur.promedio) {
+                bcvEurObtenido = parseFloat(dataEur.promedio);
+            }
 
-                        const htmlTrend = generarIconoTendenciaHTML(valEur, prevEur);
-                        const txt = `${valEur.toFixed(2)} Bs`;
-
-                        document.getElementById('val-bcv-eur').innerText = txt;
-                        document.getElementById('trend-bcv-eur').innerHTML = htmlTrend;
-
-                        document.getElementById('flyer-val-bcv-eur').innerText = txt;
-                        document.getElementById('flyer-trend-bcv-eur').innerHTML = htmlTrend;
-                    }
+            if (!bcvUsdObtenido || !bcvEurObtenido) {
+                const urlsPy = [
+                    `https://pydolarve.org/api/v1/dollar?page=bcv&_t=${timeAntiCache}`,
+                    `https://api.allorigins.win/raw?url=${encodeURIComponent('https://pydolarve.org/api/v1/dollar?page=bcv')}`
+                ];
+                const dataPy = await realizarPeticionConRespaldo(urlsPy);
+                if (dataPy && dataPy.moneda) {
+                    if (!bcvUsdObtenido && dataPy.moneda.usd) bcvUsdObtenido = parseFloat(dataPy.moneda.usd.price);
+                    if (!bcvEurObtenido && dataPy.moneda.eur) bcvEurObtenido = parseFloat(dataPy.moneda.eur.price);
+                    if (dataPy.moneda.usd && dataPy.moneda.usd.last_update) fechaEmisionBcv = dataPy.moneda.usd.last_update;
                 }
-            } catch (e) {}
+            }
+
+            if (!bcvUsdObtenido && histTasas.bcvUsd) bcvUsdObtenido = histTasas.bcvUsd;
+            if (!bcvEurObtenido && histTasas.bcvEur) bcvEurObtenido = histTasas.bcvEur;
+
+            if (bcvUsdObtenido) {
+                const prevUsd = histTasas.bcvUsd || bcvUsdObtenido;
+                histTasas.bcvUsd = bcvUsdObtenido;
+                const htmlTrendUsd = generarIconoTendenciaHTML(bcvUsdObtenido, prevUsd);
+                const txtUsd = `${bcvUsdObtenido.toFixed(2)} Bs`;
+
+                document.getElementById('val-bcv-usd').innerText = txtUsd;
+                document.getElementById('trend-bcv-usd').innerHTML = htmlTrendUsd;
+                document.getElementById('flyer-val-bcv-usd').innerText = txtUsd;
+                document.getElementById('flyer-trend-bcv-usd').innerHTML = htmlTrendUsd;
+            }
+
+            if (bcvEurObtenido) {
+                const prevEur = histTasas.bcvEur || bcvEurObtenido;
+                histTasas.bcvEur = bcvEurObtenido;
+                const htmlTrendEur = generarIconoTendenciaHTML(bcvEurObtenido, prevEur);
+                const txtEur = `${bcvEurObtenido.toFixed(2)} Bs`;
+
+                document.getElementById('val-bcv-eur').innerText = txtEur;
+                document.getElementById('trend-bcv-eur').innerHTML = htmlTrendEur;
+                document.getElementById('flyer-val-bcv-eur').innerText = txtEur;
+                document.getElementById('flyer-trend-bcv-eur').innerHTML = htmlTrendEur;
+            }
+
+            const fechaFinalTxt = fechaEmisionBcv || new Date().toLocaleDateString('es-ES');
+            document.getElementById('time-bcv').innerText = `Oficial BCV — Emisión Valor: ${fechaFinalTxt}`;
 
             let valTrmColombia = 0;
-            try {
-                const resTrm = await fetch(`https://www.datos.gov.co/resource/ceyp-9c7c.json?$limit=1&$order=vigenciahasta%20DESC&_t=${timeAntiCache}`, { cache: 'no-store' });
-                if (resTrm.ok) {
-                    const dataTrm = await resTrm.json();
-                    if(dataTrm && dataTrm[0]) {
-                        valTrmColombia = parseFloat(dataTrm[0].valor);
-                        const prevTrm = histTasas.trmCop || valTrmColombia;
-                        histTasas.trmCop = valTrmColombia;
+            const urlsTrm = [
+                `https://www.datos.gov.co/resource/ceyp-9c7c.json?$limit=1&$order=vigenciahasta%20DESC&_t=${timeAntiCache}`,
+                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://www.datos.gov.co/resource/ceyp-9c7c.json?$limit=1&$order=vigenciahasta%20DESC')}`
+            ];
+            const dataTrm = await realizarPeticionConRespaldo(urlsTrm);
+            if (dataTrm && dataTrm[0]) {
+                valTrmColombia = parseFloat(dataTrm[0].valor);
+                const prevTrm = histTasas.trmCop || valTrmColombia;
+                histTasas.trmCop = valTrmColombia;
 
-                        const htmlTrend = generarIconoTendenciaHTML(valTrmColombia, prevTrm);
-                        const txt = `${valTrmColombia.toLocaleString('es-CO')} COP`;
+                const htmlTrend = generarIconoTendenciaHTML(valTrmColombia, prevTrm);
+                const txt = `${valTrmColombia.toLocaleString('es-CO')} COP`;
 
-                        document.getElementById('val-trm-cop').innerText = txt;
-                        document.getElementById('trend-trm-cop').innerHTML = htmlTrend;
+                document.getElementById('val-trm-cop').innerText = txt;
+                document.getElementById('trend-trm-cop').innerHTML = htmlTrend;
+                document.getElementById('flyer-val-trm-cop').innerText = txt;
+                document.getElementById('flyer-trend-trm-cop').innerHTML = htmlTrend;
+                document.getElementById('time-trm').innerText = `SFC Oficial — Sincronizado: ${ahoraHora}`;
+            }
 
-                        document.getElementById('flyer-val-trm-cop').innerText = txt;
-                        document.getElementById('flyer-trend-trm-cop').innerHTML = htmlTrend;
+            const urlsEurUsd = [
+                `https://open.er-api.com/v6/latest/EUR?_t=${timeAntiCache}`,
+                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://open.er-api.com/v6/latest/EUR')}`
+            ];
+            const dataEurUsd = await realizarPeticionConRespaldo(urlsEurUsd);
+            let valEurCop = 0;
+            if (dataEurUsd && dataEurUsd.rates && dataEurUsd.rates.COP) {
+                valEurCop = parseFloat(dataEurUsd.rates.COP);
+            } else if (valTrmColombia > 0 && dataEurUsd && dataEurUsd.rates && dataEurUsd.rates.USD) {
+                valEurCop = valTrmColombia * parseFloat(dataEurUsd.rates.USD);
+            }
 
-                        document.getElementById('time-trm').innerText = `SFC Oficial — Sincronizado: ${ahoraHora}`;
-                    }
-                }
-            } catch (e) {}
+            if (valEurCop > 0) {
+                const prevEurCop = histTasas.eurCop || valEurCop;
+                histTasas.eurCop = valEurCop;
 
-            try {
-                const resEurUsd = await fetch(`https://open.er-api.com/v6/latest/EUR?_t=${timeAntiCache}`, { cache: 'no-store' });
-                if (resEurUsd.ok) {
-                    const dataEurUsd = await resEurUsd.json();
-                    let valEurCop = 0;
-                    if (dataEurUsd && dataEurUsd.rates && dataEurUsd.rates.COP) {
-                        valEurCop = parseFloat(dataEurUsd.rates.COP);
-                    } else if (valTrmColombia > 0 && dataEurUsd && dataEurUsd.rates && dataEurUsd.rates.USD) {
-                        valEurCop = valTrmColombia * parseFloat(dataEurUsd.rates.USD);
-                    }
+                const htmlTrend = generarIconoTendenciaHTML(valEurCop, prevEurCop);
+                const txt = `${valEurCop.toLocaleString('es-CO', {maximumFractionDigits: 0})} COP`;
 
-                    if(valEurCop > 0) {
-                        const prevEurCop = histTasas.eurCop || valEurCop;
-                        histTasas.eurCop = valEurCop;
-
-                        const htmlTrend = generarIconoTendenciaHTML(valEurCop, prevEurCop);
-                        const txt = `${valEurCop.toLocaleString('es-CO', {maximumFractionDigits: 0})} COP`;
-
-                        document.getElementById('val-eur-cop').innerText = txt;
-                        document.getElementById('trend-eur-cop').innerHTML = htmlTrend;
-
-                        document.getElementById('flyer-val-eur-cop').innerText = txt;
-                        document.getElementById('flyer-trend-eur-cop').innerHTML = htmlTrend;
-                    }
-                }
-            } catch (e) {}
+                document.getElementById('val-eur-cop').innerText = txt;
+                document.getElementById('trend-eur-cop').innerHTML = htmlTrend;
+                document.getElementById('flyer-val-eur-cop').innerText = txt;
+                document.getElementById('flyer-trend-eur-cop').innerHTML = htmlTrend;
+            }
 
             await sincronizarBinanceDesdeFirebase();
 
-            try {
-                const resBtc = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT&_t=${timeAntiCache}`, { cache: 'no-store' });
-                if (resBtc.ok) {
-                    const dataBtc = await resBtc.json();
-                    const btcPrecio = parseFloat(dataBtc.price);
-                    const prevBtc = histTasas.btcUsd || btcPrecio;
-                    histTasas.btcUsd = btcPrecio;
+            const urlsBtc = [
+                `https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT&_t=${timeAntiCache}`,
+                `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd`,
+                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT')}`
+            ];
+            
+            let btcPrecio = null;
+            for (const url of urlsBtc) {
+                try {
+                    const resBtc = await fetch(url, { cache: 'no-store' });
+                    if (resBtc.ok) {
+                        const dataBtc = await resBtc.json();
+                        if (dataBtc.price) { btcPrecio = parseFloat(dataBtc.price); break; }
+                        else if (dataBtc.bitcoin && dataBtc.bitcoin.usd) { btcPrecio = parseFloat(dataBtc.bitcoin.usd); break; }
+                    }
+                } catch(e) {}
+            }
 
-                    const htmlTrend = generarIconoTendenciaHTML(btcPrecio, prevBtc);
-                    const txt = `$${btcPrecio.toLocaleString('en-US', {maximumFractionDigits: 0})} USD`;
+            if (!btcPrecio && histTasas.btcUsd) btcPrecio = histTasas.btcUsd;
 
-                    document.getElementById('val-btc-usd').innerText = txt;
-                    document.getElementById('trend-btc-usd').innerHTML = htmlTrend;
+            if (btcPrecio) {
+                const prevBtc = histTasas.btcUsd || btcPrecio;
+                histTasas.btcUsd = btcPrecio;
 
-                    document.getElementById('flyer-val-btc-usd').innerText = txt;
-                    document.getElementById('flyer-trend-btc-usd').innerHTML = htmlTrend;
-                }
-            } catch (e) {}
+                const htmlTrend = generarIconoTendenciaHTML(btcPrecio, prevBtc);
+                const txt = `$${btcPrecio.toLocaleString('en-US', {maximumFractionDigits: 0})} USD`;
+
+                document.getElementById('val-btc-usd').innerText = txt;
+                document.getElementById('trend-btc-usd').innerHTML = htmlTrend;
+                document.getElementById('flyer-val-btc-usd').innerText = txt;
+                document.getElementById('flyer-trend-btc-usd').innerHTML = htmlTrend;
+            }
 
             localStorage.setItem('tcl_hist_tasas', JSON.stringify(histTasas));
         }
 
-        /* FUNCIÓN GENERADORA Y COMPARTIDORA DE IMAGEN DIRECTA A TU WHATSAPP */
         window.generarYCompartirImagenEstadoWhatsApp = async function() {
             const diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
             const ahora = new Date();
@@ -1618,9 +1648,9 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const desc = document.getElementById('new-plat-desc').value.trim();
 
             if(!id || !nombre || !desc) return alert("Faltan campos.");
-            catálogoPlataformasEstructura[id] = { nombre, precio, logo, desc };
+            catalogoPlataformasEstructura[id] = { nombre, precio, logo, desc };
             try {
-                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), catálogoPlataformasEstructura);
+                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), catalogoPlataformasEstructura);
                 alert(`✨ Plataforma [${nombre}] agregada al catálogo.`);
                 window.construirEstructurasDinamicasInterfaces();
             } catch(e) {
@@ -1657,8 +1687,8 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             if(vitrina) vitrina.innerHTML = ""; if(selectForm) selectForm.innerHTML = ""; if(tarifador) tarifador.innerHTML = "";
 
-            Object.keys(catálogoPlataformasEstructura).forEach(k => {
-                const item = catálogoPlataformasEstructura[k];
+            Object.keys(catalogoPlataformasEstructura).forEach(k => {
+                const item = catalogoPlataformasEstructura[k];
                 if(vitrina) {
                     let imgLogo = item.logo ? `<img src="${item.logo}" alt="${item.nombre}" class="h-6 object-contain">` : `<span class="text-white font-black text-xs bg-gradient-to-r from-red-600 to-neutral-700 px-2.5 py-1 rounded uppercase truncate max-w-full">${item.nombre}</span>`;
                     vitrina.innerHTML += `
@@ -1713,8 +1743,8 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             let estiloBotonPT = carpetaFiltroSeleccionadaStr === 'PUBLITASA_PRO' ? 'bg-amber-500 text-neutral-950 font-black' : 'bg-neutral-950 text-amber-400 border border-amber-500/40 hover:border-amber-400';
             htmlCarpetas += `<button onclick="window.filtrarCarpetaStreamingAdmin('PUBLITASA_PRO')" class="px-3 py-1.5 rounded-xl font-bold text-[10px] uppercase transition-all btn-interactive ${estiloBotonPT}">📊 PubliTasa Pro (${activosPubliTasa.length})</button>`;
 
-            Object.keys(catálogoPlataformasEstructura).forEach(k => {
-                const nombrePlat = catálogoPlataformasEstructura[k].nombre;
+            Object.keys(catalogoPlataformasEstructura).forEach(k => {
+                const nombrePlat = catalogoPlataformasEstructura[k].nombre;
                 const clientesDeEstaPlat = localStreamingClientesArr.filter(c => (c.estado || 'ACTIVO') === 'ACTIVO' && c.plataforma === k);
                 const vencidosLote = clientesDeEstaPlat.filter(c => c.diasRestantes <= 4).length;
 
@@ -1941,7 +1971,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     <div class="border rounded-2xl p-4 flex flex-col justify-between ${esInactivo ? 'border-red-900/40 bg-red-950/10' : (esAlertaCritica ? 'border-amber-500 bg-amber-950/10' : 'border-neutral-800 bg-neutral-950/40')}">
                         <div class="flex justify-between items-start">
                             <div>
-                                <span class="text-red-500 text-[9px] font-black uppercase font-mono">${catálogoPlataformasEstructura[c.plataforma]?.nombre || c.plataforma}</span>
+                                <span class="text-red-500 text-[9px] font-black uppercase font-mono">${catalogoPlataformasEstructura[c.plataforma]?.nombre || c.plataforma}</span>
                                 <h4 class="text-white text-sm font-black uppercase mt-0.5">${c.cliente}</h4>
                                 <p class="text-[10px] text-slate-300 font-mono truncate max-w-xs mt-1"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono} | Acceso: ${c.correo || 'ID'}</p>
                                 <p class="text-[10px] text-slate-400 font-mono">Clave: ${c.clave} ${c.perfil ? `| Perfil: ${c.perfil}` : ''} ${c.pin ? `| PIN: ${c.pin}` : ''}</p>
@@ -1980,7 +2010,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             await window.sincronizarBaseStreamingNube();
             window.renderizarMonitorMembresiasAdmin();
-            
             window.despacharMensajeWhatsAppStreaming(id, 'RENOVACION');
         };
 
@@ -1996,7 +2025,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             await window.sincronizarPubliTasaNube();
             window.renderizarBovedaPubliTasaPro();
-            
             alert(`⚡ Licencia Pro de ${match.cliente} renovada con éxito por 1 Mes.`);
         };
 
@@ -2005,11 +2033,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             
             let fAct = match.fechaActivacion || new Date().toLocaleDateString('es-ES');
             let fVencExacta = calcularFechaRenovacionExacta(fAct, match.meses || 1);
-
             let text = "";
 
             if(tipo === 'ACTIVACION') {
-                text = `🛍️ SERVICIOS STREAMING CORDERO MK\n🧾 COMPROBANTE DE ENTREGA Y ACTIVACIÓN\n\n👤 Cliente: ${match.cliente}\n📺 Plataforma: ${catálogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma}\n`;
+                text = `🛍️ SERVICIOS STREAMING CORDERO MK\n🧾 COMPROBANTE DE ENTREGA Y ACTIVACIÓN\n\n👤 Cliente: ${match.cliente}\n📺 Plataforma: ${catalogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma}\n`;
                 if(match.correo) text += `📧 Correo: ${match.correo}\n`;
                 text += `🔑 Contraseña / ID: ${match.clave}\n`;
                 if(match.perfil) text += `👤 Perfil Asignado: ${match.perfil}\n`;
@@ -2017,10 +2044,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 text += `📅 Fecha de Activación: ${fAct}\n✂️ Fecha de Renovación: ${fVencExacta}\n\n${REGLAS_DE_ORO_TEXTO}\n\n🍿 ¿Deseas adquirir otra pantalla o consultar nuestros indicadores en vivo?\n🔗 Visita nuestra Vitrina Digital Oficial:\n${URL_VITRINA_OFICIAL}${RESPALDO_FIRMA_WHATSAPP}`;
             }
             if(tipo === 'NOTIFICAR') {
-                text = `🔔 Recordatorio de Vencimiento — Streaming Cordero MK 🎞️📺\n\n¡Saludos, ${match.cliente}! 👋✨\n\nTe saludamos de Streaming Cordero MK. Pasamos por aquí para recordarte que tu suscripción de ${catálogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma} vence MAÑANA (${fVencExacta}). 📅\n\n⚠️ Nota importante: Para garantizar que tu servicio no se interrumpa y puedas seguir disfrutando sin cortes, te recordamos realizar tu pago de renovación el día de HOY. 🍿🎬\n\n🔗 Visita nuestra Vitrina Digital Oficial:\n${URL_VITRINA_OFICIAL}\n\n¡Estamos a tu orden! 🫡${RESPALDO_FIRMA_WHATSAPP}`;
+                text = `🔔 Recordatorio de Vencimiento — Streaming Cordero MK 🎞️📺\n\n¡Saludos, ${match.cliente}! 👋✨\n\nTe saludamos de Streaming Cordero MK. Pasamos por aquí para recordarte que tu suscripción de ${catalogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma} vence MAÑANA (${fVencExacta}). 📅\n\n⚠️ Nota importante: Para garantizar que tu servicio no se interrumpa y puedas seguir disfrutando sin cortes, te recordamos realizar tu pago de renovación el día de HOY. 🍿🎬\n\n🔗 Visita nuestra Vitrina Digital Oficial:\n${URL_VITRINA_OFICIAL}\n\n¡Estamos a tu orden! 🫡${RESPALDO_FIRMA_WHATSAPP}`;
             }
             if(tipo === 'RENOVACION') {
-                text = `🔄 RENOVACIÓN EXITOSA — CORDERO MK 🍿\n\nHola ${match.cliente}, tu pantalla de ${catálogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma} ha sido renovada con éxito.\n\n✂️ Nueva Fecha de Vencimiento: ${fVencExacta}\n👤 Perfil: ${match.perfil || 'General'} | 📌 PIN: ${match.pin || 'N/A'}\n🔑 Acceso: ${match.correo || match.clave} | Clave: ${match.clave}\n\n🍿 ¡Gracias por mantener tu servicio al día! Disfruta tu programación.\n🔗 ${URL_VITRINA_OFICIAL}${RESPALDO_FIRMA_WHATSAPP}`;
+                text = `🔄 RENOVACIÓN EXITOSA — CORDERO MK 🍿\n\nHola ${match.cliente}, tu pantalla de ${catalogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma} ha sido renovada con éxito.\n\n✂️ Nueva Fecha de Vencimiento: ${fVencExacta}\n👤 Perfil: ${match.perfil || 'General'} | 📌 PIN: ${match.pin || 'N/A'}\n🔑 Acceso: ${match.correo || match.clave} | Clave: ${match.clave}\n\n🍿 ¡Gracias por mantener tu servicio al día! Disfruta tu programación.\n🔗 ${URL_VITRINA_OFICIAL}${RESPALDO_FIRMA_WHATSAPP}`;
             }
 
             abrirWhatsAppPersonal(match.telefono, text);
@@ -2099,9 +2126,9 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
         window.recalcularTasasBolivaresAdmin = function() {
             const tasa = parseFloat(document.getElementById('adm-tasa-cambio').value) || 40;
-            Object.keys(catálogoPlataformasEstructura).forEach(k => {
+            Object.keys(catalogoPlataformasEstructura).forEach(k => {
                 const input = document.getElementById(`cfg-p-${k}`);
-                const val = input ? parseFloat(input.value) : catálogoPlataformasEstructura[k].precio;
+                const val = input ? parseFloat(input.value) : catalogoPlataformasEstructura[k].precio;
                 const dbBs = document.getElementById(`bs-p-${k}`);
                 if(dbBs) dbBs.innerText = `${(val * tasa).toFixed(2)} Bs`;
             });
@@ -2109,11 +2136,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
         window.salvarTarifasPublicasDinamicas = async function() {
             try {
-                Object.keys(catálogoPlataformasEstructura).forEach(k => {
+                Object.keys(catalogoPlataformasEstructura).forEach(k => {
                     const input = document.getElementById(`cfg-p-${k}`);
-                    if(input) catálogoPlataformasEstructura[k].precio = parseFloat(input.value) || 5.00;
+                    if(input) catalogoPlataformasEstructura[k].precio = parseFloat(input.value) || 5.00;
                 });
-                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), catálogoPlataformasEstructura);
+                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), catalogoPlataformasEstructura);
                 window.construirEstructurasDinamicasInterfaces();
                 alert("✨ Tarifas actualizadas en vitrina.");
             } catch(e) {
@@ -2136,7 +2163,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     document.getElementById('cfg-link-github-servidor').value = linkServidorGitHubGuardado;
                     document.getElementById('cfg-leyenda-grupos-custom').value = leyendaCustomGrupos; document.getElementById('cfg-leyenda-estados-custom').value = leyendaCustomEstados;
                 }
-                if(docTar.exists()) { catálogoPlataformasEstructura = docTar.data(); }
+                if(docTar.exists()) { catalogoPlataformasEstructura = docTar.data(); }
                 if(docCli.exists()) { 
                     localStreamingClientesArr = docCli.data().lista || []; 
                     localStorage.setItem('tcl_str_cache', JSON.stringify(localStreamingClientesArr));
@@ -2155,8 +2182,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             localStorage.setItem('tcl_str_cache', JSON.stringify(localStreamingClientesArr));
             try { await setDoc(doc(db, "tcl_streaming_core", "clientes_activos"), { lista: localStreamingClientesArr }); } catch(e) {}
         };
-
-        /* PARTICIÓN EXCLUSIVA: PUBLITASA PRO */
 
         window.salvarTarifasPubliTasaPro = async function() {
             const p1 = parseFloat(document.getElementById('pt-cfg-p1').value) || 5.00;
@@ -2188,7 +2213,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(elL1) elL1.innerText = `${p1Formatted} USDT`;
             if(elL2) elL2.innerText = `${p2Formatted} USDT`;
             if(elL3) elL3.innerText = `${p3Formatted} USDT`;
-
             if(elPMin) elPMin.innerText = `Desde ${p1Formatted} USDT`;
 
             document.getElementById('pt-cfg-p1').value = tarifasPubliTasaEstructura.plan1;
@@ -2242,7 +2266,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
 
             const timeStampConsola = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-            
             let prevCompraVal = compra;
             try {
                 const docBinancePrev = await getDoc(doc(db, "tcl_publitasa_pro", "binance_config"));
@@ -2253,19 +2276,15 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             try {
                 await setDoc(doc(db, "tcl_publitasa_pro", "binance_config"), { 
-                    compra, 
-                    venta, 
+                    compra, venta, 
                     prevCompra: esSoloMantener ? prevCompraVal : (compra !== prevCompraVal ? prevCompraVal : compra),
                     ultimaActualizacion: timeStampConsola
                 });
                 
                 const htmlTrend = generarIconoTendenciaHTML(compra, prevCompraVal);
-
                 document.getElementById('val-usdt-rango').innerText = `${compra.toFixed(2)} / ${venta.toFixed(2)} Bs.`;
                 document.getElementById('trend-usdt-binance').innerHTML = htmlTrend;
                 document.getElementById('time-binance').innerText = `⚡ Última actualización: Hoy a las ${timeStampConsola}`;
-
-                // Sincronizar plantilla flyer
                 document.getElementById('flyer-val-usdt-rango').innerText = `${compra.toFixed(2)} / ${venta.toFixed(2)} Bs`;
                 document.getElementById('flyer-trend-usdt-binance').innerHTML = htmlTrend;
 
@@ -2286,8 +2305,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 document.getElementById('val-frontera-compra').innerText = compra.toLocaleString('es-CO');
                 document.getElementById('val-frontera-venta').innerText = venta.toLocaleString('es-CO');
                 document.getElementById('time-frontera').innerText = `Última actualización en consola: Hoy a las ${timeStampConsola}`;
-
-                // Sincronizar plantilla flyer
                 document.getElementById('flyer-val-frontera-compra').innerText = `${compra.toLocaleString('es-CO')} COP`;
                 document.getElementById('flyer-val-frontera-venta').innerText = `${venta.toLocaleString('es-CO')} COP`;
             } catch(e) { alert("Error al guardar tasas."); }
@@ -2299,14 +2316,12 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const dir = document.getElementById('pt-cli-dir').value.trim().toUpperCase();
             const meses = parseInt(document.getElementById('pt-cli-meses').value);
             const maxEquipos = parseInt(document.getElementById('pt-cli-limite-equipos').value);
-            
             const rawFechaISO = document.getElementById('pt-cli-fecha-activacion-str').value;
             const fechaActStr = rawFechaISO ? convertirISOaES(rawFechaISO) : new Date().toLocaleDateString('es-ES');
 
             if(!cliente || !tlf) return alert("Por favor completa el Nombre y Teléfono.");
 
             const tokenLicencia = 'PUBLITASA-' + Math.floor(1000 + Math.random() * 9000);
-
             const nuevoClientePro = {
                 id: 'pt-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
                 cliente, telefono: tlf, direccion: dir, meses,
@@ -2317,7 +2332,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             localPubliTasaClientesArr.push(nuevoClientePro);
             await window.sincronizarPubliTasaNube();
-            
             alert(`✅ Licencia Creada con éxito.\nToken: ${tokenLicencia}`);
             
             document.getElementById('pt-cli-nombre').value = "";
@@ -2330,9 +2344,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
 
         window.renderizarBovedaPubliTasaPro = function() {
-            const box = document.getElementById('mosaico-publitasa-clientes-box');
-            if(!box) return;
-            
+            const box = document.getElementById('mosaico-publitasa-clientes-box'); if(!box) return;
             box.innerHTML = "";
 
             localPubliTasaClientesArr.forEach(c => {
@@ -2347,9 +2359,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const q = document.getElementById('pt-buscar-input').value.trim().toUpperCase();
             let lista = localPubliTasaClientesArr.filter(c => verArchivadosPubliTasaBool ? c.estado === 'INACTIVO' : (c.estado || 'ACTIVO') === 'ACTIVO');
 
-            if(q) {
-                lista = lista.filter(c => c.cliente.includes(q) || c.telefono.includes(q));
-            }
+            if(q) { lista = lista.filter(c => c.cliente.includes(q) || c.telefono.includes(q)); }
 
             if(lista.length === 0) {
                 box.innerHTML = `<p class="text-center text-slate-500 italic py-6 text-xs">No hay suscriptores Pro en ${verArchivadosPubliTasaBool ? 'Bóveda de Anulados' : 'Licencias Activas'}.</p>`;
@@ -2378,28 +2388,14 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
                         <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 mt-3 border-t border-neutral-900 pt-3">
                             ${!esInactivo ? `
-                                <button onclick="window.renovarExpresPubliTasa('${c.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[9px] py-2 rounded-lg uppercase btn-interactive">
-                                    ⚡ +1 Mes
-                                </button>
-                                <button onclick="window.enviarBienvenidaPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase btn-interactive">
-                                    📲 Acceso
-                                </button>
-                                <button onclick="window.notificarPagoPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-bold text-[9px] py-2 rounded-lg uppercase btn-interactive">
-                                    🔔 Notificar
-                                </button>
-                                <button onclick="window.resetearEquiposPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-2 rounded-lg uppercase btn-interactive">
-                                    🔄 Reset
-                                </button>
-                                <button onclick="window.abrirEditorPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-2 rounded-lg uppercase btn-interactive">
-                                    ✏️ Editar
-                                </button>
-                                <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-2 rounded-lg uppercase col-span-2 sm:col-span-5 btn-interactive">
-                                    🚫 Anular Licencia
-                                </button>
+                                <button onclick="window.renovarExpresPubliTasa('${c.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[9px] py-2 rounded-lg uppercase btn-interactive">⚡ +1 Mes</button>
+                                <button onclick="window.enviarBienvenidaPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase btn-interactive">📲 Acceso</button>
+                                <button onclick="window.notificarPagoPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-bold text-[9px] py-2 rounded-lg uppercase btn-interactive">🔔 Notificar</button>
+                                <button onclick="window.resetearEquiposPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-2 rounded-lg uppercase btn-interactive">🔄 Reset</button>
+                                <button onclick="window.abrirEditorPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-2 rounded-lg uppercase btn-interactive">✏️ Editar</button>
+                                <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-2 rounded-lg uppercase col-span-2 sm:col-span-5 btn-interactive">🚫 Anular Licencia</button>
                             ` : `
-                                <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase col-span-2 sm:col-span-5 btn-interactive">
-                                    ♻️ Reactivar Licencia Pro
-                                </button>
+                                <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase col-span-2 sm:col-span-5 btn-interactive">♻️ Reactivar Licencia Pro</button>
                             `}
                         </div>
                     </div>`;
@@ -2407,8 +2403,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
 
         window.abrirEditorPubliTasa = function(id) {
-            let match = localPubliTasaClientesArr.find(c => c.id === id);
-            if(!match) return;
+            let match = localPubliTasaClientesArr.find(c => c.id === id); if(!match) return;
             let nuevoNombre = prompt("Modificar Nombre / Comercio:", match.cliente || "");
             let nuevoTlf = prompt("Modificar Teléfono (WhatsApp):", match.telefono || "");
             let nuevaDir = prompt("Modificar Ubicación / Sector:", match.direccion || "");
@@ -2422,7 +2417,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     match.fechaActivacion = nuevaFecha;
                     match.diasRestantes = calcularDiasRestantesReales(nuevaFecha, match.meses || 1);
                 }
-                
                 window.sincronizarPubliTasaNube().then(() => { 
                     window.renderizarBovedaPubliTasaPro(); 
                     window.recalcularCarpetasYChismoseadorDinamico();
@@ -2431,31 +2425,22 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
 
         window.enviarBienvenidaPubliTasa = function(id) {
-            const c = localPubliTasaClientesArr.find(x => x.id === id);
-            if(!c) return;
-
+            const c = localPubliTasaClientesArr.find(x => x.id === id); if(!c) return;
             const linkApp = (linkServidorGitHubGuardado || URL_VITRINA_OFICIAL).split('#')[0] + '#publitasa';
-
             const msg = `📊 BIENVENIDO A PUBLI-TASA-MK PRO\n\nHola ${c.cliente},\nSe ha activado con éxito tu suscripción ejecutiva al monitor financiero.\n\n🔑 TU LICENCIA / AKEY: ${c.tokenLicencia}\n📱 Equipos Autorizados: ${c.maxEquipos} Dispositivo(s)\n📅 Período Contratado: ${c.diasRestantes} Días\n\n📌 REGLAS Y AVISO IMPORTANTE DE USO:\n• Esta suscripción es el alquiler de una membresía mensual, no constituye la compra del software.\n• Para garantizar la continuidad de tu pantalla, debes realizar la renovación un día antes del vencimiento.\n• Su licencia está vinculada a su dispositivo. Si cambia de teléfono, notifique al administrador.\n\n👇 INGRESA A TU PLATAFORMA PRO AQUÍ:\n🔗 ${linkApp}\n\n🏛️ CON EL RESPALDO DE TUCOCEL C.A.`;
-
             abrirWhatsAppPersonal(c.telefono, msg);
         };
 
         window.notificarPagoPubliTasa = function(id) {
-            const c = localPubliTasaClientesArr.find(x => x.id === id);
-            if(!c) return;
-
+            const c = localPubliTasaClientesArr.find(x => x.id === id); if(!c) return;
             let fAct = c.fechaActivacion || new Date().toLocaleDateString('es-ES');
             let fVencExacta = calcularFechaRenovacionExacta(fAct, c.meses || 1);
-
             const msg = `🔔 Recordatorio de Vencimiento — PubliTasa Pro 📊\n\n¡Saludos, ${c.cliente}! 👋✨\n\nTe saludamos de PubliTasa Pro. Pasamos por aquí para recordarte que tu membresía ejecutiva (Licencia: ${c.tokenLicencia}) vence MAÑANA (${fVencExacta}). 📅\n\n⚠️ Nota importante: Para garantizar la continuidad de tus indicadores financieros y evitar el bloqueo automático del monitor, te recordamos realizar tu pago de renovación el día de HOY. 📈\n\n¡Estamos a tu orden! 🫡${RESPALDO_FIRMA_WHATSAPP}`;
-
             abrirWhatsAppPersonal(c.telefono, msg);
         };
 
         window.resetearEquiposPubliTasa = async function(id) {
-            const c = localPubliTasaClientesArr.find(x => x.id === id);
-            if(!c) return;
+            const c = localPubliTasaClientesArr.find(x => x.id === id); if(!c) return;
             if(confirm(`¿Deseas desvincular los teléfonos registrados de ${c.cliente}?`)) {
                 c.equiposRegistrados = [];
                 await window.sincronizarPubliTasaNube();
@@ -2508,9 +2493,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     getDoc(doc(db, "tcl_publitasa_pro", "clientes_activos"))
                 ]);
 
-                if(docTarPT.exists()) {
-                    tarifasPubliTasaEstructura = docTarPT.data();
-                }
+                if(docTarPT.exists()) { tarifasPubliTasaEstructura = docTarPT.data(); }
                 window.actualizarLecturaTarifasPubliTasaGUI();
 
                 if(docFrontera.exists()) {
@@ -2522,8 +2505,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     document.getElementById('val-frontera-compra').innerText = c.toLocaleString('es-CO');
                     document.getElementById('val-frontera-venta').innerText = v.toLocaleString('es-CO');
                     document.getElementById('time-frontera').innerText = `Última actualización en consola: ${u.includes(':') ? 'Hoy a las ' + u : u}`;
-
-                    // Sincronizar plantilla flyer
                     document.getElementById('flyer-val-frontera-compra').innerText = `${c.toLocaleString('es-CO')} COP`;
                     document.getElementById('flyer-val-frontera-venta').innerText = `${v.toLocaleString('es-CO')} COP`;
                 }
@@ -2566,7 +2547,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             try {
                 const docTar = await getDoc(doc(db, "tcl_streaming_core", "tarifas_config"));
                 if(docTar.exists()) { 
-                    catálogoPlataformasEstructura = docTar.data(); 
+                    catalogoPlataformasEstructura = docTar.data(); 
                     window.construirEstructurasDinamicasInterfaces();
                 }
                 
@@ -2588,4 +2569,4 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
     </script>
 </body>
-    </html>
+</html>
