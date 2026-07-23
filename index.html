@@ -13,7 +13,7 @@
     <meta property="og:image:width" content="600">
     <meta property="og:image:height" content="600">
 
-    <!-- CONFIGURACIÓN PWA Y MANIFIESTO EMBEBIDO (ENTRADA ÚNICA A PUBLITASA PRO) -->
+    <!-- CONFIGURACIÓN PWA Y MANIFIESTO EMBEBIDO -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="PubliTasa Pro">
@@ -22,11 +22,12 @@
 
     <link rel="manifest" href='data:application/manifest+json,{"name":"PubliTasaMK Pro","short_name":"PubliTasa Pro","start_url":"./index.html%23publitasa","display":"standalone","background_color":"%23030306","theme_color":"%2300112b","icons":[{"src":"https://raw.githubusercontent.com/publionlinemk/streaming/main/imagen%20para%20Streaming%20-clean.jpg","sizes":"192x192","type":"image/jpeg"},{"src":"https://raw.githubusercontent.com/publionlinemk/streaming/main/imagen%20para%20Streaming%20-clean.jpg","sizes":"512x512","type":"image/jpeg"}]}'>
 
-    <!-- TAILWIND & FONTS -->
+    <!-- TAILWIND, FONTS Y LIBRERÍA HTML2CANVAS PARA RENDERIZAR FLYER -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800;900&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030306; color: #f8fafc; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -70,6 +71,14 @@
             user-select: none;
             -webkit-user-select: none;
             touch-action: manipulation;
+        }
+
+        /* DISEÑO DE LA PLANTILLA DEL FLYER OMNIPRESENTE PARA ESTADOS CON FONDO SÓLIDO */
+        .flyer-estado-render {
+            width: 380px;
+            background-color: #00112b;
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
         }
     </style>
 </head>
@@ -320,7 +329,7 @@
                 </div>
             </div>
 
-            <!-- BLOQUE DE INDICADORES -->
+            <!-- BLOQUE DE INDICADORES EN VIVO -->
             <div id="wrapper-indicadores-pantalla" class="space-y-4 hidden">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     
@@ -333,15 +342,15 @@
                         <div class="space-y-1 pt-1">
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slate-400">Dólar BCV:</span>
-                                <span class="flex items-center gap-1.5 font-mono font-black text-amber-400 text-lg">
-                                    <span id="trend-bcv-usd" class="text-xs animate-pulse text-amber-400">–</span>
+                                <span class="flex items-center gap-1 font-mono font-black text-amber-400 text-lg">
+                                    <span id="trend-bcv-usd" class="text-xs font-bold">•</span>
                                     <span id="val-bcv-usd">Cargando...</span>
                                 </span>
                             </div>
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slate-400">Euro BCV:</span>
-                                <span class="flex items-center gap-1.5 font-mono font-black text-amber-300 text-lg">
-                                    <span id="trend-bcv-eur" class="text-xs animate-pulse text-amber-400">–</span>
+                                <span class="flex items-center gap-1 font-mono font-black text-amber-300 text-lg">
+                                    <span id="trend-bcv-eur" class="text-xs font-bold">•</span>
                                     <span id="val-bcv-eur">Cargando...</span>
                                 </span>
                             </div>
@@ -361,15 +370,15 @@
                         <div class="space-y-1 pt-1">
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slate-400">Dólar TRM (COP):</span>
-                                <span class="flex items-center gap-1.5 font-mono font-black text-amber-400 text-lg">
-                                    <span id="trend-trm-cop" class="text-xs animate-pulse text-amber-400">–</span>
+                                <span class="flex items-center gap-1 font-mono font-black text-amber-400 text-lg">
+                                    <span id="trend-trm-cop" class="text-xs font-bold">•</span>
                                     <span id="val-trm-cop">Cargando...</span>
                                 </span>
                             </div>
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slate-400">Euro Colombia (COP):</span>
-                                <span class="flex items-center gap-1.5 font-mono font-black text-amber-300 text-lg">
-                                    <span id="trend-eur-cop" class="text-xs animate-pulse text-amber-400">–</span>
+                                <span class="flex items-center gap-1 font-mono font-black text-amber-300 text-lg">
+                                    <span id="trend-eur-cop" class="text-xs font-bold">•</span>
                                     <span id="val-eur-cop">Cargando...</span>
                                 </span>
                             </div>
@@ -403,7 +412,7 @@
                         </div>
                     </div>
 
-                    <!-- CRIPTO MERCADO: BINANCE USDT Y BITCOIN BTC CON HORARIOS INDEPENDIENTES Y FLECHA JUNTO AL MONTO -->
+                    <!-- CRIPTO MERCADO: BINANCE USDT Y BITCOIN BTC -->
                     <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-3 sm:col-span-2">
                         <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
                             <span class="text-xs font-bold text-slate-300">🪙 Mercado Cripto (Binance P2P & Global)</span>
@@ -411,15 +420,13 @@
                         </div>
                         
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                            
-                            <!-- SUB-TARJETA BINANCE USDT (CON SU PROPIO HORARIO DENTRO) -->
                             <div class="bg-neutral-900 p-3.5 rounded-xl border border-neutral-800 space-y-2 flex flex-col justify-between">
                                 <div>
                                     <span class="text-[9.5px] text-amber-400 uppercase font-black block">Binance USDT (VES)</span>
                                     <div class="pt-1.5 text-slate-300 font-mono text-xs font-bold">
                                         <span class="text-[10px] text-slate-400 block mb-0.5">Se cotiza en este momento entre:</span>
-                                        <div class="flex items-center gap-2">
-                                            <span id="trend-usdt-binance" class="text-sm font-mono animate-pulse text-amber-400">–</span>
+                                        <div class="flex items-center gap-1.5">
+                                            <span id="trend-usdt-binance" class="text-xs font-bold">•</span>
                                             <strong id="val-usdt-rango" class="text-emerald-400 text-sm sm:text-base">8.90 / 9.00 Bs.</strong>
                                         </div>
                                     </div>
@@ -429,14 +436,13 @@
                                 </div>
                             </div>
 
-                            <!-- SUB-TARJETA BITCOIN (CON SU PROPIO HORARIO INDEPENDIENTE DENTRO) -->
                             <div class="bg-neutral-900 p-3.5 rounded-xl border border-neutral-800 space-y-2 flex flex-col justify-between">
                                 <div>
                                     <span class="text-[9.5px] text-amber-400 uppercase font-black block">Bitcoin (BTC / USD Global)</span>
                                     <div class="flex justify-between items-center font-mono text-xs font-bold pt-2">
                                         <span class="text-slate-400">Cotización:</span>
                                         <span class="flex items-center gap-1 font-mono font-black text-emerald-400 text-sm">
-                                            <span id="trend-btc-usd" class="text-xs animate-pulse text-amber-400">–</span>
+                                            <span id="trend-btc-usd" class="text-xs font-bold">•</span>
                                             <span id="val-btc-usd">Cargando...</span>
                                         </span>
                                     </div>
@@ -445,7 +451,6 @@
                                     <span id="time-btc" class="text-[10px] text-slate-400 font-mono font-bold block">🌐 Mercado Global en Vivo (24/7)</span>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
@@ -473,11 +478,11 @@
                 </div>
 
                 <div class="space-y-1">
-                    <p class="text-[10px] text-slate-300 font-bold">
+                    <p class="text-[10px] text-white font-bold">
                         🔐 © 2026 PubliTasaMK Pro. Todos los derechos reservados.
                     </p>
-                    <p class="text-[9px] text-slate-400 font-medium uppercase tracking-wide">
-                        Sistema probado y avalado por <span class="text-white font-bold">Tucocel C.A.</span> &bull; Desarrollado corporativamente por <span class="text-amber-400 font-bold">@publionlinemk</span> (Agencia de Publicidad de Tucocel C.A.)
+                    <p class="text-[9px] text-slate-300 font-semibold uppercase tracking-wide">
+                        Sistema probado y avalado por <span class="text-white font-black">Tucocel C.A.</span> &bull; Desarrollado corporativamente por <span class="text-amber-400 font-black">@publionlinemk</span> (Agencia de Publicidad de Tucocel C.A.)
                     </p>
                 </div>
             </div>
@@ -487,7 +492,7 @@
         <!-- ==================== VISTA CONSOLA ADMINISTRATIVA MÁSTER ==================== -->
         <main id="vista-streaming-admin" class="max-w-6xl mx-auto px-4 py-6 space-y-6 hidden">
             
-            <!-- CABECERA PRINCIPAL CON CONMUTADOR DE PARTICIONES -->
+            <!-- CABECERA PRINCIPAL -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-neutral-900 pb-5">
                 <div>
                     <span class="bg-neutral-900 text-slate-400 border border-neutral-800 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full inline-flex items-center gap-1.5"><i class="fa-solid fa-lock text-red-500"></i> Consola Central de Control</span>
@@ -692,18 +697,21 @@
                 </div>
             </div>
 
-            <!-- BLOQUE DE PUBLITASA PRO (PARTICIÓN 2 - PANEL MÁSTER COMPLETO) -->
+            <!-- BLOQUE DE PUBLITASA PRO (PARTICIÓN 2 - PANEL MÁSTER) -->
             <div id="bloque-admin-particion-publitasa" class="hidden space-y-6">
 
-                <!-- ACCESO RÁPIDO Y BOTONERA PUBLICITARIA DE PUBLITASA PRO CON EL BOTÓN DEL REPORTE DIARIO -->
+                <!-- BOTONERA PUBLICITARIA Y ACCESO A GENERACIÓN DE IMAGEN PARA ESTADOS DE WHATSAPP -->
                 <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-3">
                     <div class="space-y-0.5 text-center sm:text-left">
                         <span class="text-amber-400 font-black text-xs uppercase block">👁️ Difusión y Vista Previa del Monitor</span>
-                        <p class="text-[10px] text-slate-400">Enviar reporte diario a comunidades, compartir publicidad o mandar propuesta comercial.</p>
+                        <p class="text-[10px] text-slate-400">Enviar reporte diario, generar imagen para Estados o mandar propuesta comercial.</p>
                     </div>
                     <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                        <button onclick="window.generarYCompartirImagenEstadoWhatsApp()" class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black text-xs px-3.5 py-2 rounded-xl uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 btn-interactive">
+                            <i class="fa-solid fa-camera"></i> 📸 Imagen para Estado
+                        </button>
                         <button onclick="window.despacharReporteDiarioWhatsApp()" class="bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-black text-xs px-3.5 py-2 rounded-xl uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 btn-interactive">
-                            <i class="fa-solid fa-chart-pie"></i> Reporte Cierre / Diario
+                            <i class="fa-solid fa-chart-pie"></i> Reporte Cierre
                         </button>
                         <button onclick="window.despacharPublicidadPubliTasa('GRUPOS')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-black text-xs px-3 py-2 rounded-xl uppercase tracking-wider hover:border-amber-500/40 transition-all flex items-center gap-1.5 btn-interactive">
                             <i class="fa-solid fa-users"></i> Pub. Grupos
@@ -714,13 +722,10 @@
                         <button onclick="window.despacharCotizacionProWhatsApp()" class="bg-gradient-to-r from-amber-400 to-amber-600 text-neutral-950 font-black text-xs px-3.5 py-2 rounded-xl uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 btn-interactive">
                             <i class="fa-solid fa-paper-plane"></i> Cotización Pro
                         </button>
-                        <button onclick="window.abrirVistaMonitorDirecto()" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-black text-xs px-3 py-2 rounded-xl uppercase tracking-wider hover:border-slate-700 transition-all btn-interactive">
-                            Monitor
-                        </button>
                     </div>
                 </div>
 
-                <!-- 1. CONTROL MANUAL RANGO BINANCE USDT P2P (+ DUAL BOTÓN MANTENER/PUBLICAR Y CÁLCULO AUTOMÁTICO DE +10 PTS) -->
+                <!-- 1. CONTROL MANUAL RANGO BINANCE USDT P2P -->
                 <div class="bg-neutral-950 border-2 border-emerald-500/40 p-5 rounded-3xl space-y-4 shadow-xl">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-neutral-950 text-xl font-black">
@@ -935,6 +940,130 @@
         </main>
     </div>
 
+    <!-- ================================================================= -->
+    <!-- PLANTILLA OCULTA DEL FLYER (LO QUE SE DIBUJA AL COMPARTIR IMAGEN) -->
+    <!-- ================================================================= -->
+    <div class="fixed -left-[9999px] top-0 overflow-hidden">
+        <div id="plantilla-flyer-render-nube" class="flyer-estado-render rounded-3xl p-4 space-y-3 relative overflow-hidden">
+            
+            <!-- CABECERA DINÁMICA CON TITULAR DÍA Y FECHA -->
+            <div class="text-center space-y-1 border-b border-amber-500/30 pb-2.5">
+                <div class="w-10 h-10 bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 rounded-full flex items-center justify-center border-2 border-white mx-auto shadow-md">
+                    <i class="fa-solid fa-arrow-trend-up text-neutral-950 text-lg"></i>
+                </div>
+                <h1 class="text-lg font-black uppercase tracking-wider text-white bg-gradient-to-r from-white via-amber-200 to-amber-400 bg-clip-text text-transparent">
+                    PUBLI-TASA-MK PRO
+                </h1>
+                
+                <div class="bg-neutral-950 border border-amber-500/40 px-3 py-1 rounded-full inline-block">
+                    <p id="flyer-titular-dinamico-txt" class="text-[9.5px] font-extrabold text-amber-300 uppercase tracking-wide">
+                        📊 Así cierran los indicadores la tarde de este día
+                    </p>
+                </div>
+            </div>
+
+            <!-- CUERPO DE INDICADORES EN VIVO -->
+            <div class="space-y-2 text-xs">
+                <div class="bg-neutral-950 border border-neutral-800 p-2.5 rounded-2xl space-y-1">
+                    <div class="flex justify-between items-center border-b border-neutral-900 pb-1">
+                        <span class="text-[9.5px] font-black text-slate-300 uppercase">🇻🇪 Oficial BCV (Venezuela)</span>
+                        <span class="text-[8px] font-mono text-emerald-400 font-bold">Oficial</span>
+                    </div>
+                    <div class="flex justify-between font-mono font-bold pt-0.5">
+                        <span class="text-slate-400 text-[10px]">Dólar BCV:</span>
+                        <span class="flex items-center gap-1">
+                            <span id="flyer-trend-bcv-usd" class="text-[10px] font-bold text-amber-400">•</span>
+                            <span id="flyer-val-bcv-usd" class="text-amber-400 font-black text-xs">Cargando...</span>
+                        </span>
+                    </div>
+                    <div class="flex justify-between font-mono font-bold">
+                        <span class="text-slate-400 text-[10px]">Euro BCV:</span>
+                        <span class="flex items-center gap-1">
+                            <span id="flyer-trend-bcv-eur" class="text-[10px] font-bold text-amber-300">•</span>
+                            <span id="flyer-val-bcv-eur" class="text-amber-300 font-black text-xs">Cargando...</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="bg-neutral-950 border border-neutral-800 p-2.5 rounded-2xl space-y-1">
+                    <div class="flex justify-between items-center border-b border-neutral-900 pb-1">
+                        <span class="text-[9.5px] font-black text-slate-300 uppercase">🇨🇴 Oficial Colombia (SFC)</span>
+                        <span class="text-[8px] font-mono text-emerald-400 font-bold">TRM</span>
+                    </div>
+                    <div class="flex justify-between font-mono font-bold pt-0.5">
+                        <span class="text-slate-400 text-[10px]">Dólar TRM:</span>
+                        <span class="flex items-center gap-1">
+                            <span id="flyer-trend-trm-cop" class="text-[10px] font-bold text-amber-400">•</span>
+                            <span id="flyer-val-trm-cop" class="text-amber-400 font-black text-xs">Cargando...</span>
+                        </span>
+                    </div>
+                    <div class="flex justify-between font-mono font-bold">
+                        <span class="text-slate-400 text-[10px]">Euro Colombia:</span>
+                        <span class="flex items-center gap-1">
+                            <span id="flyer-trend-eur-cop" class="text-[10px] font-bold text-amber-300">•</span>
+                            <span id="flyer-val-eur-cop" class="text-amber-300 font-black text-xs">Cargando...</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="bg-neutral-950 border border-amber-500/30 p-2 rounded-2xl space-y-1">
+                    <span class="text-[8.5px] font-black text-amber-400 uppercase block text-center">💱 Casas de Cambio Cúcuta / Frontera</span>
+                    <div class="grid grid-cols-2 gap-2 text-center font-mono">
+                        <div class="bg-neutral-900 p-1 rounded-xl border border-neutral-800">
+                            <span class="text-[7.5px] text-slate-400 block uppercase">Compra</span>
+                            <span id="flyer-val-frontera-compra" class="text-emerald-400 font-black text-[11px]">3.320 COP</span>
+                        </div>
+                        <div class="bg-neutral-900 p-1 rounded-xl border border-neutral-800">
+                            <span class="text-[7.5px] text-slate-400 block uppercase">Venta</span>
+                            <span id="flyer-val-frontera-venta" class="text-amber-400 font-black text-[11px]">3.370 COP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-neutral-950 border border-neutral-800 p-2.5 rounded-2xl space-y-1">
+                    <div class="flex justify-between items-center border-b border-neutral-900 pb-1">
+                        <span class="text-[9.5px] font-black text-slate-300 uppercase">🪙 Cripto (Binance & Bitcoin)</span>
+                        <span class="text-[8px] font-mono text-emerald-400 font-bold">En Vivo</span>
+                    </div>
+                    <div class="flex justify-between font-mono font-bold pt-0.5">
+                        <span class="text-slate-400 text-[10px]">Binance USDT:</span>
+                        <span class="flex items-center gap-1">
+                            <span id="flyer-trend-usdt-binance" class="text-[10px] font-bold text-emerald-400">•</span>
+                            <span id="flyer-val-usdt-rango" class="text-emerald-400 font-black text-xs">8.90 / 9.00 Bs</span>
+                        </span>
+                    </div>
+                    <div class="flex justify-between font-mono font-bold">
+                        <span class="text-slate-400 text-[10px]">Bitcoin Global:</span>
+                        <span class="flex items-center gap-1">
+                            <span id="flyer-trend-btc-usd" class="text-[10px] font-bold text-emerald-400">•</span>
+                            <span id="flyer-val-btc-usd" class="text-emerald-400 font-black text-xs">Cargando...</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER PUBLICITARIO RESALTADO CON LETRAS BLANCAS Y NÍTIDAS -->
+            <div class="border-t border-amber-500/40 pt-2 text-center space-y-1.5 bg-neutral-950 -mx-4 -mb-4 p-3">
+                <div class="bg-gradient-to-r from-amber-500/20 via-amber-500/35 to-amber-500/20 border-2 border-amber-400 p-2 rounded-2xl shadow-lg">
+                    <p class="text-[11px] font-black text-amber-300 uppercase leading-tight tracking-wide">
+                        🚀 ¿QUIERES ESTA PANTALLA EN VIVO EN TU NEGOCIO?
+                    </p>
+                    <p class="text-[9.5px] text-white font-extrabold mt-0.5">
+                        Suscríbete a PubliTasa Pro desde solo <span class="text-amber-400 font-black">$5,00 USDT/mes</span>
+                    </p>
+                </div>
+                
+                <p class="text-[8.5px] text-white font-black uppercase tracking-wider pt-0.5">
+                    🏛️ CON EL RESPALDO ABSOLUTO DE <span class="text-amber-300 font-black">TUCOCEL C.A.</span>
+                </p>
+                <p class="text-[8px] text-white font-bold tracking-wide">
+                    Desarrollado corporativamente por <span class="text-amber-400 font-black">@publionlinemk</span>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
     <!-- CINTILLO INFERIOR GENERAL -->
     <footer id="footer-general-streaming" class="footer-glow border-t border-neutral-900/80 mt-16 py-6 px-4 text-center space-y-4 relative z-40">
         <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-6 sm:gap-10 glow-white">
@@ -949,7 +1078,7 @@
         <div class="text-white text-[10px] sm:text-xs space-y-1 pt-2 font-bold tracking-wide">
             <p class="text-slate-200">🔐 © 2026 Tucocel C.A. Todos los derechos reservados.</p>
             <p class="text-slate-400 font-medium uppercase text-[9px] sm:text-[10px]">
-                📡 Agente Autorizado Movistar Cordero <span class="text-slate-600 mx-1.5">|</span> 💻 Web desarrollada por <span class="text-white font-bold">@publionlinemk</span> (Agencia de Publicidad de Tucocel C.A.)
+                💻 Web desarrollada corporativamente por <span class="text-white font-bold">@publionlinemk</span> (Agencia de Publicidad de Tucocel C.A.)
             </p>
         </div>
     </footer>
@@ -975,14 +1104,14 @@
         const URL_VITRINA_OFICIAL = "https://tucocel.github.io/StreamingCorderoMk/";
         const LINK_COMUNIDAD_WHATSAPP = "https://chat.whatsapp.com/H2R94IHBLQhBEthrZcxUHK";
 
-        /* CAPTURA INMEDIATA Y GLOBAL DEL EVENTO DE INSTALACIÓN NATIVA PWA */
+        /* CAPTURA DEL EVENTO DE INSTALACIÓN PWA */
         let deferredPromptPWA = null;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPromptPWA = e;
         });
 
-        /* REGISTRO DE SERVICE WORKER EMBEBIDO PARA HABILITAR PWA NATIVA NAVEGADOR */
+        /* SERVICE WORKER EMBEBIDO */
         if ('serviceWorker' in navigator) {
             const swContent = `
                 self.addEventListener('install', (e) => self.skipWaiting());
@@ -994,7 +1123,7 @@
             navigator.serviceWorker.register(swUrl).catch(() => {});
         }
 
-        /* HUELLA DIGITAL / BROWSER FINGERPRINT LOCAL */
+        /* HUELLA DIGITAL / BROWSER FINGERPRINT */
         function obtenerOClonarBrowserUUID() {
             let uuid = localStorage.getItem('tcl_device_uuid');
             if(!uuid) {
@@ -1004,7 +1133,7 @@
             return uuid;
         }
 
-        /* AUXILIARES DE FECHA PARA MÓVIL (YYYY-MM-DD <-> DD/MM/YYYY) */
+        /* AUXILIARES FECHA MÓVIL */
         function obtenerFechaHoyISO() {
             const hoy = new Date();
             const yyyy = hoy.getFullYear();
@@ -1019,40 +1148,31 @@
             return `${parseInt(partes[2])}/${parseInt(partes[1])}/${partes[0]}`;
         }
 
-        function convertirESaISO(esStr) {
-            if(!esStr || !esStr.includes('/')) return obtenerFechaHoyISO();
-            const partes = esStr.split('/');
-            const dd = String(partes[0]).padStart(2, '0');
-            const mm = String(partes[1]).padStart(2, '0');
-            const yyyy = partes[2];
-            return `${yyyy}-${mm}-${dd}`;
-        }
-
-        /* ENRUTAMIENTO FORZADO A WHATSAPP PERSONAL (com.whatsapp) */
         function abrirWhatsAppPersonal(phoneTarget, mensajeTexto) {
-            let cleanTlf = (phoneTarget || "").replace(/\D/g, '');
+            let cleanTlf = (phoneTarget || MI_NUMERO_CELULAR_UNICO).replace(/\D/g, '');
             if (cleanTlf && !cleanTlf.startsWith('58')) cleanTlf = '58' + cleanTlf;
             
             const textoCodificado = encodeURIComponent(mensajeTexto);
             const isAndroid = /Android/i.test(navigator.userAgent);
 
             if (isAndroid) {
-                let intentUrl = "";
-                if (cleanTlf) {
-                    intentUrl = `intent://send?phone=${cleanTlf}&text=${textoCodificado}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
-                } else {
-                    intentUrl = `intent://send?text=${textoCodificado}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
-                }
+                let intentUrl = `intent://send?phone=${cleanTlf}&text=${textoCodificado}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
                 window.location.href = intentUrl;
             } else {
-                let webUrl = "";
-                if (cleanTlf) {
-                    webUrl = `https://api.whatsapp.com/send?phone=${cleanTlf}&text=${textoCodificado}`;
-                } else {
-                    webUrl = `https://api.whatsapp.com/send?text=${textoCodificado}`;
-                }
+                let webUrl = `https://api.whatsapp.com/send?phone=${cleanTlf}&text=${textoCodificado}`;
                 window.open(webUrl, '_blank');
             }
+        }
+
+        /* FUNCIÓN AUXILIAR PARA FORMATEAR TENDENCIA SIN SIGNOS MENOS CONFUSOS */
+        function generarIconoTendenciaHTML(valActual, valPrevio) {
+            if (!valPrevio || valPrevio === 0 || valActual === valPrevio) {
+                return '<span class="text-amber-400 font-bold text-[11px]">•</span>';
+            }
+            if (valActual > valPrevio) {
+                return '<span class="text-emerald-400 font-black text-xs">▲</span>';
+            }
+            return '<span class="text-red-500 font-black text-xs">▼</span>';
         }
 
         let catálogoPlataformasEstructura = {
@@ -1066,7 +1186,6 @@
         };
 
         let tarifasPubliTasaEstructura = { plan1: 5.00, plan2: 8.00, plan3: 12.00 };
-
         let localStreamingClientesArr = JSON.parse(localStorage.getItem('tcl_str_cache')) || [];
         let localPubliTasaClientesArr = JSON.parse(localStorage.getItem('tcl_pt_cache')) || [];
         let esAdminStreamingSession = false;
@@ -1089,7 +1208,7 @@
 
 El incumplimiento de estas reglas causará la pérdida de la garantía sin derecho a reembolso. Disfruta tu servicio. 🍿🎬`;
 
-        const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.\n📡 Agente Autorizado Movistar Cordero\n💻 Desarrollado corporativamente por nuestra agencia @publionlinemk.`;
+        const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.\n💻 Desarrollado corporativamente por nuestra agencia @publionlinemk.`;
 
         function calcularFechaRenovacionExacta(fechaOrigenStr, mesesASumar) {
             let partes = fechaOrigenStr.split('/');
@@ -1125,7 +1244,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             return difDias > 0 ? difDias : 0;
         }
 
-        /* RELOJ EN HORA NORMAL 12 HORAS (AM/PM) */
         function iniciarRelojDigitalDinamico() {
             setInterval(() => {
                 const ahora = new Date();
@@ -1141,7 +1259,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }, 1000);
         }
 
-        /* CÁLCULO AUTOMÁTICO DE TASA EN VENTA BINANCE (+0.10 BS / +10 PTS) */
         window.calcularVentaBinanceAuto = function() {
             const compra = parseFloat(document.getElementById('pt-adm-usdt-compra').value) || 0;
             if(compra > 0) {
@@ -1149,7 +1266,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
         };
 
-        /* SINCRONIZACIÓN LECTURA NUBE BINANCE CON SU PROPIO BLOQUE DE HORARIO */
         async function sincronizarBinanceDesdeFirebase() {
             try {
                 const docBinance = await getDoc(doc(db, "tcl_publitasa_pro", "binance_config"));
@@ -1158,33 +1274,48 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     const baseVal = parseFloat(dataB.compra) || 8.90;
                     const estVal = parseFloat(dataB.venta) || (baseVal + 0.10);
                     const timeTxt = dataB.ultimaActualizacion || "Hoy";
-                    const tendenciaHTML = dataB.tendenciaHTML || '<span class="text-amber-400 font-mono font-bold animate-pulse">–</span>';
+                    const prevBaseVal = parseFloat(dataB.prevCompra) || baseVal;
+                    
+                    const htmlTrend = generarIconoTendenciaHTML(baseVal, prevBaseVal);
 
                     document.getElementById('val-usdt-rango').innerText = `${baseVal.toFixed(2)} / ${estVal.toFixed(2)} Bs.`;
-                    document.getElementById('trend-usdt-binance').innerHTML = tendenciaHTML;
+                    document.getElementById('trend-usdt-binance').innerHTML = htmlTrend;
                     document.getElementById('time-binance').innerText = `⚡ Última actualización: Hoy a las ${timeTxt}`;
                     
                     document.getElementById('pt-adm-usdt-compra').value = baseVal.toFixed(2);
                     document.getElementById('pt-adm-usdt-venta').value = estVal.toFixed(2);
+
+                    // Sincronizar plantilla flyer
+                    document.getElementById('flyer-val-usdt-rango').innerText = `${baseVal.toFixed(2)} / ${estVal.toFixed(2)} Bs`;
+                    document.getElementById('flyer-trend-usdt-binance').innerHTML = htmlTrend;
                 }
-            } catch(e) {
-                console.log("Lectura de Binance en espera...");
-            }
+            } catch(e) {}
         }
 
-        /* CONSULTAS EN VIVO CON ANTI-CACHÉ (NO-STORE + TIMESTAMP EN CADA PETICIÓN) */
         async function sincronizarIndicadoresMercadoEnVivo() {
             const ahoraHora = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
             const timeAntiCache = Date.now();
 
-            // 1. Dólar y Euro BCV Real Anti-Caché
+            let histTasas = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
+
             try {
                 const resBcv = await fetch(`https://ve.dolarapi.com/v1/dolares/oficial?_t=${timeAntiCache}`, { cache: 'no-store' });
                 if (resBcv.ok) {
                     const dataBcv = await resBcv.json();
                     if(dataBcv.promedio) {
                         const valUsd = dataBcv.promedio;
-                        document.getElementById('val-bcv-usd').innerText = `${valUsd.toFixed(2)} Bs`;
+                        const prevUsd = histTasas.bcvUsd || valUsd;
+                        histTasas.bcvUsd = valUsd;
+                        
+                        const htmlTrend = generarIconoTendenciaHTML(valUsd, prevUsd);
+                        const txt = `${valUsd.toFixed(2)} Bs`;
+
+                        document.getElementById('val-bcv-usd').innerText = txt;
+                        document.getElementById('trend-bcv-usd').innerHTML = htmlTrend;
+                        
+                        document.getElementById('flyer-val-bcv-usd').innerText = txt;
+                        document.getElementById('flyer-trend-bcv-usd').innerHTML = htmlTrend;
+
                         let fechaValorTxt = dataBcv.fechaActualizacion ? new Date(dataBcv.fechaActualizacion).toLocaleDateString('es-ES') : new Date().toLocaleDateString('es-ES');
                         document.getElementById('time-bcv').innerText = `Oficial BCV — Emisión Valor: ${fechaValorTxt}`;
                     }
@@ -1197,12 +1328,21 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     const dataEur = await resEur.json();
                     if(dataEur.promedio) {
                         const valEur = dataEur.promedio;
-                        document.getElementById('val-bcv-eur').innerText = `${valEur.toFixed(2)} Bs`;
+                        const prevEur = histTasas.bcvEur || valEur;
+                        histTasas.bcvEur = valEur;
+
+                        const htmlTrend = generarIconoTendenciaHTML(valEur, prevEur);
+                        const txt = `${valEur.toFixed(2)} Bs`;
+
+                        document.getElementById('val-bcv-eur').innerText = txt;
+                        document.getElementById('trend-bcv-eur').innerHTML = htmlTrend;
+
+                        document.getElementById('flyer-val-bcv-eur').innerText = txt;
+                        document.getElementById('flyer-trend-bcv-eur').innerHTML = htmlTrend;
                     }
                 }
             } catch (e) {}
 
-            // 2. TRM y Euro Colombia (COP) Anti-Caché
             let valTrmColombia = 0;
             try {
                 const resTrm = await fetch(`https://www.datos.gov.co/resource/ceyp-9c7c.json?$limit=1&$order=vigenciahasta%20DESC&_t=${timeAntiCache}`, { cache: 'no-store' });
@@ -1210,7 +1350,18 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     const dataTrm = await resTrm.json();
                     if(dataTrm && dataTrm[0]) {
                         valTrmColombia = parseFloat(dataTrm[0].valor);
-                        document.getElementById('val-trm-cop').innerText = `${valTrmColombia.toLocaleString('es-CO')} COP`;
+                        const prevTrm = histTasas.trmCop || valTrmColombia;
+                        histTasas.trmCop = valTrmColombia;
+
+                        const htmlTrend = generarIconoTendenciaHTML(valTrmColombia, prevTrm);
+                        const txt = `${valTrmColombia.toLocaleString('es-CO')} COP`;
+
+                        document.getElementById('val-trm-cop').innerText = txt;
+                        document.getElementById('trend-trm-cop').innerHTML = htmlTrend;
+
+                        document.getElementById('flyer-val-trm-cop').innerText = txt;
+                        document.getElementById('flyer-trend-trm-cop').innerHTML = htmlTrend;
+
                         document.getElementById('time-trm').innerText = `SFC Oficial — Sincronizado: ${ahoraHora}`;
                     }
                 }
@@ -1220,32 +1371,91 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 const resEurUsd = await fetch(`https://open.er-api.com/v6/latest/EUR?_t=${timeAntiCache}`, { cache: 'no-store' });
                 if (resEurUsd.ok) {
                     const dataEurUsd = await resEurUsd.json();
+                    let valEurCop = 0;
                     if (dataEurUsd && dataEurUsd.rates && dataEurUsd.rates.COP) {
-                        const valEurCop = parseFloat(dataEurUsd.rates.COP);
-                        document.getElementById('val-eur-cop').innerText = `${valEurCop.toLocaleString('es-CO', {maximumFractionDigits: 0})} COP`;
+                        valEurCop = parseFloat(dataEurUsd.rates.COP);
                     } else if (valTrmColombia > 0 && dataEurUsd && dataEurUsd.rates && dataEurUsd.rates.USD) {
-                        const eurUsdRate = parseFloat(dataEurUsd.rates.USD);
-                        const valEurCopCalculado = valTrmColombia * eurUsdRate;
-                        document.getElementById('val-eur-cop').innerText = `${valEurCopCalculado.toLocaleString('es-CO', {maximumFractionDigits: 0})} COP`;
+                        valEurCop = valTrmColombia * parseFloat(dataEurUsd.rates.USD);
+                    }
+
+                    if(valEurCop > 0) {
+                        const prevEurCop = histTasas.eurCop || valEurCop;
+                        histTasas.eurCop = valEurCop;
+
+                        const htmlTrend = generarIconoTendenciaHTML(valEurCop, prevEurCop);
+                        const txt = `${valEurCop.toLocaleString('es-CO', {maximumFractionDigits: 0})} COP`;
+
+                        document.getElementById('val-eur-cop').innerText = txt;
+                        document.getElementById('trend-eur-cop').innerHTML = htmlTrend;
+
+                        document.getElementById('flyer-val-eur-cop').innerText = txt;
+                        document.getElementById('flyer-trend-eur-cop').innerHTML = htmlTrend;
                     }
                 }
             } catch (e) {}
 
-            // 3. Binance USDT lectura nube
             await sincronizarBinanceDesdeFirebase();
 
-            // 4. Bitcoin Global Anti-Caché
             try {
                 const resBtc = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT&_t=${timeAntiCache}`, { cache: 'no-store' });
                 if (resBtc.ok) {
                     const dataBtc = await resBtc.json();
                     const btcPrecio = parseFloat(dataBtc.price);
-                    document.getElementById('val-btc-usd').innerText = `$${btcPrecio.toLocaleString('en-US', {maximumFractionDigits: 0})} USD`;
+                    const prevBtc = histTasas.btcUsd || btcPrecio;
+                    histTasas.btcUsd = btcPrecio;
+
+                    const htmlTrend = generarIconoTendenciaHTML(btcPrecio, prevBtc);
+                    const txt = `$${btcPrecio.toLocaleString('en-US', {maximumFractionDigits: 0})} USD`;
+
+                    document.getElementById('val-btc-usd').innerText = txt;
+                    document.getElementById('trend-btc-usd').innerHTML = htmlTrend;
+
+                    document.getElementById('flyer-val-btc-usd').innerText = txt;
+                    document.getElementById('flyer-trend-btc-usd').innerHTML = htmlTrend;
                 }
             } catch (e) {}
+
+            localStorage.setItem('tcl_hist_tasas', JSON.stringify(histTasas));
         }
 
-        /* DESPACHO DEL REPORTE DIARIO WHATSAPP CON FORMATO OFICIAL Y LIMPIO */
+        /* FUNCIÓN GENERADORA Y COMPARTIDORA DE IMAGEN DIRECTA A TU WHATSAPP */
+        window.generarYCompartirImagenEstadoWhatsApp = async function() {
+            const diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+            const ahora = new Date();
+            const nombreDia = diasSemana[ahora.getDay()];
+            const fechaStr = ahora.toLocaleDateString('es-ES');
+            
+            const elTitular = document.getElementById('flyer-titular-dinamico-txt');
+            if(elTitular) {
+                elTitular.innerText = `📊 Así cierran los indicadores la tarde de este ${nombreDia} ${fechaStr}`;
+            }
+
+            const nodoPlantilla = document.getElementById('plantilla-flyer-render-nube');
+            
+            const canvas = await html2canvas(nodoPlantilla, {
+                backgroundColor: '#00112b',
+                scale: 3,
+                useCORS: true
+            });
+
+            canvas.toBlob(async (blob) => {
+                const archivoImagen = new File([blob], "Reporte_PubliTasa_Pro.png", { type: "image/png" });
+
+                if (navigator.canShare && navigator.canShare({ files: [archivoImagen] })) {
+                    try {
+                        await navigator.share({
+                            files: [archivoImagen],
+                            title: 'Reporte Financiero PubliTasa Pro',
+                            text: '📊 Reporte diario de indicadores económicos.'
+                        });
+                    } catch (e) {}
+                } else {
+                    const mensajeTexto = `📊 Reporte Diario de Indicadores Económicos — PubliTasaMK Pro\n📅 Fecha: ${fechaStr}\n\n🏛️ Respaldo Corporativo: Tucocel C.A.`;
+                    abrirWhatsAppPersonal(MI_NUMERO_CELULAR_UNICO, mensajeTexto);
+                }
+            }, 'image/png');
+        };
+
         window.despacharReporteDiarioWhatsApp = function() {
             const fechaHoyStr = new Date().toLocaleDateString('es-ES');
             const linkDirectoPro = (linkServidorGitHubGuardado || URL_VITRINA_OFICIAL).split('#')[0] + '#publitasa';
@@ -1258,45 +1468,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const usdtRangoTxt = document.getElementById('val-usdt-rango').innerText;
             const btcUsd = document.getElementById('val-btc-usd').innerText;
 
-            const msg = `📊 Así cierran los indicadores económicos el día 📈
-
-📅 Fecha: ${fechaHoyStr}
-
-🇻🇪 Tasas Oficiales BCV:
-Dólar BCV: ${usdBcv}
-Euro BCV: ${eurBcv}
-
-🇨🇴 Colombia Oficial:
-Dólar TRM: ${trmCop}
-Euro Colombia: ${eurCop}
-
-💱 Frontera:
-Dólar casa de cambio Cúcuta:
-${cucutaVenta} Cop.
-
-🪙 Cripto:
-USDT Binance Venezuela:
-Se cotiza en este momento entre:
-${usdtRangoTxt}
-
-Bitcoin Global:
-${btcUsd}
-
-📢 Somos Publi-Tasa-Mk
-
-⚠️ Solo somos un medio de información. No vendemos ni compramos divisas, criptomonedas ni bolívares.
-${LINK_COMUNIDAD_WHATSAPP}
-
-📱 ¿Deseas consultar estos indicadores las 24 horas del día en tiempo real desde tu teléfono, tablet, PC y desde tu negocio o desde donde sea?
-
-⚡ Prueba nuestra plataforma ejecutiva PubliTasaMK Pro: activa tu membresía ahora mismo.
-
-🔗 ${linkDirectoPro}`;
+            const msg = `📊 Así cierran los indicadores económicos el día 📈\n\n📅 Fecha: ${fechaHoyStr}\n\n🇻🇪 Tasas Oficiales BCV:\nDólar BCV: ${usdBcv}\nEuro BCV: ${eurBcv}\n\n🇨🇴 Colombia Oficial:\nDólar TRM: ${trmCop}\nEuro Colombia: ${eurCop}\n\n💱 Frontera:\nDólar casa de cambio Cúcuta:\n${cucutaVenta} Cop.\n\n🪙 Cripto:\nUSDT Binance Venezuela:\nSe cotiza en este momento entre:\n${usdtRangoTxt}\n\nBitcoin Global:\n${btcUsd}\n\n📢 Somos Publi-Tasa-Mk\n\n⚠️ Solo somos un medio de información. No vendemos ni compramos divisas, criptomonedas ni bolívares.\n${LINK_COMUNIDAD_WHATSAPP}\n\n📱 ¿Deseas consultar estos indicadores las 24 horas del día en tiempo real desde tu teléfono, tablet, PC y desde tu negocio o desde donde sea?\n\n⚡ Prueba nuestra plataforma ejecutiva PubliTasaMK Pro: activa tu membresía ahora mismo.\n\n🔗 ${linkDirectoPro}`;
 
             abrirWhatsAppPersonal('', msg);
         };
 
-        /* BOTÓN DE INSTALACIÓN PWA MEJORADO CON CONTROL INTEGRAL NATIVO */
         window.ejecutarInstalacionPWA = function() {
             window.location.hash = 'publitasa';
 
@@ -1333,7 +1509,6 @@ ${LINK_COMUNIDAD_WHATSAPP}
             document.getElementById('footer-general-streaming').classList.remove('hidden');
         };
 
-        /* AUTENTICACIÓN PRO CON VALIDACIÓN DE DISPOSITIVOS ANTI-SHARE */
         window.autenticarClienteMonitorPro = async function() {
             const token = document.getElementById('pt-token-input').value.trim().toUpperCase();
             
@@ -1646,7 +1821,6 @@ ${LINK_COMUNIDAD_WHATSAPP}
             alert("⚡ Datos separados.");
         };
 
-        /* INYECCIÓN CON FECHA DE ACTIVACIÓN SELECCIONABLE Y ID ANTI-COLISIÓN */
         window.ejecutarCargaPerfilStreamingFirebase = async function() {
             const plataforma = document.getElementById('field-plataforma').value;
             const meses = parseInt(document.getElementById('field-meses').value);
@@ -1719,7 +1893,7 @@ ${LINK_COMUNIDAD_WHATSAPP}
                             <div class="flex justify-between items-start">
                                 <div>
                                     <span class="text-amber-400 text-[9px] font-black uppercase tracking-wider">LICENCIA PRO: ${c.tokenLicencia}</span>
-                                    <h4 class="text-white text-sm font-black uppercase mt-[#0.5px]">${c.cliente}</h4>
+                                    <h4 class="text-white text-sm font-black uppercase mt-0.5">${c.cliente}</h4>
                                     <p class="text-[10px] text-slate-300 font-mono mt-0.5"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono} &bull; ${c.direccion || 'TÁCHIRA'}</p>
                                     <p class="text-[10px] text-slate-400 font-mono"><i class="fa-solid fa-calendar text-slate-500"></i> Inicio: ${c.fechaActivacion || 'N/A'}</p>
                                     <p class="text-[10px] text-emerald-400 font-bold mt-0.5"><i class="fa-solid fa-mobile-screen"></i> Equipos: ${c.equiposRegistrados ? c.equiposRegistrados.length : 0} / ${c.maxEquipos} Máx</p>
@@ -1794,7 +1968,6 @@ ${LINK_COMUNIDAD_WHATSAPP}
             });
         };
 
-        /* BOTÓN EXPRÉS RENOVACIÓN +1 MES STREAMING */
         window.renovarExpresStreaming = async function(id) {
             let match = localStreamingClientesArr.find(c => c.id === id);
             if(!match) return;
@@ -1811,7 +1984,6 @@ ${LINK_COMUNIDAD_WHATSAPP}
             window.despacharMensajeWhatsAppStreaming(id, 'RENOVACION');
         };
 
-        /* BOTÓN EXPRÉS RENOVACIÓN +1 MES PUBLITASA PRO */
         window.renovarExpresPubliTasa = async function(id) {
             let match = localPubliTasaClientesArr.find(c => c.id === id);
             if(!match) return;
@@ -1875,7 +2047,6 @@ ${LINK_COMUNIDAD_WHATSAPP}
             }
         };
 
-        /* EDITOR PLANILLA CON CAMBIO DE FECHA DE ACTIVACIÓN MIGRACIÓN */
         window.abrirEditorPlanillaRapida = function(id) {
             let match = localStreamingClientesArr.find(c => c.id === id); if(!match) return;
             let nt = prompt("Modificar Teléfono WhatsApp:", match.telefono || "");
@@ -2061,7 +2232,6 @@ ${LINK_COMUNIDAD_WHATSAPP}
             }
         };
 
-        /* CONTROL Y GUARDADO MANUAL DIRECTO DE BINANCE USDT CON FLECHA DE TENDENCIA NUBE REAL */
         window.guardarTasaBinanceManualPubliTasa = async function(esSoloMantener = false) {
             const compra = parseFloat(document.getElementById('pt-adm-usdt-compra').value) || 8.90;
             let venta = parseFloat(document.getElementById('pt-adm-usdt-venta').value);
@@ -2072,35 +2242,32 @@ ${LINK_COMUNIDAD_WHATSAPP}
             }
 
             const timeStampConsola = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-            let tendenciaHTML = '<span class="text-amber-400 font-mono font-bold animate-pulse">–</span>';
-
-            if(!esSoloMantener) {
-                try {
-                    const docBinancePrev = await getDoc(doc(db, "tcl_publitasa_pro", "binance_config"));
-                    if(docBinancePrev.exists()) {
-                        const prevCompra = parseFloat(docBinancePrev.data().compra) || 0;
-                        if(prevCompra > 0) {
-                            if(compra > prevCompra) {
-                                tendenciaHTML = '<span class="text-emerald-400 font-bold animate-bounce inline-block">▲</span>';
-                            } else if(compra < prevCompra) {
-                                tendenciaHTML = '<span class="text-red-500 font-bold animate-bounce inline-block">▼</span>';
-                            }
-                        }
-                    }
-                } catch(e) {}
-            }
+            
+            let prevCompraVal = compra;
+            try {
+                const docBinancePrev = await getDoc(doc(db, "tcl_publitasa_pro", "binance_config"));
+                if(docBinancePrev.exists()) {
+                    prevCompraVal = parseFloat(docBinancePrev.data().compra) || compra;
+                }
+            } catch(e) {}
 
             try {
                 await setDoc(doc(db, "tcl_publitasa_pro", "binance_config"), { 
                     compra, 
                     venta, 
-                    ultimaActualizacion: timeStampConsola,
-                    tendenciaHTML: tendenciaHTML
+                    prevCompra: esSoloMantener ? prevCompraVal : (compra !== prevCompraVal ? prevCompraVal : compra),
+                    ultimaActualizacion: timeStampConsola
                 });
                 
+                const htmlTrend = generarIconoTendenciaHTML(compra, prevCompraVal);
+
                 document.getElementById('val-usdt-rango').innerText = `${compra.toFixed(2)} / ${venta.toFixed(2)} Bs.`;
-                document.getElementById('trend-usdt-binance').innerHTML = tendenciaHTML;
+                document.getElementById('trend-usdt-binance').innerHTML = htmlTrend;
                 document.getElementById('time-binance').innerText = `⚡ Última actualización: Hoy a las ${timeStampConsola}`;
+
+                // Sincronizar plantilla flyer
+                document.getElementById('flyer-val-usdt-rango').innerText = `${compra.toFixed(2)} / ${venta.toFixed(2)} Bs`;
+                document.getElementById('flyer-trend-usdt-binance').innerHTML = htmlTrend;
 
                 alert(esSoloMantener ? `– Tasa marcada como 'Se Mantiene' (Hora: ${timeStampConsola})` : `🚀 Nueva Tasa de USDT publicada (Hora: ${timeStampConsola})`);
             } catch(e) { 
@@ -2119,10 +2286,13 @@ ${LINK_COMUNIDAD_WHATSAPP}
                 document.getElementById('val-frontera-compra').innerText = compra.toLocaleString('es-CO');
                 document.getElementById('val-frontera-venta').innerText = venta.toLocaleString('es-CO');
                 document.getElementById('time-frontera').innerText = `Última actualización en consola: Hoy a las ${timeStampConsola}`;
+
+                // Sincronizar plantilla flyer
+                document.getElementById('flyer-val-frontera-compra').innerText = `${compra.toLocaleString('es-CO')} COP`;
+                document.getElementById('flyer-val-frontera-venta').innerText = `${venta.toLocaleString('es-CO')} COP`;
             } catch(e) { alert("Error al guardar tasas."); }
         };
 
-        /* CREACIÓN DE SUSCRIPTOR PRO CON FECHA DE ACTIVACIÓN MÓVIL Y ID ANTI-COLISIÓN */
         window.crearSuscriptorPubliTasaPro = async function() {
             const cliente = document.getElementById('pt-cli-nombre').value.trim().toUpperCase();
             const tlf = document.getElementById('pt-cli-tlf').value.trim();
@@ -2236,7 +2406,6 @@ ${LINK_COMUNIDAD_WHATSAPP}
             });
         };
 
-        /* EDITOR PUBLITASA PRO CON CAMBIO DE FECHA MIGRACIÓN */
         window.abrirEditorPubliTasa = function(id) {
             let match = localPubliTasaClientesArr.find(c => c.id === id);
             if(!match) return;
@@ -2353,6 +2522,10 @@ ${LINK_COMUNIDAD_WHATSAPP}
                     document.getElementById('val-frontera-compra').innerText = c.toLocaleString('es-CO');
                     document.getElementById('val-frontera-venta').innerText = v.toLocaleString('es-CO');
                     document.getElementById('time-frontera').innerText = `Última actualización en consola: ${u.includes(':') ? 'Hoy a las ' + u : u}`;
+
+                    // Sincronizar plantilla flyer
+                    document.getElementById('flyer-val-frontera-compra').innerText = `${c.toLocaleString('es-CO')} COP`;
+                    document.getElementById('flyer-val-frontera-venta').innerText = `${v.toLocaleString('es-CO')} COP`;
                 }
 
                 if(docCli.exists()) { 
@@ -2369,7 +2542,6 @@ ${LINK_COMUNIDAD_WHATSAPP}
             }
         };
 
-        // EVALUACIÓN DE ARRANQUE Y NAVEGACIÓN DE HASH (PWA ENTRADA DIRECTA A PUBLITASA)
         window.addEventListener('hashchange', function() {
             if(window.location.hash === '#publitasa') {
                 window.abrirVistaMonitorDirecto();
@@ -2380,18 +2552,14 @@ ${LINK_COMUNIDAD_WHATSAPP}
 
         window.onload = async function() {
             iniciarRelojDigitalDinamico();
-
-            // CONSTRUCCIÓN INSTANTÁNEA DE LA VITRINA DESDE EL MILISEGUNDO 0 (CARGA DE GOLPE SINO ESPERAS)
             window.construirEstructurasDinamicasInterfaces();
 
-            // Seteo de fecha de hoy por defecto en inputs tipo fecha
             const hoyISO = obtenerFechaHoyISO();
             const inputDateStr = document.getElementById('field-fecha-activacion-str');
             const inputDatePT = document.getElementById('pt-cli-fecha-activacion-str');
             if(inputDateStr) inputDateStr.value = hoyISO;
             if(inputDatePT) inputDatePT.value = hoyISO;
             
-            // DETECCION MODO APLICACIÓN INSTALADA (STANDALONE) O HASH DIRECTO
             const esAppStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
             const esRutaMonitor = esAppStandalone || window.location.hash === '#publitasa';
 
@@ -2399,7 +2567,6 @@ ${LINK_COMUNIDAD_WHATSAPP}
                 const docTar = await getDoc(doc(db, "tcl_streaming_core", "tarifas_config"));
                 if(docTar.exists()) { 
                     catálogoPlataformasEstructura = docTar.data(); 
-                    // Re-renderizado de fondo solo si cambiaron precios en la nube
                     window.construirEstructurasDinamicasInterfaces();
                 }
                 
@@ -2421,4 +2588,4 @@ ${LINK_COMUNIDAD_WHATSAPP}
         };
     </script>
 </body>
-    </html>
+                        </html>
