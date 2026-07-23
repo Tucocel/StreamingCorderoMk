@@ -938,7 +938,7 @@
                     </div>
                 </div>
 
-                <!-- 5. BÓVEDA CENTRAL PUBLITASA CON NUEVO BOTÓN ACORDEÓN DESPLEGABLE -->
+                <!-- 5. BÓVEDA CENTRAL PUBLITASA CON BOTÓN ACORDEÓN DESPLEGABLE -->
                 <div class="space-y-3">
                     <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
                         <div class="flex justify-between items-center">
@@ -1180,19 +1180,18 @@
             return `${parseInt(partes[2])}/${parseInt(partes[1])}/${partes[0]}`;
         }
 
+        /* ENRUTADOR INTELIGENTE DE WHATSAPP */
         function abrirWhatsAppPersonal(phoneTarget, mensajeTexto) {
-            let cleanTlf = (phoneTarget || MI_NUMERO_CELULAR_UNICO).replace(/\D/g, '');
-            if (cleanTlf && !cleanTlf.startsWith('58')) cleanTlf = '58' + cleanTlf;
-            
             const textoCodificado = encodeURIComponent(mensajeTexto);
-            const isAndroid = /Android/i.test(navigator.userAgent);
-
-            if (isAndroid) {
-                let intentUrl = `intent://send?phone=${cleanTlf}&text=${textoCodificado}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
-                window.location.href = intentUrl;
+            let cleanTlf = phoneTarget ? phoneTarget.replace(/\D/g, '') : '';
+            
+            // Si tiene número de cliente explícito, va directo a ese cliente
+            if (cleanTlf) {
+                if (!cleanTlf.startsWith('58') && cleanTlf.length === 10) cleanTlf = '58' + cleanTlf;
+                window.open(`https://api.whatsapp.com/send?phone=${cleanTlf}&text=${textoCodificado}`, '_blank');
             } else {
-                let webUrl = `https://api.whatsapp.com/send?phone=${cleanTlf}&text=${textoCodificado}`;
-                window.open(webUrl, '_blank');
+                // Si NO hay número (difusión general, reportes, cotizaciones), abre el selector libre de contactos/grupos
+                window.open(`https://api.whatsapp.com/send?text=${textoCodificado}`, '_blank');
             }
         }
 
@@ -1634,7 +1633,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     } catch (e) {}
                 } else {
                     const mensajeTexto = `📊 Reporte Diario de Indicadores Económicos — PubliTasaMK Pro\n📅 Fecha: ${fechaStr}\n\n🏛️ Respaldo Corporativo: Tucocel C.A.`;
-                    abrirWhatsAppPersonal(MI_NUMERO_CELULAR_UNICO, mensajeTexto);
+                    abrirWhatsAppPersonal('', mensajeTexto);
                 }
             }, 'image/png');
         };
@@ -2529,7 +2528,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         window.renderizarBovedaPubliTasaPro = function() {
             const box = document.getElementById('mosaico-publitasa-clientes-box'); if(!box) return;
             const btnAcordeon = document.getElementById('btn-acordeon-publitasa-desplegar');
-            const icoAcordeon = document.getElementById('ico-acordeon-pt');
             box.innerHTML = "";
 
             localPubliTasaClientesArr.forEach(c => {
@@ -2770,4 +2768,4 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
     </script>
 </body>
-    </html>
+                        </html>
