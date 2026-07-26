@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Servicios Streaming Cordero MK & PubliTasaMK Pro</title>
     
     <!-- METADATOS COMPARTICIÓN ESTADOS/GRUPOS -->
@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap');
+        html, body { max-width: 100%; overflow-x: hidden; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #030306; color: #f8fafc; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -81,9 +82,9 @@
         }
     </style>
 </head>
-<body class="min-h-screen overflow-x-hidden no-scrollbar flex flex-col justify-between">
+<body class="min-h-screen overflow-x-hidden no-scrollbar flex flex-col justify-between w-full">
 
-    <div>
+    <div class="w-full overflow-x-hidden">
         <!-- INICIO SESIÓN MÁSTER CENTRAL -->
         <div id="streaming-modal-login-raiz" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[12000] p-4 flex items-center justify-center hidden">
             <div class="bg-neutral-900 border border-neutral-800 w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl">
@@ -102,99 +103,116 @@
         </div>
 
         <!-- NAVBAR CORPORATIVO -->
-        <header class="bg-neutral-950/95 border-b border-neutral-900 px-4 py-3.5 sticky top-0 z-50 backdrop-blur-md">
-            <div class="max-w-6xl mx-auto flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <span class="text-red-600 text-xs sm:text-base font-black tracking-widest uppercase glow-red"><i class="fa-solid fa-film"></i> Servicios Streaming Cordero MK</span>
+        <header class="bg-neutral-950/95 border-b border-neutral-900 px-3 sm:px-4 py-3.5 sticky top-0 z-50 backdrop-blur-md w-full">
+            <div class="max-w-6xl mx-auto flex justify-between items-center w-full">
+                <div class="flex items-center gap-2 truncate">
+                    <span class="text-red-600 text-[11px] sm:text-base font-black tracking-widest uppercase glow-red truncate"><i class="fa-solid fa-film"></i> Streaming Cordero MK</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <button id="btn-nav-visitar-vitrina" onclick="window.cerrarVistaMonitorDirecto()" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 font-black text-[9px] sm:text-[10px] px-3 py-2 rounded-xl uppercase tracking-wider hidden flex items-center gap-1.5 transition-all hover:bg-amber-500/20 btn-interactive">
-                        <i class="fa-solid fa-store"></i> <span>Visitar Vitrina Streaming</span>
+                <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+                    <!-- BOTÓN PÚBLICO DE DIFUSIÓN EN VITRINA -->
+                    <button id="btn-vitrina-difusion-publica" onclick="window.despacharMarketingMasivoWhatsApp('GRUPOS')" class="bg-gradient-to-r from-amber-500 to-red-600 text-white font-black text-[9px] sm:text-[10px] px-3 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-lg hover:scale-105 btn-interactive">
+                        <i class="fa-solid fa-paper-plane"></i> <span>Compartir</span>
                     </button>
 
-                    <button id="btn-nav-abrir-monitor" onclick="window.abrirVistaMonitorDirecto()" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 font-black text-[9px] sm:text-[10px] px-3 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all hover:bg-amber-500/20 btn-interactive">
+                    <button id="btn-nav-visitar-vitrina" onclick="window.cerrarVistaMonitorDirecto()" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 font-black text-[9px] sm:text-[10px] px-2.5 sm:px-3 py-2 rounded-xl uppercase tracking-wider hidden flex items-center gap-1 transition-all hover:bg-amber-500/20 btn-interactive">
+                        <i class="fa-solid fa-store"></i> <span>Vitrina</span>
+                    </button>
+
+                    <button id="btn-nav-abrir-monitor" onclick="window.abrirVistaMonitorDirecto()" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 font-black text-[9px] sm:text-[10px] px-2.5 sm:px-3 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1 transition-all hover:bg-amber-500/20 btn-interactive">
                         <i class="fa-solid fa-chart-line"></i> <span class="hidden sm:inline">Monitor</span> Pro
                     </button>
 
-                    <button id="btn-mando-abrir-login" onclick="window.abrirModalLoginStreamingRaiz()" class="bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-slate-300 font-black text-[9px] sm:text-[10px] px-3.5 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all btn-interactive">
-                        <i class="fa-solid fa-lock text-red-500"></i> <span>Consola Máster</span>
+                    <button id="btn-mando-abrir-login" onclick="window.abrirModalLoginStreamingRaiz()" class="bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-slate-300 font-black text-[9px] sm:text-[10px] px-2.5 sm:px-3.5 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1 transition-all btn-interactive">
+                        <i class="fa-solid fa-lock text-red-500"></i> <span class="hidden sm:inline">Consola</span>
                     </button>
                 </div>
             </div>
         </header>
 
         <!-- ANUNCIO REGLA DE ORO -->
-        <div class="bg-gradient-to-r from-red-950 via-neutral-950 to-red-950 text-center py-2.5 px-4 border-b border-red-900/30">
-            <p class="text-[9.5px] sm:text-xs font-bold text-slate-200 uppercase tracking-wide">
+        <div class="bg-gradient-to-r from-red-950 via-neutral-950 to-red-950 text-center py-2 px-3 border-b border-red-900/30 w-full">
+            <p class="text-[9px] sm:text-xs font-bold text-slate-200 uppercase tracking-wide">
                 📌 <span class="text-red-500 font-black">Regla de Oro:</span> Todas las membresías son el alquiler de un servicio mensual. Deben renovarse 1 día antes del vencimiento.
             </p>
         </div>
 
         <!-- MÉTODOS DE PAGO BANNER -->
-        <div class="max-w-6xl mx-auto px-3 pt-4">
-            <div class="bg-neutral-950/40 border border-neutral-900 rounded-2xl py-2 px-4 text-center">
-                <p class="text-[9.5px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wide">
-                    💳 <span class="text-white">Múltiples Métodos de Pago Disponibles:</span> Bolívares (Pago Móvil) | Binance USDT | Zelle | Zinli | Nequi | PayPal
+        <div class="max-w-6xl mx-auto px-2.5 sm:px-3 pt-3 w-full">
+            <div class="bg-neutral-950/40 border border-neutral-900 rounded-2xl py-2 px-3 text-center">
+                <p class="text-[9px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wide">
+                    💳 <span class="text-white">Métodos de Pago:</span> Bolívares (Pago Móvil) | Binance USDT | Zelle | Zinli | Nequi | PayPal
                 </p>
             </div>
         </div>
 
         <!-- ==================== VISTA CLIENTE PÚBLICO ==================== -->
-        <div id="vista-vitrina-publica" class="space-y-6">
-            <section class="hero-epic text-center py-10 px-4 space-y-3 shadow-xl">
+        <div id="vista-vitrina-publica" class="space-y-5 w-full">
+            <section class="hero-epic text-center py-8 sm:py-10 px-3 space-y-3 shadow-xl w-full">
                 <div class="max-w-3xl mx-auto space-y-2">
-                    <span class="text-[9px] tracking-[0.3em] font-extrabold text-red-500 uppercase bg-red-950/50 border border-red-900/50 px-3 py-1 rounded-full inline-block">TAQUILLA DIGITAL OFICIAL</span>
-                    <h1 class="text-3xl sm:text-5xl font-black tracking-tight uppercase text-white leading-none">
+                    <span class="text-[8.5px] sm:text-[9px] tracking-[0.25em] font-extrabold text-red-500 uppercase bg-red-950/50 border border-red-900/50 px-3 py-1 rounded-full inline-block">TAQUILLA DIGITAL OFICIAL</span>
+                    <h1 class="text-2xl sm:text-5xl font-black tracking-tight uppercase text-white leading-none">
                         Servicios Streaming <br class="sm:hidden"><span class="text-red-600 glow-red">Cordero MK</span>
                     </h1>
-                    <div class="h-0.5 w-16 bg-red-600 mx-auto my-3 rounded-full shadow-lg shadow-red-500/50"></div>
-                    <p class="text-[10px] sm:text-xs text-slate-400 max-w-md mx-auto uppercase font-bold tracking-wider leading-relaxed">
+                    <div class="h-0.5 w-16 bg-red-600 mx-auto my-2.5 rounded-full shadow-lg shadow-red-500/50"></div>
+                    <p class="text-[9.5px] sm:text-xs text-slate-400 max-w-md mx-auto uppercase font-bold tracking-wider leading-relaxed">
                         ⭐ CALIDAD PREMIUM VIRTUAL | DISPONIBILIDAD INMEDIATA | SOPORTE 24/7
                     </p>
                 </div>
             </section>
 
-            <div class="max-w-6xl mx-auto px-2.5 sm:px-4">
-                <div onclick="window.abrirVistaMonitorDirecto()" class="publitasa-pro-card rounded-2xl p-4 sm:p-5 flex items-center justify-between cursor-pointer btn-interactive">
-                    <div class="flex items-center gap-3.5 sm:gap-4">
-                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 rounded-full flex items-center justify-center border-2 border-white shadow-lg shadow-amber-500/30 flex-shrink-0">
-                            <i class="fa-solid fa-arrow-trend-up text-neutral-950 text-xl sm:text-2xl"></i>
+            <!-- TARJETA PUBLITASA PRO -->
+            <div class="max-w-6xl mx-auto px-2.5 sm:px-4 w-full">
+                <div onclick="window.abrirVistaMonitorDirecto()" class="publitasa-pro-card rounded-2xl p-3.5 sm:p-5 flex items-center justify-between cursor-pointer btn-interactive">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <div class="w-11 h-11 sm:w-14 sm:h-14 bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 rounded-full flex items-center justify-center border-2 border-white shadow-lg shadow-amber-500/30 flex-shrink-0">
+                            <i class="fa-solid fa-arrow-trend-up text-neutral-950 text-lg sm:text-2xl"></i>
                         </div>
                         <div class="space-y-1">
-                            <div class="flex items-center gap-2">
-                                <span id="badge-publitasa-estado" class="bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-[8px] sm:text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider inline-flex items-center gap-1">
+                            <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                                <span id="badge-publitasa-estado" class="bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-[7.5px] sm:text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider inline-flex items-center gap-1">
                                     <i class="fa-solid fa-bolt text-emerald-400"></i> SERVICIO EN VIVO
                                 </span>
-                                <span id="lbl-tarjeta-publitasa-precio-min" class="bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[8px] sm:text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider font-mono">
+                                <span id="lbl-tarjeta-publitasa-precio-min" class="bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[7.5px] sm:text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider font-mono">
                                     Desde 5,00 USDT
                                 </span>
                             </div>
-                            <h3 class="text-base sm:text-xl font-extrabold uppercase text-white tracking-wide bg-gradient-to-r from-white via-amber-200 to-amber-400 bg-clip-text text-transparent">
+                            <h3 class="text-sm sm:text-xl font-extrabold uppercase text-white tracking-wide bg-gradient-to-r from-white via-amber-200 to-amber-400 bg-clip-text text-transparent">
                                 PUBLI-TASA-MK PRO
                             </h3>
-                            <div class="text-amber-400 text-[9px] flex items-center gap-0.5">
+                            <div class="text-amber-400 text-[8px] sm:text-[9px] flex items-center gap-0.5">
                                 <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                             </div>
-                            <p class="text-[9px] sm:text-[11px] text-slate-300 font-medium leading-tight">
+                            <p class="text-[8.5px] sm:text-[11px] text-slate-300 font-medium leading-tight">
                                 Todos tus indicadores financieros en tiempo real y en un solo lugar
                             </p>
                         </div>
                     </div>
-                    <div class="text-amber-400 text-lg sm:text-xl pl-2">
+                    <div class="text-amber-400 text-base sm:text-xl pl-1 sm:pl-2">
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                 </div>
             </div>
 
-            <main class="max-w-6xl mx-auto px-2.5 sm:px-4 py-2">
-                <section id="mosaico-vitrina-publica-productos" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+            <!-- CINTILLO SOLICITADO EXACTAMENTE PARA CAPTURES -->
+            <div class="max-w-6xl mx-auto px-2.5 sm:px-4 w-full">
+                <div class="bg-gradient-to-r from-red-950/90 via-neutral-900 to-red-950/90 border-2 border-red-600/70 rounded-2xl py-2.5 px-3 text-center shadow-xl">
+                    <h2 class="text-[11px] sm:text-sm font-black text-white uppercase tracking-wider flex items-center justify-center gap-1.5 sm:gap-2">
+                        <i class="fa-solid fa-fire text-red-500 animate-pulse text-xs"></i>
+                        <span>PRECIOS EN BOLÍVARES ACTUALIZADOS A LA TASA DEL DÍA USDT DE BINANCE</span>
+                        <i class="fa-solid fa-fire text-red-500 animate-pulse text-xs"></i>
+                    </h2>
+                </div>
+            </div>
+
+            <main class="max-w-6xl mx-auto px-2.5 sm:px-4 py-1 w-full">
+                <section id="mosaico-vitrina-publica-productos" class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 md:gap-5 w-full">
                 </section>
             </main>
         </div>
 
         <!-- FORMULARIO DE CAPTACIÓN PÚBLICO -->
         <div id="modal-solicitud-cliente-streaming" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[10000] p-4 hidden flex items-center justify-center">
-            <div class="bg-neutral-900 border border-neutral-800 w-full max-w-md rounded-3xl p-6 space-y-4 shadow-2xl">
+            <div class="bg-neutral-900 border border-neutral-800 w-full max-w-md rounded-3xl p-5 sm:p-6 space-y-4 shadow-2xl">
                 <div class="flex justify-between items-center border-b border-neutral-800 pb-2">
                     <h3 class="font-black text-xs uppercase tracking-wider text-white flex items-center gap-1.5 text-red-500"><i class="fa-solid fa-paper-plane"></i> Formulario de Pedido</h3>
                     <button onclick="document.getElementById('modal-solicitud-cliente-streaming').classList.add('hidden')" class="text-slate-400 hover:text-white bg-neutral-950 border border-neutral-800 w-7 h-7 rounded-xl flex items-center justify-center btn-interactive"><i class="fa-solid fa-xmark text-xs"></i></button>
@@ -254,187 +272,187 @@
         </div>
 
         <!-- ==================== VISTA: MONITOR DE INDICADORES EN VIVO ==================== -->
-        <div id="vista-publitasa-monitor" class="max-w-4xl mx-auto px-3 sm:px-4 py-6 space-y-6 hidden">
-            <div class="bg-gradient-to-b from-[#001f4d] to-[#00112b] border-2 border-amber-500/60 rounded-3xl p-5 text-center space-y-3 shadow-2xl relative overflow-hidden">
-                <div class="flex justify-between items-center border-b border-amber-500/20 pb-3">
-                    <button onclick="window.cerrarVistaMonitorDirecto()" class="text-slate-400 hover:text-white text-xs font-bold bg-neutral-900 border border-neutral-800 px-3 py-1.5 rounded-xl btn-interactive">
+        <div id="vista-publitasa-monitor" class="max-w-4xl mx-auto px-2.5 sm:px-4 py-5 space-y-5 hidden w-full">
+            <div class="bg-gradient-to-b from-[#001f4d] to-[#00112b] border-2 border-amber-500/60 rounded-3xl p-4 sm:p-5 text-center space-y-3 shadow-2xl relative overflow-hidden w-full">
+                <div class="flex justify-between items-center border-b border-amber-500/20 pb-2.5">
+                    <button onclick="window.cerrarVistaMonitorDirecto()" class="text-slate-400 hover:text-white text-[11px] font-bold bg-neutral-900 border border-neutral-800 px-2.5 py-1.5 rounded-xl btn-interactive">
                         <i class="fa-solid fa-arrow-left"></i> Volver a Vitrina
                     </button>
-                    <span class="bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sincronizado en Vivo
+                    <span class="bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-[8.5px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sincronizado
                     </span>
                 </div>
 
-                <div class="w-16 h-16 bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 rounded-full flex items-center justify-center border-2 border-white shadow-xl mx-auto">
-                    <i class="fa-solid fa-arrow-trend-up text-neutral-950 text-3xl"></i>
+                <div class="w-14 h-14 bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 rounded-full flex items-center justify-center border-2 border-white shadow-xl mx-auto">
+                    <i class="fa-solid fa-arrow-trend-up text-neutral-950 text-2xl"></i>
                 </div>
                 
                 <div>
-                    <h2 class="text-2xl font-black uppercase tracking-wider text-white bg-gradient-to-r from-white via-amber-200 to-amber-400 bg-clip-text text-transparent">
+                    <h2 class="text-xl sm:text-2xl font-black uppercase tracking-wider text-white bg-gradient-to-r from-white via-amber-200 to-amber-400 bg-clip-text text-transparent">
                         PUBLI-TASA-MK PRO
                     </h2>
-                    <p class="text-[11px] text-slate-300 font-medium mt-1">
+                    <p class="text-[10px] sm:text-[11px] text-slate-300 font-medium mt-0.5">
                         Monitor Económico Oficial Venezolano, Colombiano, USDT Binance y Bitcoin
                     </p>
                 </div>
 
-                <div class="bg-neutral-950/80 border border-amber-500/30 rounded-2xl py-2.5 px-4 max-w-sm mx-auto flex justify-between items-center text-amber-400 font-mono text-xs">
-                    <div class="flex items-center gap-1.5 font-bold">
+                <div class="bg-neutral-950/80 border border-amber-500/30 rounded-2xl py-2 px-3.5 max-w-sm mx-auto flex justify-between items-center text-amber-400 font-mono text-xs">
+                    <div class="flex items-center gap-1 font-bold">
                         <i class="fa-regular fa-calendar-days text-slate-400"></i>
-                        <span id="pt-reloj-fecha" class="text-slate-200 uppercase text-[10px]">Cargando...</span>
+                        <span id="pt-reloj-fecha" class="text-slate-200 uppercase text-[9.5px]">Cargando...</span>
                     </div>
-                    <div class="flex items-center gap-1.5 font-black text-sm">
+                    <div class="flex items-center gap-1 font-black text-xs sm:text-sm">
                         <i class="fa-regular fa-clock text-amber-400"></i>
                         <span id="pt-reloj-hora">12:00:00 AM</span>
                     </div>
                 </div>
 
-                <button onclick="window.ejecutarInstalacionPWA()" id="btn-pwa-instalar" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black px-6 py-2.5 rounded-2xl text-xs uppercase tracking-wider shadow-lg transition-all inline-flex items-center gap-2 btn-interactive">
-                    <i class="fa-solid fa-mobile-screen-button text-base"></i> Instalar Aplicación en Pantalla Principal
+                <button onclick="window.ejecutarInstalacionPWA()" id="btn-pwa-instalar" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black px-5 py-2.5 rounded-2xl text-[11px] uppercase tracking-wider shadow-lg transition-all inline-flex items-center gap-1.5 btn-interactive">
+                    <i class="fa-solid fa-mobile-screen-button text-sm"></i> Instalar Aplicación en Pantalla Principal
                 </button>
             </div>
 
-            <div class="bg-neutral-950 border border-amber-500/40 p-4 rounded-2xl space-y-1.5 text-center shadow-lg">
-                <span class="text-amber-400 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-1.5">
+            <div class="bg-neutral-950 border border-amber-500/40 p-3.5 rounded-2xl space-y-1 text-center shadow-lg w-full">
+                <span class="text-amber-400 text-[9.5px] font-black uppercase tracking-widest flex items-center justify-center gap-1">
                     <i class="fa-solid fa-triangle-exclamation"></i> AVISO Y REGLA IMPORTANTE DE USO
                 </span>
-                <p class="text-[10.5px] text-slate-300 font-medium leading-relaxed">
+                <p class="text-[10px] text-slate-300 font-medium leading-relaxed">
                     Estimado cliente, esta suscripción es el <strong>alquiler de una membresía mensual</strong>, no constituye la compra del software. La licencia queda vinculada a su dispositivo. Si cambia de equipo, debe solicitar el reset al administrador.
                 </p>
             </div>
 
-            <div id="wrapper-login-monitor-pro" class="bg-neutral-900 border border-neutral-800 p-5 rounded-3xl space-y-4 text-center max-w-sm mx-auto shadow-2xl">
+            <div id="wrapper-login-monitor-pro" class="bg-neutral-900 border border-neutral-800 p-4 sm:p-5 rounded-3xl space-y-3.5 text-center max-w-sm mx-auto shadow-2xl w-full">
                 <div class="space-y-2">
                     <h3 class="text-white font-black uppercase text-xs tracking-wider">Validar Acceso Pro</h3>
-                    <input type="password" id="pt-token-input" placeholder="INGRESE LICENCIA O CLAVE MÁSTER" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 font-mono text-center text-xs px-4 py-3 rounded-xl uppercase focus:outline-none focus:border-amber-500">
+                    <input type="password" id="pt-token-input" placeholder="INGRESE LICENCIA O CLAVE MÁSTER" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 font-mono text-center text-xs px-3.5 py-2.5 rounded-xl uppercase focus:outline-none focus:border-amber-500">
                     <button onclick="window.autenticarClienteMonitorPro()" class="w-full bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black py-2.5 rounded-xl uppercase text-xs tracking-wider shadow-md btn-interactive">
                         Desbloquear Indicadores 🔓
                     </button>
                 </div>
 
-                <div class="border-t border-neutral-800 pt-3">
-                    <p class="text-[10px] text-slate-400 font-medium mb-2">¿Aún no tienes tu acceso activo?</p>
-                    <button onclick="window.abrirModalSolicitudStreaming('PUBLITASA_PRO')" class="w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-extrabold py-3 rounded-xl uppercase tracking-wider text-xs shadow-xl transition-all border border-amber-300 animate-pulse flex items-center justify-center gap-2 btn-interactive">
-                        <i class="fa-solid fa-cart-shopping text-sm"></i> Adquiere tu Membresía Pro desde $5 USDT
+                <div class="border-t border-neutral-800 pt-2.5">
+                    <p class="text-[9.5px] text-slate-400 font-medium mb-1.5">¿Aún no tienes tu acceso activo?</p>
+                    <button onclick="window.abrirModalSolicitudStreaming('PUBLITASA_PRO')" class="w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-extrabold py-2.5 rounded-xl uppercase tracking-wider text-[11px] shadow-xl transition-all border border-amber-300 animate-pulse flex items-center justify-center gap-1.5 btn-interactive">
+                        <i class="fa-solid fa-cart-shopping text-xs"></i> Adquiere tu Membresía Pro desde $5 USDT
                     </button>
                 </div>
             </div>
 
-            <div id="wrapper-indicadores-pantalla" class="space-y-4 hidden">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div id="wrapper-indicadores-pantalla" class="space-y-4 hidden w-full">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 w-full">
                     
-                    <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-2">
-                        <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
+                    <div class="bg-neutral-950 border border-neutral-800 p-3.5 sm:p-4 rounded-2xl space-y-2">
+                        <div class="flex justify-between items-center border-b border-neutral-900 pb-1.5">
                             <span class="text-xs font-bold text-slate-300">🇻🇪 Oficial BCV (Bolívares)</span>
-                            <span class="text-[9px] text-emerald-400 font-mono font-bold"><i class="fa-solid fa-building-columns text-emerald-400"></i> Emisión Oficial</span>
+                            <span class="text-[8.5px] text-emerald-400 font-mono font-bold"><i class="fa-solid fa-building-columns text-emerald-400"></i> Emisión Oficial</span>
                         </div>
-                        <div class="space-y-1 pt-1">
+                        <div class="space-y-1 pt-0.5">
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slate-400">Dólar BCV:</span>
-                                <span class="flex items-center gap-1 font-mono font-black text-amber-400 text-lg">
+                                <span class="flex items-center gap-1 font-mono font-black text-amber-400 text-base sm:text-lg">
                                     <span id="trend-bcv-usd" class="text-xs font-bold">•</span>
                                     <span id="val-bcv-usd">Cargando...</span>
                                 </span>
                             </div>
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slate-400">Euro BCV:</span>
-                                <span class="flex items-center gap-1 font-mono font-black text-amber-300 text-lg">
+                                <span class="flex items-center gap-1 font-mono font-black text-amber-300 text-base sm:text-lg">
                                     <span id="trend-bcv-eur" class="text-xs font-bold">•</span>
                                     <span id="val-bcv-eur">Cargando...</span>
                                 </span>
                             </div>
                         </div>
-                        <div class="border-t border-neutral-900/60 pt-2 space-y-0.5 text-right">
-                            <span id="time-bcv" class="text-[10px] sm:text-[10.5px] text-slate-300 font-mono font-bold block">Oficial BCV — Cargando fecha emisión...</span>
-                            <span class="text-[8px] text-amber-400/90 font-mono font-semibold block leading-tight">Esta tasa es válida hasta la próxima publicación del Banco Central de Venezuela.</span>
+                        <div class="border-t border-neutral-900/60 pt-1.5 space-y-0.5 text-right">
+                            <span id="time-bcv" class="text-[9.5px] text-slate-300 font-mono font-bold block">Oficial BCV — Cargando fecha...</span>
+                            <span class="text-[8px] text-amber-400/90 font-mono font-semibold block leading-tight">Válida hasta próxima publicación del BCV.</span>
                         </div>
                     </div>
 
-                    <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-2">
-                        <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
+                    <div class="bg-neutral-950 border border-neutral-800 p-3.5 sm:p-4 rounded-2xl space-y-2">
+                        <div class="flex justify-between items-center border-b border-neutral-900 pb-1.5">
                             <span class="text-xs font-bold text-slate-300">🇨🇴 Oficial Colombia</span>
-                            <span class="text-[9px] text-emerald-400 font-mono font-bold"><i class="fa-solid fa-circle-dot animate-pulse"></i> SFC Oficial</span>
+                            <span class="text-[8.5px] text-emerald-400 font-mono font-bold"><i class="fa-solid fa-circle-dot animate-pulse"></i> SFC Oficial</span>
                         </div>
-                        <div class="space-y-1 pt-1">
+                        <div class="space-y-1 pt-0.5">
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slate-400">Dólar TRM (COP):</span>
-                                <span class="flex items-center gap-1 font-mono font-black text-amber-400 text-lg">
+                                <span class="flex items-center gap-1 font-mono font-black text-amber-400 text-base sm:text-lg">
                                     <span id="trend-trm-cop" class="text-xs font-bold">•</span>
                                     <span id="val-trm-cop">Cargando...</span>
                                 </span>
                             </div>
                             <div class="flex justify-between items-center">
                                 <span class="text-xs font-bold text-slate-400">Euro Colombia (COP):</span>
-                                <span class="flex items-center gap-1 font-mono font-black text-amber-300 text-lg">
+                                <span class="flex items-center gap-1 font-mono font-black text-amber-300 text-base sm:text-lg">
                                     <span id="trend-eur-cop" class="text-xs font-bold">•</span>
                                     <span id="val-eur-cop">Cargando...</span>
                                 </span>
                             </div>
                         </div>
-                        <div class="border-t border-neutral-900/60 pt-2 text-right">
-                            <span id="time-trm" class="text-[10px] sm:text-[10.5px] text-slate-300 font-mono font-bold">Última actualización: En espera...</span>
+                        <div class="border-t border-neutral-900/60 pt-1.5 text-right">
+                            <span id="time-trm" class="text-[9.5px] text-slate-300 font-mono font-bold">Última actualización: En espera...</span>
                         </div>
                     </div>
 
-                    <div class="bg-neutral-950 border-2 border-amber-500/40 p-4 rounded-2xl space-y-2 sm:col-span-2">
-                        <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
+                    <div class="bg-neutral-950 border-2 border-amber-500/40 p-3.5 sm:p-4 rounded-2xl space-y-2 sm:col-span-2">
+                        <div class="flex justify-between items-center border-b border-neutral-900 pb-1.5">
                             <span class="text-xs font-bold text-amber-400 uppercase">💱 Casa de Cambio Frontera (Cúcuta / La Parada)</span>
-                            <span class="text-[9px] text-slate-400 font-mono">Referencia Comercial</span>
+                            <span class="text-[8.5px] text-slate-400 font-mono">Referencia Comercial</span>
                         </div>
-                        <div class="grid grid-cols-2 gap-4 pt-1 text-center">
-                            <div class="bg-neutral-900 p-2.5 rounded-xl border border-neutral-800">
-                                <span class="text-[9px] text-slate-400 uppercase block font-bold">Compran Dólar (COP)</span>
-                                <span id="val-frontera-compra" class="text-2xl font-mono font-black text-emerald-400">3.320</span>
+                        <div class="grid grid-cols-2 gap-3 pt-0.5 text-center">
+                            <div class="bg-neutral-900 p-2 rounded-xl border border-neutral-800">
+                                <span class="text-[8.5px] text-slate-400 uppercase block font-bold">Compran Dólar (COP)</span>
+                                <span id="val-frontera-compra" class="text-xl sm:text-2xl font-mono font-black text-emerald-400">3.320</span>
                             </div>
-                            <div class="bg-neutral-900 p-2.5 rounded-xl border border-neutral-800">
-                                <span class="text-[9px] text-slate-400 uppercase block font-bold flex items-center justify-center gap-1">
+                            <div class="bg-neutral-900 p-2 rounded-xl border border-neutral-800">
+                                <span class="text-[8.5px] text-slate-400 uppercase block font-bold flex items-center justify-center gap-1">
                                     <span>Venden Dólar (COP)</span>
                                     <span id="trend-frontera"></span>
                                 </span>
-                                <span id="val-frontera-venta" class="text-2xl font-mono font-black text-amber-400">3.370</span>
+                                <span id="val-frontera-venta" class="text-xl sm:text-2xl font-mono font-black text-amber-400">3.370</span>
                             </div>
                         </div>
-                        <div class="border-t border-neutral-900/60 pt-2 text-right">
-                            <span id="time-frontera" class="text-[10px] sm:text-[10.5px] text-amber-400/90 font-mono font-bold">Última actualización en consola: Hoy</span>
+                        <div class="border-t border-neutral-900/60 pt-1.5 text-right">
+                            <span id="time-frontera" class="text-[9.5px] text-amber-400/90 font-mono font-bold">Última actualización en consola: Hoy</span>
                         </div>
                     </div>
 
-                    <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-3 sm:col-span-2">
-                        <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
+                    <div class="bg-neutral-950 border border-neutral-800 p-3.5 sm:p-4 rounded-2xl space-y-2.5 sm:col-span-2">
+                        <div class="flex justify-between items-center border-b border-neutral-900 pb-1.5">
                             <span class="text-xs font-bold text-slate-300">🪙 Mercado Cripto (Binance P2P & Global)</span>
-                            <span class="text-[9px] text-emerald-400 font-mono font-bold"><i class="fa-solid fa-circle-dot animate-pulse"></i> Sincronizado</span>
+                            <span class="text-[8.5px] text-emerald-400 font-mono font-bold"><i class="fa-solid fa-circle-dot animate-pulse"></i> Sincronizado</span>
                         </div>
                         
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                            <div class="bg-neutral-900 p-3.5 rounded-xl border border-neutral-800 space-y-2 flex flex-col justify-between">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-0.5">
+                            <div class="bg-neutral-900 p-3 rounded-xl border border-neutral-800 space-y-1.5 flex flex-col justify-between">
                                 <div>
-                                    <span class="text-[9.5px] text-amber-400 uppercase font-black block">Binance USDT (VES)</span>
-                                    <div class="pt-1.5 text-slate-300 font-mono">
-                                        <span class="text-[10px] text-slate-400 block mb-0.5 font-bold">Se cotiza en este momento entre:</span>
-                                        <div class="flex items-center gap-1.5">
-                                            <span id="trend-usdt-binance" class="text-sm font-bold">•</span>
-                                            <strong id="val-usdt-rango" class="text-emerald-400 text-lg sm:text-2xl font-black font-mono">800 / 812 Bs.</strong>
+                                    <span class="text-[9px] text-amber-400 uppercase font-black block">Binance USDT (VES)</span>
+                                    <div class="pt-1 text-slate-300 font-mono">
+                                        <span class="text-[9.5px] text-slate-400 block font-bold">Cotización en este momento:</span>
+                                        <div class="flex items-center gap-1">
+                                            <span id="trend-usdt-binance" class="text-xs font-bold">•</span>
+                                            <strong id="val-usdt-rango" class="text-emerald-400 text-base sm:text-2xl font-black font-mono">800 / 812 Bs.</strong>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="border-t border-neutral-800/80 pt-2 text-right mt-1">
-                                    <span id="time-binance" class="text-[10px] text-emerald-400 font-mono font-bold block">⚡ Última actualización: En espera...</span>
+                                <div class="border-t border-neutral-800/80 pt-1.5 text-right mt-1">
+                                    <span id="time-binance" class="text-[9.5px] text-emerald-400 font-mono font-bold block">⚡ Última actualización: En espera...</span>
                                 </div>
                             </div>
 
-                            <div class="bg-neutral-900 p-3.5 rounded-xl border border-neutral-800 space-y-2 flex flex-col justify-between">
+                            <div class="bg-neutral-900 p-3 rounded-xl border border-neutral-800 space-y-1.5 flex flex-col justify-between">
                                 <div>
-                                    <span class="text-[9.5px] text-amber-400 uppercase font-black block">Bitcoin (BTC / USD Global)</span>
-                                    <div class="flex justify-between items-center font-mono pt-2">
+                                    <span class="text-[9px] text-amber-400 uppercase font-black block">Bitcoin (BTC / USD Global)</span>
+                                    <div class="flex justify-between items-center font-mono pt-1.5">
                                         <span class="text-slate-400 text-xs font-bold">Cotización:</span>
-                                        <span class="flex items-center gap-1 font-mono font-black text-emerald-400 text-lg sm:text-2xl">
-                                            <span id="trend-btc-usd" class="text-sm font-bold">•</span>
+                                        <span class="flex items-center gap-1 font-mono font-black text-emerald-400 text-base sm:text-2xl">
+                                            <span id="trend-btc-usd" class="text-xs font-bold">•</span>
                                             <span id="val-btc-usd">Cargando...</span>
                                         </span>
                                     </div>
                                 </div>
-                                <div class="border-t border-neutral-800/80 pt-2 text-right mt-1">
-                                    <span id="time-btc" class="text-[10px] text-slate-400 font-mono font-bold block">🌐 Mercado Global en Vivo (24/7)</span>
+                                <div class="border-t border-neutral-800/80 pt-1.5 text-right mt-1">
+                                    <span id="time-btc" class="text-[9.5px] text-slate-400 font-mono font-bold block">🌐 Mercado Global en Vivo (24/7)</span>
                                 </div>
                             </div>
                         </div>
@@ -443,18 +461,18 @@
                 </div>
             </div>
 
-            <div class="pt-6 border-t border-amber-500/20 mt-8 text-center space-y-4">
-                <div class="flex flex-wrap justify-center items-center gap-6 sm:gap-10 opacity-80 hover:opacity-100 transition-all">
-                    <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-building-columns"></i> BCV</span>
-                    <span class="text-[10px] font-black text-amber-300 uppercase tracking-widest bg-yellow-500/10 border border-yellow-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-landmark"></i> BANCOLOMBIA</span>
-                    <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-coins"></i> BINANCE</span>
-                    <span class="text-[10px] font-black text-emerald-400 uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-circle-dollar-to-slot text-emerald-400"></i> USDT</span>
-                    <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-store"></i> FRONTERA</span>
+            <div class="pt-4 border-t border-amber-500/20 mt-6 text-center space-y-3">
+                <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-8 opacity-80 hover:opacity-100 transition-all">
+                    <span class="text-[9px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-building-columns"></i> BCV</span>
+                    <span class="text-[9px] font-black text-amber-300 uppercase tracking-widest bg-yellow-500/10 border border-yellow-500/30 px-2 py-0.5 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-landmark"></i> BANCOLOMBIA</span>
+                    <span class="text-[9px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-coins"></i> BINANCE</span>
+                    <span class="text-[9px] font-black text-emerald-400 uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-circle-dollar-to-slot text-emerald-400"></i> USDT</span>
+                    <span class="text-[9px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-store"></i> FRONTERA</span>
                 </div>
 
-                <div class="space-y-1">
-                    <p class="text-[10px] text-white font-bold">🔐 © 2026 PubliTasaMK Pro. Todos los derechos reservados.</p>
-                    <p class="text-[9px] text-slate-300 font-semibold uppercase tracking-wide">
+                <div class="space-y-0.5">
+                    <p class="text-[9.5px] text-white font-bold">🔐 © 2026 PubliTasaMK Pro. Todos los derechos reservados.</p>
+                    <p class="text-[8.5px] text-slate-300 font-semibold uppercase tracking-wide">
                         Sistema probado y avalado por <span class="text-white font-black">Tucocel C.A.</span> &bull; Desarrollado corporativamente por <span class="text-amber-400 font-black">@publionlinemk</span> (Agencia de Publicidad de Tucocel C.A.)
                     </p>
                 </div>
@@ -463,56 +481,56 @@
         </div>
 
         <!-- ==================== VISTA CONSOLA ADMINISTRATIVA MÁSTER ==================== -->
-        <main id="vista-streaming-admin" class="max-w-6xl mx-auto px-4 py-6 space-y-6 hidden">
+        <main id="vista-streaming-admin" class="max-w-6xl mx-auto px-2.5 sm:px-4 py-5 space-y-5 hidden w-full">
             
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-neutral-900 pb-5">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-neutral-900 pb-4 w-full">
                 <div>
-                    <span class="bg-neutral-900 text-slate-400 border border-neutral-800 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full inline-flex items-center gap-1.5"><i class="fa-solid fa-lock text-red-500"></i> Consola Central de Control</span>
-                    <h2 class="text-2xl font-black text-white mt-1 uppercase">Servidores de Despacho</h2>
+                    <span class="bg-neutral-900 text-slate-400 border border-neutral-800 text-[9px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5"><i class="fa-solid fa-lock text-red-500"></i> Consola Central de Control</span>
+                    <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 uppercase">Servidores de Despacho</h2>
                 </div>
 
-                <div class="bg-neutral-950 border border-neutral-800 p-1.5 rounded-2xl flex gap-2 w-full sm:w-auto">
-                    <button onclick="window.cambiarParticionAdmin('streaming')" id="btn-particion-streaming" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-red-600 text-white transition-all btn-interactive">
+                <div class="bg-neutral-950 border border-neutral-800 p-1 rounded-2xl flex gap-1.5 w-full sm:w-auto">
+                    <button onclick="window.cambiarParticionAdmin('streaming')" id="btn-particion-streaming" class="flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-red-600 text-white transition-all btn-interactive">
                         🎬 Streaming
                     </button>
-                    <button onclick="window.cambiarParticionAdmin('publitasa')" id="btn-particion-publitasa" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-neutral-900 text-amber-400 border border-neutral-800 hover:border-amber-500/50 transition-all btn-interactive">
+                    <button onclick="window.cambiarParticionAdmin('publitasa')" id="btn-particion-publitasa" class="flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-amber-400 border border-neutral-800 hover:border-amber-500/50 transition-all btn-interactive">
                         📊 PubliTasa Pro
                     </button>
                 </div>
 
-                <div class="bg-neutral-900 border border-neutral-800 p-3 rounded-2xl flex items-center gap-3 font-mono text-xs font-bold w-full sm:w-auto">
+                <div class="bg-neutral-900 border border-neutral-800 p-2.5 rounded-2xl flex items-center gap-3 font-mono text-xs font-bold w-full sm:w-auto justify-between">
                     <div>
                         <span class="block text-[8px] text-slate-500 uppercase tracking-wider font-sans">Tasa USDT Binance</span>
-                        <input type="number" id="adm-tasa-cambio" value="40" class="w-20 bg-transparent text-emerald-400 font-black focus:outline-none text-sm" onkeyup="window.recalcularTasasBolivaresAdmin()">
+                        <input type="number" id="adm-tasa-cambio" value="890" class="w-20 bg-transparent text-emerald-400 font-black focus:outline-none text-xs sm:text-sm" onkeyup="window.recalcularTasasBolivaresAdmin()">
                     </div>
                     <div class="border-l border-neutral-800 pl-3">
                         <span class="block text-[8px] text-slate-500 uppercase tracking-wider font-sans">Suscritos</span>
-                        <span id="lbl-total-activos" class="text-red-500 text-sm font-black">0</span>
+                        <span id="lbl-total-activos" class="text-red-500 text-xs sm:text-sm font-black">0</span>
                     </div>
                 </div>
             </div>
 
             <!-- BLOQUE DE STREAMING (PARTICIÓN 1) -->
-            <div id="bloque-admin-particion-streaming" class="space-y-6">
-                <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
-                    <h3 class="text-[10px] font-black text-amber-500 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Tablero de Alertas Tempranas e Indicadores de Vencimiento</h3>
-                    <div id="wrapper-chismoseador-burbujas" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2"></div>
+            <div id="bloque-admin-particion-streaming" class="space-y-5 w-full">
+                <div class="bg-neutral-900 border border-neutral-800 p-3.5 rounded-3xl space-y-2.5 w-full">
+                    <h3 class="text-[9.5px] font-black text-amber-500 uppercase tracking-wider flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation animate-pulse"></i> Tablero de Alertas Tempranas e Indicadores de Vencimiento</h3>
+                    <div id="wrapper-chismoseador-burbujas" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-1.5 sm:gap-2 w-full"></div>
                 </div>
 
-                <div class="space-y-2">
+                <div class="space-y-2 w-full">
                     <!-- ACCORDION 1: LEGO PARSER -->
-                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
-                        <button onclick="window.toggleModuloAcordeon('acc-lego-parser')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all btn-interactive">
+                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden w-full">
+                        <button onclick="window.toggleModuloAcordeon('acc-lego-parser')" class="w-full flex justify-between items-center px-4 py-3 font-black text-[10.5px] sm:text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all btn-interactive">
                             <span><i class="fa-solid fa-paste text-red-500 mr-2"></i> Carga de Clientes e Inyector Lego Parser</span>
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </button>
-                        <div id="acc-lego-parser" class="hidden p-5 border-t border-neutral-855 space-y-4 bg-neutral-950/40">
+                        <div id="acc-lego-parser" class="hidden p-4 sm:p-5 border-t border-neutral-855 space-y-3.5 bg-neutral-950/40 w-full">
                             <div class="space-y-2">
-                                <textarea id="succion-bruta-textarea" rows="3" placeholder="Pegue el bloque de texto bruto del proveedor completo aquí..." class="w-full bg-neutral-950 border border-neutral-800 text-white p-3 rounded-xl font-mono text-[10px] focus:outline-none focus:border-red-600 no-scrollbar resize-y"></textarea>
+                                <textarea id="succion-bruta-textarea" rows="3" placeholder="Pegue el bloque de texto bruto del proveedor completo aquí..." class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono text-[10px] focus:outline-none focus:border-red-600 no-scrollbar resize-y"></textarea>
                                 <button onclick="window.procesarSuccionLegoInteligenteTexto()" class="w-full bg-neutral-900 border border-neutral-800 hover:border-red-600/30 text-slate-300 font-black text-[10px] py-2 rounded-xl uppercase tracking-wider transition-all btn-interactive">Separar Datos en Planilla ⚡</button>
                             </div>
-                            <div class="space-y-3 text-xs font-bold text-slate-800">
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                            <div class="space-y-3 text-xs font-bold text-slate-800 w-full">
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full">
                                     <div>
                                         <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Plataforma</label>
                                         <select id="field-plataforma" onchange="window.alCambiarPlataformaFormulario()" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl focus:outline-none uppercase font-bold"></select>
@@ -531,17 +549,16 @@
                                     </div>
                                 </div>
 
-                                <!-- SELECCIÓN DE CUENTAS FIJAS PROPIETARIAS (TARJETAS DARK) -->
-                                <div id="wrapper-cuentas-fijas-selector" class="hidden bg-neutral-950 p-3 rounded-2xl border border-red-900/40 space-y-2">
+                                <!-- SELECCIÓN DE CUENTAS FIJAS PROPIETARIAS CON BOTÓN ELIMINAR X -->
+                                <div id="wrapper-cuentas-fijas-selector" class="hidden bg-neutral-950 p-3 rounded-2xl border border-red-900/40 space-y-2 w-full">
                                     <label class="text-[9px] text-amber-400 font-black uppercase tracking-wider block flex items-center gap-1.5">
-                                        <i class="fa-solid fa-star text-amber-400"></i> Cuentas Fijas Propietarias (Toque una para cargar)
+                                        <i class="fa-solid fa-star text-amber-400"></i> Cuentas Fijas Propietarias (Toque una para cargar o ❌ para borrar)
                                     </label>
-                                    <div id="grid-pildoras-cuentas-fijas" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                        <!-- Inyección dinámica de botones táctiles -->
+                                    <div id="grid-pildoras-cuentas-fijas" class="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
                                     </div>
                                 </div>
 
-                                <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-850 space-y-2">
+                                <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-850 space-y-2 w-full">
                                     <span class="text-[8.5px] text-red-500 font-black uppercase tracking-wider block"><i class="fa-solid fa-key"></i> Credenciales de Acceso</span>
                                     <input type="text" id="field-correo" placeholder="Correo / Cuenta ID" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
                                     <input type="text" id="field-clave" placeholder="Contraseña de Acceso" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
@@ -550,7 +567,7 @@
                                         <input type="text" id="field-pin" placeholder="PIN Perfil" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
                                     </div>
                                 </div>
-                                <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-850 space-y-2">
+                                <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-850 space-y-2 w-full">
                                     <span class="text-[8.5px] text-slate-400 font-black uppercase tracking-wider block"><i class="fa-solid fa-user"></i> Datos del Cliente</span>
                                     <input type="text" id="field-cliente-nombre" placeholder="Nombre Completo del Cliente" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
                                     <div class="grid grid-cols-2 gap-2">
@@ -563,64 +580,64 @@
                         </div>
                     </div>
 
-                    <!-- ACCORDION 2: REGULADOR PRECIOS STREAMING -->
-                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
-                        <button onclick="window.toggleModuloAcordeon('acc-tarifador')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all btn-interactive">
+                    <!-- ACCORDION 2: REGULADOR PRECIOS STREAMING INCLUYENDO PUBLITASA PRO -->
+                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden w-full">
+                        <button onclick="window.toggleModuloAcordeon('acc-tarifador')" class="w-full flex justify-between items-center px-4 py-3 font-black text-[10.5px] sm:text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all btn-interactive">
                             <span><i class="fa-solid fa-sliders text-red-500 mr-2"></i> Regulador Dinámico de Tarifas Globales Web</span>
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </button>
-                        <div id="acc-tarifador" class="hidden p-4 border-t border-neutral-850 bg-neutral-950/40 space-y-3">
-                            <div id="wrapper-inputs-tarifador-dinamico" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5"></div>
-                            <button onclick="window.salvarTarifasPublicasDinamicas()" class="bg-red-600 hover:bg-red-700 text-white font-black text-[10px] px-5 py-2 rounded-xl uppercase tracking-wider block ml-auto btn-interactive">Actualizar Precios Web</button>
+                        <div id="acc-tarifador" class="hidden p-3.5 sm:p-4 border-t border-neutral-850 bg-neutral-950/40 space-y-3 w-full">
+                            <div id="wrapper-inputs-tarifador-dinamico" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2 w-full"></div>
+                            <button onclick="window.salvarTarifasPublicasDinamicas()" class="bg-red-600 hover:bg-red-700 text-white font-black text-[10px] px-5 py-2.5 rounded-xl uppercase tracking-wider block ml-auto btn-interactive">Actualizar Precios Web</button>
                         </div>
                     </div>
 
                     <!-- ACCORDION 3: NUEVAS PLATAFORMAS -->
-                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
-                        <button onclick="window.toggleModuloAcordeon('acc-add-plataforma')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all btn-interactive">
+                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden w-full">
+                        <button onclick="window.toggleModuloAcordeon('acc-add-plataforma')" class="w-full flex justify-between items-center px-4 py-3 font-black text-[10.5px] sm:text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all btn-interactive">
                             <span><i class="fa-solid fa-square-plus text-red-500 mr-2"></i> Creador Autónomo de Nuevas Plataformas</span>
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </button>
-                        <div id="acc-add-plataforma" class="hidden p-5 border-t border-neutral-850 bg-neutral-950/40 space-y-4 text-xs font-bold text-slate-300">
-                            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                        <div id="acc-add-plataforma" class="hidden p-4 sm:p-5 border-t border-neutral-850 bg-neutral-950/40 space-y-3 text-xs font-bold text-slate-300 w-full">
+                            <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5 w-full">
                                 <div>
                                     <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">ID Único (Ej: VIX, SPOTIFY)</label>
-                                    <input type="text" id="new-plat-id" placeholder="ID..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white font-mono uppercase">
+                                    <input type="text" id="new-plat-id" placeholder="ID..." class="w-full bg-neutral-950 border border-neutral-800 p-2 rounded-xl text-white font-mono uppercase">
                                 </div>
                                 <div>
                                     <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Nombre Comercial</label>
-                                    <input type="text" id="new-plat-nombre" placeholder="Ej: Vix Premium..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white">
+                                    <input type="text" id="new-plat-nombre" placeholder="Ej: Vix Premium..." class="w-full bg-neutral-950 border border-neutral-800 p-2 rounded-xl text-white">
                                 </div>
                                 <div>
                                     <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Precio USDT</label>
-                                    <input type="number" id="new-plat-precio" value="5.00" step="0.1" class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white font-mono">
+                                    <input type="number" id="new-plat-precio" value="5.00" step="0.1" class="w-full bg-neutral-950 border border-neutral-800 p-2 rounded-xl text-white font-mono">
                                 </div>
                                 <div>
                                     <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">URL Logo (Opcional)</label>
-                                    <input type="text" id="new-plat-logo" placeholder="Link de imagen..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white font-mono">
+                                    <input type="text" id="new-plat-logo" placeholder="Link de imagen..." class="w-full bg-neutral-950 border border-neutral-800 p-2 rounded-xl text-white font-mono">
                                 </div>
                             </div>
                             <div>
                                 <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Descripción Corta</label>
-                                <input type="text" id="new-plat-desc" placeholder="Descripción de venta..." class="w-full bg-neutral-950 border border-neutral-800 p-2.5 rounded-xl text-white">
+                                <input type="text" id="new-plat-desc" placeholder="Descripción de venta..." class="w-full bg-neutral-950 border border-neutral-800 p-2 rounded-xl text-white">
                             </div>
-                            <button onclick="window.ejecutarCreacionAutonomaNuevaPlataforma()" class="bg-red-600 hover:bg-red-700 text-white font-black text-[10px] px-6 py-2.5 rounded-xl uppercase tracking-wider block ml-auto btn-interactive">➕ Inyectar Plataforma al Catálogo</button>
+                            <button onclick="window.ejecutarCreacionAutonomaNuevaPlataforma()" class="bg-red-600 hover:bg-red-700 text-white font-black text-[10px] px-5 py-2.5 rounded-xl uppercase tracking-wider block ml-auto btn-interactive">➕ Inyectar Plataforma al Catálogo</button>
                         </div>
                     </div>
 
                     <!-- ACCORDION 4: MARKETING GITHUB Y LEYENDAS -->
-                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
-                        <button onclick="window.toggleModuloAcordeon('acc-marketing')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all btn-interactive">
+                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden w-full">
+                        <button onclick="window.toggleModuloAcordeon('acc-marketing')" class="w-full flex justify-between items-center px-4 py-3 font-black text-[10.5px] sm:text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all btn-interactive">
                             <span><i class="fa-solid fa-link text-red-500 mr-2"></i> Enrutador de Enlaces y Leyendas de Comunicación (GitHub)</span>
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </button>
-                        <div id="acc-marketing" class="hidden p-5 border-t border-neutral-850 bg-neutral-950/40 space-y-4">
-                            <div class="grid grid-cols-1 gap-3">
+                        <div id="acc-marketing" class="hidden p-4 sm:p-5 border-t border-neutral-850 bg-neutral-950/40 space-y-3.5 w-full">
+                            <div class="grid grid-cols-1 gap-2.5 w-full">
                                 <div>
                                     <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Link del Proyecto Final (GitHub URL)</label>
                                     <input type="text" id="cfg-link-github-servidor" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono text-xs focus:outline-none">
                                 </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full">
                                     <div>
                                         <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Leyenda para Grupos de WhatsApp</label>
                                         <textarea id="cfg-leyenda-grupos-custom" rows="4" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none resize-y font-medium leading-relaxed" placeholder="Dejar en blanco para usar el formato de fábrica..."></textarea>
@@ -631,18 +648,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <button onclick="window.salvarConfiguracionDeEnlacesYLeyendas()" class="bg-neutral-950 text-slate-300 border border-neutral-800 hover:border-red-600/30 text-[10px] font-black uppercase px-5 py-2 rounded-xl block ml-auto btn-interactive">Guardar Enrutamiento Comercial</button>
+                            <button onclick="window.salvarConfiguracionDeEnlacesYLeyendas()" class="bg-neutral-950 text-slate-300 border border-neutral-800 hover:border-red-600/30 text-[10px] font-black uppercase px-4 py-2 rounded-xl block ml-auto btn-interactive">Guardar Enrutamiento Comercial</button>
                         </div>
                     </div>
 
                     <!-- ACCORDION 5: SEGURIDAD MÁSTER -->
-                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden">
-                        <button onclick="window.toggleModuloAcordeon('acc-seguridad')" class="w-full flex justify-between items-center px-5 py-3.5 font-black text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all btn-interactive">
+                    <div class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden w-full">
+                        <button onclick="window.toggleModuloAcordeon('acc-seguridad')" class="w-full flex justify-between items-center px-4 py-3 font-black text-[10.5px] sm:text-[11px] uppercase tracking-wide text-slate-300 hover:bg-neutral-850 transition-all btn-interactive">
                             <span><i class="fa-solid fa-shield-halved text-red-500 mr-2"></i> Configuración de Seguridad Administrativa</span>
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </button>
-                        <div id="acc-seguridad" class="hidden p-4 border-t border-neutral-850 bg-neutral-950/40">
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                        <div id="acc-seguridad" class="hidden p-4 border-t border-neutral-850 bg-neutral-950/40 w-full">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs w-full">
                                 <input type="text" id="cfg-master-usuario-actual" placeholder="Nuevo Usuario Máster" class="bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono uppercase">
                                 <input type="password" id="cfg-master-clave-actual" placeholder="Nueva Clave Maestra" class="bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl font-mono">
                                 <button onclick="window.actualizarCredencialesSeguridadMaster()" class="bg-neutral-950 border border-neutral-800 text-red-500 font-black uppercase text-[10px] py-2 rounded-xl btn-interactive">Guardar Llave de Servidor</button>
@@ -652,46 +669,46 @@
                 </div>
 
                 <!-- BOTONERA MARKETING RÁPIDA -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <button onclick="window.despacharMarketingMasivoWhatsApp('GRUPOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2 btn-interactive"><i class="fa-solid fa-users text-red-500"></i> Compartir Catálogo en Grupos</button>
-                    <button onclick="window.despacharMarketingMasivoWhatsApp('ESTADOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3.5 rounded-xl uppercase tracking-wider text-[11px] flex items-center justify-center gap-2 btn-interactive"><i class="fa-solid fa-copy text-emerald-500"></i> Copiar Texto para Estado</button>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full">
+                    <button onclick="window.despacharMarketingMasivoWhatsApp('GRUPOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3 rounded-xl uppercase tracking-wider text-[10.5px] flex items-center justify-center gap-2 btn-interactive"><i class="fa-solid fa-users text-red-500"></i> Compartir Catálogo en Grupos</button>
+                    <button onclick="window.despacharMarketingMasivoWhatsApp('ESTADOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3 rounded-xl uppercase tracking-wider text-[10.5px] flex items-center justify-center gap-2 btn-interactive"><i class="fa-solid fa-copy text-emerald-500"></i> Copiar Texto para Estado</button>
                 </div>
 
                 <!-- ARCHIVADOR INTELIGENTE POR CARPETAS STREAMING -->
-                <div class="space-y-4 pt-2">
-                    <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
+                <div class="space-y-3.5 pt-1 w-full">
+                    <div class="bg-neutral-900 border border-neutral-800 p-3.5 sm:p-4 rounded-3xl space-y-2.5 w-full">
                         <div class="flex justify-between items-center">
                             <span class="text-[9px] font-black tracking-widest text-slate-400 uppercase block"><i class="fa-solid fa-folder-tree text-red-500 mr-1"></i> Bóveda Central Filtrada de Suscriptores</span>
-                            <button onclick="window.alternarVistaArchivadosStreaming()" id="btn-toggle-anulados-str" class="bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-red-900 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider btn-interactive">
+                            <button onclick="window.alternarVistaArchivadosStreaming()" id="btn-toggle-anulados-str" class="bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-red-900 text-[8.5px] sm:text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider btn-interactive">
                                 📂 Ver Bóveda Anulados
                             </button>
                         </div>
                         
-                        <div class="relative">
+                        <div class="relative w-full">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-xs"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="buscador-nombre-input" onkeyup="window.renderizarMonitorMembresiasAdmin()" placeholder="Escribe un nombre o teléfono para filtrar en tiempo real..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl font-medium focus:outline-none focus:border-neutral-700 uppercase">
+                            <input type="text" id="buscador-nombre-input" onkeyup="window.renderizarMonitorMembresiasAdmin()" placeholder="Escribe un nombre o teléfono para filtrar en tiempo real..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-3.5 py-2.5 rounded-xl font-medium focus:outline-none focus:border-neutral-700 uppercase">
                         </div>
 
-                        <div id="wrapper-carpetas-filtros-botones" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 pt-1"></div>
+                        <div id="wrapper-carpetas-filtros-botones" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 pt-1 w-full"></div>
                     </div>
                     
-                    <div id="mosaico-streaming-clientes-box" class="space-y-3 max-h-[80vh] overflow-y-auto pr-1 no-scrollbar"></div>
+                    <div id="mosaico-streaming-clientes-box" class="space-y-3 max-h-[80vh] overflow-y-auto pr-1 no-scrollbar w-full"></div>
                 </div>
             </div>
 
             <!-- BLOQUE DE PUBLITASA PRO (PARTICIÓN 2 - PANEL MÁSTER) -->
-            <div id="bloque-admin-particion-publitasa" class="hidden space-y-6">
+            <div id="bloque-admin-particion-publitasa" class="hidden space-y-5 w-full">
 
-                <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-3">
+                <div class="bg-neutral-950 border border-neutral-800 p-3.5 sm:p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-3 w-full">
                     <div class="space-y-0.5 text-center sm:text-left">
                         <span class="text-amber-400 font-black text-xs uppercase block">👁️ Difusión y Vista Previa del Monitor</span>
                         <p class="text-[10px] text-slate-400">Enviar reporte diario, generar imagen para Estados o mandar propuesta comercial.</p>
                     </div>
                     <div class="flex flex-wrap gap-2 w-full sm:w-auto">
-                        <button onclick="window.generarYCompartirImagenEstadoWhatsApp()" class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black text-xs px-3.5 py-2 rounded-xl uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 btn-interactive">
+                        <button onclick="window.generarYCompartirImagenEstadoWhatsApp()" class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black text-xs px-3 py-2 rounded-xl uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 btn-interactive">
                             <i class="fa-solid fa-camera"></i> 📸 Imagen para Estado
                         </button>
-                        <button onclick="window.despacharReporteDiarioWhatsApp()" class="bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-black text-xs px-3.5 py-2 rounded-xl uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 btn-interactive">
+                        <button onclick="window.despacharReporteDiarioWhatsApp()" class="bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-black text-xs px-3 py-2 rounded-xl uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 btn-interactive">
                             <i class="fa-solid fa-chart-pie"></i> Reporte Cierre
                         </button>
                         <button onclick="window.despacharPublicidadPubliTasa('GRUPOS')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-black text-xs px-3 py-2 rounded-xl uppercase tracking-wider hover:border-amber-500/40 transition-all flex items-center gap-1.5 btn-interactive">
@@ -700,195 +717,195 @@
                         <button onclick="window.despacharPublicidadPubliTasa('ESTADOS')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-black text-xs px-3 py-2 rounded-xl uppercase tracking-wider hover:border-amber-500/40 transition-all flex items-center gap-1.5 btn-interactive">
                             <i class="fa-solid fa-copy"></i> Pub. Estado
                         </button>
-                        <button onclick="window.despacharCotizacionProWhatsApp()" class="bg-gradient-to-r from-amber-400 to-amber-600 text-neutral-950 font-black text-xs px-3.5 py-2 rounded-xl uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 btn-interactive">
+                        <button onclick="window.despacharCotizacionProWhatsApp()" class="bg-gradient-to-r from-amber-400 to-amber-600 text-neutral-950 font-black text-xs px-3 py-2 rounded-xl uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 btn-interactive">
                             <i class="fa-solid fa-paper-plane"></i> Cotización Pro
                         </button>
                     </div>
                 </div>
 
-                <div class="bg-neutral-950 border-2 border-amber-500/60 p-5 rounded-3xl space-y-4 shadow-xl">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center text-neutral-950 text-xl font-black">
+                <div class="bg-neutral-950 border-2 border-amber-500/60 p-4 sm:p-5 rounded-3xl space-y-3.5 shadow-xl w-full">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center text-neutral-950 text-lg font-black">
                             <i class="fa-solid fa-building-columns"></i>
                         </div>
                         <div>
-                            <h3 class="text-white font-extrabold uppercase text-sm">Control Banco Central de Venezuela (BCV)</h3>
-                            <p class="text-[10px] text-slate-400 uppercase">Sincronización Automática o Edición Manual Directa</p>
+                            <h3 class="text-white font-extrabold uppercase text-xs sm:text-sm">Control Banco Central de Venezuela (BCV)</h3>
+                            <p class="text-[9.5px] text-slate-400 uppercase">Sincronización Automática o Edición Manual Directa</p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs font-bold w-full">
                         <div>
-                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Tasa Dólar BCV (Bs)</label>
-                            <input type="number" id="pt-adm-bcv-usd" step="0.01" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500" placeholder="Ej: 36.50">
+                            <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Tasa Dólar BCV (Bs)</label>
+                            <input type="number" id="pt-adm-bcv-usd" step="0.01" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-xs sm:text-sm px-3.5 py-2 rounded-xl focus:outline-none focus:border-amber-500" placeholder="Ej: 36.50">
                         </div>
                         <div>
-                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Tasa Euro BCV (Bs)</label>
-                            <input type="number" id="pt-adm-bcv-eur" step="0.01" class="w-full bg-neutral-900 border border-neutral-800 text-amber-300 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500" placeholder="Ej: 39.80">
+                            <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Tasa Euro BCV (Bs)</label>
+                            <input type="number" id="pt-adm-bcv-eur" step="0.01" class="w-full bg-neutral-900 border border-neutral-800 text-amber-300 font-mono text-xs sm:text-sm px-3.5 py-2 rounded-xl focus:outline-none focus:border-amber-500" placeholder="Ej: 39.80">
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        <button onclick="window.sincronizarAutonomaBcvEnVivo()" class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-lg transition-all btn-interactive">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
+                        <button onclick="window.sincronizarAutonomaBcvEnVivo()" class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black py-2.5 rounded-xl uppercase tracking-wider text-[11px] shadow-lg transition-all btn-interactive">
                             ⚡ Sincronizar Tasa BCV Oficial
                         </button>
-                        <button onclick="window.guardarTasaBcvManualPubliTasa()" class="bg-neutral-900 border border-amber-500/50 hover:bg-neutral-850 text-amber-400 font-black py-3 rounded-xl uppercase tracking-wider text-xs transition-all btn-interactive">
+                        <button onclick="window.guardarTasaBcvManualPubliTasa()" class="bg-neutral-900 border border-amber-500/50 hover:bg-neutral-850 text-amber-400 font-black py-2.5 rounded-xl uppercase tracking-wider text-[11px] transition-all btn-interactive">
                             💾 Guardar Ajuste Manual BCV
                         </button>
                     </div>
                 </div>
 
-                <div class="bg-neutral-950 border-2 border-emerald-500/40 p-5 rounded-3xl space-y-4 shadow-xl">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-neutral-950 text-xl font-black">
+                <div class="bg-neutral-950 border-2 border-emerald-500/40 p-4 sm:p-5 rounded-3xl space-y-3.5 shadow-xl w-full">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 bg-emerald-500 rounded-xl flex items-center justify-center text-neutral-950 text-lg font-black">
                             <i class="fa-solid fa-coins"></i>
                         </div>
                         <div>
-                            <h3 class="text-white font-extrabold uppercase text-sm">Ajuste Manual Tasa Binance USDT (P2P)</h3>
-                            <p class="text-[10px] text-slate-400 uppercase">SE COTIZA ENTRE LA BASE Y EL ESTIMADO SUPERIOR (+12 BS)</p>
+                            <h3 class="text-white font-extrabold uppercase text-xs sm:text-sm">Ajuste Manual Tasa Binance USDT (P2P)</h3>
+                            <p class="text-[9.5px] text-slate-400 uppercase">SE COTIZA ENTRE LA BASE Y EL ESTIMADO SUPERIOR (+12 BS)</p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs font-bold w-full">
                         <div>
-                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Tasa Base USDT (Bs)</label>
-                            <input type="number" id="pt-adm-usdt-compra" value="800" step="1" oninput="window.calcularVentaBinanceAuto()" class="w-full bg-neutral-900 border border-neutral-800 text-emerald-400 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-emerald-500" placeholder="Ej: 800">
+                            <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Tasa Base USDT (Bs)</label>
+                            <input type="number" id="pt-adm-usdt-compra" value="800" step="1" oninput="window.calcularVentaBinanceAuto()" class="w-full bg-neutral-900 border border-neutral-800 text-emerald-400 font-mono text-xs sm:text-sm px-3.5 py-2 rounded-xl focus:outline-none focus:border-emerald-500" placeholder="Ej: 800">
                         </div>
                         <div>
-                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">TASA ESTIMADA SUPERIOR (+12 BS AUTO)</label>
-                            <input type="number" id="pt-adm-usdt-venta" value="812" step="1" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500" placeholder="Ej: 812">
+                            <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">TASA ESTIMADA SUPERIOR (+12 BS AUTO)</label>
+                            <input type="number" id="pt-adm-usdt-venta" value="812" step="1" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-xs sm:text-sm px-3.5 py-2 rounded-xl focus:outline-none focus:border-amber-500" placeholder="Ej: 812">
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        <button onclick="window.guardarTasaBinanceManualPubliTasa(false)" class="bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-lg transition-all btn-interactive">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
+                        <button onclick="window.guardarTasaBinanceManualPubliTasa(false)" class="bg-gradient-to-r from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white font-black py-2.5 rounded-xl uppercase tracking-wider text-[11px] shadow-lg transition-all btn-interactive">
                             ⚡ Publicar Nueva Tasa
                         </button>
-                        <button onclick="window.guardarTasaBinanceManualPubliTasa(true)" class="bg-neutral-900 border border-emerald-500/50 hover:bg-neutral-850 text-emerald-400 font-black py-3 rounded-xl uppercase tracking-wider text-xs transition-all btn-interactive">
+                        <button onclick="window.guardarTasaBinanceManualPubliTasa(true)" class="bg-neutral-900 border border-emerald-500/50 hover:bg-neutral-850 text-emerald-400 font-black py-2.5 rounded-xl uppercase tracking-wider text-[11px] transition-all btn-interactive">
                             – Se Mantienen Valores (Actualizar Hora)
                         </button>
                     </div>
                 </div>
 
-                <div class="bg-neutral-950 border-2 border-amber-500/40 p-5 rounded-3xl space-y-4 shadow-xl">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-neutral-950 text-xl font-black">
+                <div class="bg-neutral-950 border-2 border-amber-500/40 p-4 sm:p-5 rounded-3xl space-y-3.5 shadow-xl w-full">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 bg-amber-500 rounded-xl flex items-center justify-center text-neutral-950 text-lg font-black">
                             <i class="fa-solid fa-building-columns"></i>
                         </div>
                         <div>
-                            <h3 class="text-white font-extrabold uppercase text-sm">Control de Casas de Cambio (Frontera)</h3>
-                            <p class="text-[10px] text-slate-400 uppercase">Actualización Manual Instantánea &bull; PubliTasaMK Pro</p>
+                            <h3 class="text-white font-extrabold uppercase text-xs sm:text-sm">Control de Casas de Cambio (Frontera)</h3>
+                            <p class="text-[9.5px] text-slate-400 uppercase">Actualización Manual Instantánea &bull; PubliTasaMK Pro</p>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-bold">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs font-bold w-full">
                         <div>
-                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Compran Dólar Efectivo (COP)</label>
-                            <input type="number" id="pt-adm-compra" value="3320" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500">
+                            <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Compran Dólar Efectivo (COP)</label>
+                            <input type="number" id="pt-adm-compra" value="3320" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-xs sm:text-sm px-3.5 py-2 rounded-xl focus:outline-none focus:border-amber-500">
                         </div>
                         <div>
-                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Venden Dólar Efectivo (COP)</label>
-                            <input type="number" id="pt-adm-venta" value="3370" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-sm px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500">
+                            <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Venden Dólar Efectivo (COP)</label>
+                            <input type="number" id="pt-adm-venta" value="3370" class="w-full bg-neutral-900 border border-neutral-800 text-amber-400 font-mono text-xs sm:text-sm px-3.5 py-2 rounded-xl focus:outline-none focus:border-amber-500">
                         </div>
                     </div>
-                    <button onclick="window.guardarTasaFronteraPubliTasa()" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-lg transition-all btn-interactive">
+                    <button onclick="window.guardarTasaFronteraPubliTasa()" class="w-full bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black py-2.5 rounded-xl uppercase tracking-wider text-[11px] shadow-lg transition-all btn-interactive">
                         🚀 Publicar Tasas en App en Vivo
                     </button>
                 </div>
 
-                <div class="bg-neutral-950 border-2 border-amber-500/60 rounded-3xl overflow-hidden shadow-xl">
-                    <button onclick="window.toggleModuloAcordeon('acc-publitasa-tarifador')" class="w-full flex justify-between items-center px-5 py-4 font-black text-xs sm:text-sm uppercase tracking-wide text-white bg-neutral-900/80 hover:bg-neutral-900 transition-all border-b border-amber-500/20 btn-interactive">
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-8 h-8 bg-amber-500/20 border border-amber-500/40 rounded-xl flex items-center justify-center text-amber-400 text-sm">
+                <div class="bg-neutral-950 border-2 border-amber-500/60 rounded-3xl overflow-hidden shadow-xl w-full">
+                    <button onclick="window.toggleModuloAcordeon('acc-publitasa-tarifador')" class="w-full flex justify-between items-center px-4 py-3.5 font-black text-xs sm:text-sm uppercase tracking-wide text-white bg-neutral-900/80 hover:bg-neutral-900 transition-all border-b border-amber-500/20 btn-interactive">
+                        <div class="flex items-center gap-2">
+                            <div class="w-7 h-7 bg-amber-500/20 border border-amber-500/40 rounded-xl flex items-center justify-center text-amber-400 text-xs">
                                 <i class="fa-solid fa-sliders"></i>
                             </div>
                             <div class="text-left">
                                 <span class="block text-white">Regulador Dinámico de Tarifas Pro</span>
-                                <span class="block text-[9px] text-slate-400 font-normal">Pulsar para desplegar o recoger el panel de precios</span>
+                                <span class="block text-[8.5px] text-slate-400 font-normal">Pulsar para desplegar o recoger el panel de precios</span>
                             </div>
                         </div>
                         <i class="fa-solid fa-chevron-down text-amber-400 text-xs"></i>
                     </button>
 
-                    <div id="acc-publitasa-tarifador" class="hidden p-5 space-y-4 bg-neutral-950/90 border-t border-neutral-900">
+                    <div id="acc-publitasa-tarifador" class="hidden p-4 sm:p-5 space-y-3.5 bg-neutral-950/90 border-t border-neutral-900 w-full">
                         <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
-                            <p class="text-[10px] text-slate-400 font-medium">Edita los precios globales en USDT para actualizar la vitrina y los mensajes automáticos.</p>
-                            <button onclick="window.despacharCotizacionProWhatsApp()" class="bg-neutral-900 border border-amber-500/40 hover:border-amber-400 text-amber-400 text-[9.5px] font-black px-3 py-1.5 rounded-xl uppercase tracking-wider hidden sm:flex items-center gap-1.5 btn-interactive">
+                            <p class="text-[9.5px] text-slate-400 font-medium">Edita los precios globales en USDT para actualizar la vitrina y los mensajes automáticos.</p>
+                            <button onclick="window.despacharCotizacionProWhatsApp()" class="bg-neutral-900 border border-amber-500/40 hover:border-amber-400 text-amber-400 text-[9px] font-black px-2.5 py-1 rounded-xl uppercase tracking-wider hidden sm:flex items-center gap-1 btn-interactive">
                                 <i class="fa-solid fa-paper-plane"></i> Probar Cotización
                             </button>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-bold">
-                            <div class="bg-neutral-900 p-3 rounded-2xl border border-neutral-800 space-y-2">
-                                <span class="text-[9px] text-slate-400 font-black uppercase block">📱 Plan 1 Equipo</span>
-                                <div class="flex justify-between items-center text-[10px] bg-neutral-950 p-2 rounded-xl border border-neutral-850">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs font-bold w-full">
+                            <div class="bg-neutral-900 p-2.5 rounded-2xl border border-neutral-800 space-y-1.5">
+                                <span class="text-[8.5px] text-slate-400 font-black uppercase block">📱 Plan 1 Equipo</span>
+                                <div class="flex justify-between items-center text-[9.5px] bg-neutral-950 p-1.5 rounded-xl border border-neutral-850">
                                     <span class="text-slate-500">Actual en Web:</span>
                                     <strong id="lbl-tarifa-act-p1" class="text-amber-400 font-mono text-xs">5,00 USDT</strong>
                                 </div>
                                 <div>
-                                    <label class="text-[8px] text-slate-500 uppercase block mb-1">Nuevo Precio (USDT):</label>
-                                    <input type="number" id="pt-cfg-p1" value="5.00" step="0.5" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono text-sm px-3 py-1.5 rounded-xl focus:outline-none focus:border-amber-500">
+                                    <label class="text-[8px] text-slate-500 uppercase block mb-0.5">Nuevo Precio (USDT):</label>
+                                    <input type="number" id="pt-cfg-p1" value="5.00" step="0.5" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono text-xs px-2.5 py-1 rounded-xl focus:outline-none focus:border-amber-500">
                                 </div>
                             </div>
 
-                            <div class="bg-neutral-900 p-3 rounded-2xl border border-neutral-800 space-y-2">
-                                <span class="text-[9px] text-slate-400 font-black uppercase block">📱📱 Plan 2 Equipos</span>
-                                <div class="flex justify-between items-center text-[10px] bg-neutral-950 p-2 rounded-xl border border-neutral-850">
+                            <div class="bg-neutral-900 p-2.5 rounded-2xl border border-neutral-800 space-y-1.5">
+                                <span class="text-[8.5px] text-slate-400 font-black uppercase block">📱📱 Plan 2 Equipos</span>
+                                <div class="flex justify-between items-center text-[9.5px] bg-neutral-950 p-1.5 rounded-xl border border-neutral-850">
                                     <span class="text-slate-500">Actual en Web:</span>
                                     <strong id="lbl-tarifa-act-p2" class="text-amber-400 font-mono text-xs">8,00 USDT</strong>
                                 </div>
                                 <div>
-                                    <label class="text-[8px] text-slate-500 uppercase block mb-1">Nuevo Precio (USDT):</label>
-                                    <input type="number" id="pt-cfg-p2" value="8.00" step="0.5" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono text-sm px-3 py-1.5 rounded-xl focus:outline-none focus:border-amber-500">
+                                    <label class="text-[8px] text-slate-500 uppercase block mb-0.5">Nuevo Precio (USDT):</label>
+                                    <input type="number" id="pt-cfg-p2" value="8.00" step="0.5" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono text-xs px-2.5 py-1 rounded-xl focus:outline-none focus:border-amber-500">
                                 </div>
                             </div>
 
-                            <div class="bg-neutral-900 p-3 rounded-2xl border border-neutral-800 space-y-2">
-                                <span class="text-[9px] text-slate-400 font-black uppercase block">📱📱📱 Plan 3 Equipos</span>
-                                <div class="flex justify-between items-center text-[10px] bg-neutral-950 p-2 rounded-xl border border-neutral-850">
+                            <div class="bg-neutral-900 p-2.5 rounded-2xl border border-neutral-800 space-y-1.5">
+                                <span class="text-[8.5px] text-slate-400 font-black uppercase block">📱📱📱 Plan 3 Equipos</span>
+                                <div class="flex justify-between items-center text-[9.5px] bg-neutral-950 p-1.5 rounded-xl border border-neutral-850">
                                     <span class="text-slate-500">Actual en Web:</span>
                                     <strong id="lbl-tarifa-act-p3" class="text-amber-400 font-mono text-xs">12,00 USDT</strong>
                                 </div>
                                 <div>
-                                    <label class="text-[8px] text-slate-500 uppercase block mb-1">Nuevo Precio (USDT):</label>
-                                    <input type="number" id="pt-cfg-p3" value="12.00" step="0.5" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono text-sm px-3 py-1.5 rounded-xl focus:outline-none focus:border-amber-500">
+                                    <label class="text-[8px] text-slate-500 uppercase block mb-0.5">Nuevo Precio (USDT):</label>
+                                    <input type="number" id="pt-cfg-p3" value="12.00" step="0.5" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono text-xs px-2.5 py-1 rounded-xl focus:outline-none focus:border-amber-500">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flex flex-col sm:flex-row gap-2 pt-1">
-                            <button onclick="window.salvarTarifasPubliTasaPro()" class="flex-1 bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-lg transition-all btn-interactive">
+                        <div class="flex flex-col sm:flex-row gap-2 pt-1 w-full">
+                            <button onclick="window.salvarTarifasPubliTasaPro()" class="flex-1 bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black py-2.5 rounded-xl uppercase tracking-wider text-[11px] shadow-lg transition-all btn-interactive">
                                 🚀 Guardar y Actualizar Precios Pro en Web
                             </button>
-                            <button onclick="window.despacharCotizacionProWhatsApp()" class="sm:hidden bg-neutral-900 border border-amber-500/40 text-amber-400 font-black py-3 rounded-xl uppercase tracking-wider text-xs btn-interactive">
+                            <button onclick="window.despacharCotizacionProWhatsApp()" class="sm:hidden bg-neutral-900 border border-amber-500/40 text-amber-400 font-black py-2.5 rounded-xl uppercase tracking-wider text-[11px] btn-interactive">
                                 📲 Enviar Cotización al WhatsApp
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-neutral-900 border border-neutral-800 p-5 rounded-3xl space-y-4 shadow-xl">
-                    <div class="flex items-center gap-2 border-b border-neutral-800 pb-3">
-                        <i class="fa-solid fa-user-plus text-amber-400 text-lg"></i>
+                <div class="bg-neutral-900 border border-neutral-800 p-4 sm:p-5 rounded-3xl space-y-3.5 shadow-xl w-full">
+                    <div class="flex items-center gap-2 border-b border-neutral-800 pb-2.5">
+                        <i class="fa-solid fa-user-plus text-amber-400 text-base"></i>
                         <h3 class="text-white font-black uppercase text-xs tracking-wider">Crear Nueva Licencia / Suscriptor Pro</h3>
                     </div>
                     
-                    <div class="space-y-3 text-xs font-bold">
+                    <div class="space-y-3 text-xs font-bold w-full">
                         <div>
-                            <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Nombre Comercial / Cliente</label>
-                            <input type="text" id="pt-cli-nombre" placeholder="Ej: Comercial La 5ta C.A." class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-2.5 rounded-xl uppercase focus:outline-none focus:border-amber-500">
+                            <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Nombre Comercial / Cliente</label>
+                            <input type="text" id="pt-cli-nombre" placeholder="Ej: Comercial La 5ta C.A." class="w-full bg-neutral-950 border border-neutral-800 text-white px-3.5 py-2 rounded-xl uppercase focus:outline-none focus:border-amber-500">
                         </div>
                         
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full">
                             <div>
-                                <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">WhatsApp (Con Código País)</label>
-                                <input type="text" id="pt-cli-tlf" placeholder="Ej: 584147357549" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono px-4 py-2.5 rounded-xl focus:outline-none focus:border-amber-500">
+                                <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">WhatsApp (Con Código País)</label>
+                                <input type="text" id="pt-cli-tlf" placeholder="Ej: 584147357549" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono px-3.5 py-2 rounded-xl focus:outline-none focus:border-amber-500">
                             </div>
                             <div>
-                                <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Ubicación / Sector</label>
-                                <input type="text" id="pt-cli-dir" placeholder="Ej: Táriba / Cordero" class="w-full bg-neutral-950 border border-neutral-800 text-white px-4 py-2.5 rounded-xl uppercase focus:outline-none focus:border-amber-500">
+                                <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Ubicación / Sector</label>
+                                <input type="text" id="pt-cli-dir" placeholder="Ej: Táriba / Cordero" class="w-full bg-neutral-950 border border-neutral-800 text-white px-3.5 py-2 rounded-xl uppercase focus:outline-none focus:border-amber-500">
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 w-full">
                             <div>
-                                <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Ciclo de Suscripción (Meses)</label>
-                                <select id="pt-cli-meses" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 px-4 py-2.5 rounded-xl uppercase focus:outline-none">
+                                <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Ciclo de Suscripción (Meses)</label>
+                                <select id="pt-cli-meses" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 px-3.5 py-2 rounded-xl uppercase focus:outline-none">
                                     <option value="1">1 Mes (Calendario)</option>
                                     <option value="2">2 Meses (Calendario)</option>
                                     <option value="3">3 Meses (Calendario)</option>
@@ -897,53 +914,53 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="text-[9px] text-slate-400 font-black uppercase mb-1 block">Límite Dispositivos (Anti-Share)</label>
-                                <select id="pt-cli-limite-equipos" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 px-4 py-2.5 rounded-xl uppercase focus:outline-none">
+                                <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Límite Dispositivos (Anti-Share)</label>
+                                <select id="pt-cli-limite-equipos" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 px-3.5 py-2 rounded-xl uppercase focus:outline-none">
                                     <option value="1">1 Teléfono Autorizado</option>
                                     <option value="2">2 Teléfonos Autorizados</option>
                                     <option value="3">3 Teléfonos Autorizados</option>
                                 </select>
                             </div>
                             <div>
-                                <label class="text-[9px] text-amber-400 font-black uppercase mb-1 block">📅 Fecha Activación (Calendario)</label>
-                                <input type="date" id="pt-cli-fecha-activacion-str" class="w-full bg-neutral-950 border border-amber-500/40 text-amber-400 font-mono px-4 py-2.5 rounded-xl focus:outline-none">
+                                <label class="text-[8.5px] text-amber-400 font-black uppercase mb-1 block">📅 Fecha Activación (Calendario)</label>
+                                <input type="date" id="pt-cli-fecha-activacion-str" class="w-full bg-neutral-950 border border-amber-500/40 text-amber-400 font-mono px-3.5 py-2 rounded-xl focus:outline-none">
                             </div>
                         </div>
 
-                        <button onclick="window.crearSuscriptorPubliTasaPro()" class="w-full bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black py-3.5 rounded-xl uppercase tracking-wider text-xs shadow-lg transition-all mt-2 btn-interactive">
+                        <button onclick="window.crearSuscriptorPubliTasaPro()" class="w-full bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-lg transition-all mt-1 btn-interactive">
                             ➕ Generar Licencia e Inyectar a Firebase 🔒
                         </button>
                     </div>
                 </div>
 
-                <div class="space-y-3">
-                    <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
+                <div class="space-y-2.5 w-full">
+                    <div class="bg-neutral-900 border border-neutral-800 p-3.5 sm:p-4 rounded-3xl space-y-2.5 w-full">
                         <div class="flex justify-between items-center">
-                            <span class="text-[9px] font-black tracking-widest text-amber-400 uppercase flex items-center gap-1.5">
+                            <span class="text-[9px] font-black tracking-widest text-amber-400 uppercase flex items-center gap-1">
                                 <i class="fa-solid fa-address-book"></i> Bóveda Licencias PubliTasa Pro
                             </span>
                             <div class="flex items-center gap-2">
-                                <button onclick="window.alternarVistaArchivadosPubliTasa()" id="btn-toggle-anulados-pt" class="bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-amber-500/40 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider btn-interactive">
+                                <button onclick="window.alternarVistaArchivadosPubliTasa()" id="btn-toggle-anulados-pt" class="bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-amber-500/40 text-[8.5px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider btn-interactive">
                                     📂 Ver Bóveda Anulados
                                 </button>
-                                <span id="lbl-total-publitasa" class="bg-neutral-950 text-amber-400 border border-amber-500/30 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold">
+                                <span id="lbl-total-publitasa" class="bg-neutral-950 text-amber-400 border border-amber-500/30 px-2 py-0.5 rounded-full text-[9.5px] font-mono font-bold">
                                     0 Activos
                                 </span>
                             </div>
                         </div>
                         
-                        <div class="relative">
+                        <div class="relative w-full">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-xs"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input type="text" id="pt-buscar-input" onkeyup="window.renderizarBovedaPubliTasaPro()" placeholder="Buscar comercio o teléfono..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl uppercase focus:outline-none focus:border-amber-500">
+                            <input type="text" id="pt-buscar-input" onkeyup="window.renderizarBovedaPubliTasaPro()" placeholder="Buscar comercio o teléfono..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-3.5 py-2.5 rounded-xl uppercase focus:outline-none focus:border-amber-500">
                         </div>
 
-                        <button onclick="window.toggleAcordeonPubliTasaPro()" id="btn-acordeon-publitasa-desplegar" class="w-full bg-neutral-950 border border-amber-500/50 hover:border-amber-400 text-amber-400 font-black text-[10.5px] py-2.5 rounded-2xl uppercase tracking-wider flex items-center justify-center gap-2 transition-all btn-interactive">
+                        <button onclick="window.toggleAcordeonPubliTasaPro()" id="btn-acordeon-publitasa-desplegar" class="w-full bg-neutral-950 border border-amber-500/50 hover:border-amber-400 text-amber-400 font-black text-[10px] py-2.5 rounded-2xl uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all btn-interactive">
                             <span>📊 VER LICENCIAS ACTIVAS PUBLITASA PRO</span>
                             <i id="ico-acordeon-pt" class="fa-solid fa-chevron-down text-xs"></i>
                         </button>
                     </div>
 
-                    <div id="mosaico-publitasa-clientes-box" class="space-y-3 max-h-[70vh] overflow-y-auto pr-1 no-scrollbar"></div>
+                    <div id="mosaico-publitasa-clientes-box" class="space-y-3 max-h-[70vh] overflow-y-auto pr-1 no-scrollbar w-full"></div>
                 </div>
 
             </div>
@@ -1067,19 +1084,19 @@
     </div>
 
     <!-- CINTILLO INFERIOR GENERAL -->
-    <footer id="footer-general-streaming" class="footer-glow border-t border-neutral-900/80 mt-16 py-6 px-4 text-center space-y-4 relative z-40">
-        <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-6 sm:gap-10 glow-white">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="h-4 object-contain">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+" class="h-4.5 object-contain">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg" alt="Max" class="h-3.5 object-contain">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg" alt="Prime Video" class="h-3 object-contain">
-            <span class="text-[9.5px] text-white font-extrabold font-mono tracking-widest bg-gradient-to-r from-red-600 to-amber-600 px-2 py-0.5 rounded shadow">CANVA</span>
-            <span class="text-[9.5px] text-white font-extrabold font-mono tracking-widest bg-neutral-800 px-2 py-0.5 rounded border border-neutral-700 shadow">YOUTUBE</span>
+    <footer id="footer-general-streaming" class="footer-glow border-t border-neutral-900/80 mt-12 py-5 px-3 text-center space-y-3 relative z-40 w-full">
+        <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-4 sm:gap-10 glow-white">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="h-3.5 sm:h-4 object-contain">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+" class="h-4 sm:h-4.5 object-contain">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg" alt="Max" class="h-3 sm:h-3.5 object-contain">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg" alt="Prime Video" class="h-2.5 sm:h-3 object-contain">
+            <span class="text-[9px] text-white font-extrabold font-mono tracking-widest bg-gradient-to-r from-red-600 to-amber-600 px-2 py-0.5 rounded shadow">CANVA</span>
+            <span class="text-[9px] text-white font-extrabold font-mono tracking-widest bg-neutral-800 px-2 py-0.5 rounded border border-neutral-700 shadow">YOUTUBE</span>
         </div>
         
-        <div class="text-white text-[10px] sm:text-xs space-y-1 pt-2 font-bold tracking-wide">
+        <div class="text-white text-[9.5px] sm:text-xs space-y-0.5 pt-1 font-bold tracking-wide">
             <p class="text-slate-200">🔐 © 2026 Tucocel C.A. Todos los derechos reservados.</p>
-            <p class="text-slate-400 font-medium uppercase text-[9px] sm:text-[10px]">
+            <p class="text-slate-400 font-medium uppercase text-[8.5px] sm:text-[10px]">
                 💻 Web desarrollada corporativamente por <span class="text-white font-bold">@publionlinemk</span> (Agencia de Publicidad de Tucocel C.A.)
             </p>
         </div>
@@ -1140,7 +1157,6 @@
             return `${yyyy}-${mm}-${dd}`;
         }
 
-        /* PARSER UNIFICADO INTELIGENTE DE FECHAS (FORMATOS AAAA-MM-DD Y DD/MM/AAAA) */
         function convertirCualquierFechaADateObj(fechaRaw) {
             if(!fechaRaw) return new Date();
             if(fechaRaw.includes('-')) {
@@ -1162,7 +1178,6 @@
             return `${dd}/${mm}/${yyyy}`;
         }
 
-        /* ENRUTADOR ESTRICTO PARA FORZAR SIEMPRE WHATSAPP NORMAL (com.whatsapp) */
         function abrirWhatsAppPersonal(phoneTarget, mensajeTexto) {
             const textoCodificado = encodeURIComponent(mensajeTexto);
             let cleanTlf = phoneTarget ? phoneTarget.replace(/\D/g, '') : '';
@@ -1201,6 +1216,7 @@
             return valActual > valPrevio ? '🔺' : '🔻';
         }
 
+        /* NETFLIX PERMANECE COMO EL REY DE LA LISTA (#1) */
         let catalogoPlataformasEstructura = {
             NETFLIX: { nombre: "Netflix", precio: 5.00, logo: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", desc: "Series exclusivas, películas de estreno y documentales en resolución Ultra HD 4K." },
             TELE_LATINO: { nombre: "Tele Latino", precio: 5.00, logo: "", desc: "Programación en vivo, canales de deportes, series de estreno y películas sin límites." },
@@ -1211,7 +1227,6 @@
             HBO_MAX: { nombre: "HBO Max", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg", desc: "Series mundiales galardedonas, estrenos de cine de Warner Bros y documentales." }
         };
 
-        /* BÓVEDA DE CUENTAS FIJAS PROPIETARIAS */
         let cuentasFijasMasterDict = {
             NETFLIX: [
                 { id: "net-1", correo: "ServiciosNetflixmk@gmail.com", clave: "razu2020.+" },
@@ -1234,6 +1249,7 @@
         let verArchivadosStreamingBool = false;
         let verArchivadosPubliTasaBool = false;
         let pildoraCuentaFijaSeleccionada = null;
+        let tasaUsdtActualSincro = parseFloat(localStorage.getItem('tcl_tasa_usdt')) || 890;
         
         let masterUsuarioIdDinamico = "TUCOCEL";
         let masterClaveDinamica = "Razu2020.";
@@ -1766,14 +1782,14 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(particion === 'publitasa') {
                 blockStreaming.classList.add('hidden');
                 blockPubliTasa.classList.remove('hidden');
-                btnPubliTasa.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-amber-500 text-neutral-950 transition-all btn-interactive";
-                btnStreaming.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-neutral-900 text-slate-400 border border-neutral-800 hover:border-slate-700 transition-all btn-interactive";
+                btnPubliTasa.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-amber-500 text-neutral-950 transition-all btn-interactive";
+                btnStreaming.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-slate-400 border border-neutral-800 hover:border-slate-700 transition-all btn-interactive";
                 window.descargarBasePubliTasaFirebaseCompleta();
             } else {
                 blockPubliTasa.classList.add('hidden');
                 blockStreaming.classList.remove('hidden');
-                btnStreaming.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-red-600 text-white transition-all btn-interactive";
-                btnPubliTasa.className = "flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-neutral-900 text-amber-400 border border-neutral-800 hover:border-amber-500/50 transition-all btn-interactive";
+                btnStreaming.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-red-600 text-white transition-all btn-interactive";
+                btnPubliTasa.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-amber-400 border border-neutral-800 hover:border-amber-500/50 transition-all btn-interactive";
             }
         };
 
@@ -1843,7 +1859,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(!id || !nombre || !desc) return alert("Faltan campos.");
             catalogoPlataformasEstructura[id] = { nombre, precio, logo, desc };
             try {
-                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), catalogoPlataformasEstructura);
+                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), { catalogo: catalogoPlataformasEstructura, tasaUsdt: tasaUsdtActualSincro });
                 alert(`✨ Plataforma [${nombre}] agregada al catálogo.`);
                 window.construirEstructurasDinamicasInterfaces();
             } catch(e) {
@@ -1873,7 +1889,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
         };
 
-        /* LÓGICA DE CONTROL CON TARJETAS DARK Y CAMPOS INICIALMENTE VACÍOS */
+        /* CONTROL DE PÍLDORAS DARK DE CUENTAS FIJAS CON BOTÓN ELIMINAR X */
         window.alCambiarPlataformaFormulario = function() {
             const platSelect = document.getElementById('field-plataforma');
             if(!platSelect) return;
@@ -1886,23 +1902,28 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             pildoraCuentaFijaSeleccionada = null;
             
-            // SIEMPRE ARRANCAN TOTALMENTE VACÍOS
             inCorreo.value = "";
             inClave.value = "";
             inPerfil.value = platKey === 'TELE_LATINO' ? "PERFIL 1" : "";
 
-            if(platKey === 'NETFLIX' || platKey === 'TELE_LATINO') {
+            const cuentasList = cuentasFijasMasterDict[platKey] || [];
+
+            if(cuentasList.length > 0) {
                 wrapperFijas.classList.remove('hidden');
                 gridPildoras.innerHTML = "";
-                const cuentasList = cuentasFijasMasterDict[platKey] || [];
                 
                 cuentasList.forEach((item, index) => {
-                    const aliasVisual = platKey === 'NETFLIX' ? `Cuenta ${index+1}` : `Cuenta ${index+1}`;
+                    const aliasVisual = `Cuenta ${index+1}`;
                     gridPildoras.innerHTML += `
-                        <button type="button" onclick="window.seleccionarPildoraCuentaFija('${platKey}', ${index})" id="pildora-fija-${index}" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500/60 p-2.5 rounded-xl text-left transition-all btn-interactive flex flex-col justify-center">
-                            <span class="text-[9px] font-black uppercase text-amber-400 block">${aliasVisual}</span>
-                            <span class="text-[10px] font-mono text-slate-300 font-bold truncate block">${item.correo}</span>
-                        </button>`;
+                        <div id="pildora-fija-${index}" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500/60 p-2.5 rounded-xl text-left transition-all btn-interactive flex justify-between items-center relative">
+                            <div onclick="window.seleccionarPildoraCuentaFija('${platKey}', ${index})" class="flex-1 cursor-pointer truncate pr-2">
+                                <span class="text-[9px] font-black uppercase text-amber-400 block">${aliasVisual}</span>
+                                <span class="text-[10px] font-mono text-slate-300 font-bold truncate block">${item.correo}</span>
+                            </div>
+                            <button type="button" onclick="window.eliminarCuentaFija('${platKey}', ${index})" title="Eliminar cuenta fija" class="text-slate-500 hover:text-red-500 p-1 font-bold text-xs">
+                                ❌
+                            </button>
+                        </div>`;
                 });
                 
                 gridPildoras.innerHTML += `
@@ -1920,11 +1941,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const inClave = document.getElementById('field-clave');
             const inPerfil = document.getElementById('field-perfil');
 
-            // Resetear estilos de todas las píldoras
             const cuentasList = cuentasFijasMasterDict[platKey] || [];
             cuentasList.forEach((_, i) => {
                 const el = document.getElementById(`pildora-fija-${i}`);
-                if(el) el.className = "bg-neutral-900 border border-neutral-800 hover:border-amber-500/60 p-2.5 rounded-xl text-left transition-all btn-interactive flex flex-col justify-center";
+                if(el) el.className = "bg-neutral-900 border border-neutral-800 hover:border-amber-500/60 p-2.5 rounded-xl text-left transition-all btn-interactive flex justify-between items-center relative";
             });
             const elExt = document.getElementById('pildora-fija-externa');
             if(elExt) elExt.className = "bg-neutral-900 border border-neutral-800 hover:border-red-500/60 p-2.5 rounded-xl text-left transition-all btn-interactive flex flex-col justify-center col-span-1 sm:col-span-2";
@@ -1937,7 +1957,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 pildoraCuentaFijaSeleccionada = 'EXTERNA';
             } else {
                 const elSel = document.getElementById(`pildora-fija-${idxVal}`);
-                if(elSel) elSel.className = "bg-amber-950/40 border-2 border-amber-400 p-2.5 rounded-xl text-left transition-all btn-interactive flex flex-col justify-center shadow-lg";
+                if(elSel) elSel.className = "bg-amber-950/40 border-2 border-amber-400 p-2.5 rounded-xl text-left transition-all btn-interactive flex justify-between items-center relative shadow-lg";
                 
                 const cuentaObj = cuentasFijasMasterDict[platKey][parseInt(idxVal)];
                 if(cuentaObj) {
@@ -1949,6 +1969,23 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
         };
 
+        window.eliminarCuentaFija = async function(platKey, index) {
+            const cuentaObj = cuentasFijasMasterDict[platKey][index];
+            if(!cuentaObj) return;
+
+            if(confirm(`❌ ¿Seguro que deseas borrar la cuenta fija [${cuentaObj.correo}] de ${platKey}?`)) {
+                cuentasFijasMasterDict[platKey].splice(index, 1);
+                try {
+                    await setDoc(doc(db, "tcl_streaming_core", "cuentas_fijas_config"), cuentasFijasMasterDict);
+                    alert("🗑️ Cuenta fija eliminada correctamente.");
+                } catch(e) {
+                    alert("✨ Cuenta eliminada localmente.");
+                }
+                window.alCambiarPlataformaFormulario();
+            }
+        };
+
+        /* INCLUYE PRECIOS EN LÍNEAS SEPARADAS DE CADA PANTALLA EN VITRINA (USDT ARRIBA, BS ABAJO BIEN GRUESO) */
         window.construirEstructurasDinamicasInterfaces = function() {
             const vitrina = document.getElementById('mosaico-vitrina-publica-productos');
             const selectForm = document.getElementById('field-plataforma');
@@ -1958,19 +1995,26 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             Object.keys(catalogoPlataformasEstructura).forEach(k => {
                 const item = catalogoPlataformasEstructura[k];
+                const precioBs = item.precio * tasaUsdtActualSincro;
+
                 if(vitrina) {
                     let imgLogo = item.logo ? `<img src="${item.logo}" alt="${item.nombre}" class="h-6 object-contain">` : `<span class="text-white font-black text-xs bg-gradient-to-r from-red-600 to-neutral-700 px-2.5 py-1 rounded uppercase truncate max-w-full">${item.nombre}</span>`;
                     vitrina.innerHTML += `
-                        <div class="cinema-card rounded-2xl p-4 flex flex-col justify-between min-h-[250px]">
-                            <div class="space-y-2">
-                                <div class="h-10 flex items-center justify-start logo-container">${imgLogo}</div>
-                                <div class="text-amber-400 text-[9px] flex items-center gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                                <p class="text-[10.5px] text-slate-400 leading-tight font-medium min-h-[40px]">${item.desc}</p>
+                        <div class="cinema-card rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between min-h-[260px] sm:min-h-[270px] w-full">
+                            <div class="space-y-1.5 sm:space-y-2">
+                                <div class="h-9 sm:h-10 flex items-center justify-start logo-container">${imgLogo}</div>
+                                <div class="text-amber-400 text-[8px] sm:text-[9px] flex items-center gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                <p class="text-[9.5px] sm:text-[10.5px] text-slate-400 leading-tight font-medium min-h-[38px]">${item.desc}</p>
                             </div>
-                            <div class="border-t border-neutral-900/60 pt-2.5 mt-2 flex flex-col justify-end space-y-2">
+                            <div class="border-t border-neutral-900/60 pt-2 mt-1.5 flex flex-col justify-end space-y-2">
                                 <div class="space-y-0.5">
-                                    <span class="text-base font-mono font-black text-red-500 block">${item.precio.toFixed(2)} <small class="text-[9px] text-slate-500">USDT</small></span>
-                                    <span class="text-[8.5px] font-bold text-slate-400 block leading-tight">Aceptamos Bolívares (Pago Móvil), Binance USDT, Zelle, Zinli, Nequi y PayPal.</span>
+                                    <span class="text-base sm:text-lg font-mono font-black text-red-500 block">
+                                        ${item.precio.toFixed(2)} <small class="text-[9px] text-slate-400 font-bold">USDT</small>
+                                    </span>
+                                    <span class="text-emerald-400 text-xs sm:text-sm font-mono font-black block">
+                                        ${precioBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs.
+                                    </span>
+                                    <span class="text-[7.5px] sm:text-[8px] text-amber-400/80 font-bold block leading-tight pt-0.5">📌 Tasa Binance USDT del día. Confirmar monto en Bs. con el proveedor.</span>
                                 </div>
                                 <button onclick="window.abrirModalSolicitudStreaming('${item.nombre}')" class="w-full bg-red-600 hover:bg-red-700 text-white font-black text-[9px] py-2 rounded-xl uppercase tracking-wider transition-all text-center btn-interactive">Adquirir</button>
                             </div>
@@ -1982,12 +2026,26 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                         <div class="bg-neutral-950 p-2 rounded-xl border border-neutral-800">
                             <span class="block text-[8.5px] text-slate-500 font-bold uppercase truncate">${item.nombre}</span>
                             <input type="number" id="cfg-p-${k}" value="${item.precio}" step="0.1" class="w-full bg-transparent font-bold text-xs text-white focus:outline-none" onkeyup="window.recalcularTasasBolivaresAdmin()">
-                            <span class="block text-[8px] text-emerald-500 font-mono mt-0.5" id="bs-p-${k}">0 Bs</span>
+                            <span class="block text-[8px] text-emerald-500 font-mono mt-0.5" id="bs-p-${k}">${(item.precio * tasaUsdtActualSincro).toFixed(2)} Bs</span>
                         </div>`;
                 }
             });
+
+            // CASILLA ESPECIAL PUBLITASA PRO EN EL TARIFADOR
+            if(tarifador) {
+                const ptBs = (tarifasPubliTasaEstructura.plan1 || 5.00) * tasaUsdtActualSincro;
+                tarifador.innerHTML += `
+                    <div class="bg-neutral-950 p-2 rounded-xl border border-amber-500/50">
+                        <span class="block text-[8.5px] text-amber-400 font-black uppercase truncate">PUBLITASA PRO</span>
+                        <input type="number" id="cfg-p-PUBLITASA_PRO" value="${tarifasPubliTasaEstructura.plan1 || 5.00}" step="0.5" class="w-full bg-transparent font-bold text-xs text-amber-300 focus:outline-none" onkeyup="window.recalcularTasasBolivaresAdmin()">
+                        <span class="block text-[8px] text-emerald-500 font-mono mt-0.5" id="bs-p-PUBLITASA_PRO">${ptBs.toFixed(2)} Bs</span>
+                    </div>`;
+            }
+
+            const inputTasaAdm = document.getElementById('adm-tasa-cambio');
+            if(inputTasaAdm) inputTasaAdm.value = tasaUsdtActualSincro;
+
             window.alCambiarPlataformaFormulario();
-            window.recalcularTasasBolivaresAdmin();
             window.recalcularCarpetasYChismoseadorDinamico();
         };
 
@@ -1997,7 +2055,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(!burbujasBox || !carpetasBox) return;
 
             burbujasBox.innerHTML = "";
-            let htmlCarpetas = `<button onclick="window.filtrarCarpetaStreamingAdmin('TODOS')" class="w-full py-2 rounded-xl font-black text-[10px] uppercase transition-all text-center btn-interactive ${carpetaFiltroSeleccionadaStr === 'TODOS' ? 'bg-red-600 text-white' : 'bg-neutral-950 text-slate-400 border border-neutral-800'}">📁 VER TODOS</button>`;
+            let htmlCarpetas = `<button onclick="window.filtrarCarpetaStreamingAdmin('TODOS')" class="w-full py-2 rounded-xl font-black text-[9.5px] uppercase transition-all text-center btn-interactive ${carpetaFiltroSeleccionadaStr === 'TODOS' ? 'bg-red-600 text-white' : 'bg-neutral-950 text-slate-400 border border-neutral-800'}">📁 VER TODOS</button>`;
 
             const activosPubliTasa = localPubliTasaClientesArr.filter(c => (c.estado || 'ACTIVO') === 'ACTIVO');
             const vencidosPubliTasa = activosPubliTasa.filter(c => c.diasRestantes <= 5).length;
@@ -2007,11 +2065,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             burbujasBox.innerHTML += `
                 <div onclick="window.cambiarParticionAdmin('publitasa')" class="border rounded-xl p-2 text-center cursor-pointer hover:border-amber-400 transition-all btn-interactive ${colorBurbujaPT}">
                     <span class="block text-[8.5px] font-black uppercase truncate">PubliTasa Pro</span>
-                    <span class="text-[10px] font-mono block mt-0.5">${vencidosPubliTasa > 0 ? `⚠️ ${vencidosPubliTasa} Alerta` : '✅ Al Día'}</span>
+                    <span class="text-[9.5px] font-mono block mt-0.5">${vencidosPubliTasa > 0 ? `⚠️ ${vencidosPubliTasa} Alerta` : '✅ Al Día'}</span>
                 </div>`;
 
             let estiloBotonPT = carpetaFiltroSeleccionadaStr === 'PUBLITASA_PRO' ? 'bg-amber-500 text-neutral-950 font-black' : 'bg-neutral-950 text-amber-400 border border-amber-500/40 hover:border-amber-400';
-            htmlCarpetas += `<button onclick="window.filtrarCarpetaStreamingAdmin('PUBLITASA_PRO')" class="w-full py-2 rounded-xl font-bold text-[10px] uppercase transition-all text-center btn-interactive ${estiloBotonPT}">📊 PUBLITASA PRO (${activosPubliTasa.length})</button>`;
+            htmlCarpetas += `<button onclick="window.filtrarCarpetaStreamingAdmin('PUBLITASA_PRO')" class="w-full py-2 rounded-xl font-bold text-[9.5px] uppercase transition-all text-center btn-interactive ${estiloBotonPT}">📊 PUBLITASA PRO (${activosPubliTasa.length})</button>`;
 
             Object.keys(catalogoPlataformasEstructura).forEach(k => {
                 const nombrePlat = catalogoPlataformasEstructura[k].nombre;
@@ -2022,11 +2080,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 burbujasBox.innerHTML += `
                     <div onclick="window.filtrarCarpetaStreamingAdmin('${k}')" class="border rounded-xl p-2 text-center cursor-pointer hover:border-neutral-600 transition-all btn-interactive ${colorBurbuja}">
                         <span class="block text-[8.5px] font-black uppercase truncate">${nombrePlat}</span>
-                        <span class="text-[10px] font-mono block mt-0.5">${vencidosLote > 0 ? `⚠️ ${vencidosLote} Alerta` : '✅ Al Día'}</span>
+                        <span class="text-[9.5px] font-mono block mt-0.5">${vencidosLote > 0 ? `⚠️ ${vencidosLote} Alerta` : '✅ Al Día'}</span>
                     </div>`;
 
                 let estiloCarpetaBoton = carpetaFiltroSeleccionadaStr === k ? 'bg-red-600 text-white font-black' : 'bg-neutral-950 text-slate-400 border border-neutral-800';
-                htmlCarpetas += `<button onclick="window.filtrarCarpetaStreamingAdmin('${k}')" class="w-full py-2 rounded-xl font-bold text-[10px] uppercase transition-all text-center btn-interactive ${estiloCarpetaBoton}">${nombrePlat} (${clientesDeEstaPlat.length})</button>`;
+                htmlCarpetas += `<button onclick="window.filtrarCarpetaStreamingAdmin('${k}')" class="w-full py-2 rounded-xl font-bold text-[9.5px] uppercase transition-all text-center btn-interactive ${estiloCarpetaBoton}">${nombrePlat} (${clientesDeEstaPlat.length})</button>`;
             });
 
             carpetasBox.innerHTML = htmlCarpetas;
@@ -2046,10 +2104,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             verArchivadosStreamingBool = !verArchivadosStreamingBool;
             const btn = document.getElementById('btn-toggle-anulados-str');
             if(verArchivadosStreamingBool) {
-                btn.className = "bg-red-600 text-white text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider btn-interactive";
+                btn.className = "bg-red-600 text-white text-[8.5px] sm:text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider btn-interactive";
                 btn.innerHTML = "🟢 Ver Clientes Activos";
             } else {
-                btn.className = "bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-red-900 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider btn-interactive";
+                btn.className = "bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-red-900 text-[8.5px] sm:text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider btn-interactive";
                 btn.innerHTML = "📂 Ver Bóveda Anulados";
             }
             window.renderizarMonitorMembresiasAdmin();
@@ -2059,10 +2117,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             verArchivadosPubliTasaBool = !verArchivadosPubliTasaBool;
             const btn = document.getElementById('btn-toggle-anulados-pt');
             if(verArchivadosPubliTasaBool) {
-                btn.className = "bg-amber-500 text-neutral-950 font-black text-[9px] px-3 py-1 rounded-full uppercase tracking-wider btn-interactive";
+                btn.className = "bg-amber-500 text-neutral-950 font-black text-[8.5px] sm:text-[9px] px-3 py-1 rounded-full uppercase tracking-wider btn-interactive";
                 btn.innerHTML = "🟢 Ver Licencias Activas";
             } else {
-                btn.className = "bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-amber-500/40 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider btn-interactive";
+                btn.className = "bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-amber-500/40 text-[8.5px] sm:text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider btn-interactive";
                 btn.innerHTML = "📂 Ver Bóveda Anulados";
             }
             mostrarListaPubliTasaBool = true;
@@ -2126,7 +2184,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             alert("⚡ Datos separados.");
         };
 
-        /* EJECUTA CARGA Y APRENDE NUEVAS CLAVES EN FIREBASE SI FUERON MODIFICADAS */
         window.ejecutarCargaPerfilStreamingFirebase = async function() {
             const plataforma = document.getElementById('field-plataforma').value;
             const meses = parseInt(document.getElementById('field-meses').value);
@@ -2143,11 +2200,24 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             if(!clave || !cNombre || !cTlf) return alert("Campos obligatorios vacíos.");
 
-            // APRENDIZAJE Y AUTO-ACTUALIZACIÓN DE CLAVE EN FIREBASE
-            if((plataforma === 'NETFLIX' || plataforma === 'TELE_LATINO') && cuentasFijasMasterDict[plataforma]) {
-                const cuentaFijaMatch = cuentasFijasMasterDict[plataforma].find(c => c.correo.toLowerCase() === correo.toLowerCase());
-                if(cuentaFijaMatch && cuentaFijaMatch.clave !== clave) {
-                    cuentaFijaMatch.clave = clave;
+            if(!cuentasFijasMasterDict[plataforma]) cuentasFijasMasterDict[plataforma] = [];
+            
+            const matchExistente = cuentasFijasMasterDict[plataforma].find(c => c.correo.toLowerCase() === correo.toLowerCase());
+
+            if(matchExistente) {
+                if(matchExistente.clave !== clave) {
+                    matchExistente.clave = clave;
+                    try {
+                        await setDoc(doc(db, "tcl_streaming_core", "cuentas_fijas_config"), cuentasFijasMasterDict);
+                    } catch(e) {}
+                }
+            } else if(correo) {
+                if(confirm(`✨ La cuenta [${correo}] no está guardada como Cuenta Fija de ${plataforma}.\n\n¿Deseas agregarla a tus cuentas fijas para el futuro?`)) {
+                    cuentasFijasMasterDict[plataforma].push({
+                        id: 'fija-' + Date.now(),
+                        correo: correo,
+                        clave: clave
+                    });
                     try {
                         await setDoc(doc(db, "tcl_streaming_core", "cuentas_fijas_config"), cuentasFijasMasterDict);
                     } catch(e) {}
@@ -2167,7 +2237,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             localStreamingClientesArr.push(nuevoClienteStreaming);
             await window.sincronizarBaseStreamingNube();
-            alert("🔒 Perfil indexado.");
+            alert("🔒 Perfil indexado con éxito.");
             
             document.getElementById('field-correo').value = ""; document.getElementById('field-clave').value = "";
             document.getElementById('field-perfil').value = ""; document.getElementById('field-pin').value = "";
@@ -2212,30 +2282,30 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     const esAlerta = c.diasRestantes <= 5;
                     const esInactivo = c.estado === 'INACTIVO';
                     box.innerHTML += `
-                        <div class="border-2 border-amber-500/60 rounded-2xl p-4 flex flex-col justify-between ${esInactivo ? 'border-red-900/40 bg-red-950/10' : (esAlerta ? 'bg-amber-950/20' : 'bg-[#00112b]/80')} shadow-xl">
+                        <div class="border-2 border-amber-500/60 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between ${esInactivo ? 'border-red-900/40 bg-red-950/10' : (esAlerta ? 'bg-amber-950/20' : 'bg-[#00112b]/80')} shadow-xl w-full">
                             <div class="flex justify-between items-start">
                                 <div>
                                     <span class="text-amber-400 text-[9px] font-black uppercase tracking-wider">LICENCIA PRO: ${c.tokenLicencia}</span>
-                                    <h4 class="text-white text-sm font-black uppercase mt-0.5">${c.cliente}</h4>
-                                    <p class="text-[10px] text-slate-300 font-mono mt-0.5"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono} &bull; ${c.direccion || 'TÁCHIRA'}</p>
-                                    <p class="text-[10px] text-slate-400 font-mono"><i class="fa-solid fa-calendar text-slate-500"></i> Inicio: ${c.fechaActivacion || 'N/A'}</p>
-                                    <p class="text-[10px] text-emerald-400 font-bold mt-0.5"><i class="fa-solid fa-mobile-screen"></i> Equipos: ${c.equiposRegistrados ? c.equiposRegistrados.length : 0} / ${c.maxEquipos} Máx</p>
+                                    <h4 class="text-white text-xs sm:text-sm font-black uppercase mt-0.5">${c.cliente}</h4>
+                                    <p class="text-[9.5px] text-slate-300 font-mono mt-0.5"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono} &bull; ${c.direccion || 'TÁCHIRA'}</p>
+                                    <p class="text-[9.5px] text-slate-400 font-mono"><i class="fa-solid fa-calendar text-slate-500"></i> Inicio: ${c.fechaActivacion || 'N/A'}</p>
+                                    <p class="text-[9.5px] text-emerald-400 font-bold mt-0.5"><i class="fa-solid fa-mobile-screen"></i> Equipos: ${c.equiposRegistrados ? c.equiposRegistrados.length : 0} / ${c.maxEquipos} Máx</p>
                                 </div>
                                 <div class="text-right">
-                                    <span class="block text-base font-mono font-black ${esInactivo ? 'text-red-500' : (esAlerta ? 'text-amber-400 animate-pulse' : 'text-slate-200')}">${c.diasRestantes} Días</span>
+                                    <span class="block text-sm sm:text-base font-mono font-black ${esInactivo ? 'text-red-500' : (esAlerta ? 'text-amber-400 animate-pulse' : 'text-slate-200')}">${c.diasRestantes} Días</span>
                                     <span class="text-[8px] text-slate-500 block uppercase font-bold">${esInactivo ? 'ANULADO' : 'Plan: ' + c.meses + ' Mes(es)'}</span>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mt-3 border-t border-neutral-900 pt-3">
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mt-3 border-t border-neutral-900 pt-2.5 w-full">
                                 ${!esInactivo ? `
-                                    <button onclick="window.renovarExpresPubliTasa('${c.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[9px] py-2 rounded-lg uppercase btn-interactive">⚡ +1 Mes</button>
-                                    <button onclick="window.enviarBienvenidaPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase btn-interactive">📲 Acceso</button>
-                                    <button onclick="window.notificarPagoPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-bold text-[9px] py-2 rounded-lg uppercase btn-interactive">🔔 Notificar</button>
-                                    <button onclick="window.resetearEquiposPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-2 rounded-lg uppercase btn-interactive">🔄 Reset</button>
-                                    <button onclick="window.abrirEditorPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-2 rounded-lg uppercase btn-interactive">✏️ Editar</button>
-                                    <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-2 rounded-lg uppercase col-span-2 sm:col-span-3 btn-interactive">🚫 Anular Licencia</button>
+                                    <button onclick="window.renovarExpresPubliTasa('${c.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">⚡ +1 Mes</button>
+                                    <button onclick="window.enviarBienvenidaPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">📲 Acceso</button>
+                                    <button onclick="window.notificarPagoPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">🔔 Notificar</button>
+                                    <button onclick="window.resetearEquiposPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">🔄 Reset</button>
+                                    <button onclick="window.abrirEditorPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">✏️ Editar</button>
+                                    <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-1.5 rounded-lg uppercase col-span-2 sm:col-span-3 btn-interactive">🚫 Anular Licencia</button>
                                 ` : `
-                                    <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase col-span-2 sm:col-span-4 btn-interactive">♻️ Reactivar Licencia Pro</button>
+                                    <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase col-span-2 sm:col-span-4 btn-interactive">♻️ Reactivar Licencia Pro</button>
                                 `}
                             </div>
                         </div>`;
@@ -2261,21 +2331,21 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 const esInactivo = c.estado === 'INACTIVO';
 
                 box.innerHTML += `
-                    <div class="border rounded-2xl p-4 flex flex-col justify-between ${esInactivo ? 'border-red-900/40 bg-red-950/10' : (esAlertaCritica ? 'border-amber-500 bg-amber-950/10' : 'border-neutral-800 bg-neutral-950/40')}">
+                    <div class="border rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between ${esInactivo ? 'border-red-900/40 bg-red-950/10' : (esAlertaCritica ? 'border-amber-500 bg-amber-950/10' : 'border-neutral-800 bg-neutral-950/40')} w-full">
                         <div class="flex justify-between items-start">
                             <div>
                                 <span class="text-red-500 text-[9px] font-black uppercase font-mono">${catalogoPlataformasEstructura[c.plataforma]?.nombre || c.plataforma}</span>
-                                <h4 class="text-white text-sm font-black uppercase mt-0.5">${c.cliente}</h4>
-                                <p class="text-[10px] text-slate-300 font-mono truncate max-w-xs mt-1"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono} | Acceso: ${c.correo || 'ID'}</p>
-                                <p class="text-[10px] text-slate-400 font-mono">Clave: ${c.clave} ${c.perfil ? `| Perfil: ${c.perfil}` : ''} ${c.pin ? `| PIN: ${c.pin}` : ''}</p>
-                                <p class="text-[10px] text-amber-400/90 font-mono mt-0.5"><i class="fa-solid fa-calendar text-amber-500"></i> Activado: ${c.fechaActivacion || 'N/A'}</p>
+                                <h4 class="text-white text-xs sm:text-sm font-black uppercase mt-0.5">${c.cliente}</h4>
+                                <p class="text-[9.5px] text-slate-300 font-mono truncate max-w-xs mt-0.5"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono} | Acceso: ${c.correo || 'ID'}</p>
+                                <p class="text-[9.5px] text-slate-400 font-mono">Clave: ${c.clave} ${c.perfil ? `| Perfil: ${c.perfil}` : ''} ${c.pin ? `| PIN: ${c.pin}` : ''}</p>
+                                <p class="text-[9.5px] text-amber-400/90 font-mono mt-0.5"><i class="fa-solid fa-calendar text-amber-500"></i> Activado: ${c.fechaActivacion || 'N/A'}</p>
                             </div>
                             <div class="text-right">
-                                <span class="block text-[15px] font-mono font-black ${esInactivo ? 'text-red-500' : (esAlertaCritica ? 'text-amber-400 animate-pulse' : 'text-slate-200')}">${c.diasRestantes} Días</span>
+                                <span class="block text-sm sm:text-[15px] font-mono font-black ${esInactivo ? 'text-red-500' : (esAlertaCritica ? 'text-amber-400 animate-pulse' : 'text-slate-200')}">${c.diasRestantes} Días</span>
                                 <span class="text-[8px] text-slate-500 block uppercase font-bold">${esInactivo ? 'ANULADO' : 'Lote: ' + c.meses + ' Mes(es)'}</span>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 sm:grid-cols-6 gap-1.5 mt-3 border-t border-neutral-900 pt-3">
+                        <div class="grid grid-cols-2 sm:grid-cols-6 gap-1.5 mt-3 border-t border-neutral-900 pt-2.5 w-full">
                             ${!esInactivo ? `
                                 <button onclick="window.renovarExpresStreaming('${c.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">⚡ +1 Mes</button>
                                 <button onclick="window.despacharMensajeWhatsAppStreaming('${c.id}', 'ACTIVACION')" class="bg-red-600 hover:bg-red-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">Activación</button>
@@ -2346,6 +2416,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             abrirWhatsAppPersonal(match.telefono, text);
         };
 
+        /* DIFUSIÓN MASIVA CON COPIADO DIRECTO PARA ESTADOS */
         window.despacharMarketingMasivoWhatsApp = function(destino) {
             const urlFinal = linkServidorGitHubGuardado || URL_VITRINA_OFICIAL;
             let msg = "";
@@ -2361,8 +2432,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     msg = `🎬 SERVICIOS STREAMING CORDERO MK 🍿\n\n¿Cansado de caídas y cuentas caídas? Disfruta del mejor entretenimiento digital con estabilidad garantizada y soporte real. 🚀\n\n🔥 Netflix UHD 4K, Tele Latino, Disney+, Amazon Prime, Max y TV en vivo.\n\n💳 Aceptamos Bolívares (Pago Móvil), USDT, Zelle, Zinli, Nequi y PayPal.\n\n👇 Ingresa a nuestra Taquilla Digital y pide tu pantalla en vivo:\n${urlFinal}`;
                 }
                 navigator.clipboard.writeText(msg).then(() => {
-                    alert("📋 ¡Texto publicitario copiado con éxito!\n\nSe abrirá WhatsApp Personal para que crees tu Estado, elijas tu imagen de la galería y pegues la leyenda encima.");
+                    alert("📋 ¡Texto publicitario copiado con éxito al portapapeles!\n\nSe abrirá WhatsApp para que elijas tu foto de Estado y pegues la leyenda encima en el editor.");
                     abrirWhatsAppPersonal('', '');
+                }).catch(() => {
+                    abrirWhatsAppPersonal('', msg);
                 });
             }
         };
@@ -2418,24 +2491,53 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
 
         window.recalcularTasasBolivaresAdmin = function() {
-            const tasa = parseFloat(document.getElementById('adm-tasa-cambio').value) || 40;
+            const tasa = parseFloat(document.getElementById('adm-tasa-cambio').value) || 890;
+            tasaUsdtActualSincro = tasa;
+            localStorage.setItem('tcl_tasa_usdt', tasa);
+
             Object.keys(catalogoPlataformasEstructura).forEach(k => {
                 const input = document.getElementById(`cfg-p-${k}`);
                 const val = input ? parseFloat(input.value) : catalogoPlataformasEstructura[k].precio;
                 const dbBs = document.getElementById(`bs-p-${k}`);
                 if(dbBs) dbBs.innerText = `${(val * tasa).toFixed(2)} Bs`;
             });
+
+            // RECALCULO TASA EN REGULADOR PARA PUBLITASA PRO
+            const inputPT = document.getElementById('cfg-p-PUBLITASA_PRO');
+            const dbBsPT = document.getElementById('bs-p-PUBLITASA_PRO');
+            if(inputPT && dbBsPT) {
+                const valPT = parseFloat(inputPT.value) || 5.00;
+                dbBsPT.innerText = `${(valPT * tasa).toFixed(2)} Bs`;
+            }
         };
 
         window.salvarTarifasPublicasDinamicas = async function() {
             try {
+                const nuevaTasa = parseFloat(document.getElementById('adm-tasa-cambio').value) || 890;
+                tasaUsdtActualSincro = nuevaTasa;
+                localStorage.setItem('tcl_tasa_usdt', nuevaTasa);
+
                 Object.keys(catalogoPlataformasEstructura).forEach(k => {
                     const input = document.getElementById(`cfg-p-${k}`);
                     if(input) catalogoPlataformasEstructura[k].precio = parseFloat(input.value) || 5.00;
                 });
-                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), catalogoPlataformasEstructura);
+
+                // GUARDADO DE TARIFAS Y PUBLITASA PRO
+                const inputPT = document.getElementById('cfg-p-PUBLITASA_PRO');
+                if(inputPT) {
+                    tarifasPubliTasaEstructura.plan1 = parseFloat(inputPT.value) || 5.00;
+                    try {
+                        await setDoc(doc(db, "tcl_publitasa_pro", "tarifas_config"), tarifasPubliTasaEstructura);
+                    } catch(e) {}
+                }
+
+                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), { 
+                    catalogo: catalogoPlataformasEstructura, 
+                    tasaUsdt: tasaUsdtActualSincro 
+                });
+                
                 window.construirEstructurasDinamicasInterfaces();
-                alert("✨ Tarifas actualizadas en vitrina.");
+                alert(`✨ Precios y Tasa USDT (${tasaUsdtActualSincro} Bs) actualizados en la web.`);
             } catch(e) {
                 alert("❌ Fallo al guardar tarifas.");
             }
@@ -2457,7 +2559,16 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     document.getElementById('cfg-link-github-servidor').value = linkServidorGitHubGuardado;
                     document.getElementById('cfg-leyenda-grupos-custom').value = leyendaCustomGrupos; document.getElementById('cfg-leyenda-estados-custom').value = leyendaCustomEstados;
                 }
-                if(docTar.exists()) { catalogoPlataformasEstructura = docTar.data(); }
+                if(docTar.exists()) { 
+                    const dataT = docTar.data();
+                    if(dataT.catalogo) { catalogoPlataformasEstructura = dataT.catalogo; }
+                    else { catalogoPlataformasEstructura = dataT; }
+                    
+                    if(dataT.tasaUsdt) {
+                        tasaUsdtActualSincro = parseFloat(dataT.tasaUsdt);
+                        localStorage.setItem('tcl_tasa_usdt', tasaUsdtActualSincro);
+                    }
+                }
                 if(docCuentasFijas.exists()) { cuentasFijasMasterDict = docCuentasFijas.data(); }
                 if(docCli.exists()) { 
                     localStreamingClientesArr = docCli.data().lista || []; 
@@ -2545,7 +2656,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             } else {
                 msg = `📊 PUBLITASA-MK PRO — MEMBRESÍA DESDE 5 USDT 🚀\n\n¡Tus números claros y al instante en una sola pantalla! 👁️\n\n🇻🇪 Dólar y Euro BCV Oficial\n🇨🇴 TRM Colombia, Euro y Casas de Cambio Cúcuta\n🌐 Binance P2P (USDT) y Bitcoin Global\n\n⚡ 100% Fuentes Oficiales y Mercado Real.\n\n📲 Prueba la plataforma y solicita tu acceso Pro aquí:\n${urlFinal}`;
                 navigator.clipboard.writeText(msg).then(() => {
-                    alert("📋 ¡Texto publicitario de PubliTasa Pro copiado con éxito!\n\nSe abrirá WhatsApp Personal para que crees tu Estado, elijas la foto dorada de tu galería y pegues la leyenda encima.");
+                    alert("📋 ¡Texto publicitario de PubliTasa Pro copiado con éxito!\n\nSe abrirá WhatsApp para que crees tu Estado y pegues la leyenda encima.");
                     abrirWhatsAppPersonal('', '');
                 });
             }
@@ -2682,31 +2793,31 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 const esInactivo = c.estado === 'INACTIVO';
 
                 box.innerHTML += `
-                    <div class="border rounded-2xl p-4 flex flex-col justify-between ${esInactivo ? 'border-red-900/40 bg-red-950/10' : (esAlerta ? 'border-amber-500 bg-amber-950/20' : 'border-neutral-800 bg-neutral-950/60')} shadow-lg">
+                    <div class="border rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between ${esInactivo ? 'border-red-900/40 bg-red-950/10' : (esAlerta ? 'border-amber-500 bg-amber-950/20' : 'border-neutral-800 bg-neutral-950/60')} shadow-lg w-full">
                         <div class="flex justify-between items-start">
                             <div>
                                 <span class="text-amber-400 text-[9px] font-black uppercase tracking-wider">LICENCIA: ${c.tokenLicencia}</span>
-                                <h4 class="text-white text-sm font-black uppercase mt-0.5">${c.cliente}</h4>
-                                <p class="text-[10px] text-slate-400 font-mono mt-0.5"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono} &bull; ${c.direccion || 'TÁCHIRA'}</p>
-                                <p class="text-[10px] text-slate-400 font-mono"><i class="fa-solid fa-calendar text-slate-500"></i> Inicio: ${c.fechaActivacion || 'N/A'}</p>
-                                <p class="text-[10px] text-emerald-400 font-bold mt-0.5"><i class="fa-solid fa-mobile-screen"></i> Equipos: ${c.equiposRegistrados ? c.equiposRegistrados.length : 0} / ${c.maxEquipos} Máx</p>
+                                <h4 class="text-white text-xs sm:text-sm font-black uppercase mt-0.5">${c.cliente}</h4>
+                                <p class="text-[9.5px] text-slate-400 font-mono mt-0.5"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono} &bull; ${c.direccion || 'TÁCHIRA'}</p>
+                                <p class="text-[9.5px] text-slate-400 font-mono"><i class="fa-solid fa-calendar text-slate-500"></i> Inicio: ${c.fechaActivacion || 'N/A'}</p>
+                                <p class="text-[9.5px] text-emerald-400 font-bold mt-0.5"><i class="fa-solid fa-mobile-screen"></i> Equipos: ${c.equiposRegistrados ? c.equiposRegistrados.length : 0} / ${c.maxEquipos} Máx</p>
                             </div>
                             <div class="text-right">
-                                <span class="block text-base font-mono font-black ${esInactivo ? 'text-red-500' : (esAlerta ? 'text-amber-400 animate-pulse' : 'text-slate-200')}">${c.diasRestantes} Días</span>
+                                <span class="block text-sm sm:text-base font-mono font-black ${esInactivo ? 'text-red-500' : (esAlerta ? 'text-amber-400 animate-pulse' : 'text-slate-200')}">${c.diasRestantes} Días</span>
                                 <span class="text-[8px] text-slate-500 block uppercase font-bold">${esInactivo ? 'ANULADO' : 'Plan: ' + c.meses + ' Mes(es)'}</span>
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 mt-3 border-t border-neutral-900 pt-3">
+                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 mt-3 border-t border-neutral-900 pt-2.5 w-full">
                             ${!esInactivo ? `
-                                <button onclick="window.renovarExpresPubliTasa('${c.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[9px] py-2 rounded-lg uppercase btn-interactive">⚡ +1 Mes</button>
-                                <button onclick="window.enviarBienvenidaPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase btn-interactive">📲 Acceso</button>
-                                <button onclick="window.notificarPagoPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-bold text-[9px] py-2 rounded-lg uppercase btn-interactive">🔔 Notificar</button>
-                                <button onclick="window.resetearEquiposPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-2 rounded-lg uppercase btn-interactive">🔄 Reset</button>
-                                <button onclick="window.abrirEditorPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-2 rounded-lg uppercase btn-interactive">✏️ Editar</button>
-                                <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-2 rounded-lg uppercase col-span-2 sm:col-span-5 btn-interactive">🚫 Anular Licencia</button>
+                                <button onclick="window.renovarExpresPubliTasa('${c.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">⚡ +1 Mes</button>
+                                <button onclick="window.enviarBienvenidaPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">📲 Acceso</button>
+                                <button onclick="window.notificarPagoPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">🔔 Notificar</button>
+                                <button onclick="window.resetearEquiposPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">🔄 Reset</button>
+                                <button onclick="window.abrirEditorPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">✏️ Editar</button>
+                                <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-1.5 rounded-lg uppercase col-span-2 sm:col-span-5 btn-interactive">🚫 Anular Licencia</button>
                             ` : `
-                                <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-2 rounded-lg uppercase col-span-2 sm:col-span-5 btn-interactive">♻️ Reactivar Licencia Pro</button>
+                                <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase col-span-2 sm:col-span-5 btn-interactive">♻️ Reactivar Licencia Pro</button>
                             `}
                         </div>
                     </div>`;
@@ -2856,17 +2967,8 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const esRutaMonitor = esAppStandalone || window.location.hash === '#publitasa';
 
             try {
-                const docTar = await getDoc(doc(db, "tcl_streaming_core", "tarifas_config"));
-                if(docTar.exists()) { 
-                    catalogoPlataformasEstructura = docTar.data(); 
-                    window.construirEstructurasDinamicasInterfaces();
-                }
+                await window.descargarBaseStreamingFirebaseCompleta();
 
-                const docCuentasFijas = await getDoc(doc(db, "tcl_streaming_core", "cuentas_fijas_config"));
-                if(docCuentasFijas.exists()) {
-                    cuentasFijasMasterDict = docCuentasFijas.data();
-                }
-                
                 const docCliPT = await getDoc(doc(db, "tcl_publitasa_pro", "clientes_activos"));
                 if(docCliPT.exists()) { 
                     localPubliTasaClientesArr = docCliPT.data().lista || []; 
