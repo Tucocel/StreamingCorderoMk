@@ -1083,13 +1083,13 @@
         </div>
     </div>
 
-    <!-- CINTILLO INFERIOR GENERAL -->
+    <!-- CINTILLO INFERIOR GENERAL (LOGOS CON TAMAÑOS Y ESCALA CORREGIDOS) -->
     <footer id="footer-general-streaming" class="footer-glow border-t border-neutral-900/80 mt-12 py-5 px-3 text-center space-y-3 relative z-40 w-full">
-        <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-4 sm:gap-10 glow-white">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="h-3.5 sm:h-4 object-contain">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+" class="h-4 sm:h-4.5 object-contain">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg" alt="Max" class="h-3 sm:h-3.5 object-contain">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg" alt="Prime Video" class="h-2.5 sm:h-3 object-contain">
+        <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-4 sm:gap-8 glow-white">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="h-4 w-auto object-contain">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+" class="h-5 w-auto object-contain">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg" alt="Max" class="h-3.5 w-auto object-contain">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg" alt="Prime Video" class="h-3 w-auto object-contain">
             <span class="text-[9px] text-white font-extrabold font-mono tracking-widest bg-gradient-to-r from-red-600 to-amber-600 px-2 py-0.5 rounded shadow">CANVA</span>
             <span class="text-[9px] text-white font-extrabold font-mono tracking-widest bg-neutral-800 px-2 py-0.5 rounded border border-neutral-700 shadow">YOUTUBE</span>
         </div>
@@ -1122,6 +1122,11 @@
         const MI_NUMERO_CELULAR_UNICO = "584147357549";
         const URL_VITRINA_OFICIAL = "https://tucocel.github.io/StreamingCorderoMk/";
         const LINK_COMUNIDAD_WHATSAPP = "https://chat.whatsapp.com/H2R94IHBLQhBEthrZcxUHK";
+
+        /* ORDEN ESTÁTICO INDESTRUCTIBLE Y CONGELADO (NETFLIX #1 SIEMPRE) */
+        const ORDEN_PLATAFORMAS_ESTATICO = [
+            "NETFLIX", "TELE_LATINO", "FLUJO_TV", "XUPER_TV", "DISNEY", "AMAZON", "HBO_MAX"
+        ];
 
         let deferredPromptPWA = null;
         window.addEventListener('beforeinstallprompt', (e) => {
@@ -1858,6 +1863,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             if(!id || !nombre || !desc) return alert("Faltan campos.");
             catalogoPlataformasEstructura[id] = { nombre, precio, logo, desc };
+            
+            if(!ORDEN_PLATAFORMAS_ESTATICO.includes(id)) {
+                ORDEN_PLATAFORMAS_ESTATICO.push(id);
+            }
+
             try {
                 await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), { catalogo: catalogoPlataformasEstructura, tasaUsdt: tasaUsdtActualSincro });
                 alert(`✨ Plataforma [${nombre}] agregada al catálogo.`);
@@ -1985,7 +1995,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
         };
 
-        /* INCLUYE PRECIOS EN LÍNEAS SEPARADAS DE CADA PANTALLA EN VITRINA (USDT ARRIBA, BS ABAJO BIEN GRUESO) */
+        /* INCLUYE PRECIOS EN LÍNEAS SEPARADAS DE CADA PANTALLA EN VITRINA CON ORDEN ESTÁTICO FIJO Y CONGELADO */
         window.construirEstructurasDinamicasInterfaces = function() {
             const vitrina = document.getElementById('mosaico-vitrina-publica-productos');
             const selectForm = document.getElementById('field-plataforma');
@@ -1993,8 +2003,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             if(vitrina) vitrina.innerHTML = ""; if(selectForm) selectForm.innerHTML = ""; if(tarifador) tarifador.innerHTML = "";
 
-            Object.keys(catalogoPlataformasEstructura).forEach(k => {
+            // CONSTRUCCIÓN CON ORDEN ESTÁTICO REGLAMENTARIO (NETFLIX #1 SIEMPRE)
+            ORDEN_PLATAFORMAS_ESTATICO.forEach(k => {
                 const item = catalogoPlataformasEstructura[k];
+                if(!item) return;
+
                 const precioBs = item.precio * tasaUsdtActualSincro;
 
                 if(vitrina) {
@@ -2028,6 +2041,46 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                             <input type="number" id="cfg-p-${k}" value="${item.precio}" step="0.1" class="w-full bg-transparent font-bold text-xs text-white focus:outline-none" onkeyup="window.recalcularTasasBolivaresAdmin()">
                             <span class="block text-[8px] text-emerald-500 font-mono mt-0.5" id="bs-p-${k}">${(item.precio * tasaUsdtActualSincro).toFixed(2)} Bs</span>
                         </div>`;
+                }
+            });
+
+            // PLATAFORMAS ADICIONALES CREADAS DINÁMICAMENTE
+            Object.keys(catalogoPlataformasEstructura).forEach(k => {
+                if(!ORDEN_PLATAFORMAS_ESTATICO.includes(k)) {
+                    const item = catalogoPlataformasEstructura[k];
+                    const precioBs = item.precio * tasaUsdtActualSincro;
+                    if(vitrina) {
+                        let imgLogo = item.logo ? `<img src="${item.logo}" alt="${item.nombre}" class="h-6 object-contain">` : `<span class="text-white font-black text-xs bg-gradient-to-r from-red-600 to-neutral-700 px-2.5 py-1 rounded uppercase truncate max-w-full">${item.nombre}</span>`;
+                        vitrina.innerHTML += `
+                            <div class="cinema-card rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between min-h-[260px] sm:min-h-[270px] w-full">
+                                <div class="space-y-1.5 sm:space-y-2">
+                                    <div class="h-9 sm:h-10 flex items-center justify-start logo-container">${imgLogo}</div>
+                                    <div class="text-amber-400 text-[8px] sm:text-[9px] flex items-center gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                                    <p class="text-[9.5px] sm:text-[10.5px] text-slate-400 leading-tight font-medium min-h-[38px]">${item.desc}</p>
+                                </div>
+                                <div class="border-t border-neutral-900/60 pt-2 mt-1.5 flex flex-col justify-end space-y-2">
+                                    <div class="space-y-0.5">
+                                        <span class="text-base sm:text-lg font-mono font-black text-red-500 block">
+                                            ${item.precio.toFixed(2)} <small class="text-[9px] text-slate-400 font-bold">USDT</small>
+                                        </span>
+                                        <span class="text-emerald-400 text-xs sm:text-sm font-mono font-black block">
+                                            ${precioBs.toLocaleString('es-VE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} Bs.
+                                        </span>
+                                        <span class="text-[7.5px] sm:text-[8px] text-amber-400/80 font-bold block leading-tight pt-0.5">📌 Tasa Binance USDT del día. Confirmar monto en Bs. con el proveedor.</span>
+                                    </div>
+                                    <button onclick="window.abrirModalSolicitudStreaming('${item.nombre}')" class="w-full bg-red-600 hover:bg-red-700 text-white font-black text-[9px] py-2 rounded-xl uppercase tracking-wider transition-all text-center btn-interactive">Adquirir</button>
+                                </div>
+                            </div>`;
+                    }
+                    if(selectForm) selectForm.innerHTML += `<option value="${k}">${item.nombre}</option>`;
+                    if(tarifador) {
+                        tarifador.innerHTML += `
+                            <div class="bg-neutral-950 p-2 rounded-xl border border-neutral-800">
+                                <span class="block text-[8.5px] text-slate-500 font-bold uppercase truncate">${item.nombre}</span>
+                                <input type="number" id="cfg-p-${k}" value="${item.precio}" step="0.1" class="w-full bg-transparent font-bold text-xs text-white focus:outline-none" onkeyup="window.recalcularTasasBolivaresAdmin()">
+                                <span class="block text-[8px] text-emerald-500 font-mono mt-0.5" id="bs-p-${k}">${(item.precio * tasaUsdtActualSincro).toFixed(2)} Bs</span>
+                            </div>`;
+                    }
                 }
             });
 
@@ -2071,20 +2124,22 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             let estiloBotonPT = carpetaFiltroSeleccionadaStr === 'PUBLITASA_PRO' ? 'bg-amber-500 text-neutral-950 font-black' : 'bg-neutral-950 text-amber-400 border border-amber-500/40 hover:border-amber-400';
             htmlCarpetas += `<button onclick="window.filtrarCarpetaStreamingAdmin('PUBLITASA_PRO')" class="w-full py-2 rounded-xl font-bold text-[9.5px] uppercase transition-all text-center btn-interactive ${estiloBotonPT}">📊 PUBLITASA PRO (${activosPubliTasa.length})</button>`;
 
-            Object.keys(catalogoPlataformasEstructura).forEach(k => {
-                const nombrePlat = catalogoPlataformasEstructura[k].nombre;
-                const clientesDeEstaPlat = localStreamingClientesArr.filter(c => (c.estado || 'ACTIVO') === 'ACTIVO' && c.plataforma === k);
-                const vencidosLote = clientesDeEstaPlat.filter(c => c.diasRestantes <= 4).length;
+            ORDEN_PLATAFORMAS_ESTATICO.forEach(k => {
+                if(catalogoPlataformasEstructura[k]) {
+                    const nombrePlat = catalogoPlataformasEstructura[k].nombre;
+                    const clientesDeEstaPlat = localStreamingClientesArr.filter(c => (c.estado || 'ACTIVO') === 'ACTIVO' && c.plataforma === k);
+                    const vencidosLote = clientesDeEstaPlat.filter(c => c.diasRestantes <= 4).length;
 
-                let colorBurbuja = vencidosLote > 0 ? 'border-amber-500 bg-amber-950/20 text-amber-400 animate-pulse font-black' : 'border-neutral-800 bg-neutral-950/40 text-slate-500';
-                burbujasBox.innerHTML += `
-                    <div onclick="window.filtrarCarpetaStreamingAdmin('${k}')" class="border rounded-xl p-2 text-center cursor-pointer hover:border-neutral-600 transition-all btn-interactive ${colorBurbuja}">
-                        <span class="block text-[8.5px] font-black uppercase truncate">${nombrePlat}</span>
-                        <span class="text-[9.5px] font-mono block mt-0.5">${vencidosLote > 0 ? `⚠️ ${vencidosLote} Alerta` : '✅ Al Día'}</span>
-                    </div>`;
+                    let colorBurbuja = vencidosLote > 0 ? 'border-amber-500 bg-amber-950/20 text-amber-400 animate-pulse font-black' : 'border-neutral-800 bg-neutral-950/40 text-slate-500';
+                    burbujasBox.innerHTML += `
+                        <div onclick="window.filtrarCarpetaStreamingAdmin('${k}')" class="border rounded-xl p-2 text-center cursor-pointer hover:border-neutral-600 transition-all btn-interactive ${colorBurbuja}">
+                            <span class="block text-[8.5px] font-black uppercase truncate">${nombrePlat}</span>
+                            <span class="text-[9.5px] font-mono block mt-0.5">${vencidosLote > 0 ? `⚠️ ${vencidosLote} Alerta` : '✅ Al Día'}</span>
+                        </div>`;
 
-                let estiloCarpetaBoton = carpetaFiltroSeleccionadaStr === k ? 'bg-red-600 text-white font-black' : 'bg-neutral-950 text-slate-400 border border-neutral-800';
-                htmlCarpetas += `<button onclick="window.filtrarCarpetaStreamingAdmin('${k}')" class="w-full py-2 rounded-xl font-bold text-[9.5px] uppercase transition-all text-center btn-interactive ${estiloCarpetaBoton}">${nombrePlat} (${clientesDeEstaPlat.length})</button>`;
+                    let estiloCarpetaBoton = carpetaFiltroSeleccionadaStr === k ? 'bg-red-600 text-white font-black' : 'bg-neutral-950 text-slate-400 border border-neutral-800';
+                    htmlCarpetas += `<button onclick="window.filtrarCarpetaStreamingAdmin('${k}')" class="w-full py-2 rounded-xl font-bold text-[9.5px] uppercase transition-all text-center btn-interactive ${estiloCarpetaBoton}">${nombrePlat} (${clientesDeEstaPlat.length})</button>`;
+                }
             });
 
             carpetasBox.innerHTML = htmlCarpetas;
@@ -2987,4 +3042,4 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
     </script>
 </body>
-</html>
+                                                                    </html>
