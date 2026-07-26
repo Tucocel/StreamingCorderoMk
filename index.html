@@ -73,7 +73,6 @@
             touch-action: manipulation;
         }
 
-        /* PLANTILLA COMPACTA ULTRA HD COMPATIBLE 100% CON HTML2CANVAS */
         .flyer-estado-compacto {
             width: 380px;
             background-color: #000c1e;
@@ -109,17 +108,14 @@
                     <span class="text-red-600 text-xs sm:text-base font-black tracking-widest uppercase glow-red"><i class="fa-solid fa-film"></i> Servicios Streaming Cordero MK</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <!-- BOTÓN VISITAR VITRINA SOLO VISIBLE PARA CLIENTE EN MONITOR -->
                     <button id="btn-nav-visitar-vitrina" onclick="window.cerrarVistaMonitorDirecto()" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 font-black text-[9px] sm:text-[10px] px-3 py-2 rounded-xl uppercase tracking-wider hidden flex items-center gap-1.5 transition-all hover:bg-amber-500/20 btn-interactive">
                         <i class="fa-solid fa-store"></i> <span>Visitar Vitrina Streaming</span>
                     </button>
 
-                    <!-- BOTÓN ACCESO PRO (MANTENIDO INTACTO) -->
                     <button id="btn-nav-abrir-monitor" onclick="window.abrirVistaMonitorDirecto()" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 font-black text-[9px] sm:text-[10px] px-3 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all hover:bg-amber-500/20 btn-interactive">
                         <i class="fa-solid fa-chart-line"></i> <span class="hidden sm:inline">Monitor</span> Pro
                     </button>
 
-                    <!-- BOTÓN CONSOLA MÁSTER / VER VITRINA -->
                     <button id="btn-mando-abrir-login" onclick="window.abrirModalLoginStreamingRaiz()" class="bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-slate-300 font-black text-[9px] sm:text-[10px] px-3.5 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all btn-interactive">
                         <i class="fa-solid fa-lock text-red-500"></i> <span>Consola Máster</span>
                     </button>
@@ -145,7 +141,6 @@
 
         <!-- ==================== VISTA CLIENTE PÚBLICO ==================== -->
         <div id="vista-vitrina-publica" class="space-y-6">
-            <!-- BANNER PRINCIPAL -->
             <section class="hero-epic text-center py-10 px-4 space-y-3 shadow-xl">
                 <div class="max-w-3xl mx-auto space-y-2">
                     <span class="text-[9px] tracking-[0.3em] font-extrabold text-red-500 uppercase bg-red-950/50 border border-red-900/50 px-3 py-1 rounded-full inline-block">TAQUILLA DIGITAL OFICIAL</span>
@@ -159,7 +154,6 @@
                 </div>
             </section>
 
-            <!-- TARJETA PUBLITASA PRO -->
             <div class="max-w-6xl mx-auto px-2.5 sm:px-4">
                 <div onclick="window.abrirVistaMonitorDirecto()" class="publitasa-pro-card rounded-2xl p-4 sm:p-5 flex items-center justify-between cursor-pointer btn-interactive">
                     <div class="flex items-center gap-3.5 sm:gap-4">
@@ -192,10 +186,8 @@
                 </div>
             </div>
 
-            <!-- GRID ADAPTATIVO PRODUCTOS -->
             <main class="max-w-6xl mx-auto px-2.5 sm:px-4 py-2">
                 <section id="mosaico-vitrina-publica-productos" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
-                    <!-- Inyección automatizada por JS -->
                 </section>
             </main>
         </div>
@@ -261,12 +253,8 @@
             </div>
         </div>
 
-        <!-- ================================================================= -->
-        <!-- VISTA: MONITOR DE INDICADORES EN VIVO -->
-        <!-- ================================================================= -->
+        <!-- ==================== VISTA: MONITOR DE INDICADORES EN VIVO ==================== -->
         <div id="vista-publitasa-monitor" class="max-w-4xl mx-auto px-3 sm:px-4 py-6 space-y-6 hidden">
-            
-            <!-- ENCABEZADO CORPORATIVO -->
             <div class="bg-gradient-to-b from-[#001f4d] to-[#00112b] border-2 border-amber-500/60 rounded-3xl p-5 text-center space-y-3 shadow-2xl relative overflow-hidden">
                 <div class="flex justify-between items-center border-b border-amber-500/20 pb-3">
                     <button onclick="window.cerrarVistaMonitorDirecto()" class="text-slate-400 hover:text-white text-xs font-bold bg-neutral-900 border border-neutral-800 px-3 py-1.5 rounded-xl btn-interactive">
@@ -277,7 +265,6 @@
                     </span>
                 </div>
 
-                <!-- EMBLEMA PUBLITASA -->
                 <div class="w-16 h-16 bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 rounded-full flex items-center justify-center border-2 border-white shadow-xl mx-auto">
                     <i class="fa-solid fa-arrow-trend-up text-neutral-950 text-3xl"></i>
                 </div>
@@ -291,7 +278,6 @@
                     </p>
                 </div>
 
-                <!-- PANEL DINÁMICO DE FECHA Y RELOJ DIGITAL EN VIVO -->
                 <div class="bg-neutral-950/80 border border-amber-500/30 rounded-2xl py-2.5 px-4 max-w-sm mx-auto flex justify-between items-center text-amber-400 font-mono text-xs">
                     <div class="flex items-center gap-1.5 font-bold">
                         <i class="fa-regular fa-calendar-days text-slate-400"></i>
@@ -303,13 +289,11 @@
                     </div>
                 </div>
 
-                <!-- BOTÓN PWA -->
                 <button onclick="window.ejecutarInstalacionPWA()" id="btn-pwa-instalar" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black px-6 py-2.5 rounded-2xl text-xs uppercase tracking-wider shadow-lg transition-all inline-flex items-center gap-2 btn-interactive">
                     <i class="fa-solid fa-mobile-screen-button text-base"></i> Instalar Aplicación en Pantalla Principal
                 </button>
             </div>
 
-            <!-- ADVERTENCIA LEGAL -->
             <div class="bg-neutral-950 border border-amber-500/40 p-4 rounded-2xl space-y-1.5 text-center shadow-lg">
                 <span class="text-amber-400 text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-1.5">
                     <i class="fa-solid fa-triangle-exclamation"></i> AVISO Y REGLA IMPORTANTE DE USO
@@ -319,7 +303,6 @@
                 </p>
             </div>
 
-            <!-- PANEL DE LOGUEO OBLIGATORIO -->
             <div id="wrapper-login-monitor-pro" class="bg-neutral-900 border border-neutral-800 p-5 rounded-3xl space-y-4 text-center max-w-sm mx-auto shadow-2xl">
                 <div class="space-y-2">
                     <h3 class="text-white font-black uppercase text-xs tracking-wider">Validar Acceso Pro</h3>
@@ -337,11 +320,9 @@
                 </div>
             </div>
 
-            <!-- BLOQUE DE INDICADORES EN VIVO -->
             <div id="wrapper-indicadores-pantalla" class="space-y-4 hidden">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     
-                    <!-- VENEZUELA BCV REAL -->
                     <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-2">
                         <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
                             <span class="text-xs font-bold text-slate-300">🇻🇪 Oficial BCV (Bolívares)</span>
@@ -369,7 +350,6 @@
                         </div>
                     </div>
 
-                    <!-- COLOMBIA TRM Y EURO REAL -->
                     <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-2">
                         <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
                             <span class="text-xs font-bold text-slate-300">🇨🇴 Oficial Colombia</span>
@@ -396,7 +376,6 @@
                         </div>
                     </div>
 
-                    <!-- FRONTERA CÚCUTA MANUAL -->
                     <div class="bg-neutral-950 border-2 border-amber-500/40 p-4 rounded-2xl space-y-2 sm:col-span-2">
                         <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
                             <span class="text-xs font-bold text-amber-400 uppercase">💱 Casa de Cambio Frontera (Cúcuta / La Parada)</span>
@@ -420,7 +399,6 @@
                         </div>
                     </div>
 
-                    <!-- CRIPTO MERCADO: BINANCE USDT Y BITCOIN BTC -->
                     <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl space-y-3 sm:col-span-2">
                         <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
                             <span class="text-xs font-bold text-slate-300">🪙 Mercado Cripto (Binance P2P & Global)</span>
@@ -465,7 +443,6 @@
                 </div>
             </div>
 
-            <!-- FOOTER PUBLITASA -->
             <div class="pt-6 border-t border-amber-500/20 mt-8 text-center space-y-4">
                 <div class="flex flex-wrap justify-center items-center gap-6 sm:gap-10 opacity-80 hover:opacity-100 transition-all">
                     <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-building-columns"></i> BCV</span>
@@ -488,14 +465,12 @@
         <!-- ==================== VISTA CONSOLA ADMINISTRATIVA MÁSTER ==================== -->
         <main id="vista-streaming-admin" class="max-w-6xl mx-auto px-4 py-6 space-y-6 hidden">
             
-            <!-- CABECERA PRINCIPAL CONSOLA -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-neutral-900 pb-5">
                 <div>
                     <span class="bg-neutral-900 text-slate-400 border border-neutral-800 text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full inline-flex items-center gap-1.5"><i class="fa-solid fa-lock text-red-500"></i> Consola Central de Control</span>
                     <h2 class="text-2xl font-black text-white mt-1 uppercase">Servidores de Despacho</h2>
                 </div>
 
-                <!-- SWITCHER DE PARTICIÓN EN CONSOLA MÁSTER -->
                 <div class="bg-neutral-950 border border-neutral-800 p-1.5 rounded-2xl flex gap-2 w-full sm:w-auto">
                     <button onclick="window.cambiarParticionAdmin('streaming')" id="btn-particion-streaming" class="flex-1 sm:flex-none px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider bg-red-600 text-white transition-all btn-interactive">
                         🎬 Streaming
@@ -540,7 +515,7 @@
                                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                                     <div>
                                         <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Plataforma</label>
-                                        <select id="field-plataforma" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl focus:outline-none"></select>
+                                        <select id="field-plataforma" onchange="window.alCambiarPlataformaFormulario()" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl focus:outline-none uppercase font-bold"></select>
                                     </div>
                                     <div>
                                         <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Vigencia Lote</label>
@@ -555,6 +530,17 @@
                                         <input type="date" id="field-fecha-activacion-str" class="w-full bg-neutral-950 border border-amber-500/40 text-amber-400 font-mono p-2.5 rounded-xl focus:outline-none">
                                     </div>
                                 </div>
+
+                                <!-- SELECCIÓN DE CUENTAS FIJAS PROPIETARIAS (TARJETAS DARK) -->
+                                <div id="wrapper-cuentas-fijas-selector" class="hidden bg-neutral-950 p-3 rounded-2xl border border-red-900/40 space-y-2">
+                                    <label class="text-[9px] text-amber-400 font-black uppercase tracking-wider block flex items-center gap-1.5">
+                                        <i class="fa-solid fa-star text-amber-400"></i> Cuentas Fijas Propietarias (Toque una para cargar)
+                                    </label>
+                                    <div id="grid-pildoras-cuentas-fijas" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                        <!-- Inyección dinámica de botones táctiles -->
+                                    </div>
+                                </div>
+
                                 <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-850 space-y-2">
                                     <span class="text-[8.5px] text-red-500 font-black uppercase tracking-wider block"><i class="fa-solid fa-key"></i> Credenciales de Acceso</span>
                                     <input type="text" id="field-correo" placeholder="Correo / Cuenta ID" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
@@ -686,7 +672,6 @@
                             <input type="text" id="buscador-nombre-input" onkeyup="window.renderizarMonitorMembresiasAdmin()" placeholder="Escribe un nombre o teléfono para filtrar en tiempo real..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl font-medium focus:outline-none focus:border-neutral-700 uppercase">
                         </div>
 
-                        <!-- REJILLA ALINEADA DE CARPETAS -->
                         <div id="wrapper-carpetas-filtros-botones" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2 pt-1"></div>
                     </div>
                     
@@ -697,7 +682,6 @@
             <!-- BLOQUE DE PUBLITASA PRO (PARTICIÓN 2 - PANEL MÁSTER) -->
             <div id="bloque-admin-particion-publitasa" class="hidden space-y-6">
 
-                <!-- BOTONERA PUBLICITARIA -->
                 <div class="bg-neutral-950 border border-neutral-800 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-3">
                     <div class="space-y-0.5 text-center sm:text-left">
                         <span class="text-amber-400 font-black text-xs uppercase block">👁️ Difusión y Vista Previa del Monitor</span>
@@ -722,7 +706,6 @@
                     </div>
                 </div>
 
-                <!-- CONTROL TASA OFICIAL BCV -->
                 <div class="bg-neutral-950 border-2 border-amber-500/60 p-5 rounded-3xl space-y-4 shadow-xl">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center text-neutral-950 text-xl font-black">
@@ -753,7 +736,6 @@
                     </div>
                 </div>
 
-                <!-- 1. CONTROL MANUAL BINANCE USDT P2P (+12 BS) -->
                 <div class="bg-neutral-950 border-2 border-emerald-500/40 p-5 rounded-3xl space-y-4 shadow-xl">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-neutral-950 text-xl font-black">
@@ -784,7 +766,6 @@
                     </div>
                 </div>
 
-                <!-- 2. CONTROL FRONTERA -->
                 <div class="bg-neutral-950 border-2 border-amber-500/40 p-5 rounded-3xl space-y-4 shadow-xl">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center text-neutral-950 text-xl font-black">
@@ -810,7 +791,6 @@
                     </button>
                 </div>
 
-                <!-- 3. REGULADOR TARIFAS PUBLITASA PRO -->
                 <div class="bg-neutral-950 border-2 border-amber-500/60 rounded-3xl overflow-hidden shadow-xl">
                     <button onclick="window.toggleModuloAcordeon('acc-publitasa-tarifador')" class="w-full flex justify-between items-center px-5 py-4 font-black text-xs sm:text-sm uppercase tracking-wide text-white bg-neutral-900/80 hover:bg-neutral-900 transition-all border-b border-amber-500/20 btn-interactive">
                         <div class="flex items-center gap-2.5">
@@ -882,7 +862,6 @@
                     </div>
                 </div>
 
-                <!-- 4. REGISTRO DE NUEVO SUSCRIPTOR PUBLITASA PRO -->
                 <div class="bg-neutral-900 border border-neutral-800 p-5 rounded-3xl space-y-4 shadow-xl">
                     <div class="flex items-center gap-2 border-b border-neutral-800 pb-3">
                         <i class="fa-solid fa-user-plus text-amber-400 text-lg"></i>
@@ -937,7 +916,6 @@
                     </div>
                 </div>
 
-                <!-- 5. BÓVEDA CENTRAL PUBLITASA CON BOTÓN ACORDEÓN DESPLEGABLE -->
                 <div class="space-y-3">
                     <div class="bg-neutral-900 border border-neutral-800 p-4 rounded-3xl space-y-3">
                         <div class="flex justify-between items-center">
@@ -959,7 +937,6 @@
                             <input type="text" id="pt-buscar-input" onkeyup="window.renderizarBovedaPubliTasaPro()" placeholder="Buscar comercio o teléfono..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-4 py-2.5 rounded-xl uppercase focus:outline-none focus:border-amber-500">
                         </div>
 
-                        <!-- BOTÓN ESTILO ACORDEÓN COMPACTO / EXPANDIDO -->
                         <button onclick="window.toggleAcordeonPubliTasaPro()" id="btn-acordeon-publitasa-desplegar" class="w-full bg-neutral-950 border border-amber-500/50 hover:border-amber-400 text-amber-400 font-black text-[10.5px] py-2.5 rounded-2xl uppercase tracking-wider flex items-center justify-center gap-2 transition-all btn-interactive">
                             <span>📊 VER LICENCIAS ACTIVAS PUBLITASA PRO</span>
                             <i id="ico-acordeon-pt" class="fa-solid fa-chevron-down text-xs"></i>
@@ -974,11 +951,9 @@
         </main>
     </div>
 
-    <!-- PLANTILLA FLYER COMPACTA ULTRA HD (CORREGIDA CÁPSULA Y LEGIBILIDAD) -->
+    <!-- PLANTILLA FLYER COMPACTA ULTRA HD -->
     <div class="fixed -left-[9999px] top-0 overflow-hidden">
         <div id="plantilla-flyer-render-nube" class="flyer-estado-compacto rounded-3xl p-4 space-y-3 relative overflow-hidden" style="background-color: #000c1e; border: 3px solid #d4af37;">
-            
-            <!-- CABECERA DINÁMICA CON CÁPSULA DE ALTO CONTRASTE -->
             <div class="text-center space-y-1.5 border-b border-amber-500/40 pb-2.5">
                 <div class="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center border-2 border-white mx-auto shadow-md">
                     <i class="fa-solid fa-arrow-trend-up text-neutral-950 text-lg"></i>
@@ -987,7 +962,6 @@
                     PUBLI-TASA-MK PRO
                 </h1>
                 
-                <!-- CÁPSULA CON TEXTO BLANCO PURO TOTALMENTE VISIBLE -->
                 <div style="background-color: #001f4d; border: 1.5px solid #FFD700; padding: 4px 12px; border-radius: 9999px; display: inline-block; margin-top: 4px;">
                     <p id="flyer-titular-dinamico-txt" style="color: #FFFFFF; font-size: 10px; font-weight: 800; text-transform: uppercase; margin: 0; letter-spacing: 0.02em;">
                         📊 Así cierran los indicadores la tarde de este día
@@ -995,9 +969,7 @@
                 </div>
             </div>
 
-            <!-- INDICADORES CON COLORES SÓLIDOS PUROS -->
             <div class="space-y-2 text-xs">
-                <!-- VENEZUELA BCV -->
                 <div class="bg-neutral-950 border border-neutral-800 p-2.5 rounded-2xl space-y-1" style="background-color: #051329; border-color: #1e293b;">
                     <div class="flex justify-between items-center border-b border-neutral-900 pb-1" style="border-color: rgba(255,255,255,0.1);">
                         <span class="text-[9.5px] font-black text-slate-200 uppercase">🇻🇪 Oficial BCV (Venezuela)</span>
@@ -1019,7 +991,6 @@
                     </div>
                 </div>
 
-                <!-- COLOMBIA SFC -->
                 <div class="bg-neutral-950 border border-neutral-800 p-2.5 rounded-2xl space-y-1" style="background-color: #051329; border-color: #1e293b;">
                     <div class="flex justify-between items-center border-b border-neutral-900 pb-1" style="border-color: rgba(255,255,255,0.1);">
                         <span class="text-[9.5px] font-black text-slate-200 uppercase">🇨🇴 Oficial Colombia (SFC)</span>
@@ -1041,7 +1012,6 @@
                     </div>
                 </div>
 
-                <!-- FRONTERA CÚCUTA -->
                 <div class="bg-neutral-950 border border-amber-500/40 p-2 rounded-2xl space-y-1" style="background-color: #051329; border-color: rgba(212,175,55,0.4);">
                     <span class="text-[8.5px] font-black text-amber-400 uppercase block text-center" style="color: #FFD700;">💱 Casas de Cambio Cúcuta / Frontera</span>
                     <div class="grid grid-cols-2 gap-2 text-center font-mono">
@@ -1056,7 +1026,6 @@
                     </div>
                 </div>
 
-                <!-- CRIPTO BINANCE & BITCOIN -->
                 <div class="bg-neutral-950 border border-neutral-800 p-2.5 rounded-2xl space-y-1" style="background-color: #051329; border-color: #1e293b;">
                     <div class="flex justify-between items-center border-b border-neutral-900 pb-1" style="border-color: rgba(255,255,255,0.1);">
                         <span class="text-[9.5px] font-black text-slate-200 uppercase">🪙 Cripto (Binance & Bitcoin)</span>
@@ -1076,7 +1045,6 @@
                 </div>
             </div>
 
-            <!-- FOOTER PUBLICITARIO RESALTADO -->
             <div class="border-t border-amber-500/40 pt-2 text-center space-y-1.5 bg-neutral-950 -mx-4 -mb-4 p-3" style="background-color: #000814; border-color: rgba(212,175,55,0.4);">
                 <div class="bg-neutral-900 border-2 border-amber-400 p-2 rounded-2xl shadow-lg" style="background-color: #051329; border-color: #FFD700;">
                     <p class="text-[11px] font-black uppercase leading-tight tracking-wide" style="color: #FFD700; margin: 0;">
@@ -1172,10 +1140,26 @@
             return `${yyyy}-${mm}-${dd}`;
         }
 
+        /* PARSER UNIFICADO INTELIGENTE DE FECHAS (FORMATOS AAAA-MM-DD Y DD/MM/AAAA) */
+        function convertirCualquierFechaADateObj(fechaRaw) {
+            if(!fechaRaw) return new Date();
+            if(fechaRaw.includes('-')) {
+                const partes = fechaRaw.split('-');
+                return new Date(parseInt(partes[0]), parseInt(partes[1]) - 1, parseInt(partes[2]));
+            } else if(fechaRaw.includes('/')) {
+                const partes = fechaRaw.split('/');
+                return new Date(parseInt(partes[2]), parseInt(partes[1]) - 1, parseInt(partes[0]));
+            }
+            return new Date();
+        }
+
         function convertirISOaES(isoStr) {
-            if(!isoStr || !isoStr.includes('-')) return new Date().toLocaleDateString('es-ES');
-            const partes = isoStr.split('-');
-            return `${parseInt(partes[2])}/${parseInt(partes[1])}/${partes[0]}`;
+            if(!isoStr) return new Date().toLocaleDateString('es-ES');
+            const dateObj = convertirCualquierFechaADateObj(isoStr);
+            const dd = String(dateObj.getDate()).padStart(2, '0');
+            const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const yyyy = dateObj.getFullYear();
+            return `${dd}/${mm}/${yyyy}`;
         }
 
         /* ENRUTADOR ESTRICTO PARA FORZAR SIEMPRE WHATSAPP NORMAL (com.whatsapp) */
@@ -1227,6 +1211,20 @@
             HBO_MAX: { nombre: "HBO Max", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg", desc: "Series mundiales galardedonas, estrenos de cine de Warner Bros y documentales." }
         };
 
+        /* BÓVEDA DE CUENTAS FIJAS PROPIETARIAS */
+        let cuentasFijasMasterDict = {
+            NETFLIX: [
+                { id: "net-1", correo: "ServiciosNetflixmk@gmail.com", clave: "razu2020.+" },
+                { id: "net-2", correo: "Netflixmk2026@gmail.com", clave: "razu2020.+" },
+                { id: "net-3", correo: "servicioscorderomk@gmail.com", clave: "Razu0202" },
+                { id: "net-4", correo: "Netflixcorderomk@gmail.com", clave: "Razu0202." }
+            ],
+            TELE_LATINO: [
+                { id: "tl-1", correo: "561157030", clave: "202020" },
+                { id: "tl-2", correo: "610664494", clave: "razu2020" }
+            ]
+        };
+
         let tarifasPubliTasaEstructura = { plan1: 5.00, plan2: 8.00, plan3: 12.00 };
         let localStreamingClientesArr = JSON.parse(localStorage.getItem('tcl_str_cache')) || [];
         let localPubliTasaClientesArr = JSON.parse(localStorage.getItem('tcl_pt_cache')) || [];
@@ -1235,6 +1233,7 @@
         let mostrarListaPubliTasaBool = false;
         let verArchivadosStreamingBool = false;
         let verArchivadosPubliTasaBool = false;
+        let pildoraCuentaFijaSeleccionada = null;
         
         let masterUsuarioIdDinamico = "TUCOCEL";
         let masterClaveDinamica = "Razu2020.";
@@ -1254,27 +1253,20 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         const RESPALDO_FIRMA_WHATSAPP = `\n\n🏛️ CON EL RESPALDO ABSOLUTO DE TUCOCEL C.A.\n💻 Desarrollado corporativamente por nuestra agencia @publionlinemk.`;
 
         function calcularFechaRenovacionExacta(fechaOrigenStr, mesesASumar) {
-            let partes = fechaOrigenStr.split('/');
-            let dia = parseInt(partes[0]);
-            let mes = parseInt(partes[1]) - 1; 
-            let ano = parseInt(partes[2]);
-
-            let fechaObj = new Date(ano, mes, dia);
-            fechaObj.setMonth(fechaObj.getMonth() + mesesASumar);
+            let fechaObj = convertirCualquierFechaADateObj(fechaOrigenStr);
+            fechaObj.setMonth(fechaObj.getMonth() + parseInt(mesesASumar || 1));
             fechaObj.setDate(fechaObj.getDate() - 1);
 
-            return fechaObj.toLocaleDateString('es-ES');
+            const dd = String(fechaObj.getDate()).padStart(2, '0');
+            const mm = String(fechaObj.getMonth() + 1).padStart(2, '0');
+            const yyyy = fechaObj.getFullYear();
+            return `${dd}/${mm}/${yyyy}`;
         }
 
         function calcularDiasRestantesReales(fechaOrigenStr, mesesTotales) {
-            if(!fechaOrigenStr || !fechaOrigenStr.includes('/')) return 0;
-            let partes = fechaOrigenStr.split('/');
-            let dia = parseInt(partes[0]);
-            let mes = parseInt(partes[1]) - 1; 
-            let ano = parseInt(partes[2]);
-
-            let fechaVenc = new Date(ano, mes, dia);
-            fechaVenc.setMonth(fechaVenc.getMonth() + mesesTotales);
+            if(!fechaOrigenStr) return 0;
+            let fechaVenc = convertirCualquierFechaADateObj(fechaOrigenStr);
+            fechaVenc.setMonth(fechaVenc.getMonth() + parseInt(mesesTotales || 1));
             fechaVenc.setDate(fechaVenc.getDate() - 1);
 
             let hoy = new Date();
@@ -1500,7 +1492,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const timeAntiCache = Date.now();
             let histTasas = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
 
-            /* 1. BCV FIREBASE */
             const exitoBcvNube = await sincronizarBcvDesdeFirebase();
             if(!exitoBcvNube) {
                 if (histTasas.bcvUsd && histTasas.bcvEur) {
@@ -1514,7 +1505,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 }
             }
 
-            /* 2. COLOMBIA TRM CON SERVIDORES MULTI-RESPALDO (SIN BLOQUEO) */
             let valTrmColombia = 0;
             const urlsTrm = [
                 `https://www.datos.gov.co/resource/ceyp-9c7c.json?$limit=1&$order=vigenciahasta%20DESC&_t=${timeAntiCache}`,
@@ -1558,7 +1548,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 document.getElementById('flyer-val-trm-cop').innerText = txt;
             }
 
-            /* EURO COLOMBIA */
             let valEurCop = 0;
             try {
                 const resEurUsd = await fetch(`https://open.er-api.com/v6/latest/EUR?_t=${timeAntiCache}`, { cache: 'no-store' });
@@ -1590,7 +1579,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 document.getElementById('flyer-val-eur-cop').innerText = txt;
             }
 
-            /* 3. BINANCE USDT Y BITCOIN EN VIVO */
             await sincronizarBinanceDesdeFirebase();
 
             const urlsBtc = [
@@ -1630,7 +1618,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             localStorage.setItem('tcl_hist_tasas', JSON.stringify(histTasas));
         }
 
-        /* GENERACIÓN RÁPIDA EN ULTRA HD CON INYECCIÓN DE DÍA Y FECHA */
         window.generarYCompartirImagenEstadoWhatsApp = async function() {
             const diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
             const ahora = new Date();
@@ -1644,7 +1631,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             const nodoPlantilla = document.getElementById('plantilla-flyer-render-nube');
             
-            // ESCALA 3x PARA CALIDAD ULTRA HD EN WHATSAPP
             const canvas = await html2canvas(nodoPlantilla, {
                 backgroundColor: '#000c1e',
                 scale: 3,
@@ -1797,7 +1783,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             else { el.classList.add('hidden'); }
         };
 
-        /* ACORDEÓN ESPECIAL PUBLITASA PRO */
         window.toggleAcordeonPubliTasaPro = function() {
             mostrarListaPubliTasaBool = !mostrarListaPubliTasaBool;
             window.renderizarBovedaPubliTasaPro();
@@ -1888,6 +1873,82 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
         };
 
+        /* LÓGICA DE CONTROL CON TARJETAS DARK Y CAMPOS INICIALMENTE VACÍOS */
+        window.alCambiarPlataformaFormulario = function() {
+            const platSelect = document.getElementById('field-plataforma');
+            if(!platSelect) return;
+            const platKey = platSelect.value;
+            const wrapperFijas = document.getElementById('wrapper-cuentas-fijas-selector');
+            const gridPildoras = document.getElementById('grid-pildoras-cuentas-fijas');
+            const inCorreo = document.getElementById('field-correo');
+            const inClave = document.getElementById('field-clave');
+            const inPerfil = document.getElementById('field-perfil');
+
+            pildoraCuentaFijaSeleccionada = null;
+            
+            // SIEMPRE ARRANCAN TOTALMENTE VACÍOS
+            inCorreo.value = "";
+            inClave.value = "";
+            inPerfil.value = platKey === 'TELE_LATINO' ? "PERFIL 1" : "";
+
+            if(platKey === 'NETFLIX' || platKey === 'TELE_LATINO') {
+                wrapperFijas.classList.remove('hidden');
+                gridPildoras.innerHTML = "";
+                const cuentasList = cuentasFijasMasterDict[platKey] || [];
+                
+                cuentasList.forEach((item, index) => {
+                    const aliasVisual = platKey === 'NETFLIX' ? `Cuenta ${index+1}` : `Cuenta ${index+1}`;
+                    gridPildoras.innerHTML += `
+                        <button type="button" onclick="window.seleccionarPildoraCuentaFija('${platKey}', ${index})" id="pildora-fija-${index}" class="bg-neutral-900 border border-neutral-800 hover:border-amber-500/60 p-2.5 rounded-xl text-left transition-all btn-interactive flex flex-col justify-center">
+                            <span class="text-[9px] font-black uppercase text-amber-400 block">${aliasVisual}</span>
+                            <span class="text-[10px] font-mono text-slate-300 font-bold truncate block">${item.correo}</span>
+                        </button>`;
+                });
+                
+                gridPildoras.innerHTML += `
+                    <button type="button" onclick="window.seleccionarPildoraCuentaFija('${platKey}', 'EXTERNA')" id="pildora-fija-externa" class="bg-neutral-900 border border-neutral-800 hover:border-red-500/60 p-2.5 rounded-xl text-left transition-all btn-interactive flex flex-col justify-center col-span-1 sm:col-span-2">
+                        <span class="text-[9px] font-black uppercase text-red-500 block">➕ Proveedor Externo</span>
+                        <span class="text-[10px] font-mono text-slate-400 block">Escribir correo/ID y clave manualmente</span>
+                    </button>`;
+            } else {
+                wrapperFijas.classList.add('hidden');
+            }
+        };
+
+        window.seleccionarPildoraCuentaFija = function(platKey, idxVal) {
+            const inCorreo = document.getElementById('field-correo');
+            const inClave = document.getElementById('field-clave');
+            const inPerfil = document.getElementById('field-perfil');
+
+            // Resetear estilos de todas las píldoras
+            const cuentasList = cuentasFijasMasterDict[platKey] || [];
+            cuentasList.forEach((_, i) => {
+                const el = document.getElementById(`pildora-fija-${i}`);
+                if(el) el.className = "bg-neutral-900 border border-neutral-800 hover:border-amber-500/60 p-2.5 rounded-xl text-left transition-all btn-interactive flex flex-col justify-center";
+            });
+            const elExt = document.getElementById('pildora-fija-externa');
+            if(elExt) elExt.className = "bg-neutral-900 border border-neutral-800 hover:border-red-500/60 p-2.5 rounded-xl text-left transition-all btn-interactive flex flex-col justify-center col-span-1 sm:col-span-2";
+
+            if(idxVal === 'EXTERNA') {
+                if(elExt) elExt.className = "bg-red-950/40 border-2 border-red-500 p-2.5 rounded-xl text-left transition-all btn-interactive flex flex-col justify-center col-span-1 sm:col-span-2 shadow-lg";
+                inCorreo.value = "";
+                inClave.value = "";
+                if(platKey === 'TELE_LATINO') inPerfil.value = "PERFIL 1";
+                pildoraCuentaFijaSeleccionada = 'EXTERNA';
+            } else {
+                const elSel = document.getElementById(`pildora-fija-${idxVal}`);
+                if(elSel) elSel.className = "bg-amber-950/40 border-2 border-amber-400 p-2.5 rounded-xl text-left transition-all btn-interactive flex flex-col justify-center shadow-lg";
+                
+                const cuentaObj = cuentasFijasMasterDict[platKey][parseInt(idxVal)];
+                if(cuentaObj) {
+                    inCorreo.value = cuentaObj.correo;
+                    inClave.value = cuentaObj.clave;
+                    if(platKey === 'TELE_LATINO') inPerfil.value = "PERFIL 1";
+                }
+                pildoraCuentaFijaSeleccionada = idxVal;
+            }
+        };
+
         window.construirEstructurasDinamicasInterfaces = function() {
             const vitrina = document.getElementById('mosaico-vitrina-publica-productos');
             const selectForm = document.getElementById('field-plataforma');
@@ -1925,6 +1986,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                         </div>`;
                 }
             });
+            window.alCambiarPlataformaFormulario();
             window.recalcularTasasBolivaresAdmin();
             window.recalcularCarpetasYChismoseadorDinamico();
         };
@@ -2064,6 +2126,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             alert("⚡ Datos separados.");
         };
 
+        /* EJECUTA CARGA Y APRENDE NUEVAS CLAVES EN FIREBASE SI FUERON MODIFICADAS */
         window.ejecutarCargaPerfilStreamingFirebase = async function() {
             const plataforma = document.getElementById('field-plataforma').value;
             const meses = parseInt(document.getElementById('field-meses').value);
@@ -2079,6 +2142,17 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const cDir = document.getElementById('field-cliente-dir').value.trim().toUpperCase();
 
             if(!clave || !cNombre || !cTlf) return alert("Campos obligatorios vacíos.");
+
+            // APRENDIZAJE Y AUTO-ACTUALIZACIÓN DE CLAVE EN FIREBASE
+            if((plataforma === 'NETFLIX' || plataforma === 'TELE_LATINO') && cuentasFijasMasterDict[plataforma]) {
+                const cuentaFijaMatch = cuentasFijasMasterDict[plataforma].find(c => c.correo.toLowerCase() === correo.toLowerCase());
+                if(cuentaFijaMatch && cuentaFijaMatch.clave !== clave) {
+                    cuentaFijaMatch.clave = clave;
+                    try {
+                        await setDoc(doc(db, "tcl_streaming_core", "cuentas_fijas_config"), cuentasFijasMasterDict);
+                    } catch(e) {}
+                }
+            }
 
             let coindiceViejo = localStreamingClientesArr.find(x => x.telefono.replace(/\D/g, '') === cTlf.replace(/\D/g, ''));
             if(coindiceViejo) {
@@ -2250,14 +2324,14 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         window.despacharMensajeWhatsAppStreaming = function(id, tipo) {
             let match = localStreamingClientesArr.find(c => c.id === id); if(!match) return;
             
-            let fAct = match.fechaActivacion || new Date().toLocaleDateString('es-ES');
-            let fVencExacta = calcularFechaRenovacionExacta(fAct, match.meses || 1);
+            let fAct = match.fechaActivacion ? convertirISOaES(match.fechaActivacion) : new Date().toLocaleDateString('es-ES');
+            let fVencExacta = calcularFechaRenovacionExacta(match.fechaActivacion || new Date().toLocaleDateString('es-ES'), match.meses || 1);
             let text = "";
 
             if(tipo === 'ACTIVACION') {
                 text = `🛍️ SERVICIOS STREAMING CORDERO MK\n🧾 COMPROBANTE DE ENTREGA Y ACTIVACIÓN\n\n👤 Cliente: ${match.cliente}\n📺 Plataforma: ${catalogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma}\n`;
-                if(match.correo) text += `📧 Correo: ${match.correo}\n`;
-                text += `🔑 Contraseña / ID: ${match.clave}\n`;
+                if(match.correo) text += `📧 Correo / ID: ${match.correo}\n`;
+                text += `🔑 Contraseña / Clave: ${match.clave}\n`;
                 if(match.perfil) text += `👤 Perfil Asignado: ${match.perfil}\n`;
                 if(match.pin) text += `📌 PIN Perfil: ${match.pin}\n\n`;
                 text += `📅 Fecha de Activación: ${fAct}\n✂️ Fecha de Renovación: ${fVencExacta}\n\n${REGLAS_DE_ORO_TEXTO}\n\n🍿 ¿Deseas adquirir otra pantalla o consultar nuestros indicadores en vivo?\n🔗 Visita nuestra Vitrina Digital Oficial:\n${URL_VITRINA_OFICIAL}${RESPALDO_FIRMA_WHATSAPP}`;
@@ -2266,7 +2340,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 text = `🔔 Recordatorio de Vencimiento — Streaming Cordero MK 🎞️📺\n\n¡Saludos, ${match.cliente}! 👋✨\n\nTe saludamos de Streaming Cordero MK. Pasamos por aquí para recordarte que tu suscripción de ${catalogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma} vence MAÑANA (${fVencExacta}). 📅\n\n⚠️ Nota importante: Para garantizar que tu servicio no se interrumpa y puedas seguir disfrutando sin cortes, te recordamos realizar tu pago de renovación el día de HOY. 🍿🎬\n\n🔗 Visita nuestra Vitrina Digital Oficial:\n${URL_VITRINA_OFICIAL}\n\n¡Estamos a tu orden! 🫡${RESPALDO_FIRMA_WHATSAPP}`;
             }
             if(tipo === 'RENOVACION') {
-                text = `🔄 RENOVACIÓN EXITOSA — CORDERO MK 🍿\n\nHola ${match.cliente}, tu pantalla de ${catalogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma} ha sido renovada con éxito.\n\n✂️ Nueva Fecha de Vencimiento: ${fVencExacta}\n👤 Perfil: ${match.perfil || 'General'} | 📌 PIN: ${match.pin || 'N/A'}\n🔑 Acceso: ${match.correo || match.clave} | Clave: ${match.clave}\n\n🍿 ¡Gracias por mantener tu servicio al día! Disfruta tu programación.\n🔗 ${URL_VITRINA_OFICIAL}${RESPALDO_FIRMA_WHATSAPP}`;
+                text = `🔄 RENOVACIÓN EXITOSA — CORDERO MK 🍿\n\nHola ${match.cliente}, tu pantalla de ${catalogoPlataformasEstructura[match.plataforma]?.nombre || match.plataforma} ha sido renovada con éxito.\n\n📅 Fecha de Activación: ${fAct}\n✂️ Nueva Fecha de Renovación: ${fVencExacta}\n👤 Perfil: ${match.perfil || 'General'} | 📌 PIN: ${match.pin || 'N/A'}\n🔑 Acceso / Correo: ${match.correo || match.clave} | Clave: ${match.clave}\n\n🍿 ¡Gracias por mantener tu servicio al día! Disfruta tu programación.\n🔗 ${URL_VITRINA_OFICIAL}${RESPALDO_FIRMA_WHATSAPP}`;
             }
 
             abrirWhatsAppPersonal(match.telefono, text);
@@ -2304,7 +2378,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(ncl !== null) {
                 if(nt) match.telefono = nt;
                 match.correo = nc; match.clave = ncl; match.pin = np;
-                if(nf && nf.includes('/')) {
+                if(nf) {
                     match.fechaActivacion = nf;
                     match.diasRestantes = calcularDiasRestantesReales(nf, match.meses || 1);
                 }
@@ -2369,11 +2443,12 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
         window.descargarBaseStreamingFirebaseCompleta = async function() {
             try {
-                const [docSeg, docMkt, docTar, docCli] = await Promise.all([
+                const [docSeg, docMkt, docTar, docCli, docCuentasFijas] = await Promise.all([
                     getDoc(doc(db, "tcl_streaming_core", "seguridad_config")),
                     getDoc(doc(db, "tcl_streaming_core", "marketing_config")),
                     getDoc(doc(db, "tcl_streaming_core", "tarifas_config")),
-                    getDoc(doc(db, "tcl_streaming_core", "clientes_activos"))
+                    getDoc(doc(db, "tcl_streaming_core", "clientes_activos")),
+                    getDoc(doc(db, "tcl_streaming_core", "cuentas_fijas_config"))
                 ]);
 
                 if(docSeg.exists()) { masterUsuarioIdDinamico = docSeg.data().usuario; masterClaveDinamica = docSeg.data().clave; }
@@ -2383,6 +2458,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     document.getElementById('cfg-leyenda-grupos-custom').value = leyendaCustomGrupos; document.getElementById('cfg-leyenda-estados-custom').value = leyendaCustomEstados;
                 }
                 if(docTar.exists()) { catalogoPlataformasEstructura = docTar.data(); }
+                if(docCuentasFijas.exists()) { cuentasFijasMasterDict = docCuentasFijas.data(); }
                 if(docCli.exists()) { 
                     localStreamingClientesArr = docCli.data().lista || []; 
                     localStorage.setItem('tcl_str_cache', JSON.stringify(localStreamingClientesArr));
@@ -2563,7 +2639,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             window.recalcularCarpetasYChismoseadorDinamico();
         };
 
-        /* RENDERIZADO DE BÓVEDA CON CONTROL DE ACORDEÓN */
         window.renderizarBovedaPubliTasaPro = function() {
             const box = document.getElementById('mosaico-publitasa-clientes-box'); if(!box) return;
             const btnAcordeon = document.getElementById('btn-acordeon-publitasa-desplegar');
@@ -2649,7 +2724,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 if(nuevoNombre) match.cliente = nuevoNombre.toUpperCase();
                 if(nuevoTlf) match.telefono = nuevoTlf;
                 if(nuevaDir) match.direccion = nuevaDir.toUpperCase();
-                if(nuevaFecha && nuevaFecha.includes('/')) {
+                if(nuevaFecha) {
                     match.fechaActivacion = nuevaFecha;
                     match.diasRestantes = calcularDiasRestantesReales(nuevaFecha, match.meses || 1);
                 }
@@ -2786,6 +2861,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     catalogoPlataformasEstructura = docTar.data(); 
                     window.construirEstructurasDinamicasInterfaces();
                 }
+
+                const docCuentasFijas = await getDoc(doc(db, "tcl_streaming_core", "cuentas_fijas_config"));
+                if(docCuentasFijas.exists()) {
+                    cuentasFijasMasterDict = docCuentasFijas.data();
+                }
                 
                 const docCliPT = await getDoc(doc(db, "tcl_publitasa_pro", "clientes_activos"));
                 if(docCliPT.exists()) { 
@@ -2805,4 +2885,4 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
     </script>
 </body>
-    </html>
+</html>
