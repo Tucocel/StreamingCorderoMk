@@ -2269,25 +2269,68 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         window.procesarSuccionLegoInteligenteTexto = function() {
             const text = document.getElementById('succion-bruta-textarea').value.trim();
             if(!text) return alert("Ingrese un bloque de texto bruto.");
-            document.getElementById('field-correo').value = ""; document.getElementById('field-clave').value = "";
-            document.getElementById('field-perfil').value = ""; document.getElementById('field-pin').value = "";
+            document.getElementById('field-correo').value = ""; 
+            document.getElementById('field-clave').value = "";
+            document.getElementById('field-perfil').value = ""; 
+            document.getElementById('field-pin').value = "";
 
+            const lineas = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            
+            // 1. DETECCIÓN DE FORMATO IPTV (Cuenta:, Contraseña:, Perfiles:)
+            const cuentaMatch = text.match(/(?:Cuenta|ID|Usuario):\s*([^\n\r]+)/i);
+            const passMatch = text.match(/(?:Contraseña|Clave|Calve):\s*([^\n\r]+)/i);
+            const perfilesContratadosMatch = text.match(/(?:Perfiles\s+contratados|Pantallas):\s*(\d+)/i);
+
+            if (cuentaMatch && passMatch) {
+                document.getElementById('field-correo').value = cuentaMatch[1].trim();
+                document.getElementById('field-clave').value = passMatch[1].trim();
+                
+                let cantPerfiles = perfilesContratadosMatch ? perfilesContratadosMatch[1].trim() : "1";
+                document.getElementById('field-perfil').value = "PERFIL " + cantPerfiles;
+                alert("⚡ Datos IPTV procesados con éxito.");
+                return;
+            }
+
+            // 2. DETECCIÓN DE FORMATO NETFLIX Y SIMILARES POR LÍNEAS / ESTRUCTURA
             const correoMatch = text.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/);
-            if(correoMatch) document.getElementById('field-correo').value = correoMatch[0];
+            if(correoMatch) {
+                document.getElementById('field-correo').value = correoMatch[0];
+            } else if (lineas.length >= 1) {
+                const cleanL1 = lineas[0].replace(/^(?:Correo|Cuenta|ID|Usuario):\s*/i, '').trim();
+                document.getElementById('field-correo').value = cleanL1;
+            }
 
-            const lineas = text.split('\n');
-            lineas.forEach(l => {
-                const clean = l.trim();
-                if(clean.toLowerCase().includes('razu2020') || clean.toLowerCase().includes('clave:') || clean.toLowerCase().includes('contraseña:')) {
-                    document.getElementById('field-clave').value = clean.replace(/(?:clave:|contraseña:)/i, '').trim();
+            if (lineas.length >= 2) {
+                let cleanL2 = lineas[1].replace(/^(?:Clave|Contraseña|Calve):\s*/i, '').trim();
+                document.getElementById('field-clave').value = cleanL2;
+            }
+
+            let perfilDetectado = "";
+            let pinDetectado = "";
+
+            const pinMatch = text.match(/(?:Pin|PIN|pin):?\s*([0-9]{4})/);
+            if (pinMatch) {
+                pinDetectado = pinMatch[1];
+                document.getElementById('field-pin').value = pinDetectado;
+            }
+
+            if (lineas.length >= 3) {
+                let l3 = lineas[2];
+                l3 = l3.replace(/(?:Pin|PIN|pin):?\s*[0-9]{4}/gi, '');
+                l3 = l3.replace(/^(?:Usuario|Perfil|Nombre):?\s*/i, '').trim();
+                perfilDetectado = l3;
+            } else {
+                const usuarioMatch = text.match(/(?:Usuario|Perfil):\s*([^\n\r]+)/i);
+                if (usuarioMatch) {
+                    perfilDetectado = usuarioMatch[1].replace(/(?:Pin|PIN|pin):?\s*[0-9]{4}/gi, '').trim();
                 }
-                const pinMatch = clean.match(/(?:Pin:)\s*([0-9]{4})/i);
-                if(pinMatch) document.getElementById('field-pin').value = pinMatch[1];
-                if(clean.toLowerCase().includes('perfil') && !clean.toLowerCase().includes('reglas')) {
-                    document.getElementById('field-perfil').value = clean.toUpperCase();
-                }
-            });
-            alert("⚡ Datos separados.");
+            }
+
+            if (perfilDetectado) {
+                document.getElementById('field-perfil').value = perfilDetectado.toUpperCase();
+            }
+
+            alert("⚡ Datos separados correctamente.");
         };
 
         window.ejecutarCargaPerfilStreamingFirebase = async function() {
