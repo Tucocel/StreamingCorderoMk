@@ -1960,12 +1960,24 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const inCorreo = document.getElementById('field-correo');
             const inClave = document.getElementById('field-clave');
             const inPerfil = document.getElementById('field-perfil');
+            const inPin = document.getElementById('field-pin');
 
             pildoraCuentaFijaSeleccionada = null;
-            
-            inCorreo.value = "";
-            inClave.value = "";
-            inPerfil.value = platKey === 'TELE_LATINO' ? "PERFIL 1" : "";
+
+            // Ocultar / Mostrar campo PIN según plataforma (IPTV no usa PIN)
+            const esIPTV = ['FLUJO_TV', 'TELE_LATINO', 'XUPER_TV'].includes(platKey);
+            if (inPin) {
+                if (esIPTV) {
+                    inPin.classList.add('hidden');
+                    inPin.value = "";
+                } else {
+                    inPin.classList.remove('hidden');
+                }
+            }
+
+            if (inPerfil) {
+                inPerfil.placeholder = esIPTV ? "PERFIL CONTRATADO (EJ: 1)" : "PERFIL ASIGNADO";
+            }
 
             const cuentasList = cuentasFijasMasterDict[platKey] || [];
 
@@ -2269,6 +2281,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         window.procesarSuccionLegoInteligenteTexto = function() {
             const text = document.getElementById('succion-bruta-textarea').value.trim();
             if(!text) return alert("Ingrese un bloque de texto bruto.");
+            
             document.getElementById('field-correo').value = ""; 
             document.getElementById('field-clave').value = "";
             document.getElementById('field-perfil').value = ""; 
@@ -2276,22 +2289,35 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             const lineas = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
             
-            // 1. DETECCIÓN DE FORMATO IPTV (Cuenta:, Contraseña:, Perfiles:)
+            // 1. DETECCIÓN DE FORMATO EXPLICITO IPTV (Flujo TV, Tele Latino, XUPERtv)
+            // Formato exacto:
+            // Cuenta: 610664494
+            // Contraseña: razu2020
+            // Perfiles contratados: 1
             const cuentaMatch = text.match(/(?:Cuenta|ID|Usuario):\s*([^\n\r]+)/i);
             const passMatch = text.match(/(?:Contraseña|Clave|Calve):\s*([^\n\r]+)/i);
-            const perfilesContratadosMatch = text.match(/(?:Perfiles\s+contratados|Pantallas):\s*(\d+)/i);
+            const perfilesMatch = text.match(/(?:Perfiles\s+contratados|Perfil\s+contratado|Pantallas\s+contratadas|Perfiles|Pantallas):\s*([^\n\r]+)/i);
 
             if (cuentaMatch && passMatch) {
                 document.getElementById('field-correo').value = cuentaMatch[1].trim();
                 document.getElementById('field-clave').value = passMatch[1].trim();
                 
-                let cantPerfiles = perfilesContratadosMatch ? perfilesContratadosMatch[1].trim() : "1";
-                document.getElementById('field-perfil').value = "PERFIL " + cantPerfiles;
-                alert("⚡ Datos IPTV procesados con éxito.");
+                if (perfilesMatch) {
+                    document.getElementById('field-perfil').value = perfilesMatch[1].trim();
+                } else {
+                    document.getElementById('field-perfil').value = "1";
+                }
+                
+                // PIN Perfil no aplica para IPTV
+                document.getElementById('field-pin').value = "";
+                
+                // Asegurar adaptación visual
+                window.alCambiarPlataformaFormulario();
+                alert("⚡ Datos IPTV separados correctamente.");
                 return;
             }
 
-            // 2. DETECCIÓN DE FORMATO NETFLIX Y SIMILARES POR LÍNEAS / ESTRUCTURA
+            // 2. DETECCIÓN DE FORMATO NETFLIX Y SIMILARES
             const correoMatch = text.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/);
             if(correoMatch) {
                 document.getElementById('field-correo').value = correoMatch[0];
@@ -2306,12 +2332,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
 
             let perfilDetectado = "";
-            let pinDetectado = "";
 
             const pinMatch = text.match(/(?:Pin|PIN|pin):?\s*([0-9]{4})/);
             if (pinMatch) {
-                pinDetectado = pinMatch[1];
-                document.getElementById('field-pin').value = pinDetectado;
+                document.getElementById('field-pin').value = pinMatch[1];
             }
 
             if (lineas.length >= 3) {
@@ -2330,6 +2354,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 document.getElementById('field-perfil').value = perfilDetectado.toUpperCase();
             }
 
+            window.alCambiarPlataformaFormulario();
             alert("⚡ Datos separados correctamente.");
         };
 
