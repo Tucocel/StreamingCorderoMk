@@ -1714,6 +1714,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             const usdBcv = document.getElementById('val-bcv-usd').innerText;
             const eurBcv = document.getElementById('val-bcv-eur').innerText;
+            const cucutaCompra = document.getElementById('val-frontera-compra').innerText;
             const cucutaVenta = document.getElementById('val-frontera-venta').innerText;
             const trmCop = document.getElementById('val-trm-cop').innerText;
             const eurCop = document.getElementById('val-eur-cop').innerText;
@@ -1726,7 +1727,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const simEurCop = obtenerSimboloTendenciaTxt(hist.eurCop, hist.prevEurCop);
             const simBtc = obtenerSimboloTendenciaTxt(hist.btcUsd, hist.prevBtcUsd);
 
-            const msg = `📊 Así cierran los indicadores económicos el día 📈\n\n📅 Fecha: ${fechaHoyStr}\n\n🇻🇪 Tasas Oficiales BCV:\nDólar BCV: ${usdBcv} ${simBcvUsd}\nEuro BCV: ${eurBcv} ${simBcvEur}\n\n🇨🇴 Colombia Oficial:\nDólar TRM: ${trmCop} ${simTrm}\nEuro Colombia: ${eurCop} ${simEurCop}\n\n💱 Frontera:\nDólar casa de cambio Cúcuta:\n${cucutaVenta} Cop. ➖\n\n🪙 Cripto:\nUSDT Binance Venezuela:\nSe cotiza en este momento entre:\n${usdtRangoTxt}\n\nBitcoin Global:\n${btcUsd} ${simBtc}\n\n📢 Somos Publi-Tasa-Mk\n\n⚠️ Solo somos un medio de información. No vendemos ni compramos divisas, criptomonedas ni bolívares.\n${LINK_COMUNIDAD_WHATSAPP}\n\n📱 ¿Deseas consultar estos indicadores las 24 horas del día en tiempo real desde tu teléfono, tablet, PC y desde tu negocio o desde donde sea?\n\n⚡ Prueba nuestra plataforma ejecutiva PubliTasaMK Pro: activa tu membresía ahora mismo.\n\n🔗 ${linkDirectoPro}`;
+            const msg = `📊 Así cierran los indicadores económicos el día 📈\n\n📅 Fecha: ${fechaHoyStr}\n\n🇻🇪 Tasas Oficiales BCV:\nDólar BCV: ${usdBcv} ${simBcvUsd}\nEuro BCV: ${eurBcv} ${simBcvEur}\n\n🇨🇴 Colombia Oficial:\nDólar TRM: ${trmCop} ${simTrm}\nEuro Colombia: ${eurCop} ${simEurCop}\n\n💱 Frontera:\nDólar casa de cambio Cúcuta:\nCompra: ${cucutaCompra} Cop. ➖\nVenta: ${cucutaVenta} Cop. ➖\n\n🪙 Cripto:\nUSDT Binance Venezuela:\nSe cotiza en este momento entre:\n${usdtRangoTxt}\n\nBitcoin Global:\n${btcUsd} ${simBtc}\n\n📢 Somos Publi-Tasa-Mk\n\n⚠️ Solo somos un medio de información. No vendemos ni compramos divisas, criptomonedas ni bolívares.\n${LINK_COMUNIDAD_WHATSAPP}\n\n📱 ¿Deseas consultar estos indicadores las 24 horas del día en tiempo real desde tu teléfono, tablet, PC y desde tu negocio o desde donde sea?\n\n⚡ Prueba nuestra plataforma ejecutiva PubliTasaMK Pro: activa tu membresía ahora mismo.\n\n🔗 ${linkDirectoPro}`;
 
             abrirWhatsAppPersonal('', msg);
         };
