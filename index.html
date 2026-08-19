@@ -83,6 +83,26 @@
     </style>
 </head>
 <body class="min-h-screen overflow-x-hidden no-scrollbar flex flex-col justify-between w-full">
+    <!-- MODAL VISUAL DE CONEXIÓN Y BLINDAJE DE SERVIDOR EN LA NUBE -->
+    <div id="modal-overlay-conexion-nube" class="fixed inset-0 bg-[#030306]/95 backdrop-blur-xl z-[99999] flex flex-col items-center justify-center p-6 select-none transition-opacity duration-700">
+        <div class="bg-neutral-900 border border-neutral-800 rounded-3xl p-8 max-w-sm w-full text-center space-y-5 shadow-2xl relative overflow-hidden">
+            <div id="box-icono-conexion-nube" class="w-16 h-16 bg-red-950/40 border border-red-500/40 rounded-2xl flex items-center justify-center mx-auto text-red-500 text-3xl shadow-lg transition-all duration-500">
+                <i id="ico-estado-conexion-nube" class="fa-solid fa-spinner animate-spin"></i>
+            </div>
+            <div class="space-y-1.5">
+                <span class="text-[9px] font-black uppercase tracking-[0.2em] text-red-500 block">ENLACE CLOUD FIREBASE</span>
+                <h3 id="txt-titulo-conexion-nube" class="text-base font-black text-white uppercase tracking-tight">Sincronizando Servidor...</h3>
+                <p id="txt-sub-conexion-nube" class="text-[11px] text-slate-400 font-medium leading-relaxed">
+                    Verificando base de datos en la nube y protegiendo registros contra sobreescritura...
+                </p>
+            </div>
+            <div class="bg-neutral-950/80 border border-neutral-850 p-2.5 rounded-xl text-[10px] font-mono text-slate-400 font-bold flex items-center justify-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                <span id="lbl-estado-seguro-txt">Conectando a Firestore...</span>
+            </div>
+        </div>
+    </div>
+
 
     <div class="w-full overflow-x-hidden">
         <!-- INICIO SESIÓN MÁSTER CENTRAL -->
@@ -1254,6 +1274,45 @@
         
         let masterUsuarioIdDinamico = "TUCOCEL";
         let masterClaveDinamica = "Razu2020.";
+        let conexionNubeSeguraActiva = false;
+
+        function actualizarEstadoVisualConexion(exito, mensaje = "") {
+            const modal = document.getElementById('modal-overlay-conexion-nube');
+            const icoBox = document.getElementById('box-icono-conexion-nube');
+            const ico = document.getElementById('ico-estado-conexion-nube');
+            const tit = document.getElementById('txt-titulo-conexion-nube');
+            const sub = document.getElementById('txt-sub-conexion-nube');
+            const lbl = document.getElementById('lbl-estado-seguro-txt');
+
+            if (!modal) return;
+
+            if (exito) {
+                conexionNubeSeguraActiva = true;
+                if (icoBox) icoBox.className = "w-16 h-16 bg-emerald-950/50 border border-emerald-500/50 rounded-2xl flex items-center justify-center mx-auto text-emerald-400 text-3xl shadow-lg shadow-emerald-500/20";
+                if (ico) ico.className = "fa-solid fa-circle-check";
+                if (tit) tit.innerText = "¡Conexión Segura Establecida!";
+                if (sub) sub.innerText = "Base de datos enlazada con éxito. Todos sus registros y cuentas están blindados.";
+                if (lbl) lbl.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span> <span class="text-emerald-400 font-bold">100% Sincronizado en Vivo</span>';
+
+                setTimeout(() => {
+                    modal.style.opacity = '0';
+                    modal.style.pointerEvents = 'none';
+                    setTimeout(() => { modal.classList.add('hidden'); }, 700);
+                }, 900);
+            } else {
+                if (icoBox) icoBox.className = "w-16 h-16 bg-amber-950/40 border border-amber-500/40 rounded-2xl flex items-center justify-center mx-auto text-amber-400 text-3xl shadow-lg";
+                if (ico) ico.className = "fa-solid fa-triangle-exclamation";
+                if (tit) tit.innerText = "Modo Respaldo Local (Offline)";
+                if (sub) sub.innerText = mensaje || "No se pudo enlazar a Firestore. Se cargaron los datos en caché para proteger su información contra sobreescritura vacía.";
+                if (lbl) lbl.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-400"></span> <span class="text-amber-400 font-bold">Protección Read-Before-Write Activa</span>';
+
+                setTimeout(() => {
+                    modal.style.opacity = '0';
+                    modal.style.pointerEvents = 'none';
+                    setTimeout(() => { modal.classList.add('hidden'); }, 700);
+                }, 1500);
+            }
+        }
         let linkServidorGitHubGuardado = "";
         let leyendaCustomGrupos = "";
         let leyendaCustomEstados = "";
@@ -2769,7 +2828,24 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
         window.sincronizarBaseStreamingNube = async function() {
             localStorage.setItem('tcl_str_cache', JSON.stringify(localStreamingClientesArr));
-            try { await setDoc(doc(db, "tcl_streaming_core", "clientes_activos"), { lista: localStreamingClientesArr }); } catch(e) {}
+            try {
+                // PROTECCIÓN READ-BEFORE-WRITE: Evita sobreescribir la base de datos si la variable local está vacía por error de red
+                const docCheck = await getDoc(doc(db, "tcl_streaming_core", "clientes_activos"));
+                let listaFinal = [...localStreamingClientesArr];
+
+                if (docCheck.exists()) {
+                    const dataServ = docCheck.data();
+                    if (listaFinal.length === 0 && dataServ.lista && dataServ.lista.length > 0) {
+                        listaFinal = dataServ.lista;
+                        localStreamingClientesArr = dataServ.lista;
+                        localStorage.setItem('tcl_str_cache', JSON.stringify(localStreamingClientesArr));
+                    }
+                }
+
+                await setDoc(doc(db, "tcl_streaming_core", "clientes_activos"), { lista: listaFinal });
+            } catch(e) {
+                console.warn("Sincronización diferida en Firestore. Los datos están protegidos en el caché local.");
+            }
         };
 
         window.salvarTarifasPubliTasaPro = async function() {
@@ -3081,8 +3157,23 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         window.sincronizarPubliTasaNube = async function() {
             localStorage.setItem('tcl_pt_cache', JSON.stringify(localPubliTasaClientesArr));
             try {
-                await setDoc(doc(db, "tcl_publitasa_pro", "clientes_activos"), { lista: localPubliTasaClientesArr });
-            } catch(e) {}
+                // PROTECCIÓN READ-BEFORE-WRITE PUBLITASA PRO
+                const docCheckPT = await getDoc(doc(db, "tcl_publitasa_pro", "clientes_activos"));
+                let listaPTFinal = [...localPubliTasaClientesArr];
+
+                if (docCheckPT.exists()) {
+                    const dataServPT = docCheckPT.data();
+                    if (listaPTFinal.length === 0 && dataServPT.lista && dataServPT.lista.length > 0) {
+                        listaPTFinal = dataServPT.lista;
+                        localPubliTasaClientesArr = dataServPT.lista;
+                        localStorage.setItem('tcl_pt_cache', JSON.stringify(localPubliTasaClientesArr));
+                    }
+                }
+
+                await setDoc(doc(db, "tcl_publitasa_pro", "clientes_activos"), { lista: listaPTFinal });
+            } catch(e) {
+                console.warn("Sincronización diferida en PubliTasa Firestore. Los datos están protegidos en el caché local.");
+            }
         };
 
         window.descargarBasePubliTasaFirebaseCompleta = async function() {
@@ -3145,8 +3236,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const esRutaMonitor = esAppStandalone || window.location.hash === '#publitasa';
 
             try {
+                // 1. Descarga Streaming Firebase
                 await window.descargarBaseStreamingFirebaseCompleta();
 
+                // 2. Descarga PubliTasa Pro Firebase
                 const docCliPT = await getDoc(doc(db, "tcl_publitasa_pro", "clientes_activos"));
                 if(docCliPT.exists()) { 
                     localPubliTasaClientesArr = docCliPT.data().lista || []; 
@@ -3157,10 +3250,15 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 if (esRutaMonitor) {
                     window.abrirVistaMonitorDirecto();
                 }
+
+                // 3. Confirmación visual de conexión segura con chulito verde
+                actualizarEstadoVisualConexion(true);
             } catch(e) {
+                console.error("Error en arranque de red:", e);
                 if (esRutaMonitor) {
                     window.abrirVistaMonitorDirecto();
                 }
+                actualizarEstadoVisualConexion(false);
             }
         };
     </script>
