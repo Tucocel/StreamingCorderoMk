@@ -123,32 +123,46 @@
         </div>
 
         <!-- NAVBAR CORPORATIVO -->
-        <header class="bg-neutral-950/95 border-b border-neutral-900 px-3 sm:px-4 py-3.5 sticky top-0 z-50 backdrop-blur-md w-full">
-            <div class="max-w-6xl mx-auto flex justify-between items-center w-full">
-                <div class="flex items-center gap-2 truncate">
-                    <span class="text-red-600 text-[11px] sm:text-base font-black tracking-widest uppercase glow-red truncate"><i class="fa-solid fa-film"></i> Streaming Cordero MK</span>
+        <header class="bg-neutral-950/95 border-b border-neutral-900 px-3 sm:px-4 py-2.5 sm:py-3 sticky top-0 z-50 backdrop-blur-md w-full">
+            <div class="max-w-6xl mx-auto space-y-2 w-full">
+                <!-- FILA 1: MARCA Y BOTÓN DE CONSOLA / ACCESO -->
+                <div class="flex justify-between items-center w-full">
+                    <div class="flex items-center gap-2">
+                        <span class="text-red-600 text-xs sm:text-base font-black tracking-widest uppercase glow-red flex items-center gap-1.5">
+                            <i class="fa-solid fa-film"></i> Streaming Cordero MK
+                        </span>
+                    </div>
+
+                    <div class="flex items-center gap-1.5">
+                        <button id="btn-nav-visitar-vitrina" onclick="window.cerrarTodasVistasSecundarias()" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 font-black text-[9px] sm:text-[10px] px-2.5 sm:px-3 py-1.5 rounded-xl uppercase tracking-wider hidden flex items-center gap-1 transition-all hover:bg-amber-500/20 btn-interactive">
+                            <i class="fa-solid fa-store"></i> <span>Vitrina</span>
+                        </button>
+                        <button id="btn-mando-abrir-login" onclick="window.abrirModalLoginStreamingRaiz()" class="bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-slate-300 font-black text-[9px] sm:text-[10px] px-2.5 sm:px-3.5 py-1.5 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all btn-interactive">
+                            <i class="fa-solid fa-lock text-red-500"></i> <span>Consola</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-                    <!-- BOTÓN DE INSTALACIÓN PWA GLOBAL -->
-                    <button onclick="window.instalarAppDispositivo()" title="Instalar en Pantalla Principal" class="bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-black text-[9px] sm:text-[10px] px-2.5 sm:px-3 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-lg hover:scale-105 border border-emerald-400/40 btn-interactive">
-                        <i class="fa-solid fa-mobile-screen-button"></i> <span class="hidden md:inline">Instalar</span> <span>App</span>
+
+                <!-- FILA 2: BOTONERA DE ACCIONES Y MÓDULOS 100% VISIBLES SIN APRETARSE -->
+                <div class="grid grid-cols-4 gap-1.5 w-full">
+                    <!-- BOTÓN INSTALAR PWA -->
+                    <button onclick="window.instalarAppDispositivo()" title="Instalar en Pantalla Principal" class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white font-black text-[9px] sm:text-[10px] py-1.5 rounded-xl uppercase tracking-wider flex items-center justify-center gap-1 transition-all shadow-md border border-emerald-400/40 btn-interactive truncate">
+                        <i class="fa-solid fa-mobile-screen-button"></i> <span>App</span>
                     </button>
 
-                    <!-- BOTÓN PÚBLICO DE DIFUSIÓN EN VITRINA -->
-                    <button id="btn-vitrina-difusion-publica" onclick="window.despacharMarketingMasivoWhatsApp('GRUPOS')" class="bg-gradient-to-r from-amber-500 to-red-600 text-white font-black text-[9px] sm:text-[10px] px-3 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-lg hover:scale-105 btn-interactive">
-                        <i class="fa-solid fa-paper-plane"></i> <span>Compartir</span>
+                    <!-- BOTÓN COMPARTIR -->
+                    <button id="btn-vitrina-difusion-publica" onclick="window.despacharMarketingMasivoWhatsApp('GRUPOS')" class="bg-gradient-to-r from-amber-500 to-red-600 text-white font-black text-[9px] sm:text-[10px] py-1.5 rounded-xl uppercase tracking-wider flex items-center justify-center gap-1 transition-all shadow-md btn-interactive truncate">
+                        <i class="fa-solid fa-paper-plane"></i> <span>Difusión</span>
                     </button>
 
-                    <button id="btn-nav-visitar-vitrina" onclick="window.cerrarVistaMonitorDirecto()" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 font-black text-[9px] sm:text-[10px] px-2.5 sm:px-3 py-2 rounded-xl uppercase tracking-wider hidden flex items-center gap-1 transition-all hover:bg-amber-500/20 btn-interactive">
-                        <i class="fa-solid fa-store"></i> <span>Vitrina</span>
+                    <!-- BOTÓN CALCULADORA MASTER -->
+                    <button id="btn-nav-abrir-calculadora" onclick="window.abrirVistaCalculadoraMasterDirecto()" class="bg-emerald-950/80 border border-emerald-500/50 text-emerald-400 font-black text-[9px] sm:text-[10px] py-1.5 rounded-xl uppercase tracking-wider flex items-center justify-center gap-1 transition-all hover:bg-emerald-900/50 btn-interactive truncate">
+                        <i class="fa-solid fa-calculator"></i> <span>Master</span>
                     </button>
 
-                    <button id="btn-nav-abrir-monitor" onclick="window.abrirVistaMonitorDirecto()" class="bg-amber-500/10 border border-amber-500/40 text-amber-400 font-black text-[9px] sm:text-[10px] px-2.5 sm:px-3 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1 transition-all hover:bg-amber-500/20 btn-interactive">
-                        <i class="fa-solid fa-chart-line"></i> <span class="hidden sm:inline">Monitor</span> Pro
-                    </button>
-
-                    <button id="btn-mando-abrir-login" onclick="window.abrirModalLoginStreamingRaiz()" class="bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-slate-300 font-black text-[9px] sm:text-[10px] px-2.5 sm:px-3.5 py-2 rounded-xl uppercase tracking-wider flex items-center gap-1 transition-all btn-interactive">
-                        <i class="fa-solid fa-lock text-red-500"></i> <span class="hidden sm:inline">Consola</span>
+                    <!-- BOTÓN MONITOR PRO -->
+                    <button id="btn-nav-abrir-monitor" onclick="window.abrirVistaMonitorDirecto()" class="bg-amber-950/80 border border-amber-500/50 text-amber-400 font-black text-[9px] sm:text-[10px] py-1.5 rounded-xl uppercase tracking-wider flex items-center justify-center gap-1 transition-all hover:bg-amber-900/50 btn-interactive truncate">
+                        <i class="fa-solid fa-chart-line"></i> <span>Monitor</span>
                     </button>
                 </div>
             </div>
@@ -213,6 +227,39 @@
                         </div>
                     </div>
                     <div class="text-amber-400 text-base sm:text-xl pl-1 sm:pl-2">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+
+                        <!-- TARJETA PUBLITASA-MK CALCULADORA MASTER -->
+            <div class="max-w-6xl mx-auto px-2.5 sm:px-4 w-full">
+                <div onclick="window.abrirVistaCalculadoraMasterDirecto()" class="bg-gradient-to-r from-[#00112b] via-[#02183a] to-[#001f4d] border-2 border-emerald-500/60 hover:border-emerald-400 rounded-2xl p-3.5 sm:p-5 flex items-center justify-between cursor-pointer shadow-xl transition-all hover:scale-[1.01] btn-interactive">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <div class="w-11 h-11 sm:w-14 sm:h-14 bg-gradient-to-br from-emerald-400 via-teal-500 to-emerald-700 rounded-full flex items-center justify-center border-2 border-white shadow-lg shadow-emerald-500/30 flex-shrink-0">
+                            <i class="fa-solid fa-calculator text-neutral-950 text-lg sm:text-2xl"></i>
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                                <span class="bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-[7.5px] sm:text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider inline-flex items-center gap-1">
+                                    <i class="fa-solid fa-bolt text-emerald-400"></i> SERVICIO DE CAJA COMERCIAL
+                                </span>
+                                <span id="lbl-tarjeta-calc-precio-min" class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[7.5px] sm:text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider font-mono">
+                                    Desde 5,00 USDT
+                                </span>
+                            </div>
+                            <h3 class="text-sm sm:text-xl font-extrabold uppercase text-white tracking-wide bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
+                                PUBLI-TASA-MK CALCULADORA MASTER
+                            </h3>
+                            <div class="text-amber-400 text-[8px] sm:text-[9px] flex items-center gap-0.5">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-[8.5px] sm:text-[11px] text-slate-300 font-medium leading-tight">
+                                Control y cálculo de vueltos multimoneda exactos en Pesos, Dólares y Bolívares
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-emerald-400 text-base sm:text-xl pl-1 sm:pl-2">
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                 </div>
@@ -505,6 +552,219 @@
 
         </div>
 
+                        <!-- ==================== VISTA: PUBLITASA-MK CALCULADORA MASTER ==================== -->
+        <div id="vista-calculadora-master" class="max-w-4xl mx-auto px-2.5 sm:px-4 py-5 space-y-5 hidden w-full">
+            <!-- CABECERA IDÉNTICA A PUBLITASA PRO -->
+            <div class="bg-gradient-to-b from-[#001f4d] to-[#00112b] border-2 border-emerald-500/60 rounded-3xl p-4 sm:p-5 text-center space-y-3 shadow-2xl relative overflow-hidden w-full">
+                <div class="flex justify-between items-center border-b border-emerald-500/20 pb-2.5">
+                    <button onclick="window.cerrarTodasVistasSecundarias()" class="text-slate-400 hover:text-white text-[11px] font-bold bg-neutral-900 border border-neutral-800 px-2.5 py-1.5 rounded-xl btn-interactive">
+                        <i class="fa-solid fa-arrow-left"></i> Volver a Vitrina
+                    </button>
+                    <span class="bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-[8.5px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sincronizado
+                    </span>
+                </div>
+
+                <div class="w-14 h-14 bg-gradient-to-br from-emerald-400 via-teal-500 to-emerald-700 rounded-full flex items-center justify-center border-2 border-white shadow-xl mx-auto">
+                    <i class="fa-solid fa-calculator text-neutral-950 text-2xl"></i>
+                </div>
+                
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-black uppercase tracking-wider text-white bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
+                        PUBLI-TASA-MK CALCULADORA MASTER
+                    </h2>
+                    <p class="text-[10px] sm:text-[11px] text-slate-300 font-medium mt-0.5">
+                        Control y Conversor de Vueltos Multimoneda en Pesos, Dólares y Bolívares
+                    </p>
+                </div>
+
+                <!-- RELOJ DIGITAL EN VIVO (IDÉNTICO A PUBLITASA PRO) -->
+                <div class="bg-neutral-950/80 border border-emerald-500/30 rounded-2xl py-2 px-3.5 max-w-sm mx-auto flex justify-between items-center text-emerald-400 font-mono text-xs">
+                    <div class="flex items-center gap-1 font-bold">
+                        <i class="fa-regular fa-calendar-days text-slate-400"></i>
+                        <span id="cm-reloj-fecha" class="text-slate-200 uppercase text-[9.5px]">Cargando...</span>
+                    </div>
+                    <div class="flex items-center gap-1 font-black text-xs sm:text-sm">
+                        <i class="fa-regular fa-clock text-emerald-400"></i>
+                        <span id="cm-reloj-hora">12:00:00 AM</span>
+                    </div>
+                </div>
+
+                <!-- BOTÓN INSTALACIÓN PWA -->
+                <button onclick="window.ejecutarInstalacionPWA()" class="bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black px-5 py-2.5 rounded-2xl text-[11px] uppercase tracking-wider shadow-lg transition-all inline-flex items-center gap-1.5 btn-interactive">
+                    <i class="fa-solid fa-mobile-screen-button text-sm"></i> Instalar Aplicación en Pantalla Principal
+                </button>
+            </div>
+
+            <!-- AVISO Y REGLA IMPORTANTE DE USO (IDÉNTICO A PUBLITASA PRO) -->
+            <div class="bg-neutral-950 border border-emerald-500/40 p-3.5 rounded-2xl space-y-1 text-center shadow-lg w-full">
+                <span class="text-emerald-400 text-[9.5px] font-black uppercase tracking-widest flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-triangle-exclamation"></i> AVISO Y REGLA IMPORTANTE DE USO
+                </span>
+                <p class="text-[10px] text-slate-300 font-medium leading-relaxed">
+                    Estimado cliente, esta suscripción es el <strong>alquiler de una membresía mensual</strong>, no constituye la compra del software. La licencia queda vinculada a su dispositivo de caja. Si cambia de equipo, debe solicitar el reset al administrador.
+                </p>
+            </div>
+
+            <!-- LOGIN Y BLOQUEO POR LICENCIA CALC MASTER (BLOQUEADO HASTA VALIDAR) -->
+            <div id="wrapper-login-calculadora-master" class="bg-neutral-900 border border-neutral-800 p-4 sm:p-5 rounded-3xl space-y-3.5 text-center max-w-sm mx-auto shadow-2xl w-full">
+                <div class="space-y-2">
+                    <h3 class="text-white font-black uppercase text-xs tracking-wider">Validar Acceso Calculadora Master</h3>
+                    <input type="password" id="cm-token-input" placeholder="INGRESE LICENCIA O CLAVE MÁSTER" class="w-full bg-neutral-950 border border-neutral-800 text-emerald-400 font-mono text-center text-xs px-3.5 py-2.5 rounded-xl uppercase focus:outline-none focus:border-emerald-500">
+                    <button onclick="window.autenticarClienteCalculadoraMaster()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-neutral-950 font-black py-2.5 rounded-xl uppercase text-xs tracking-wider shadow-md btn-interactive">
+                        Desbloquear Calculadora 🔓
+                    </button>
+                </div>
+
+                <div class="border-t border-neutral-800 pt-2.5">
+                    <p class="text-[9.5px] text-slate-400 font-medium mb-1.5">¿Aún no tienes tu acceso activo para tu negocio?</p>
+                    <button onclick="window.abrirModalSolicitudStreaming('CALCULADORA_MASTER')" class="w-full bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600 hover:from-emerald-500 hover:to-emerald-700 text-neutral-950 font-extrabold py-2.5 rounded-xl uppercase tracking-wider text-[11px] shadow-xl transition-all border border-emerald-300 animate-pulse flex items-center justify-center gap-1.5 btn-interactive">
+                        <i class="fa-solid fa-cart-shopping text-xs"></i> Adquiere tu Membresía de Caja desde $5 USDT
+                    </button>
+                </div>
+            </div>
+
+            <!-- CUERPO PRINCIPAL DE LA CALCULADORA (SE MUESTRA ÚNICAMENTE TRAS LOGUEARSE) -->
+            <div id="wrapper-cuerpo-calculadora-master" class="space-y-4 hidden w-full">
+                
+                <!-- BARRA DE ESTADO DE CAJA Y BOTÓN AJUSTAR TASAS -->
+                <div class="bg-neutral-950 border border-neutral-800 p-3 rounded-2xl flex justify-between items-center w-full">
+                    <span class="bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistema de Caja Desbloqueado
+                    </span>
+                    <button onclick="window.abrirModalConfigTasasCalculadora()" class="text-amber-400 hover:text-white bg-neutral-900 border border-amber-500/40 px-3 py-1 rounded-xl text-[10px] font-black uppercase flex items-center gap-1.5 btn-interactive">
+                        <i class="fa-solid fa-sliders"></i> Ajustar Tasas
+                    </button>
+                </div>
+
+                <!-- CINTILLO CON LAS TASAS FIJAS DE LA JORNADA (VISIBLES SOLO AL LOGUEARSE) -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full font-mono">
+                    <div class="bg-neutral-950 border border-amber-500/40 p-3 rounded-2xl text-center">
+                        <span class="text-[9px] text-slate-400 block uppercase font-sans font-bold">Dólar / Pesos (COP)</span>
+                        <strong id="cm-lbl-tasa-dolar-cop" class="text-lg sm:text-2xl font-black text-amber-400">3.300 COP</strong>
+                    </div>
+                    <div class="bg-neutral-950 border border-emerald-500/40 p-3 rounded-2xl text-center">
+                        <span class="text-[9px] text-slate-400 block uppercase font-sans font-bold">Factor Bs (Frontera)</span>
+                        <strong id="cm-lbl-tasa-factor-bs" class="text-lg sm:text-2xl font-black text-emerald-400">3,80 COP/Bs</strong>
+                    </div>
+                    <div class="bg-neutral-950 border border-blue-500/40 p-3 rounded-2xl text-center">
+                        <span class="text-[9px] text-slate-400 block uppercase font-sans font-bold">Tasa Oficial Dólar BCV</span>
+                        <strong id="cm-lbl-tasa-bcv-val" class="text-lg sm:text-2xl font-black text-blue-300">45,50 Bs</strong>
+                    </div>
+                </div>
+
+                <!-- MÓDULO 1: MONTO TOTAL DE LA CUENTA -->
+                <div class="bg-neutral-950 border border-neutral-800 rounded-3xl p-4 sm:p-5 space-y-3 shadow-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-[10.5px] font-black uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                            <span class="w-5 h-5 rounded-full bg-amber-500 text-neutral-950 font-black flex items-center justify-center text-[10px]">1</span>
+                            TOTAL A COBRAR (MONTO DE LA VENTA)
+                        </span>
+                        <span class="text-[9px] text-slate-500 font-bold uppercase">Monto Base</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                        <div class="sm:col-span-2 relative">
+                            <input type="text" id="cm-in-total-cuenta" placeholder="0" oninput="window.alEscribirMontoCuenta()" class="w-full bg-neutral-900 border-2 border-amber-500/60 rounded-2xl px-4 py-3 text-right font-mono text-xl sm:text-2xl font-black text-amber-400 focus:outline-none focus:border-amber-400">
+                        </div>
+                        <select id="cm-sel-moneda-total" onchange="window.recalcularCajaCalculadoraMaster()" class="bg-neutral-900 border border-neutral-700 text-white text-xs font-black rounded-2xl px-3 py-3 uppercase focus:outline-none">
+                            <option value="COP">Pesos (COP)</option>
+                            <option value="USD">Dólares (USD)</option>
+                            <option value="BS_FRONT">Bolívares (Frontera)</option>
+                            <option value="BS_BCV">Bolívares (BCV)</option>
+                        </select>
+                    </div>
+
+                    <!-- EQUIVALENCIAS EN TIEMPO REAL DE LA VENTA -->
+                    <div class="grid grid-cols-3 gap-2 text-center font-mono pt-1">
+                        <div class="bg-neutral-900/80 p-2 rounded-xl border border-neutral-800/80">
+                            <span class="text-slate-400 text-[8.5px] block uppercase font-sans font-bold">En Pesos</span>
+                            <strong id="cm-eq-total-cop" class="text-xs sm:text-sm text-slate-200 font-black block mt-0.5">0 COP</strong>
+                        </div>
+                        <div class="bg-neutral-900/80 p-2 rounded-xl border border-neutral-800/80">
+                            <span class="text-slate-400 text-[8.5px] block uppercase font-sans font-bold">En Dólares</span>
+                            <strong id="cm-eq-total-usd" class="text-xs sm:text-sm text-amber-400 font-black block mt-0.5">$0.00</strong>
+                        </div>
+                        <div class="bg-neutral-900/80 p-2 rounded-xl border border-neutral-800/80">
+                            <span class="text-slate-400 text-[8.5px] block uppercase font-sans font-bold">En Bolívares</span>
+                            <strong id="cm-eq-total-bs" class="text-xs sm:text-sm text-emerald-400 font-black block mt-0.5">0 Bs</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MÓDULO 2: CON CUÁNTO PAGA EL CLIENTE -->
+                <div class="bg-neutral-950 border border-neutral-800 rounded-3xl p-4 sm:p-5 space-y-3 shadow-lg">
+                    <div class="flex justify-between items-center">
+                        <span class="text-[10.5px] font-black uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                            <span class="w-5 h-5 rounded-full bg-emerald-500 text-neutral-950 font-black flex items-center justify-center text-[10px]">2</span>
+                            CLIENTE PAGA CON (MONTO RECIBIDO)
+                        </span>
+                        <span class="text-[9px] text-slate-500 font-bold uppercase">Entregado</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                        <div class="sm:col-span-2 relative">
+                            <input type="text" id="cm-in-paga-cliente" placeholder="0" oninput="window.alEscribirMontoPaga()" class="w-full bg-neutral-900 border-2 border-emerald-500/60 rounded-2xl px-4 py-3 text-right font-mono text-xl sm:text-2xl font-black text-emerald-400 focus:outline-none focus:border-emerald-400">
+                        </div>
+                        <select id="cm-sel-moneda-paga" onchange="window.recalcularCajaCalculadoraMaster()" class="bg-neutral-900 border border-neutral-700 text-white text-xs font-black rounded-2xl px-3 py-3 uppercase focus:outline-none">
+                            <option value="COP">Pesos (COP)</option>
+                            <option value="USD">Dólares (USD)</option>
+                            <option value="BS_FRONT">Bolívares (Frontera)</option>
+                            <option value="BS_BCV">Bolívares (BCV)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- MÓDULO 3: RESULTADO EXACTO DEL VUELTO O FALTANTE -->
+                <div id="cm-panel-resultado-vuelto" class="rounded-3xl p-4 sm:p-5 space-y-3.5 bg-gradient-to-b from-neutral-900 to-neutral-950 border-2 border-emerald-500/80 shadow-2xl">
+                    <div class="flex justify-between items-center border-b border-neutral-800 pb-2">
+                        <span id="cm-lbl-titulo-vuelto" class="text-xs sm:text-sm font-black uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                            <i class="fa-solid fa-hand-holding-dollar text-base"></i> VUELTO EXACTO A ENTREGAR
+                        </span>
+                        <span id="cm-badge-estado-vuelto" class="text-[9px] font-mono font-bold text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-full border border-emerald-500/40">
+                            Cambio Listo
+                        </span>
+                    </div>
+
+                    <!-- CAJAS DE RESULTADO CON NÚMEROS GRANDES Y VISIBLES -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-center font-mono">
+                        <div class="bg-neutral-950 border border-neutral-800 p-3 rounded-2xl space-y-1">
+                            <span class="text-[9px] text-slate-400 block uppercase font-sans font-bold">Vuelto en Pesos</span>
+                            <span id="cm-vuelto-val-cop" class="text-lg sm:text-2xl font-black text-emerald-400 block">0 COP</span>
+                        </div>
+                        <div class="bg-neutral-950 border border-neutral-800 p-3 rounded-2xl space-y-1">
+                            <span class="text-[9px] text-slate-400 block uppercase font-sans font-bold">Vuelto en Dólares</span>
+                            <span id="cm-vuelto-val-usd" class="text-lg sm:text-2xl font-black text-amber-400 block">$0.00</span>
+                        </div>
+                        <div class="bg-neutral-950 border border-neutral-800 p-3 rounded-2xl space-y-1">
+                            <span class="text-[9px] text-slate-400 block uppercase font-sans font-bold">Vuelto en Bolívares</span>
+                            <span id="cm-vuelto-val-bs" class="text-lg sm:text-2xl font-black text-blue-300 block">0 Bs</span>
+                        </div>
+                    </div>
+
+                    <p id="cm-vuelto-nota-extra" class="text-[9.5px] text-slate-400 text-center font-medium">
+                        💡 Puedes entregar el vuelto en cualquiera de las 3 monedas según la disponibilidad de tu caja.
+                    </p>
+                </div>
+
+                <!-- BOTÓN DIRECTO TIPO "C" PARA LIMPIAR MONTOS (NO TOCA LAS TASAS DEL DÍA) -->
+                <button onclick="window.limpiarMontosCalculadoraMaster()" class="w-full bg-neutral-900 border-2 border-neutral-800 hover:border-red-500/60 text-slate-300 hover:text-white font-black py-3 rounded-2xl uppercase tracking-wider text-xs flex items-center justify-center gap-2 transition-all shadow-md btn-interactive">
+                    <i class="fa-solid fa-broom text-amber-400"></i> LIMPIAR MONTOS (SIGUIENTE COBRO)
+                </button>
+
+            </div>
+
+            <!-- PIE INSTITUCIONAL -->
+            <div class="pt-4 border-t border-emerald-500/20 mt-6 text-center space-y-3">
+                <div class="space-y-0.5">
+                    <p class="text-[9.5px] text-white font-bold">🔐 © 2026 PubliTasaMK Calculadora Master. Todos los derechos reservados.</p>
+                    <p class="text-[8.5px] text-slate-300 font-semibold uppercase tracking-wide">
+                        Sistema probado y avalado por <span class="text-white font-black">Tucocel C.A.</span> &bull; Desarrollado corporativamente por <span class="text-emerald-400 font-black">@publionlinemk</span> (Agencia de Publicidad de Tucocel C.A.)
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <!-- ==================== VISTA CONSOLA ADMINISTRATIVA MÁSTER ==================== -->
         <main id="vista-streaming-admin" class="max-w-6xl mx-auto px-2.5 sm:px-4 py-5 space-y-5 hidden w-full">
             
@@ -514,12 +774,15 @@
                     <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5 uppercase">Servidores de Despacho</h2>
                 </div>
 
-                <div class="bg-neutral-950 border border-neutral-800 p-1 rounded-2xl flex gap-1.5 w-full sm:w-auto">
+                <div class="bg-neutral-950 border border-neutral-800 p-1 rounded-2xl flex flex-wrap gap-1.5 w-full sm:w-auto">
                     <button onclick="window.cambiarParticionAdmin('streaming')" id="btn-particion-streaming" class="flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-red-600 text-white transition-all btn-interactive">
                         🎬 Streaming
                     </button>
                     <button onclick="window.cambiarParticionAdmin('publitasa')" id="btn-particion-publitasa" class="flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-amber-400 border border-neutral-800 hover:border-amber-500/50 transition-all btn-interactive">
                         📊 PubliTasa Pro
+                    </button>
+                    <button onclick="window.cambiarParticionAdmin('calculadora')" id="btn-particion-calculadora" class="flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-emerald-400 border border-neutral-800 hover:border-emerald-500/50 transition-all btn-interactive">
+                        🧮 Calculadora Master
                     </button>
                 </div>
 
@@ -987,6 +1250,172 @@
 
             </div>
 
+                    <!-- BLOQUE DE CALCULADORA MASTER (PARTICIÓN 3 - PANEL MÁSTER) -->
+            <div id="bloque-admin-particion-calculadora" class="hidden space-y-5 w-full">
+
+                <div class="bg-neutral-950 border border-neutral-800 p-3.5 sm:p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-center gap-3 w-full">
+                    <div class="space-y-0.5 text-center sm:text-left">
+                        <span class="text-emerald-400 font-black text-xs uppercase block">🧮 Difusión Comercial Calculadora Master</span>
+                        <p class="text-[10px] text-slate-400">Enviar propuesta comercial de la calculadora para negocios a grupos o clientes.</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                        <button onclick="window.despacharPublicidadCalculadora('GRUPOS')" class="bg-neutral-900 border border-neutral-800 text-emerald-400 font-black text-xs px-3 py-2 rounded-xl uppercase tracking-wider hover:border-emerald-500/40 transition-all flex items-center gap-1.5 btn-interactive">
+                            <i class="fa-solid fa-users"></i> Pub. Grupos
+                        </button>
+                        <button onclick="window.despacharCotizacionCalculadoraWhatsApp()" class="bg-gradient-to-r from-emerald-400 to-teal-600 text-neutral-950 font-black text-xs px-3 py-2 rounded-xl uppercase tracking-wider transition-all shadow-md flex items-center gap-1.5 btn-interactive">
+                            <i class="fa-solid fa-paper-plane"></i> Cotización Caja
+                        </button>
+                    </div>
+                </div>
+
+                <!-- REGULADOR DE TARIFAS CALCULADORA MASTER -->
+                <div class="bg-neutral-950 border-2 border-emerald-500/60 rounded-3xl overflow-hidden shadow-xl w-full">
+                    <button onclick="window.toggleModuloAcordeon('acc-calc-tarifador')" class="w-full flex justify-between items-center px-4 py-3.5 font-black text-xs sm:text-sm uppercase tracking-wide text-white bg-neutral-900/80 hover:bg-neutral-900 transition-all border-b border-emerald-500/20 btn-interactive">
+                        <div class="flex items-center gap-2">
+                            <div class="w-7 h-7 bg-emerald-500/20 border border-emerald-500/40 rounded-xl flex items-center justify-center text-emerald-400 text-xs">
+                                <i class="fa-solid fa-sliders"></i>
+                            </div>
+                            <div class="text-left">
+                                <span class="block text-white">Regulador de Tarifas Calculadora Master</span>
+                                <span class="block text-[8.5px] text-slate-400 font-normal">Pulsar para desplegar o recoger el panel de precios</span>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-emerald-400 text-xs"></i>
+                    </button>
+
+                    <div id="acc-calc-tarifador" class="hidden p-4 sm:p-5 space-y-3.5 bg-neutral-950/90 border-t border-neutral-900 w-full">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs font-bold w-full">
+                            <div class="bg-neutral-900 p-2.5 rounded-2xl border border-neutral-800 space-y-1.5">
+                                <span class="text-[8.5px] text-slate-400 font-black uppercase block">📱 Plan 1 Caja / Teléfono</span>
+                                <div class="flex justify-between items-center text-[9.5px] bg-neutral-950 p-1.5 rounded-xl border border-neutral-800">
+                                    <span class="text-slate-500">Actual en Web:</span>
+                                    <strong id="lbl-tarifa-act-cm-p1" class="text-emerald-400 font-mono text-xs">5,00 USDT</strong>
+                                </div>
+                                <div>
+                                    <label class="text-[8px] text-slate-500 uppercase block mb-0.5">Nuevo Precio (USDT):</label>
+                                    <input type="number" id="cm-cfg-p1" value="5.00" step="0.5" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono text-xs px-2.5 py-1 rounded-xl focus:outline-none focus:border-emerald-500">
+                                </div>
+                            </div>
+
+                            <div class="bg-neutral-900 p-2.5 rounded-2xl border border-neutral-800 space-y-1.5">
+                                <span class="text-[8.5px] text-slate-400 font-black uppercase block">📱📱 Plan 2 Cajas / Puntos</span>
+                                <div class="flex justify-between items-center text-[9.5px] bg-neutral-950 p-1.5 rounded-xl border border-neutral-800">
+                                    <span class="text-slate-500">Actual en Web:</span>
+                                    <strong id="lbl-tarifa-act-cm-p2" class="text-emerald-400 font-mono text-xs">8,00 USDT</strong>
+                                </div>
+                                <div>
+                                    <label class="text-[8px] text-slate-500 uppercase block mb-0.5">Nuevo Precio (USDT):</label>
+                                    <input type="number" id="cm-cfg-p2" value="8.00" step="0.5" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono text-xs px-2.5 py-1 rounded-xl focus:outline-none focus:border-emerald-500">
+                                </div>
+                            </div>
+
+                            <div class="bg-neutral-900 p-2.5 rounded-2xl border border-neutral-800 space-y-1.5">
+                                <span class="text-[8.5px] text-slate-400 font-black uppercase block">📱📱📱 Plan 3 Cajas (Multicaja)</span>
+                                <div class="flex justify-between items-center text-[9.5px] bg-neutral-950 p-1.5 rounded-xl border border-neutral-800">
+                                    <span class="text-slate-500">Actual en Web:</span>
+                                    <strong id="lbl-tarifa-act-cm-p3" class="text-emerald-400 font-mono text-xs">12,00 USDT</strong>
+                                </div>
+                                <div>
+                                    <label class="text-[8px] text-slate-500 uppercase block mb-0.5">Nuevo Precio (USDT):</label>
+                                    <input type="number" id="cm-cfg-p3" value="12.00" step="0.5" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono text-xs px-2.5 py-1 rounded-xl focus:outline-none focus:border-emerald-500">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="window.salvarTarifasCalculadoraMaster()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-neutral-950 font-black py-2.5 rounded-xl uppercase tracking-wider text-[11px] shadow-lg transition-all btn-interactive">
+                            🚀 Guardar y Actualizar Precios Calculadora en Web
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FORMULARIO DE ALTA DE SUSCRIPTOR CALCULADORA MASTER -->
+                <div class="bg-neutral-900 border border-neutral-800 p-4 sm:p-5 rounded-3xl space-y-3.5 shadow-xl w-full">
+                    <div class="flex items-center gap-2 border-b border-neutral-800 pb-2.5">
+                        <i class="fa-solid fa-calculator text-emerald-400 text-base"></i>
+                        <h3 class="text-white font-black uppercase text-xs tracking-wider">Crear Nueva Licencia Calculadora Master</h3>
+                    </div>
+                    
+                    <div class="space-y-3 text-xs font-bold w-full">
+                        <div>
+                            <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Nombre Comercial / Negocio</label>
+                            <input type="text" id="cm-cli-nombre" placeholder="Ej: Panadería El Parque C.A." class="w-full bg-neutral-950 border border-neutral-800 text-white px-3.5 py-2 rounded-xl uppercase focus:outline-none focus:border-emerald-500">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full">
+                            <div>
+                                <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">WhatsApp (Con Código País)</label>
+                                <input type="text" id="cm-cli-tlf" placeholder="Ej: 584147357549" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono px-3.5 py-2 rounded-xl focus:outline-none focus:border-emerald-500">
+                            </div>
+                            <div>
+                                <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Ubicación / Sector</label>
+                                <input type="text" id="cm-cli-dir" placeholder="Ej: Cordero / Táriba" class="w-full bg-neutral-950 border border-neutral-800 text-white px-3.5 py-2 rounded-xl uppercase focus:outline-none focus:border-emerald-500">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 w-full">
+                            <div>
+                                <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Ciclo de Suscripción (Meses)</label>
+                                <select id="cm-cli-meses" class="w-full bg-neutral-950 border border-neutral-800 text-emerald-400 px-3.5 py-2 rounded-xl uppercase focus:outline-none">
+                                    <option value="1">1 Mes (Calendario)</option>
+                                    <option value="2">2 Meses (Calendario)</option>
+                                    <option value="3">3 Meses (Calendario)</option>
+                                    <option value="6">6 Meses (Calendario)</option>
+                                    <option value="12">12 Meses (Año Completo)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-[8.5px] text-slate-400 font-black uppercase mb-1 block">Límite Dispositivos (Cajas)</label>
+                                <select id="cm-cli-limite-equipos" class="w-full bg-neutral-950 border border-neutral-800 text-emerald-400 px-3.5 py-2 rounded-xl uppercase focus:outline-none">
+                                    <option value="1">1 Caja / Dispositivo</option>
+                                    <option value="2">2 Cajas / Dispositivos</option>
+                                    <option value="3">3 Cajas / Dispositivos</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-[8.5px] text-emerald-400 font-black uppercase mb-1 block">📅 Fecha Activación (Calendario)</label>
+                                <input type="date" id="cm-cli-fecha-activacion-str" class="w-full bg-neutral-950 border border-emerald-500/40 text-emerald-400 font-mono px-3.5 py-2 rounded-xl focus:outline-none">
+                            </div>
+                        </div>
+
+                        <button onclick="window.crearSuscriptorCalculadoraMaster()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-neutral-950 font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-lg transition-all mt-1 btn-interactive">
+                            ➕ Generar Licencia CALC-XXXX e Inyectar a Firebase 🔒
+                        </button>
+                    </div>
+                </div>
+
+                <!-- BÓVEDA DE LICENCIAS CALCULADORA MASTER -->
+                <div class="space-y-2.5 w-full">
+                    <div class="bg-neutral-900 border border-neutral-800 p-3.5 sm:p-4 rounded-3xl space-y-2.5 w-full">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[9px] font-black tracking-widest text-emerald-400 uppercase flex items-center gap-1">
+                                <i class="fa-solid fa-address-book"></i> Bóveda Licencias Calculadora Master
+                            </span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="window.alternarVistaArchivadosCalculadora()" id="btn-toggle-anulados-cm" class="bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-emerald-500/40 text-[8.5px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider btn-interactive">
+                                    📂 Ver Bóveda Anulados
+                                </button>
+                                <span id="lbl-total-calculadora" class="bg-neutral-950 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full text-[9.5px] font-mono font-bold">
+                                    0 Activos
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="relative w-full">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-xs"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input type="text" id="cm-buscar-input" onkeyup="window.renderizarBovedaCalculadoraMaster()" placeholder="Buscar negocio o teléfono..." class="w-full bg-neutral-950 border border-neutral-800 text-white text-xs pl-9 pr-3.5 py-2.5 rounded-xl uppercase focus:outline-none focus:border-emerald-500">
+                        </div>
+
+                        <button onclick="window.toggleAcordeonCalculadoraMaster()" id="btn-acordeon-calc-desplegar" class="w-full bg-neutral-950 border border-emerald-500/50 hover:border-emerald-400 text-emerald-400 font-black text-[10px] py-2.5 rounded-2xl uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all btn-interactive">
+                            <span>🧮 VER LICENCIAS ACTIVAS CALCULADORA MASTER</span>
+                            <i id="ico-acordeon-cm" class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                    </div>
+
+                    <div id="mosaico-calculadora-clientes-box" class="space-y-3 max-h-[70vh] overflow-y-auto pr-1 no-scrollbar w-full"></div>
+                </div>
+
+            </div>
+
         </main>
     </div>
 
@@ -1293,6 +1722,14 @@
         };
 
         let tarifasPubliTasaEstructura = { plan1: 5.00, plan2: 8.00, plan3: 12.00 };
+        let tarifasCalculadoraEstructura = { plan1: 5.00, plan2: 8.00, plan3: 12.00 };
+        let localCalculadoraClientesArr = JSON.parse(localStorage.getItem('tcl_cm_cache')) || [];
+        let mostrarListaCalculadoraBool = false;
+        let verArchivadosCalculadoraBool = false;
+        let cmTasaDolarCop = parseFloat(localStorage.getItem('tcl_cm_tasa_dolar_cop')) || 3300;
+        let cmFactorBsFrontera = parseFloat(localStorage.getItem('tcl_cm_factor_bs')) || 3.80;
+        let cmTasaBcvUsd = parseFloat(localStorage.getItem('tcl_cm_tasa_bcv')) || 45.50;
+
         let localStreamingClientesArr = JSON.parse(localStorage.getItem('tcl_str_cache')) || [];
         let localPubliTasaClientesArr = JSON.parse(localStorage.getItem('tcl_pt_cache')) || [];
         let esAdminStreamingSession = false;
@@ -1395,9 +1832,13 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
                 const elFecha = document.getElementById('pt-reloj-fecha');
                 const elHora = document.getElementById('pt-reloj-hora');
+                const elCmFecha = document.getElementById('cm-reloj-fecha');
+                const elCmHora = document.getElementById('cm-reloj-hora');
 
                 if (elFecha) elFecha.innerText = fechaTexto;
                 if (elHora) elHora.innerText = horaTexto;
+                if (elCmFecha) elCmFecha.innerText = fechaTexto;
+                if (elCmHora) elCmHora.innerText = horaTexto;
             }, 1000);
         }
 
@@ -1936,20 +2377,30 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         window.cambiarParticionAdmin = function(particion) {
             const blockStreaming = document.getElementById('bloque-admin-particion-streaming');
             const blockPubliTasa = document.getElementById('bloque-admin-particion-publitasa');
+            const blockCalc = document.getElementById('bloque-admin-particion-calculadora');
             const btnStreaming = document.getElementById('btn-particion-streaming');
             const btnPubliTasa = document.getElementById('btn-particion-publitasa');
+            const btnCalc = document.getElementById('btn-particion-calculadora');
+
+            if (blockStreaming) blockStreaming.classList.add('hidden');
+            if (blockPubliTasa) blockPubliTasa.classList.add('hidden');
+            if (blockCalc) blockCalc.classList.add('hidden');
+
+            if (btnStreaming) btnStreaming.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-slate-400 border border-neutral-800 hover:border-slate-700 transition-all btn-interactive";
+            if (btnPubliTasa) btnPubliTasa.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-amber-400 border border-neutral-800 hover:border-amber-500/50 transition-all btn-interactive";
+            if (btnCalc) btnCalc.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-emerald-400 border border-neutral-800 hover:border-emerald-500/50 transition-all btn-interactive";
 
             if(particion === 'publitasa') {
-                blockStreaming.classList.add('hidden');
-                blockPubliTasa.classList.remove('hidden');
-                btnPubliTasa.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-amber-500 text-neutral-950 transition-all btn-interactive";
-                btnStreaming.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-slate-400 border border-neutral-800 hover:border-slate-700 transition-all btn-interactive";
+                if (blockPubliTasa) blockPubliTasa.classList.remove('hidden');
+                if (btnPubliTasa) btnPubliTasa.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-amber-500 text-neutral-950 transition-all btn-interactive";
                 window.descargarBasePubliTasaFirebaseCompleta();
+            } else if(particion === 'calculadora') {
+                if (blockCalc) blockCalc.classList.remove('hidden');
+                if (btnCalc) btnCalc.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-emerald-500 text-neutral-950 transition-all btn-interactive";
+                window.descargarBaseCalculadoraFirebaseCompleta();
             } else {
-                blockPubliTasa.classList.add('hidden');
-                blockStreaming.classList.remove('hidden');
-                btnStreaming.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-red-600 text-white transition-all btn-interactive";
-                btnPubliTasa.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-amber-400 border border-neutral-800 hover:border-amber-500/50 transition-all btn-interactive";
+                if (blockStreaming) blockStreaming.classList.remove('hidden');
+                if (btnStreaming) btnStreaming.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-red-600 text-white transition-all btn-interactive";
             }
         };
 
@@ -2288,8 +2739,22 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     <span class="text-[9.5px] font-mono block mt-0.5">${vencidosPubliTasa > 0 ? `⚠️ ${vencidosPubliTasa} Alerta` : '✅ Al Día'}</span>
                 </div>`;
 
+            // BURBUJA CALCULADORA MASTER
+            const activosCalc = localCalculadoraClientesArr.filter(c => (c.estado || 'ACTIVO') === 'ACTIVO');
+            const vencidosCalc = activosCalc.filter(c => c.diasRestantes <= 5).length;
+            let colorBurbujaCM = vencidosCalc > 0 ? 'border-emerald-500 bg-emerald-950/30 text-emerald-400 animate-pulse font-black' : 'border-emerald-500/40 bg-neutral-950/60 text-emerald-400';
+            
+            burbujasBox.innerHTML += `
+                <div onclick="window.cambiarParticionAdmin('calculadora')" class="border rounded-xl p-2 text-center cursor-pointer hover:border-emerald-400 transition-all btn-interactive ${colorBurbujaCM}">
+                    <span class="block text-[8.5px] font-black uppercase truncate">Calculadora</span>
+                    <span class="text-[9.5px] font-mono block mt-0.5">${vencidosCalc > 0 ? `⚠️ ${vencidosCalc} Alerta` : '✅ Al Día'}</span>
+                </div>`;
+
             let estiloBotonPT = carpetaFiltroSeleccionadaStr === 'PUBLITASA_PRO' ? 'bg-amber-500 text-neutral-950 font-black' : 'bg-neutral-950 text-amber-400 border border-amber-500/40 hover:border-amber-400';
             htmlCarpetas += `<button onclick="window.filtrarCarpetaStreamingAdmin('PUBLITASA_PRO')" class="w-full py-2 rounded-xl font-bold text-[9.5px] uppercase transition-all text-center btn-interactive ${estiloBotonPT}">📊 PUBLITASA PRO (${activosPubliTasa.length})</button>`;
+
+            let estiloBotonCM = carpetaFiltroSeleccionadaStr === 'CALCULADORA_MASTER' ? 'bg-emerald-500 text-neutral-950 font-black' : 'bg-neutral-950 text-emerald-400 border border-emerald-500/40 hover:border-emerald-400';
+            htmlCarpetas += `<button onclick="window.filtrarCarpetaStreamingAdmin('CALCULADORA_MASTER')" class="w-full py-2 rounded-xl font-bold text-[9.5px] uppercase transition-all text-center btn-interactive ${estiloBotonCM}">🧮 CALCULADORA MASTER (${activosCalc.length})</button>`;
 
             ORDEN_PLATAFORMAS_ESTATICO.forEach(k => {
                 if(catalogoPlataformasEstructura[k]) {
@@ -2354,6 +2819,9 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(plataforma === 'PUBLITASA_PRO') {
                 document.getElementById('sol-plataforma').value = "PUBLITASA MK PRO";
                 if(extraPT) extraPT.classList.remove('hidden');
+            } else if(plataforma === 'CALCULADORA_MASTER') {
+                document.getElementById('sol-plataforma').value = "CALCULADORA MASTER";
+                if(extraPT) extraPT.classList.remove('hidden');
             } else {
                 document.getElementById('sol-plataforma').value = plataforma.toUpperCase();
                 if(extraPT) extraPT.classList.add('hidden');
@@ -2370,10 +2838,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const metodo = document.getElementById('sol-metodo-pago').value;
 
             let extraInfo = "";
-            if(plat === "PUBLITASA MK PRO") {
+            if(plat === "PUBLITASA MK PRO" || plat === "CALCULADORA MASTER") {
                 const eq = document.getElementById('sol-pt-equipos').value;
                 const ms = document.getElementById('sol-pt-meses').value;
-                extraInfo = `\n📱 Equipos Solicitados: ${eq}\n📅 Tiempo a Cancelar: ${ms}`;
+                extraInfo = `\n📱 Equipos / Cajas: ${eq}\n📅 Tiempo a Cancelar: ${ms}`;
             }
 
             let msg = `🎬 SOLICITUD — CORDERO MK\n\n📺 Plataforma: ${plat}${extraInfo}\n👤 Cliente: ${name}\n📱 WhatsApp: ${tlf}\n📍 Dirección: ${dir}\n💳 Método de Pago: ${metodo}\n\n⚠️ Confirmo que estoy 100% seguro de la contratación.`;
@@ -2596,6 +3064,50 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                                     <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-1.5 rounded-lg uppercase col-span-2 sm:col-span-3 btn-interactive">🚫 Anular Licencia</button>
                                 ` : `
                                     <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase col-span-2 sm:col-span-4 btn-interactive">♻️ Reactivar Licencia Pro</button>
+                                `}
+                            </div>
+                        </div>`;
+                });
+                return;
+            }
+
+            if(carpetaFiltroSeleccionadaStr === "CALCULADORA_MASTER") {
+                let listaCM = localCalculadoraClientesArr.filter(c => verArchivadosStreamingBool ? c.estado === 'INACTIVO' : (c.estado || 'ACTIVO') === 'ACTIVO');
+                if(busquedaQuery) {
+                    listaCM = listaCM.filter(c => c.cliente.includes(busquedaQuery) || c.telefono.includes(busquedaQuery));
+                }
+                if(listaCM.length === 0) {
+                    box.innerHTML = `<p class="text-center text-slate-500 italic py-8 text-xs">No hay suscriptores Calculadora Master en ${verArchivadosStreamingBool ? 'Bóveda de Anulados' : 'Clientes Activos'}.</p>`; return;
+                }
+                listaCM.forEach(c => {
+                    const esAlerta = c.diasRestantes <= 5;
+                    const esInactivo = c.estado === 'INACTIVO';
+                    box.innerHTML += `
+                        <div class="border-2 border-emerald-500/60 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between ${esInactivo ? 'border-red-900/40 bg-red-950/10' : (esAlerta ? 'bg-emerald-950/30' : 'bg-[#00112b]/80')} shadow-xl w-full">
+                            <div class="flex justify-between items-start gap-2 w-full">
+                                <div class="flex-1 min-w-0 pr-2 space-y-0.5">
+                                    <span class="text-emerald-400 text-[9px] font-black uppercase tracking-wider block truncate">LICENCIA CAJA: ${c.tokenLicencia}</span>
+                                    <h4 class="text-white text-xs sm:text-sm font-black uppercase truncate">${c.cliente}</h4>
+                                    <p class="text-[9.5px] text-slate-300 font-mono truncate"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono}</p>
+                                    <p class="text-[9.5px] text-slate-400 font-mono truncate"><i class="fa-solid fa-location-dot text-slate-500"></i> Ubicación: ${c.direccion || 'TÁCHIRA'}</p>
+                                    <p class="text-[9.5px] text-slate-400 font-mono truncate"><i class="fa-solid fa-calendar text-slate-500"></i> Inicio: ${c.fechaActivacion || 'N/A'}</p>
+                                    <p class="text-[9.5px] text-emerald-400 font-bold mt-0.5 truncate"><i class="fa-solid fa-mobile-screen"></i> Cajas Autorizadas: ${c.equiposRegistrados ? c.equiposRegistrados.length : 0} / ${c.maxEquipos} Máx</p>
+                                </div>
+                                <div class="shrink-0 text-right">
+                                    <span class="block text-sm sm:text-base font-mono font-black ${esInactivo ? 'text-red-500' : (esAlerta ? 'text-emerald-400 animate-pulse' : 'text-slate-200')}">${c.diasRestantes} Días</span>
+                                    <span class="text-[8px] text-slate-500 block uppercase font-bold">${esInactivo ? 'ANULADO' : 'Plan: ' + c.meses + ' Mes(es)'}</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 mt-3 border-t border-neutral-900 pt-2.5 w-full">
+                                ${!esInactivo ? `
+                                    <button onclick="window.renovarExpresCalculadora('${c.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">⚡ +1 Mes</button>
+                                    <button onclick="window.enviarBienvenidaCalculadora('${c.id}')" class="bg-emerald-500 hover:bg-emerald-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">📲 Acceso</button>
+                                    <button onclick="window.notificarPagoCalculadora('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">🔔 Notificar</button>
+                                    <button onclick="window.resetearEquiposCalculadora('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">🔄 Reset</button>
+                                    <button onclick="window.abrirEditorCalculadora('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">✏️ Editar</button>
+                                    <button onclick="window.anularSuscriptorCalculadora('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-1.5 rounded-lg uppercase col-span-2 sm:col-span-3 btn-interactive">🚫 Anular Licencia</button>
+                                ` : `
+                                    <button onclick="window.reactivarSuscriptorCalculadora('${c.id}')" class="bg-emerald-500 hover:bg-emerald-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase col-span-2 sm:col-span-4 btn-interactive">♻️ Reactivar Licencia</button>
                                 `}
                             </div>
                         </div>`;
@@ -3269,11 +3781,591 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
         };
 
+        
+        // ==================== LÓGICA CALCULADORA MASTER ====================
+
+        function formatearNumeroConMiles(val) {
+            if (!val || isNaN(val)) return '0';
+            return Math.round(val).toLocaleString('es-CO');
+        }
+
+        function limpiarPuntosString(str) {
+            if (!str) return 0;
+            const clean = String(str).replace(/\./g, '').replace(/,/g, '.');
+            return parseFloat(clean) || 0;
+        }
+
+        window.abrirVistaCalculadoraMasterDirecto = function() {
+            window.location.hash = 'calculadora';
+            document.getElementById('vista-vitrina-publica').classList.add('hidden');
+            document.getElementById('vista-streaming-admin').classList.add('hidden');
+            document.getElementById('vista-publitasa-monitor').classList.add('hidden');
+            document.getElementById('footer-general-streaming').classList.add('hidden');
+            document.getElementById('vista-calculadora-master').classList.remove('hidden');
+
+            const btnVisitarVit = document.getElementById('btn-nav-visitar-vitrina');
+            if(btnVisitarVit && !esAdminStreamingSession) btnVisitarVit.classList.remove('hidden');
+
+            window.cargarTasasCalculadoraEnGUI();
+
+            window.descargarBaseCalculadoraFirebaseCompleta().then(() => {
+                const tokenGuardado = localStorage.getItem('tcl_cm_active_token');
+                if(tokenGuardado) {
+                    const matchActual = localCalculadoraClientesArr.find(x => x.tokenLicencia === tokenGuardado);
+                    if(!matchActual || matchActual.estado === 'INACTIVO') {
+                        localStorage.removeItem('tcl_cm_active_token');
+                        document.getElementById('wrapper-login-calculadora-master').classList.remove('hidden');
+                        document.getElementById('wrapper-cuerpo-calculadora-master').classList.add('hidden');
+                        alert("🛑 Acceso Revocado: Su licencia ha sido desactivada o eliminada por el administrador.");
+                    } else {
+                        document.getElementById('wrapper-login-calculadora-master').classList.add('hidden');
+                        document.getElementById('wrapper-cuerpo-calculadora-master').classList.remove('hidden');
+                    }
+                }
+            });
+        };
+
+        window.cerrarTodasVistasSecundarias = function() {
+            window.location.hash = '';
+            document.getElementById('vista-publitasa-monitor').classList.add('hidden');
+            document.getElementById('vista-calculadora-master').classList.add('hidden');
+            document.getElementById('vista-vitrina-publica').classList.remove('hidden');
+            document.getElementById('footer-general-streaming').classList.remove('hidden');
+
+            const btnVisitarVit = document.getElementById('btn-nav-visitar-vitrina');
+            if(btnVisitarVit) btnVisitarVit.classList.add('hidden');
+        };
+
+        window.autenticarClienteCalculadoraMaster = async function() {
+            const token = document.getElementById('cm-token-input').value.trim().toUpperCase();
+            
+            if(token === masterClaveDinamica.toUpperCase() || token === "TUCOCEL") {
+                localStorage.setItem('tcl_cm_active_token', token);
+                document.getElementById('wrapper-login-calculadora-master').classList.add('hidden');
+                document.getElementById('wrapper-cuerpo-calculadora-master').classList.remove('hidden');
+                return;
+            }
+
+            const docCliCM = await getDoc(doc(db, "tcl_calc_master", "clientes_activos"));
+            if(docCliCM.exists()) {
+                localCalculadoraClientesArr = docCliCM.data().lista || [];
+            }
+
+            const clienteEncontrado = localCalculadoraClientesArr.find(x => x.tokenLicencia === token && (x.estado || 'ACTIVO') === 'ACTIVO');
+
+            if(clienteEncontrado) {
+                const myUUID = obtenerOClonarBrowserUUID();
+                if(!clienteEncontrado.equiposRegistrados) clienteEncontrado.equiposRegistrados = [];
+
+                if(!clienteEncontrado.equiposRegistrados.includes(myUUID)) {
+                    if(clienteEncontrado.equiposRegistrados.length < (clienteEncontrado.maxEquipos || 1)) {
+                        clienteEncontrado.equiposRegistrados.push(myUUID);
+                        await window.sincronizarCalculadoraNube();
+                    } else {
+                        alert(`🛑 LÍMITE DE DISPOSITIVOS ALCANZADO (${clienteEncontrado.equiposRegistrados.length}/${clienteEncontrado.maxEquipos})\n\nTu suscripción ha superado el máximo de cajas/teléfonos autorizados. Si cambiaste de equipo, solicita un RESET al administrador.`);
+                        return;
+                    }
+                }
+
+                localStorage.setItem('tcl_cm_active_token', token);
+                document.getElementById('wrapper-login-calculadora-master').classList.add('hidden');
+                document.getElementById('wrapper-cuerpo-calculadora-master').classList.remove('hidden');
+            } else {
+                alert("❌ Licencia no válida o servicio inactivo.");
+            }
+        };
+
+        window.abrirModalConfigTasasCalculadora = function() {
+            document.getElementById('cm-cfg-tasa-dolar-cop').value = cmTasaDolarCop;
+            document.getElementById('cm-cfg-tasa-factor-bs').value = cmFactorBsFrontera;
+            document.getElementById('cm-cfg-tasa-bcv').value = cmTasaBcvUsd;
+            document.getElementById('modal-config-tasas-calculadora').classList.remove('hidden');
+        };
+
+        window.guardarTasasCajaCalculadoraLocal = function() {
+            cmTasaDolarCop = parseFloat(document.getElementById('cm-cfg-tasa-dolar-cop').value) || 3300;
+            cmFactorBsFrontera = parseFloat(document.getElementById('cm-cfg-tasa-factor-bs').value) || 3.80;
+            cmTasaBcvUsd = parseFloat(document.getElementById('cm-cfg-tasa-bcv').value) || 45.50;
+
+            localStorage.setItem('tcl_cm_tasa_dolar_cop', cmTasaDolarCop);
+            localStorage.setItem('tcl_cm_factor_bs', cmFactorBsFrontera);
+            localStorage.setItem('tcl_cm_tasa_bcv', cmTasaBcvUsd);
+
+            window.cargarTasasCalculadoraEnGUI();
+            window.recalcularCajaCalculadoraMaster();
+            document.getElementById('modal-config-tasas-calculadora').classList.add('hidden');
+            alert("💾 Tasas de la jornada fijadas con éxito.");
+        };
+
+        window.cargarTasasCalculadoraEnGUI = function() {
+            const elD = document.getElementById('cm-lbl-tasa-dolar-cop');
+            const elF = document.getElementById('cm-lbl-tasa-factor-bs');
+            const elB = document.getElementById('cm-lbl-tasa-bcv-val');
+
+            if (elD) elD.innerText = cmTasaDolarCop.toLocaleString('es-CO') + ' COP';
+            if (elF) elF.innerText = cmFactorBsFrontera.toFixed(2) + ' COP/Bs';
+            if (elB) elB.innerText = cmTasaBcvUsd.toFixed(2) + ' Bs';
+        };
+
+        window.alEscribirMontoCuenta = function() {
+            const inElem = document.getElementById('cm-in-total-cuenta');
+            const num = limpiarPuntosString(inElem.value);
+            if (num > 0) {
+                inElem.value = num.toLocaleString('es-CO');
+            }
+            window.recalcularCajaCalculadoraMaster();
+        };
+
+        window.alEscribirMontoPaga = function() {
+            const inElem = document.getElementById('cm-in-paga-cliente');
+            const num = limpiarPuntosString(inElem.value);
+            if (num > 0) {
+                inElem.value = num.toLocaleString('es-CO');
+            }
+            window.recalcularCajaCalculadoraMaster();
+        };
+
+        function cmConvertirMontoA_COP(monto, tipoMoneda) {
+            if (!monto || monto <= 0) return 0;
+            if (tipoMoneda === 'COP') return monto;
+            if (tipoMoneda === 'USD') return monto * cmTasaDolarCop;
+            if (tipoMoneda === 'BS_FRONT') return monto * cmFactorBsFrontera;
+            if (tipoMoneda === 'BS_BCV') {
+                const usdEquiv = monto / cmTasaBcvUsd;
+                return usdEquiv * cmTasaDolarCop;
+            }
+            return 0;
+        }
+
+        function cmConvertirCOP_A_TodasLasMonedas(montoCOP) {
+            const cop = montoCOP;
+            const usd = cmTasaDolarCop > 0 ? (montoCOP / cmTasaDolarCop) : 0;
+            const bsFrontera = cmFactorBsFrontera > 0 ? (montoCOP / cmFactorBsFrontera) : 0;
+            const bsBCV = usd * cmTasaBcvUsd;
+
+            return { cop, usd, bsFrontera, bsBCV };
+        }
+
+        window.recalcularCajaCalculadoraMaster = function() {
+            const rawTotal = limpiarPuntosString(document.getElementById('cm-in-total-cuenta')?.value);
+            const monedaTotal = document.getElementById('cm-sel-moneda-total')?.value || 'COP';
+
+            const rawPaga = limpiarPuntosString(document.getElementById('cm-in-paga-cliente')?.value);
+            const monedaPaga = document.getElementById('cm-sel-moneda-paga')?.value || 'COP';
+
+            // 1. Total venta a COP y equivalencias
+            const totalCOP = cmConvertirMontoA_COP(rawTotal, monedaTotal);
+            const eqTotal = cmConvertirCOP_A_TodasLasMonedas(totalCOP);
+
+            const elEqCOP = document.getElementById('cm-eq-total-cop');
+            const elEqUSD = document.getElementById('cm-eq-total-usd');
+            const elEqBS = document.getElementById('cm-eq-total-bs');
+
+            if (elEqCOP) elEqCOP.innerText = formatearNumeroConMiles(eqTotal.cop) + ' COP';
+            if (elEqUSD) elEqUSD.innerText = '$' + eqTotal.usd.toFixed(2);
+            if (elEqBS) elEqBS.innerText = (monedaTotal === 'BS_BCV' ? eqTotal.bsBCV.toFixed(2) : formatearNumeroConMiles(eqTotal.bsFrontera)) + ' Bs';
+
+            // 2. Monto recibido del cliente a COP
+            const pagaCOP = cmConvertirMontoA_COP(rawPaga, monedaPaga);
+
+            // 3. Resultado del Vuelto / Faltante
+            const panelRes = document.getElementById('cm-panel-resultado-vuelto');
+            const titVuelto = document.getElementById('cm-lbl-titulo-vuelto');
+            const badgeVuelto = document.getElementById('cm-badge-estado-vuelto');
+            const elVCop = document.getElementById('cm-vuelto-val-cop');
+            const elVUsd = document.getElementById('cm-vuelto-val-usd');
+            const elVBs = document.getElementById('cm-vuelto-val-bs');
+
+            if (rawTotal === 0 && rawPaga === 0) {
+                if (elVCop) elVCop.innerText = '0 COP';
+                if (elVUsd) elVUsd.innerText = '$0.00';
+                if (elVBs) elVBs.innerText = '0 Bs';
+                if (panelRes) panelRes.className = "rounded-3xl p-4 sm:p-5 space-y-3.5 bg-gradient-to-b from-neutral-900 to-neutral-950 border-2 border-neutral-800 shadow-2xl";
+                if (titVuelto) {
+                    titVuelto.className = "text-xs sm:text-sm font-black uppercase tracking-wider text-slate-400 flex items-center gap-1.5";
+                    titVuelto.innerHTML = `<i class="fa-solid fa-hand-holding-dollar text-base"></i> VUELTO A ENTREGAR`;
+                }
+                if (badgeVuelto) {
+                    badgeVuelto.className = "text-[9px] font-mono font-bold text-slate-400 bg-neutral-950 px-2.5 py-1 rounded-full border border-neutral-800";
+                    badgeVuelto.innerText = "En Espera";
+                }
+                return;
+            }
+
+            const diferenciaCOP = pagaCOP - totalCOP;
+            const eqDiferencia = cmConvertirCOP_A_TodasLasMonedas(Math.abs(diferenciaCOP));
+
+            if (diferenciaCOP >= 0) {
+                if (panelRes) panelRes.className = "rounded-3xl p-4 sm:p-5 space-y-3.5 bg-gradient-to-b from-neutral-900 to-emerald-950/40 border-2 border-emerald-500/80 shadow-2xl";
+                if (titVuelto) {
+                    titVuelto.className = "text-xs sm:text-sm font-black uppercase tracking-wider text-emerald-400 flex items-center gap-1.5";
+                    titVuelto.innerHTML = `<i class="fa-solid fa-hand-holding-dollar text-base"></i> VUELTO EXACTO A ENTREGAR`;
+                }
+                if (badgeVuelto) {
+                    badgeVuelto.className = "text-[9px] font-mono font-bold text-emerald-400 bg-emerald-950 px-2.5 py-1 rounded-full border border-emerald-500/40";
+                    badgeVuelto.innerText = "Cambio Listo";
+                }
+
+                if (elVCop) elVCop.innerText = formatearNumeroConMiles(eqDiferencia.cop) + ' COP';
+                if (elVUsd) elVUsd.innerText = '$' + eqDiferencia.usd.toFixed(2);
+                if (elVBs) elVBs.innerText = (monedaPaga === 'BS_BCV' ? eqDiferencia.bsBCV.toFixed(2) : formatearNumeroConMiles(eqDiferencia.bsFrontera)) + ' Bs';
+            } else {
+                if (panelRes) panelRes.className = "rounded-3xl p-4 sm:p-5 space-y-3.5 bg-gradient-to-b from-neutral-900 to-red-950/40 border-2 border-red-500/80 shadow-2xl";
+                if (titVuelto) {
+                    titVuelto.className = "text-xs sm:text-sm font-black uppercase tracking-wider text-red-500 flex items-center gap-1.5";
+                    titVuelto.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-base"></i> FALTA DINERO POR PAGAR`;
+                }
+                if (badgeVuelto) {
+                    badgeVuelto.className = "text-[9px] font-mono font-bold text-red-400 bg-red-950 px-2.5 py-1 rounded-full border border-red-500/40";
+                    badgeVuelto.innerText = "Pago Incompleto";
+                }
+
+                if (elVCop) elVCop.innerText = '-' + formatearNumeroConMiles(eqDiferencia.cop) + ' COP';
+                if (elVUsd) elVUsd.innerText = '-$' + eqDiferencia.usd.toFixed(2);
+                if (elVBs) elVBs.innerText = '-' + (monedaPaga === 'BS_BCV' ? eqDiferencia.bsBCV.toFixed(2) : formatearNumeroConMiles(eqDiferencia.bsFrontera)) + ' Bs';
+            }
+        };
+
+        window.limpiarMontosCalculadoraMaster = function() {
+            const inT = document.getElementById('cm-in-total-cuenta');
+            const inP = document.getElementById('cm-in-paga-cliente');
+            if (inT) inT.value = '';
+            if (inP) inP.value = '';
+            window.recalcularCajaCalculadoraMaster();
+        };
+
+        // ==================== GESTIÓN ADMINISTRATIVA FIREBASE CALCULADORA ====================
+
+        window.crearSuscriptorCalculadoraMaster = async function() {
+            const cliente = document.getElementById('cm-cli-nombre').value.trim().toUpperCase();
+            const tlf = document.getElementById('cm-cli-tlf').value.trim();
+            const dir = document.getElementById('cm-cli-dir').value.trim().toUpperCase();
+            const meses = parseInt(document.getElementById('cm-cli-meses').value);
+            const maxEquipos = parseInt(document.getElementById('cm-cli-limite-equipos').value);
+            const rawFechaISO = document.getElementById('cm-cli-fecha-activacion-str').value;
+            const fechaActStr = rawFechaISO ? convertirISOaES(rawFechaISO) : new Date().toLocaleDateString('es-ES');
+
+            if(!cliente || !tlf) return alert("Por favor completa el Nombre del negocio y Teléfono.");
+
+            const tokenLicencia = 'CALC-' + Math.floor(1000 + Math.random() * 9000);
+            const nuevoClienteCalc = {
+                id: 'cm-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+                cliente, telefono: tlf, direccion: dir, meses,
+                maxEquipos, equiposRegistrados: [],
+                tokenLicencia, fechaActivacion: fechaActStr,
+                diasRestantes: calcularDiasRestantesReales(fechaActStr, meses), estado: 'ACTIVO'
+            };
+
+            localCalculadoraClientesArr.push(nuevoClienteCalc);
+            await window.sincronizarCalculadoraNube();
+            alert(`✅ Licencia Calculadora Master Creada con éxito.\nToken: ${tokenLicencia}`);
+            
+            document.getElementById('cm-cli-nombre').value = "";
+            document.getElementById('cm-cli-tlf').value = "";
+            document.getElementById('cm-cli-dir').value = "";
+            document.getElementById('cm-cli-fecha-activacion-str').value = obtenerFechaHoyISO();
+            
+            mostrarListaCalculadoraBool = true;
+            window.renderizarBovedaCalculadoraMaster();
+            window.recalcularCarpetasYChismoseadorDinamico();
+        };
+
+        window.renderizarBovedaCalculadoraMaster = function() {
+            const box = document.getElementById('mosaico-calculadora-clientes-box'); if(!box) return;
+            const btnAcordeon = document.getElementById('btn-acordeon-calc-desplegar');
+            box.innerHTML = "";
+
+            localCalculadoraClientesArr.forEach(c => {
+                if(c.fechaActivacion && c.meses) {
+                    c.diasRestantes = calcularDiasRestantesReales(c.fechaActivacion, c.meses);
+                }
+            });
+
+            const activosTotales = localCalculadoraClientesArr.filter(c => (c.estado || 'ACTIVO') === 'ACTIVO');
+            const lblTotal = document.getElementById('lbl-total-calculadora');
+            if (lblTotal) lblTotal.innerText = `${activosTotales.length} Activos`;
+
+            const q = document.getElementById('cm-buscar-input')?.value.trim().toUpperCase() || "";
+
+            if (q) {
+                mostrarListaCalculadoraBool = true;
+            }
+
+            if (btnAcordeon) {
+                btnAcordeon.innerHTML = `<span>🧮 VER LICENCIAS ACTIVAS CALCULADORA MASTER (${activosTotales.length})</span> <i id="ico-acordeon-cm" class="fa-solid fa-chevron-${mostrarListaCalculadoraBool ? 'up' : 'down'} text-xs"></i>`;
+            }
+
+            if (!mostrarListaCalculadoraBool) {
+                box.innerHTML = `<p class="text-center text-slate-500 italic py-6 text-xs bg-neutral-950/40 border border-neutral-900 rounded-2xl">📁 Panel de licencias plegado. Presiona el botón de arriba para desplegar o escribe un nombre.</p>`;
+                return;
+            }
+
+            let lista = localCalculadoraClientesArr.filter(c => verArchivadosCalculadoraBool ? c.estado === 'INACTIVO' : (c.estado || 'ACTIVO') === 'ACTIVO');
+
+            if(q) { lista = lista.filter(c => c.cliente.includes(q) || c.telefono.includes(q)); }
+
+            if(lista.length === 0) {
+                box.innerHTML = `<p class="text-center text-slate-500 italic py-6 text-xs">No hay suscriptores en ${verArchivadosCalculadoraBool ? 'Bóveda de Anulados' : 'Licencias Activas'}.</p>`;
+                return;
+            }
+
+            lista.forEach(c => {
+                const esAlerta = c.diasRestantes <= 5;
+                const esInactivo = c.estado === 'INACTIVO';
+
+                box.innerHTML += `
+                    <div class="border rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between ${esInactivo ? 'border-red-900/40 bg-red-950/10' : (esAlerta ? 'border-emerald-500 bg-emerald-950/20' : 'border-neutral-800 bg-neutral-950/60')} shadow-lg w-full">
+                        <div class="flex justify-between items-start gap-2 w-full">
+                            <div class="flex-1 min-w-0 pr-2 space-y-0.5">
+                                <span class="text-emerald-400 text-[9px] font-black uppercase tracking-wider block truncate">LICENCIA: ${c.tokenLicencia}</span>
+                                <h4 class="text-white text-xs sm:text-sm font-black uppercase truncate">${c.cliente}</h4>
+                                <p class="text-[9.5px] text-slate-400 font-mono truncate"><i class="fa-solid fa-phone text-slate-500"></i> ${c.telefono}</p>
+                                <p class="text-[9.5px] text-slate-400 font-mono truncate"><i class="fa-solid fa-location-dot text-slate-500"></i> Ubicación: ${c.direccion || 'TÁCHIRA'}</p>
+                                <p class="text-[9.5px] text-slate-400 font-mono truncate"><i class="fa-solid fa-calendar text-slate-500"></i> Inicio: ${c.fechaActivacion || 'N/A'}</p>
+                                <p class="text-[9.5px] text-emerald-400 font-bold mt-0.5 truncate"><i class="fa-solid fa-mobile-screen"></i> Cajas: ${c.equiposRegistrados ? c.equiposRegistrados.length : 0} / ${c.maxEquipos} Máx</p>
+                            </div>
+                            <div class="shrink-0 text-right">
+                                <span class="block text-sm sm:text-base font-mono font-black ${esInactivo ? 'text-red-500' : (esAlerta ? 'text-emerald-400 animate-pulse' : 'text-slate-200')}">${c.diasRestantes} Días</span>
+                                <span class="text-[8px] text-slate-500 block uppercase font-bold">${esInactivo ? 'ANULADO' : 'Plan: ' + c.meses + ' Mes(es)'}</span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 mt-3 border-t border-neutral-900 pt-2.5 w-full">
+                            ${!esInactivo ? `
+                                <button onclick="window.renovarExpresCalculadora('${c.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">⚡ +1 Mes</button>
+                                <button onclick="window.enviarBienvenidaCalculadora('${c.id}')" class="bg-emerald-500 hover:bg-emerald-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">📲 Acceso</button>
+                                <button onclick="window.notificarPagoCalculadora('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-amber-400 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">🔔 Notificar</button>
+                                <button onclick="window.resetearEquiposCalculadora('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">🔄 Reset</button>
+                                <button onclick="window.abrirEditorCalculadora('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">✏️ Editar</button>
+                                <button onclick="window.anularSuscriptorCalculadora('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-1.5 rounded-lg uppercase col-span-2 sm:col-span-5 btn-interactive">🚫 Anular Licencia</button>
+                            ` : `
+                                <button onclick="window.reactivarSuscriptorCalculadora('${c.id}')" class="bg-emerald-500 hover:bg-emerald-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase col-span-2 sm:col-span-5 btn-interactive">♻️ Reactivar Licencia</button>
+                            `}
+                        </div>
+                    </div>`;
+            });
+        };
+
+        window.toggleAcordeonCalculadoraMaster = function() {
+            mostrarListaCalculadoraBool = !mostrarListaCalculadoraBool;
+            window.renderizarBovedaCalculadoraMaster();
+        };
+
+        window.alternarVistaArchivadosCalculadora = function() {
+            verArchivadosCalculadoraBool = !verArchivadosCalculadoraBool;
+            const btn = document.getElementById('btn-toggle-anulados-cm');
+            if(verArchivadosCalculadoraBool) {
+                btn.className = "bg-emerald-500 text-neutral-950 font-black text-[8.5px] sm:text-[9px] px-3 py-1 rounded-full uppercase tracking-wider btn-interactive";
+                btn.innerHTML = "🟢 Ver Licencias Activas";
+            } else {
+                btn.className = "bg-neutral-950 text-slate-400 border border-neutral-800 hover:border-emerald-500/40 text-[8.5px] sm:text-[9px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider btn-interactive";
+                btn.innerHTML = "📂 Ver Bóveda Anulados";
+            }
+            mostrarListaCalculadoraBool = true;
+            window.renderizarBovedaCalculadoraMaster();
+        };
+
+        window.renovarExpresCalculadora = async function(id) {
+            let match = localCalculadoraClientesArr.find(c => c.id === id);
+            if(!match) return;
+
+            const fechaHoyStr = new Date().toLocaleDateString('es-ES');
+            match.fechaActivacion = fechaHoyStr;
+            match.meses = 1;
+            match.diasRestantes = calcularDiasRestantesReales(fechaHoyStr, 1);
+            match.estado = 'ACTIVO';
+
+            await window.sincronizarCalculadoraNube();
+            window.renderizarBovedaCalculadoraMaster();
+            alert(`⚡ Licencia de ${match.cliente} renovada con éxito por 1 Mes.`);
+        };
+
+        window.enviarBienvenidaCalculadora = function(id) {
+            const c = localCalculadoraClientesArr.find(x => x.id === id); if(!c) return;
+            const linkApp = (linkServidorGitHubGuardado || URL_VITRINA_OFICIAL).split('#')[0] + '#calculadora';
+            const msg = `🧮 BIENVENIDO A PUBLI-TASA-MK CALCULADORA MASTER\n\nHola ${c.cliente},\nSe ha activado con éxito tu suscripción comercial a la calculadora multimoneda de caja.\n\n🔑 TU LICENCIA / TOKEN: ${c.tokenLicencia}\n📱 Cajas Autorizadas: ${c.maxEquipos} Dispositivo(s)\n📅 Período Contratado: ${c.diasRestantes} Días\n\n📌 INSTRUCCIONES RÁPIDAS DE USO:\n• Ingresa al enlace con tu licencia.\n• Ajusta las tasas de tu jornada (Dólar, Factor Bs Frontera y BCV).\n• Escribe la cuenta en cualquier moneda y calcula tus vueltos al instante.\n\n👇 INGRESA A TU CALCULADORA AQUÍ:\n🔗 ${linkApp}\n\n🏛️ CON EL RESPALDO DE TUCOCEL C.A.`;
+            abrirWhatsAppPersonal(c.telefono, msg);
+        };
+
+        window.notificarPagoCalculadora = function(id) {
+            const c = localCalculadoraClientesArr.find(x => x.id === id); if(!c) return;
+            let fAct = c.fechaActivacion || new Date().toLocaleDateString('es-ES');
+            let fVencExacta = calcularFechaRenovacionExacta(fAct, c.meses || 1);
+            const msg = `🔔 Recordatorio de Vencimiento — Calculadora Master 🧮\n\n¡Saludos, ${c.cliente}! 👋✨\n\nTe saludamos de PubliTasaMK. Pasamos por aquí para recordarte que tu membresía de caja (Licencia: ${c.tokenLicencia}) vence MAÑANA (${fVencExacta}). 📅\n\n⚠️ Nota importante: Para garantizar la continuidad del sistema en tu caja registradora y evitar interrupciones, te recordamos realizar tu pago de renovación el día de HOY. 📈\n\n¡Estamos a tu orden! 🫡${RESPALDO_FIRMA_WHATSAPP}`;
+            abrirWhatsAppPersonal(c.telefono, msg);
+        };
+
+        window.resetearEquiposCalculadora = async function(id) {
+            const c = localCalculadoraClientesArr.find(x => x.id === id); if(!c) return;
+            if(confirm(`¿Deseas desvincular los dispositivos registrados de ${c.cliente}?`)) {
+                c.equiposRegistrados = [];
+                await window.sincronizarCalculadoraNube();
+                window.renderizarBovedaCalculadoraMaster();
+                alert("🔄 Dispositivos desvinculados.");
+            }
+        };
+
+        window.abrirEditorCalculadora = function(id) {
+            let match = localCalculadoraClientesArr.find(c => c.id === id); if(!match) return;
+            let nuevoNombre = prompt("Modificar Nombre del Negocio:", match.cliente || "");
+            let nuevoTlf = prompt("Modificar Teléfono (WhatsApp):", match.telefono || "");
+            let nuevaDir = prompt("Modificar Ubicación / Sector:", match.direccion || "");
+            let nuevaFecha = prompt("Modificar Fecha de Activación (DD/MM/AAAA):", match.fechaActivacion || new Date().toLocaleDateString('es-ES'));
+            
+            if(nuevoNombre !== null && nuevoTlf !== null) {
+                if(nuevoNombre) match.cliente = nuevoNombre.toUpperCase();
+                if(nuevoTlf) match.telefono = nuevoTlf;
+                if(nuevaDir) match.direccion = nuevaDir.toUpperCase();
+                if(nuevaFecha) {
+                    match.fechaActivacion = nuevaFecha;
+                    match.diasRestantes = calcularDiasRestantesReales(nuevaFecha, match.meses || 1);
+                }
+                window.sincronizarCalculadoraNube().then(() => { 
+                    window.renderizarBovedaCalculadoraMaster(); 
+                    window.recalcularCarpetasYChismoseadorDinamico();
+                });
+            }
+        };
+
+        window.anularSuscriptorCalculadora = async function(id) {
+            if(!confirm("¿Deseas mover esta licencia de Calculadora a la Bóveda de Anulados?")) return;
+            const c = localCalculadoraClientesArr.find(x => x.id === id);
+            if(c) {
+                c.estado = 'INACTIVO';
+                await window.sincronizarCalculadoraNube();
+                window.renderizarBovedaCalculadoraMaster();
+                window.recalcularCarpetasYChismoseadorDinamico();
+            }
+        };
+
+        window.reactivarSuscriptorCalculadora = async function(id) {
+            const c = localCalculadoraClientesArr.find(x => x.id === id);
+            if(c) {
+                let nuevosMeses = parseInt(prompt("Ingrese los meses a renovar (1, 2, 3...):", c.meses || 1));
+                if(nuevosMeses) {
+                    let fechaHoyStr = new Date().toLocaleDateString('es-ES');
+                    c.meses = nuevosMeses;
+                    c.fechaActivacion = fechaHoyStr;
+                    c.diasRestantes = calcularDiasRestantesReales(fechaHoyStr, nuevosMeses);
+                    c.estado = 'ACTIVO';
+                    await window.sincronizarCalculadoraNube();
+                    window.renderizarBovedaCalculadoraMaster();
+                    window.recalcularCarpetasYChismoseadorDinamico();
+                    alert("♻️ Licencia Reactivada con éxito.");
+                }
+            }
+        };
+
+        window.salvarTarifasCalculadoraMaster = async function() {
+            const p1 = parseFloat(document.getElementById('cm-cfg-p1').value) || 5.00;
+            const p2 = parseFloat(document.getElementById('cm-cfg-p2').value) || 8.00;
+            const p3 = parseFloat(document.getElementById('cm-cfg-p3').value) || 12.00;
+
+            tarifasCalculadoraEstructura = { plan1: p1, plan2: p2, plan3: p3 };
+
+            try {
+                await setDoc(doc(db, "tcl_calc_master", "tarifas_config"), tarifasCalculadoraEstructura);
+                window.actualizarLecturaTarifasCalculadoraGUI();
+                alert("🚀 Precios de Calculadora Master actualizados en la web.");
+            } catch(e) {
+                window.actualizarLecturaTarifasCalculadoraGUI();
+                alert("✨ Precios actualizados localmente.");
+            }
+        };
+
+        window.actualizarLecturaTarifasCalculadoraGUI = function() {
+            const elL1 = document.getElementById('lbl-tarifa-act-cm-p1');
+            const elL2 = document.getElementById('lbl-tarifa-act-cm-p2');
+            const elL3 = document.getElementById('lbl-tarifa-act-cm-p3');
+            const elPMin = document.getElementById('lbl-tarjeta-calc-precio-min');
+
+            const p1Formatted = tarifasCalculadoraEstructura.plan1.toFixed(2);
+            const p2Formatted = tarifasCalculadoraEstructura.plan2.toFixed(2);
+            const p3Formatted = tarifasCalculadoraEstructura.plan3.toFixed(2);
+
+            if(elL1) elL1.innerText = `${p1Formatted} USDT`;
+            if(elL2) elL2.innerText = `${p2Formatted} USDT`;
+            if(elL3) elL3.innerText = `${p3Formatted} USDT`;
+            if(elPMin) elPMin.innerText = `Desde ${p1Formatted} USDT`;
+
+            const inP1 = document.getElementById('cm-cfg-p1');
+            const inP2 = document.getElementById('cm-cfg-p2');
+            const inP3 = document.getElementById('cm-cfg-p3');
+
+            if (inP1) inP1.value = tarifasCalculadoraEstructura.plan1;
+            if (inP2) inP2.value = tarifasCalculadoraEstructura.plan2;
+            if (inP3) inP3.value = tarifasCalculadoraEstructura.plan3;
+        };
+
+        window.despacharCotizacionCalculadoraWhatsApp = function() {
+            const urlFinal = (linkServidorGitHubGuardado || URL_VITRINA_OFICIAL).split('#')[0] + '#calculadora';
+            const p1 = tarifasCalculadoraEstructura.plan1.toFixed(2);
+            const p2 = tarifasCalculadoraEstructura.plan2.toFixed(2);
+            const p3 = tarifasCalculadoraEstructura.plan3.toFixed(2);
+
+            const msg = `🧮 PROPUESTA COMERCIAL — PUBLITASA-MK CALCULADORA MASTER 🚀\n\nEstimado comerciante, agilice el cuadre de su caja y elimine los errores humanos en el cobro y cálculo de vueltos multimoneda:\n\n⚡ BENEFICIOS EN SU CAJA REGISTRADORA:\n▪️ Ingrese la cuenta en Pesos, Dólares o Bolívares.\n▪️ Calcule el vuelto exacto al instante en las 3 monedas.\n▪️ Fije sus tasas del día (Dólar, Factor Frontera y BCV).\n▪️ Números grandes, claros y con separadores de miles.\n\n📱 PLANES MENSUALES DISPONIBLES:\n▪️ 1 Caja / Dispositivo: ${p1} USDT / Mes\n▪️ 2 Cajas / Puntos: ${p2} USDT / Mes\n▪️ 3 Cajas (Multicaja): ${p3} USDT / Mes\n\n👇 PRUEBE LA CALCULADORA AQUÍ:\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
+            abrirWhatsAppPersonal('', msg);
+        };
+
+        window.despacharPublicidadCalculadora = function(tipo) {
+            const urlFinal = (linkServidorGitHubGuardado || URL_VITRINA_OFICIAL).split('#')[0] + '#calculadora';
+            const msg = `🧮 ¡AGILIZA LOS COBROS Y VUELTOS EN TU NEGOCIO! 🚀\n\n¿Cobras en Pesos, Dólares y Bolívares? Con PubliTasaMK Calculadora Master nunca más te enredarás dando cambio:\n\n💵 Vueltos exactos en segundos en COP, USD y Bs.\n📊 Fija tus tasas del día y cobra sin errores.\n\n📲 Pruébalo y activa tu caja desde $${tarifasCalculadoraEstructura.plan1.toFixed(2)}/mes:\n🔗 ${urlFinal}${RESPALDO_FIRMA_WHATSAPP}`;
+            abrirWhatsAppPersonal('', msg);
+        };
+
+        window.sincronizarCalculadoraNube = async function() {
+            localStorage.setItem('tcl_cm_cache', JSON.stringify(localCalculadoraClientesArr));
+            try {
+                const docCheckCM = await getDoc(doc(db, "tcl_calc_master", "clientes_activos"));
+                let listaCMFinal = [...localCalculadoraClientesArr];
+
+                if (docCheckCM.exists()) {
+                    const dataServCM = docCheckCM.data();
+                    if (listaCMFinal.length === 0 && dataServCM.lista && dataServCM.lista.length > 0) {
+                        listaCMFinal = dataServCM.lista;
+                        localCalculadoraClientesArr = dataServCM.lista;
+                        localStorage.setItem('tcl_cm_cache', JSON.stringify(localCalculadoraClientesArr));
+                    }
+                }
+
+                await setDoc(doc(db, "tcl_calc_master", "clientes_activos"), { lista: listaCMFinal });
+            } catch(e) {
+                console.warn("Sincronización diferida en Calculadora Firestore. Datos protegidos en caché local.");
+            }
+        };
+
+        window.descargarBaseCalculadoraFirebaseCompleta = async function() {
+            try {
+                const [docTarCM, docCliCM] = await Promise.all([
+                    getDoc(doc(db, "tcl_calc_master", "tarifas_config")),
+                    getDoc(doc(db, "tcl_calc_master", "clientes_activos"))
+                ]);
+
+                if(docTarCM.exists()) { tarifasCalculadoraEstructura = docTarCM.data(); }
+                window.actualizarLecturaTarifasCalculadoraGUI();
+
+                if(docCliCM.exists()) { 
+                    localCalculadoraClientesArr = docCliCM.data().lista || []; 
+                    localStorage.setItem('tcl_cm_cache', JSON.stringify(localCalculadoraClientesArr));
+                }
+                window.renderizarBovedaCalculadoraMaster();
+                window.recalcularCarpetasYChismoseadorDinamico();
+            } catch(e) {
+                const cacheCm = localStorage.getItem('tcl_cm_cache');
+                if(cacheCm) localCalculadoraClientesArr = JSON.parse(cacheCm);
+                window.renderizarBovedaCalculadoraMaster();
+                window.recalcularCarpetasYChismoseadorDinamico();
+            }
+        };
+
+
         window.addEventListener('hashchange', function() {
             if(window.location.hash === '#publitasa') {
                 window.abrirVistaMonitorDirecto();
+            } else if(window.location.hash === '#calculadora') {
+                window.abrirVistaCalculadoraMasterDirecto();
             } else if(!window.location.hash) {
-                window.cerrarVistaMonitorDirecto();
+                window.cerrarTodasVistasSecundarias();
             }
         });
 
@@ -3289,6 +4381,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             
             const esAppStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
             const esRutaMonitor = esAppStandalone || window.location.hash === '#publitasa';
+            const esRutaCalc = window.location.hash === '#calculadora';
 
             try {
                 // 1. Descarga Streaming Firebase
@@ -3296,10 +4389,15 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
                 // 2. Descarga Completa PubliTasa Pro Firebase (Tarifas, Frontera y Clientes)
                 await window.descargarBasePubliTasaFirebaseCompleta();
+
+                // 3. Descarga Completa Calculadora Master Firebase
+                await window.descargarBaseCalculadoraFirebaseCompleta();
                 
                 window.recalcularCarpetasYChismoseadorDinamico();
 
-                if (esRutaMonitor) {
+                if (esRutaCalc) {
+                    window.abrirVistaCalculadoraMasterDirecto();
+                } else if (esRutaMonitor) {
                     window.abrirVistaMonitorDirecto();
                 }
 
