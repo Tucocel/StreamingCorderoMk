@@ -383,6 +383,77 @@
             </div>
         </div>
 
+        
+        <!-- MODAL DE EDICIÓN FLOTANTE ESTILIZADO DE MEMBRESÍAS STREAMING -->
+        <div id="modal-editor-cliente-streaming" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[11000] p-4 hidden flex items-center justify-center overflow-y-auto">
+            <div class="bg-neutral-900 border border-neutral-800 w-full max-w-lg rounded-3xl p-5 sm:p-6 space-y-4 shadow-2xl my-auto">
+                <div class="flex justify-between items-center border-b border-neutral-800 pb-2.5">
+                    <h3 class="font-black text-xs sm:text-sm uppercase tracking-wider text-amber-400 flex items-center gap-2">
+                        <i class="fa-solid fa-user-pen text-amber-400"></i> Modificar Membresía Streaming
+                    </h3>
+                    <button onclick="document.getElementById('modal-editor-cliente-streaming').classList.add('hidden')" class="text-slate-400 hover:text-white bg-neutral-950 border border-neutral-800 w-7 h-7 rounded-xl flex items-center justify-center btn-interactive">
+                        <i class="fa-solid fa-xmark text-xs"></i>
+                    </button>
+                </div>
+
+                <form onsubmit="event.preventDefault(); window.guardarCambiosEditorStreaming();" class="space-y-3 text-xs font-bold text-slate-300">
+                    <input type="hidden" id="edit-cli-id">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <div>
+                            <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Plataforma</label>
+                            <select id="edit-field-plataforma" onchange="window.alCambiarPlataformaEditorFormulario()" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl focus:outline-none uppercase font-bold"></select>
+                        </div>
+                        <div>
+                            <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Vigencia Lote</label>
+                            <select id="edit-field-meses" class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl focus:outline-none">
+                                <option value="1">1 Mes (Calendario)</option>
+                                <option value="2">2 Meses (Calendario)</option>
+                                <option value="3">3 Meses (Calendario)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[8.5px] text-amber-400 uppercase block mb-1">📅 Fecha Activación</label>
+                            <input type="date" id="edit-field-fecha-activacion" class="w-full bg-neutral-950 border border-amber-500/40 text-amber-400 font-mono p-2.5 rounded-xl focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- SELECTOR DE CUENTAS FIJAS EN MODO EDICIÓN -->
+                    <div id="edit-wrapper-cuentas-fijas" class="hidden bg-neutral-950 p-3 rounded-2xl border border-red-900/40 space-y-2">
+                        <label class="text-[9px] text-amber-400 font-black uppercase tracking-wider block flex items-center gap-1.5">
+                            <i class="fa-solid fa-star text-amber-400"></i> Cuentas Fijas Propietarias (Selecciona una o cambia a manual)
+                        </label>
+                        <div id="edit-grid-pildoras-cuentas-fijas" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
+                    </div>
+
+                    <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-800 space-y-2">
+                        <span class="text-[8.5px] text-red-500 font-black uppercase tracking-wider block"><i class="fa-solid fa-key"></i> Credenciales de Acceso</span>
+                        <input type="text" id="edit-field-correo" placeholder="Correo / Cuenta ID" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
+                        <input type="text" id="edit-field-clave" placeholder="Contraseña de Acceso" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" id="edit-field-perfil" placeholder="Perfil Asignado" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
+                            <input type="text" id="edit-field-pin" placeholder="PIN Perfil" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-800 space-y-2">
+                        <span class="text-[8.5px] text-slate-400 font-black uppercase tracking-wider block"><i class="fa-solid fa-user"></i> Datos del Suscriptor</span>
+                        <input type="text" id="edit-field-cliente-nombre" placeholder="Nombre Completo del Cliente" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" id="edit-field-cliente-tlf" placeholder="Celular (WhatsApp)" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg font-mono text-[11px] focus:outline-none">
+                            <input type="text" id="edit-field-cliente-dir" placeholder="Dirección / Sector" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2 rounded-lg text-[11px] focus:outline-none uppercase">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 pt-1">
+                        <button type="button" onclick="document.getElementById('modal-editor-cliente-streaming').classList.add('hidden')" class="bg-neutral-950 border border-neutral-800 text-slate-400 hover:text-white font-bold py-3 rounded-xl uppercase text-xs btn-interactive">Cancelar</button>
+                        <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-lg btn-interactive">Guardar Cambios 💾</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
         <!-- ==================== VISTA: MONITOR DE INDICADORES EN VIVO ==================== -->
         <div id="vista-publitasa-monitor" class="max-w-4xl mx-auto px-2.5 sm:px-4 py-5 space-y-5 hidden w-full">
             <div class="bg-gradient-to-b from-[#001f4d] to-[#00112b] border-2 border-amber-500/60 rounded-3xl p-4 sm:p-5 text-center space-y-3 shadow-2xl relative overflow-hidden w-full">
@@ -2335,16 +2406,53 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             window.instalarAppDispositivo();
         };
 
+        
+        window.mostrarVistaUnica = function(vistaId) {
+            const todasLasVistas = [
+                'vista-vitrina-publica',
+                'vista-publitasa-monitor',
+                'vista-calculadora-master',
+                'vista-streaming-admin'
+            ];
+
+            todasLasVistas.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (id === vistaId) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                }
+            });
+
+            const footerGen = document.getElementById('footer-general-streaming');
+            const btnVisitarVit = document.getElementById('btn-nav-visitar-vitrina');
+            const btnConsola = document.getElementById('btn-mando-abrir-login');
+
+            if (vistaId === 'vista-streaming-admin') {
+                if (footerGen) footerGen.classList.add('hidden');
+                if (btnVisitarVit) btnVisitarVit.classList.add('hidden');
+                if (btnConsola) btnConsola.innerHTML = `<i class="fa-solid fa-store text-amber-400"></i> <span>Vitrina</span>`;
+            } else if (vistaId === 'vista-vitrina-publica') {
+                if (footerGen) footerGen.classList.remove('hidden');
+                if (btnVisitarVit) btnVisitarVit.classList.add('hidden');
+                if (btnConsola) {
+                    btnConsola.innerHTML = `<i class="fa-solid fa-lock text-red-500"></i> <span>Consola</span>`;
+                }
+            } else {
+                // Vistas secundarias (Monitor Pro o Calculadora Master)
+                if (footerGen) footerGen.classList.add('hidden');
+                if (btnVisitarVit) btnVisitarVit.classList.remove('hidden');
+                if (btnConsola) {
+                    btnConsola.innerHTML = `<i class="fa-solid fa-lock text-red-500"></i> <span>Consola</span>`;
+                }
+            }
+        };
+
         window.abrirVistaMonitorDirecto = function() {
             window.location.hash = 'publitasa';
-            document.getElementById('vista-vitrina-publica').classList.add('hidden');
-            document.getElementById('vista-streaming-admin').classList.add('hidden');
-            document.getElementById('vista-calculadora-master').classList.add('hidden');
-            document.getElementById('footer-general-streaming').classList.add('hidden');
-            document.getElementById('vista-publitasa-monitor').classList.remove('hidden');
-
-            const btnVisitarVit = document.getElementById('btn-nav-visitar-vitrina');
-            if(btnVisitarVit && !esAdminStreamingSession) btnVisitarVit.classList.remove('hidden');
+            window.mostrarVistaUnica('vista-publitasa-monitor');
 
             window.descargarBasePubliTasaFirebaseCompleta().then(() => {
                 const tokenGuardado = localStorage.getItem('tcl_pt_active_token');
@@ -2354,7 +2462,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                         localStorage.removeItem('tcl_pt_active_token');
                         document.getElementById('wrapper-login-monitor-pro').classList.remove('hidden');
                         document.getElementById('wrapper-indicadores-pantalla').classList.add('hidden');
-                        alert("🛑 Acceso Revocado: Su licencia ha sido desactivada o eliminada por el administrador.");
                     } else {
                         document.getElementById('wrapper-login-monitor-pro').classList.add('hidden');
                         document.getElementById('wrapper-indicadores-pantalla').classList.remove('hidden');
@@ -2364,14 +2471,46 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             sincronizarIndicadoresMercadoEnVivo();
         };
 
-        window.cerrarVistaMonitorDirecto = function() {
-            window.location.hash = '';
-            document.getElementById('vista-publitasa-monitor').classList.add('hidden');
-            document.getElementById('vista-vitrina-publica').classList.remove('hidden');
-            document.getElementById('footer-general-streaming').classList.remove('hidden');
+        window.abrirVistaCalculadoraMasterDirecto = function() {
+            window.location.hash = 'calculadora';
+            window.mostrarVistaUnica('vista-calculadora-master');
 
-            const btnVisitarVit = document.getElementById('btn-nav-visitar-vitrina');
-            if(btnVisitarVit) btnVisitarVit.classList.add('hidden');
+            window.cargarTasasCalculadoraEnGUI();
+
+            window.descargarBaseCalculadoraFirebaseCompleta().then(() => {
+                const tokenGuardado = localStorage.getItem('tcl_cm_active_token');
+                if(tokenGuardado) {
+                    const matchActual = localCalculadoraClientesArr.find(x => x.tokenLicencia === tokenGuardado);
+                    if(!matchActual || matchActual.estado === 'INACTIVO') {
+                        localStorage.removeItem('tcl_cm_active_token');
+                        document.getElementById('wrapper-login-calculadora-master').classList.remove('hidden');
+                        document.getElementById('wrapper-cuerpo-calculadora-master').classList.add('hidden');
+                    } else {
+                        document.getElementById('wrapper-login-calculadora-master').classList.add('hidden');
+                        document.getElementById('wrapper-cuerpo-calculadora-master').classList.remove('hidden');
+                    }
+                }
+            });
+        };
+
+        window.cerrarVistaMonitorDirecto = function() {
+            window.cerrarTodasVistasSecundarias();
+        };
+
+        window.cerrarTodasVistasSecundarias = function() {
+            window.location.hash = '';
+            window.mostrarVistaUnica('vista-vitrina-publica');
+        };
+
+        window.conmutarVistaAdminCliente = function() {
+            const vistaAdm = document.getElementById('vista-streaming-admin');
+            if(vistaAdm && vistaAdm.classList.contains('hidden')) {
+                window.location.hash = '';
+                window.mostrarVistaUnica('vista-streaming-admin');
+                window.descargarBaseStreamingFirebaseCompleta();
+            } else {
+                window.mostrarVistaUnica('vista-vitrina-publica');
+            }
         };
 
         window.autenticarClienteMonitorPro = async function() {
@@ -2524,27 +2663,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
         };
 
-        window.conmutarVistaAdminCliente = function() {
-            const vistaCli = document.getElementById('vista-vitrina-publica');
-            const vistaAdm = document.getElementById('vista-streaming-admin');
-            const vistaMon = document.getElementById('vista-publitasa-monitor');
-            const footerGen = document.getElementById('footer-general-streaming');
-            const label = document.getElementById('btn-mando-abrir-login');
-            
-            if(vistaAdm.classList.contains('hidden')) {
-                vistaCli.classList.add('hidden'); 
-                vistaMon.classList.add('hidden');
-                vistaAdm.classList.remove('hidden');
-                if(footerGen) footerGen.classList.add('hidden');
-                label.innerHTML = `<i class="fa-solid fa-eye"></i> Ver Vitrina Web`;
-                window.descargarBaseStreamingFirebaseCompleta();
-            } else {
-                vistaAdm.classList.add('hidden'); 
-                vistaCli.classList.remove('hidden');
-                if(footerGen) footerGen.classList.remove('hidden');
-                label.innerHTML = `<i class="fa-solid fa-user-gear"></i> Consola Central`;
-            }
-        };
+        
 
         /* CONTROL DE PÍLDORAS DARK DE CUENTAS FIJAS CON BOTÓN ELIMINAR X */
         window.alCambiarPlataformaFormulario = function() {
@@ -3290,27 +3409,181 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
         };
 
-        window.abrirEditorPlanillaRapida = function(id) {
-            let match = localStreamingClientesArr.find(c => c.id === id); if(!match) return;
-            let nt = prompt("Modificar Teléfono WhatsApp:", match.telefono || "");
-            let nc = prompt("Modificar Correo / ID:", match.correo || "");
-            let ncl = prompt("Modificar Clave:", match.clave);
-            let np = prompt("Modificar PIN:", match.pin || "");
-            let nf = prompt("Modificar Fecha de Activación (DD/MM/AAAA):", match.fechaActivacion || new Date().toLocaleDateString('es-ES'));
-
-            if(ncl !== null) {
-                if(nt) match.telefono = nt;
-                match.correo = nc; match.clave = ncl; match.pin = np;
-                if(nf) {
-                    match.fechaActivacion = nf;
-                    match.diasRestantes = calcularDiasRestantesReales(nf, match.meses || 1);
+        
+        function convertirCualquierFechaA_ISO(fechaRaw) {
+            if(!fechaRaw) return obtenerFechaHoyISO();
+            if(fechaRaw.includes('-')) return fechaRaw;
+            if(fechaRaw.includes('/')) {
+                const partes = fechaRaw.split('/');
+                if(partes.length === 3) {
+                    const dd = partes[0].padStart(2, '0');
+                    const mm = partes[1].padStart(2, '0');
+                    const yyyy = partes[2];
+                    return `${yyyy}-${mm}-${dd}`;
                 }
-                window.sincronizarBaseStreamingNube().then(() => { 
-                    window.renderizarMonitorMembresiasAdmin(); 
-                    window.construirEstructurasDinamicasInterfaces(); 
+            }
+            return obtenerFechaHoyISO();
+        }
+
+        window.abrirEditorPlanillaRapida = function(id) {
+            let match = localStreamingClientesArr.find(c => c.id === id); 
+            if(!match) return;
+
+            document.getElementById('edit-cli-id').value = match.id;
+            
+            const selPlat = document.getElementById('edit-field-plataforma');
+            selPlat.innerHTML = "";
+            ORDEN_PLATAFORMAS_ESTATICO.forEach(k => {
+                if(catalogoPlataformasEstructura[k]) {
+                    selPlat.innerHTML += `<option value="${k}">${catalogoPlataformasEstructura[k].nombre}</option>`;
+                }
+            });
+            Object.keys(catalogoPlataformasEstructura).forEach(k => {
+                if(!ORDEN_PLATAFORMAS_ESTATICO.includes(k)) {
+                    selPlat.innerHTML += `<option value="${k}">${catalogoPlataformasEstructura[k].nombre}</option>`;
+                }
+            });
+            selPlat.value = match.plataforma;
+
+            document.getElementById('edit-field-meses').value = match.meses || 1;
+            document.getElementById('edit-field-fecha-activacion').value = convertirCualquierFechaA_ISO(match.fechaActivacion);
+            
+            document.getElementById('edit-field-correo').value = match.correo || "";
+            document.getElementById('edit-field-clave').value = match.clave || "";
+            document.getElementById('edit-field-perfil').value = match.perfil || "";
+            document.getElementById('edit-field-pin').value = match.pin || "";
+
+            document.getElementById('edit-field-cliente-nombre').value = match.cliente || "";
+            document.getElementById('edit-field-cliente-tlf').value = match.telefono || "";
+            document.getElementById('edit-field-cliente-dir').value = match.direccion || "";
+
+            window.alCambiarPlataformaEditorFormulario();
+            document.getElementById('modal-editor-cliente-streaming').classList.remove('hidden');
+        };
+
+        window.alCambiarPlataformaEditorFormulario = function() {
+            const platKey = document.getElementById('edit-field-plataforma').value;
+            const wrapperFijas = document.getElementById('edit-wrapper-cuentas-fijas');
+            const gridPildoras = document.getElementById('edit-grid-pildoras-cuentas-fijas');
+            const inPin = document.getElementById('edit-field-pin');
+            const inPerfil = document.getElementById('edit-field-perfil');
+            const correoActual = document.getElementById('edit-field-correo').value.trim().toLowerCase();
+
+            const esIPTV = ['FLUJO_TV', 'TELE_LATINO', 'XUPER_TV'].includes(platKey);
+            if (inPin) {
+                if (esIPTV) { inPin.classList.add('hidden'); inPin.value = ""; }
+                else { inPin.classList.remove('hidden'); }
+            }
+            if (inPerfil) {
+                inPerfil.placeholder = esIPTV ? "PERFIL CONTRATADO (EJ: 1)" : "PERFIL ASIGNADO";
+            }
+
+            const cuentasList = cuentasFijasMasterDict[platKey] || [];
+            if(cuentasList.length > 0) {
+                wrapperFijas.classList.remove('hidden');
+                gridPildoras.innerHTML = "";
+                
+                cuentasList.forEach((item, index) => {
+                    const aliasVisual = `Cuenta ${index+1}`;
+                    const esSeleccionada = item.correo.toLowerCase() === correoActual;
+                    gridPildoras.innerHTML += `
+                        <div onclick="window.seleccionarPildoraEditorCuentaFija('${platKey}', ${index})" class="${esSeleccionada ? 'bg-amber-950/40 border-2 border-amber-400' : 'bg-neutral-900 border border-neutral-800 hover:border-amber-500/60'} p-2.5 rounded-xl text-left transition-all btn-interactive cursor-pointer truncate">
+                            <span class="text-[9px] font-black uppercase text-amber-400 block">${aliasVisual}</span>
+                            <span class="text-[10px] font-mono text-slate-300 font-bold truncate block">${item.correo}</span>
+                        </div>`;
                 });
+                
+                gridPildoras.innerHTML += `
+                    <div onclick="window.seleccionarPildoraEditorCuentaFija('${platKey}', 'EXTERNA')" class="bg-neutral-900 border border-neutral-800 hover:border-red-500/60 p-2.5 rounded-xl text-left transition-all btn-interactive cursor-pointer flex flex-col justify-center col-span-1 sm:col-span-2">
+                        <span class="text-[9px] font-black uppercase text-red-500 block">➕ Proveedor Externo / Editar Manual</span>
+                        <span class="text-[10px] font-mono text-slate-400 block">Escribir credenciales personalizadas</span>
+                    </div>`;
+            } else {
+                wrapperFijas.classList.add('hidden');
             }
         };
+
+        window.seleccionarPildoraEditorCuentaFija = function(platKey, idxVal) {
+            const inCorreo = document.getElementById('edit-field-correo');
+            const inClave = document.getElementById('edit-field-clave');
+            const inPerfil = document.getElementById('edit-field-perfil');
+
+            if(idxVal === 'EXTERNA') {
+                inCorreo.focus();
+            } else {
+                const cuentaObj = cuentasFijasMasterDict[platKey][parseInt(idxVal)];
+                if(cuentaObj) {
+                    inCorreo.value = cuentaObj.correo;
+                    inClave.value = cuentaObj.clave;
+                    if(platKey === 'TELE_LATINO' && !inPerfil.value) inPerfil.value = "PERFIL 1";
+                }
+            }
+            window.alCambiarPlataformaEditorFormulario();
+        };
+
+        window.guardarCambiosEditorStreaming = async function() {
+            const id = document.getElementById('edit-cli-id').value;
+            let match = localStreamingClientesArr.find(c => c.id === id);
+            if(!match) return;
+
+            const plataforma = document.getElementById('edit-field-plataforma').value;
+            const meses = parseInt(document.getElementById('edit-field-meses').value);
+            const rawFechaISO = document.getElementById('edit-field-fecha-activacion').value;
+            const fechaActStr = rawFechaISO ? convertirISOaES(rawFechaISO) : match.fechaActivacion;
+
+            const correo = document.getElementById('edit-field-correo').value.trim();
+            const clave = document.getElementById('edit-field-clave').value.trim();
+            const perfil = document.getElementById('edit-field-perfil').value.trim().toUpperCase();
+            let pin = document.getElementById('edit-field-pin').value.trim();
+
+            if (['FLUJO_TV', 'TELE_LATINO', 'XUPER_TV'].includes(plataforma)) {
+                pin = "";
+            }
+
+            const cNombre = document.getElementById('edit-field-cliente-nombre').value.trim().toUpperCase();
+            const cTlf = document.getElementById('edit-field-cliente-tlf').value.trim();
+            const cDir = document.getElementById('edit-field-cliente-dir').value.trim().toUpperCase();
+
+            if(!clave || !cNombre || !cTlf) return alert("Por favor complete los campos obligatorios.");
+
+            if(!cuentasFijasMasterDict[plataforma]) cuentasFijasMasterDict[plataforma] = [];
+            const matchExistente = cuentasFijasMasterDict[plataforma].find(c => c.correo.toLowerCase() === correo.toLowerCase());
+
+            if(matchExistente) {
+                if(matchExistente.clave !== clave) {
+                    matchExistente.clave = clave;
+                    try { await setDoc(doc(db, "tcl_streaming_core", "cuentas_fijas_config"), cuentasFijasMasterDict); } catch(e) {}
+                }
+            } else if(correo) {
+                if(confirm(`✨ La cuenta [${correo}] no está guardada como Cuenta Fija de ${plataforma}.\n\n¿Deseas agregarla a tus cuentas fijas para el futuro?`)) {
+                    cuentasFijasMasterDict[plataforma].push({
+                        id: 'fija-' + Date.now(),
+                        correo: correo,
+                        clave: clave
+                    });
+                    try { await setDoc(doc(db, "tcl_streaming_core", "cuentas_fijas_config"), cuentasFijasMasterDict); } catch(e) {}
+                }
+            }
+
+            match.plataforma = plataforma;
+            match.meses = meses;
+            match.fechaActivacion = fechaActStr;
+            match.correo = correo;
+            match.clave = clave;
+            match.perfil = perfil;
+            match.pin = pin;
+            match.cliente = cNombre;
+            match.telefono = cTlf;
+            match.direccion = cDir;
+            match.diasRestantes = calcularDiasRestantesReales(fechaActStr, meses);
+
+            await window.sincronizarBaseStreamingNube();
+            window.renderizarMonitorMembresiasAdmin();
+            window.construirEstructurasDinamicasInterfaces();
+            document.getElementById('modal-editor-cliente-streaming').classList.add('hidden');
+            alert("💾 Membresía modificada y sincronizada con éxito.");
+        };
+
 
         window.anularPerfilStreaming = async function(id) {
             if(!confirm("¿Deseas enviar este cliente a la Bóveda de Anulados?")) return;
@@ -3836,46 +4109,9 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             return parseFloat(clean) || 0;
         }
 
-        window.abrirVistaCalculadoraMasterDirecto = function() {
-            window.location.hash = 'calculadora';
-            document.getElementById('vista-vitrina-publica').classList.add('hidden');
-            document.getElementById('vista-streaming-admin').classList.add('hidden');
-            document.getElementById('vista-publitasa-monitor').classList.add('hidden');
-            document.getElementById('footer-general-streaming').classList.add('hidden');
-            document.getElementById('vista-calculadora-master').classList.remove('hidden');
+        
 
-            const btnVisitarVit = document.getElementById('btn-nav-visitar-vitrina');
-            if(btnVisitarVit && !esAdminStreamingSession) btnVisitarVit.classList.remove('hidden');
-
-            window.cargarTasasCalculadoraEnGUI();
-
-            window.descargarBaseCalculadoraFirebaseCompleta().then(() => {
-                const tokenGuardado = localStorage.getItem('tcl_cm_active_token');
-                if(tokenGuardado) {
-                    const matchActual = localCalculadoraClientesArr.find(x => x.tokenLicencia === tokenGuardado);
-                    if(!matchActual || matchActual.estado === 'INACTIVO') {
-                        localStorage.removeItem('tcl_cm_active_token');
-                        document.getElementById('wrapper-login-calculadora-master').classList.remove('hidden');
-                        document.getElementById('wrapper-cuerpo-calculadora-master').classList.add('hidden');
-                        alert("🛑 Acceso Revocado: Su licencia ha sido desactivada o eliminada por el administrador.");
-                    } else {
-                        document.getElementById('wrapper-login-calculadora-master').classList.add('hidden');
-                        document.getElementById('wrapper-cuerpo-calculadora-master').classList.remove('hidden');
-                    }
-                }
-            });
-        };
-
-        window.cerrarTodasVistasSecundarias = function() {
-            window.location.hash = '';
-            document.getElementById('vista-publitasa-monitor').classList.add('hidden');
-            document.getElementById('vista-calculadora-master').classList.add('hidden');
-            document.getElementById('vista-vitrina-publica').classList.remove('hidden');
-            document.getElementById('footer-general-streaming').classList.remove('hidden');
-
-            const btnVisitarVit = document.getElementById('btn-nav-visitar-vitrina');
-            if(btnVisitarVit) btnVisitarVit.classList.add('hidden');
-        };
+        
 
         window.autenticarClienteCalculadoraMaster = async function() {
             const token = document.getElementById('cm-token-input').value.trim().toUpperCase();
@@ -4410,6 +4646,13 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
         });
 
+        const ejecutarConTimeout = (promesa, ms = 3500) => {
+            return Promise.race([
+                promesa,
+                new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout de red")), ms))
+            ]);
+        };
+
         window.onload = async function() {
             iniciarRelojDigitalDinamico();
             window.construirEstructurasDinamicasInterfaces();
@@ -4420,19 +4663,28 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(inputDateStr) inputDateStr.value = hoyISO;
             if(inputDatePT) inputDatePT.value = hoyISO;
             
-            const esAppStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
-            const esRutaMonitor = esAppStandalone || window.location.hash === '#publitasa';
+            // Enrutamiento: Por defecto SIEMPRE abre la Vitrina Web Principal.
+            // Solo entra directo a Monitor o Calculadora si viene con el hash explícito en el enlace.
+            const esRutaMonitor = window.location.hash === '#publitasa';
             const esRutaCalc = window.location.hash === '#calculadora';
 
-            try {
-                // 1. Descarga Streaming Firebase
-                await window.descargarBaseStreamingFirebaseCompleta();
+            // Temporizador de seguridad infalible: Si la red tarda más de 2.5s, retira el modal y activa modo local de inmediato
+            const timerSeguridadModal = setTimeout(() => {
+                const modalCheck = document.getElementById('modal-overlay-conexion-nube');
+                if (modalCheck && !modalCheck.classList.contains('hidden')) {
+                    actualizarEstadoVisualConexion(false, "Modo rápido activado. Datos seguros desde caché local.");
+                }
+            }, 2500);
 
-                // 2. Descarga Completa PubliTasa Pro Firebase (Tarifas, Frontera y Clientes)
-                await window.descargarBasePubliTasaFirebaseCompleta();
+            try {
+                // 1. Descarga Streaming Firebase con límite de tiempo
+                await ejecutarConTimeout(window.descargarBaseStreamingFirebaseCompleta(), 3000);
+
+                // 2. Descarga Completa PubliTasa Pro Firebase
+                await ejecutarConTimeout(window.descargarBasePubliTasaFirebaseCompleta(), 3000);
 
                 // 3. Descarga Completa Calculadora Master Firebase
-                await window.descargarBaseCalculadoraFirebaseCompleta();
+                await ejecutarConTimeout(window.descargarBaseCalculadoraFirebaseCompleta(), 3000);
                 
                 window.recalcularCarpetasYChismoseadorDinamico();
 
@@ -4440,15 +4692,23 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     window.abrirVistaCalculadoraMasterDirecto();
                 } else if (esRutaMonitor) {
                     window.abrirVistaMonitorDirecto();
+                } else {
+                    window.cerrarTodasVistasSecundarias();
                 }
 
-                // 3. Confirmación visual de conexión segura con chulito verde
+                clearTimeout(timerSeguridadModal);
                 actualizarEstadoVisualConexion(true);
             } catch(e) {
-                console.error("Error en arranque de red:", e);
-                if (esRutaMonitor) {
+                console.warn("Inicio en modo seguro/local:", e);
+                window.recalcularCarpetasYChismoseadorDinamico();
+                if (esRutaCalc) {
+                    window.abrirVistaCalculadoraMasterDirecto();
+                } else if (esRutaMonitor) {
                     window.abrirVistaMonitorDirecto();
+                } else {
+                    window.cerrarTodasVistasSecundarias();
                 }
+                clearTimeout(timerSeguridadModal);
                 actualizarEstadoVisualConexion(false);
             }
         };
