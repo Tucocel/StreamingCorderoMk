@@ -1674,8 +1674,8 @@
                 <span class="text-[9px] text-slate-400 font-black uppercase tracking-wider block">Coloca los montos a cobrar:</span>
                 
                 <div>
-                    <label class="text-[8.5px] text-amber-400 uppercase block mb-1">Monto en USDT (Dólares)</label>
-                    <input type="text" id="cobro-in-usdt" placeholder="Ej: 5.00 USDT" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 font-mono font-bold p-2.5 rounded-xl focus:outline-none focus:border-amber-500">
+                    <label class="text-[8.5px] text-amber-400 uppercase block mb-1">Monto en USDT (Dólares) — Auto-conversión ⚡</label>
+                    <input type="text" id="cobro-in-usdt" onfocus="this.select()" oninput="window.alEscribirMontoCobroUSDT()" onblur="window.alSalirMontoCobroUSDT()" placeholder="Ej: 5.00 USDT" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 font-mono font-bold p-2.5 rounded-xl focus:outline-none focus:border-amber-500">
                 </div>
 
                 <div>
@@ -4936,6 +4936,35 @@ window.construirEstructurasDinamicasInterfaces = function() {
         // =========================================================
         // MÓDULO DE COBRO MULTIMONEDA INDEPENDIENTE
         // =========================================================
+        
+        window.alEscribirMontoCobroUSDT = function() {
+            const inUsdt = document.getElementById('cobro-in-usdt');
+            if (!inUsdt) return;
+            const limpio = inUsdt.value.replace(/[^\d.,]/g, '').replace(/,/g, '.');
+            const numUSD = parseFloat(limpio) || 0;
+            const inCop = document.getElementById('cobro-in-cop');
+            const inBs = document.getElementById('cobro-in-bs');
+
+            if (numUSD > 0) {
+                const tasaCOP = tasaUsdtCopActualSincro || 3500;
+                const tasaBs = tasaUsdtActualSincro || 890;
+                const cop = Math.round(numUSD * tasaCOP);
+                const bs = Math.round(numUSD * tasaBs);
+                if (inCop) inCop.value = `${cop.toLocaleString('es-CO')} COP`;
+                if (inBs) inBs.value = `${bs.toLocaleString('es-CO')} Bs`;
+            }
+        };
+
+        window.alSalirMontoCobroUSDT = function() {
+            const inUsdt = document.getElementById('cobro-in-usdt');
+            if (!inUsdt) return;
+            const limpio = inUsdt.value.replace(/[^\d.,]/g, '').replace(/,/g, '.');
+            const numUSD = parseFloat(limpio) || 0;
+            if (numUSD > 0) {
+                inUsdt.value = `${numUSD.toFixed(2)} USDT`;
+            }
+        };
+
         window.abrirModalCobroCliente = function(tipoModulo, id) {
             let clienteNombre = "";
             let clienteTlf = "";
