@@ -1967,21 +1967,16 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             return difDias > 0 ? difDias : 0;
         }
 
-        function iniciarRelojDigitalDinamico() {
-            setInterval(() => {
-                const ahora = new Date();
-                const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
-
         function calcularNuevaFechaActivacionRenovacion(fechaActPrevia, mesesCicloPrevio = 1) {
             if (!fechaActPrevia) return new Date().toLocaleDateString('es-ES');
 
             let fechaObj = convertirCualquierFechaADateObj(fechaActPrevia);
             const diaFijoCorte = fechaObj.getDate();
 
-            // 1. Avanzar el ciclo sumando los meses del ciclo previo
+            // 1. Avanzar el ciclo sumando los meses
             fechaObj.setMonth(fechaObj.getMonth() + parseInt(mesesCicloPrevio || 1));
 
-            // Si por desborde de mes (ej. día 31 en febrero o mes de 30 días) el día cambió, ajustar al último día del mes
+            // Si por desborde de mes cambia de día, mantener fin de mes
             if (fechaObj.getDate() !== diaFijoCorte) {
                 fechaObj.setDate(0);
             }
@@ -1989,16 +1984,15 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const hoy = new Date();
             hoy.setHours(0, 0, 0, 0);
 
-            // Si la cuenta estaba extremadamente atrasada (ej. más de 2 meses vencida y en abandono)
-            // recalculamos el ciclo más reciente pero CONSERVANDO RIGUROSAMENTE el día fijo de corte del cliente
+            // Si la cuenta estaba vencida hace días o meses,
+            // recalcular el ciclo conservando RIGUROSAMENTE el día fijo de corte del cliente
+            // (por ejemplo, si su corte es el día 5 y renovamos el 7, la fecha base sigue anclada al 5)
             let fechaCorteProximo = new Date(fechaObj);
             fechaCorteProximo.setMonth(fechaCorteProximo.getMonth() + 1);
             if (fechaCorteProximo < hoy) {
-                // Sincronizar al mes actual con el mismo día fijo de corte
                 let anioAct = hoy.getFullYear();
                 let mesAct = hoy.getMonth();
                 if (hoy.getDate() < diaFijoCorte) {
-                    // El día de corte de este mes aún no llega, la fecha de inicio del ciclo actual fue el mes pasado
                     mesAct = mesAct - 1;
                 }
                 fechaObj = new Date(anioAct, mesAct, diaFijoCorte);
@@ -2009,7 +2003,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const yyyy = fechaObj.getFullYear();
             return `${dd}/${mm}/${yyyy}`;
         }
-;
+
+        function iniciarRelojDigitalDinamico() {
+            setInterval(() => {
+                const ahora = new Date();
+                const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                 const fechaTexto = ahora.toLocaleDateString('es-ES', opcionesFecha);
                 const horaTexto = ahora.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
 
