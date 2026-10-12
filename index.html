@@ -5781,13 +5781,18 @@ window.recalcularTasasBolivaresAdmin = function() {
                             </button>
                         </div>
 
-                        <div class="flex justify-between items-center pt-1 border-t border-neutral-900 text-[9px]">
+                        <div class="flex justify-between items-center pt-1 border-t border-neutral-900 text-[9px] gap-1">
                             <button onclick="window.abrirModalHistorialNequi('${cli.id}')" class="text-purple-400 hover:text-purple-300 font-bold flex items-center gap-1 btn-interactive">
                                 <i class="fa-solid fa-clock-rotate-left"></i> Ver Historial (${cli.movimientos ? cli.movimientos.length : 0})
                             </button>
-                            <button onclick="window.abrirChatDirectoWhatsApp('${cli.telefono}')" class="text-slate-400 hover:text-emerald-400 font-bold flex items-center gap-1 btn-interactive">
-                                <i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp
-                            </button>
+                            <div class="flex items-center gap-2.5">
+                                <button onclick="window.eliminarClienteNequi('${cli.id}')" class="text-slate-400 hover:text-red-500 font-bold flex items-center gap-1 btn-interactive" title="Eliminar cliente de Nequi">
+                                    <i class="fa-solid fa-trash-can text-red-500"></i> Eliminar
+                                </button>
+                                <button onclick="window.abrirChatDirectoWhatsApp('${cli.telefono}')" class="text-slate-400 hover:text-emerald-400 font-bold flex items-center gap-1 btn-interactive">
+                                    <i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp
+                                </button>
+                            </div>
                         </div>
                     </div>`;
             });
@@ -6013,6 +6018,28 @@ El saldo de la cuenta quedará en $0 COP.`);
                 alert(`✅ Cuenta de ${cli.nombre} liquidada con éxito a $0 COP.`);
             }
         };
+        window.eliminarClienteNequi = async function(cliId) {
+            const cli = localNequiClientesArr.find(c => c.id === cliId);
+            if(!cli) return;
+
+            const saldo = cli.saldo || 0;
+            let avisoSaldo = "";
+            if (saldo > 0) {
+                avisoSaldo = `\n⚠️ ATENCIÓN: El cliente tiene un saldo a favor de $${saldo.toLocaleString('es-CO')} COP en custodia.`;
+            } else if (saldo < 0) {
+                avisoSaldo = `\n⚠️ ATENCIÓN: El cliente tiene un saldo negativo / deuda pendiente.`;
+            }
+
+            if(!confirm(`🗑️ ¿Estás seguro de que deseas eliminar permanentemente al cliente [${cli.nombre}]?${avisoSaldo}\n\nEsta acción borrará al cliente y todos sus movimientos de la base de datos.`)) {
+                return;
+            }
+
+            localNequiClientesArr = localNequiClientesArr.filter(c => c.id !== cliId);
+            await window.sincronizarNequiNube();
+            window.renderizarCajaNequiAdmin();
+            alert(`✅ Cliente [${cli.nombre}] eliminado exitosamente de la Caja Nequi.`);
+        };
+
 
         window.abrirModalHistorialNequi = function(cliId) {
             const cli = localNequiClientesArr.find(c => c.id === cliId);
@@ -6486,4 +6513,3 @@ window.pintarTasasInmediatasDesdeCache = function() {
 
 </body>
 </html>
-
