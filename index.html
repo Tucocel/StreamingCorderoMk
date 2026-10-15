@@ -413,6 +413,7 @@
 
         
         
+    
     <!-- MODAL DE CONSULTA DE NUEVO SERVICIO / DISPONIBILIDAD -->
     <div id="modal-consulta-nuevo-servicio" class="fixed inset-0 bg-black/90 backdrop-blur-md z-[10050] p-4 hidden flex items-center justify-center">
         <div class="bg-neutral-900 border border-neutral-800 w-full max-w-md rounded-3xl p-5 sm:p-6 space-y-4 shadow-2xl">
@@ -467,8 +468,19 @@
                     </button>
                 </div>
 
-                <form onsubmit="event.preventDefault(); window.guardarCambiosEditorStreaming();" class="space-y-3 text-xs font-bold text-slate-300">
+                <form onsubmit="event.preventDefault(); window.guardarCambiosEditorStreaming(false);" class="space-y-3 text-xs font-bold text-slate-300">
                     <input type="hidden" id="edit-cli-id">
+
+                    <!-- INYECTOR LEGO PARSER PARA MODO EDICIÓN (COPIAR Y PEGAR) -->
+                    <div class="space-y-2 bg-neutral-950/80 p-3 rounded-2xl border border-amber-500/40">
+                        <label class="text-[9px] text-amber-400 font-black uppercase tracking-wider block flex items-center gap-1.5">
+                            <i class="fa-solid fa-paste text-amber-400"></i> Pegar texto del proveedor (Separar rápido)
+                        </label>
+                        <textarea id="edit-succion-bruta-textarea" rows="2" placeholder="Pegue el bloque de texto bruto aquí..." class="w-full bg-neutral-900 border border-neutral-800 text-white p-2.5 rounded-xl font-mono text-[10.5px] focus:outline-none focus:border-amber-500 resize-y no-scrollbar"></textarea>
+                        <button type="button" onclick="window.procesarSuccionLegoEditor()" class="w-full bg-neutral-900 border border-amber-500/50 hover:bg-neutral-800 text-amber-400 font-black text-[10px] py-2 rounded-xl uppercase tracking-wider transition-all btn-interactive">
+                            Separar Datos en Formulario ⚡
+                        </button>
+                    </div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                         <div>
@@ -516,9 +528,12 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2 pt-1">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
                         <button type="button" onclick="document.getElementById('modal-editor-cliente-streaming').classList.add('hidden')" class="bg-neutral-950 border border-neutral-800 text-slate-400 hover:text-white font-bold py-3 rounded-xl uppercase text-xs btn-interactive">Cancelar</button>
-                        <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-lg btn-interactive">Guardar Cambios 💾</button>
+                        <button type="button" onclick="window.guardarCambiosEditorStreaming(false)" class="bg-neutral-800 hover:bg-neutral-700 text-slate-200 font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-md btn-interactive">Solo Guardar 💾</button>
+                        <button type="button" onclick="window.guardarCambiosEditorStreaming(true)" class="bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-lg flex items-center justify-center gap-1.5 btn-interactive">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Guardar y Enviar 📲
+                        </button>
                     </div>
                 </form>
             </div>
@@ -972,6 +987,9 @@
                     <button onclick="window.cambiarParticionAdmin('nequi')" id="btn-particion-nequi" class="flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-purple-400 border border-neutral-800 hover:border-purple-500/50 transition-all btn-interactive">
                         🟣 Caja Nequi
                     </button>
+                    <button type="button" onclick="window.abrirModalListaPreciosWhatsApp()" id="btn-capsula-lista-precios" title="Enviar Lista de Cuentas y Precios por WhatsApp" class="flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-amber-400 border border-amber-500/50 hover:bg-amber-950/40 hover:border-amber-400 transition-all btn-interactive flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-list-check text-amber-400"></i> <span>Lista Precios</span>
+                    </button>
                 </div>
 
                 <div class="bg-neutral-900 border border-neutral-800 p-2.5 rounded-2xl flex flex-wrap sm:flex-nowrap items-center gap-2.5 sm:gap-3 font-mono text-xs font-bold w-full sm:w-auto justify-between shadow-lg">
@@ -1171,8 +1189,8 @@
 
                 <!-- BOTONERA MARKETING RÁPIDA -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full">
-                    <button onclick="window.despacharMarketingMasivoWhatsApp('GRUPOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3 rounded-xl uppercase tracking-wider text-[10.5px] flex items-center justify-center gap-2 btn-interactive"><i class="fa-solid fa-users text-red-500"></i> Compartir Catálogo en Grupos</button>
-                    <button onclick="window.despacharMarketingMasivoWhatsApp('ESTADOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3 rounded-xl uppercase tracking-wider text-[10.5px] flex items-center justify-center gap-2 btn-interactive"><i class="fa-solid fa-copy text-emerald-500"></i> Copiar Texto para Estado</button>
+                    <button onclick="window.despacharMarketingMasivoWhatsApp('GRUPOS')" class="bg-neutral-950 border border-neutral-800 hover:border-neutral-700 text-white font-black p-3 rounded-xl uppercase tracking-wider text-[10.5px] flex items-center justify-center gap-2 btn-interactive shadow-md"><i class="fa-solid fa-users text-red-500"></i> Compartir Catálogo en Grupos</button>
+                    <button onclick="window.generarYCompartirFlyerStreamingHD()" class="bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-black p-3 rounded-xl uppercase tracking-wider text-[10.5px] flex items-center justify-center gap-2 btn-interactive shadow-xl"><i class="fa-solid fa-camera text-amber-300"></i> 📸 Generar Flyer HD para Estados</button>
                 </div>
 
                 <!-- ARCHIVADOR INTELIGENTE POR CARPETAS STREAMING -->
@@ -2007,6 +2025,169 @@
         </div>
     </div>
 
+
+    
+    <!-- PLANTILLA FLYER PUBLICITARIO PROFESIONAL STREAMING (ESTILO AFICHE PREMIUM NEON) -->
+    <div class="fixed -left-[9999px] top-0 overflow-hidden">
+        <div id="plantilla-flyer-publicitario-render" style="width: 440px; background: radial-gradient(circle at 50% 0%, #2a0408 0%, #0c0714 45%, #030206 100%); border: 3px solid #ef4444; border-radius: 32px; padding: 26px 20px; color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; position: relative; box-shadow: 0 0 50px rgba(239, 68, 68, 0.4);">
+            
+            <!-- MARCA SUPERIOR DISCRETA -->
+            <div style="text-align: center; margin-bottom: 8px;">
+                <span style="font-size: 10px; font-weight: 900; letter-spacing: 0.25em; text-transform: uppercase; color: #f87171; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); padding: 4px 14px; border-radius: 9999px; display: inline-block;">
+                    🚀 SERVICIOS STREAMING CORDERO MK
+                </span>
+            </div>
+
+            <!-- TITULAR GIGANTE 3D IMPACTANTE -->
+            <div style="text-align: center; margin-bottom: 12px; line-height: 0.95;">
+                <h1 style="font-size: 42px; font-weight: 950; text-transform: uppercase; letter-spacing: -0.02em; margin: 0; color: #ffffff; text-shadow: 0 4px 10px rgba(0,0,0,0.9), 0 0 20px rgba(255,255,255,0.2);">
+                    CUENTAS
+                </h1>
+                <h1 style="font-size: 44px; font-weight: 950; text-transform: uppercase; letter-spacing: -0.01em; margin: 0; color: #ff2a4b; text-shadow: 0 0 25px rgba(255, 42, 75, 0.85), 0 4px 12px rgba(0,0,0,0.9);">
+                    STREAMING
+                </h1>
+            </div>
+
+            <!-- CINTILLO NEON: AL MEJOR PRECIO -->
+            <div style="text-align: center; margin-bottom: 12px;">
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 0, 0, 0.7); border: 2px solid #ff2a4b; box-shadow: 0 0 18px rgba(255, 42, 75, 0.5); padding: 6px 18px; border-radius: 9999px;">
+                    <span style="font-size: 13px; font-weight: 900; text-transform: uppercase; color: #ffffff; letter-spacing: 0.05em;">
+                        AL MEJOR PRECIO
+                    </span>
+                    <span style="background: #ffffff; color: #000000; font-size: 12px; font-weight: 900; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">
+                        🏷️
+                    </span>
+                </div>
+            </div>
+
+            <!-- SUBTÍTULO CALIDAD -->
+            <div style="text-align: center; margin-bottom: 18px;">
+                <p style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #cbd5e1; margin: 0;">
+                    ACCESO PREMIUM &bull; <span style="color: #ef4444;">100% PRIVADO</span> &bull; CALIDAD GARANTIZADA
+                </p>
+            </div>
+
+            <!-- MOSAICO DE CUENTAS / LOGOS BRILLANTES (GRILLA 4 COLUMNAS) -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px;">
+                
+                <!-- NETFLIX -->
+                <div style="background: #0d0f1a; border: 1.5px solid #ef4444; box-shadow: 0 0 12px rgba(239, 68, 68, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
+                    <span style="font-size: 20px; font-weight: 900; color: #e50914; font-family: sans-serif; line-height: 1; letter-spacing: -1px;">N</span>
+                    <span style="font-size: 8px; font-weight: 900; color: #ffffff; text-transform: uppercase; margin-top: 3px;">NETFLIX</span>
+                </div>
+
+                <!-- DISNEY+ -->
+                <div style="background: #0d0f1a; border: 1.5px solid #38bdf8; box-shadow: 0 0 12px rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
+                    <span style="font-size: 15px; font-weight: 900; color: #38bdf8; line-height: 1;">Disney+</span>
+                    <span style="font-size: 7.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-top: 3px;">PREMIUM</span>
+                </div>
+
+                <!-- PRIME VIDEO -->
+                <div style="background: #0d0f1a; border: 1.5px solid #00a8e1; box-shadow: 0 0 12px rgba(0, 168, 225, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
+                    <span style="font-size: 13px; font-weight: 900; color: #00a8e1; line-height: 1;">prime</span>
+                    <span style="font-size: 7.5px; font-weight: 800; color: #ffffff; text-transform: uppercase; margin-top: 3px;">VIDEO</span>
+                </div>
+
+                <!-- MAX -->
+                <div style="background: #0d0f1a; border: 1.5px solid #6366f1; box-shadow: 0 0 12px rgba(99, 102, 241, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
+                    <span style="font-size: 17px; font-weight: 950; color: #ffffff; letter-spacing: 1px; line-height: 1;">max</span>
+                    <span style="font-size: 7.5px; font-weight: 800; color: #818cf8; text-transform: uppercase; margin-top: 3px;">HBO</span>
+                </div>
+
+                <!-- TELE LATINO -->
+                <div style="background: #0d0f1a; border: 1.5px solid #f59e0b; box-shadow: 0 0 12px rgba(245, 158, 11, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
+                    <i class="fa-solid fa-tv" style="color: #f59e0b; font-size: 16px; margin-bottom: 2px;"></i>
+                    <span style="font-size: 8px; font-weight: 900; color: #ffffff; text-transform: uppercase;">TELE LATINO</span>
+                </div>
+
+                <!-- FLUJO TV -->
+                <div style="background: #0d0f1a; border: 1.5px solid #10b981; box-shadow: 0 0 12px rgba(16, 185, 129, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
+                    <i class="fa-solid fa-play" style="color: #10b981; font-size: 16px; margin-bottom: 2px;"></i>
+                    <span style="font-size: 8px; font-weight: 900; color: #ffffff; text-transform: uppercase;">FLUJO TV</span>
+                </div>
+
+                <!-- XUPER TV -->
+                <div style="background: #0d0f1a; border: 1.5px solid #ec4899; box-shadow: 0 0 12px rgba(236, 72, 153, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
+                    <i class="fa-solid fa-satellite-dish" style="color: #ec4899; font-size: 16px; margin-bottom: 2px;"></i>
+                    <span style="font-size: 8px; font-weight: 900; color: #ffffff; text-transform: uppercase;">XUPER TV</span>
+                </div>
+
+                <!-- CANVA PRO -->
+                <div style="background: #0d0f1a; border: 1.5px solid #06b6d4; box-shadow: 0 0 12px rgba(6, 182, 212, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
+                    <span style="font-size: 13px; font-weight: 900; color: #06b6d4; line-height: 1;">Canva</span>
+                    <span style="font-size: 7.5px; font-weight: 800; color: #fbbf24; text-transform: uppercase; margin-top: 3px;">👑 PRO</span>
+                </div>
+
+                <!-- SPOTIFY -->
+                <div style="background: #0d0f1a; border: 1.5px solid #22c55e; box-shadow: 0 0 12px rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
+                    <i class="fa-brands fa-spotify" style="color: #22c55e; font-size: 18px; margin-bottom: 2px;"></i>
+                    <span style="font-size: 7.5px; font-weight: 900; color: #ffffff; text-transform: uppercase;">SPOTIFY</span>
+                </div>
+
+                <!-- YOUTUBE -->
+                <div style="background: #0d0f1a; border: 1.5px solid #ef4444; box-shadow: 0 0 12px rgba(239, 68, 68, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
+                    <i class="fa-brands fa-youtube" style="color: #ef4444; font-size: 18px; margin-bottom: 2px;"></i>
+                    <span style="font-size: 7.5px; font-weight: 900; color: #ffffff; text-transform: uppercase;">PREMIUM</span>
+                </div>
+
+                <!-- VIX+ -->
+                <div style="background: #0d0f1a; border: 1.5px solid #ea580c; box-shadow: 0 0 12px rgba(234, 88, 12, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
+                    <span style="font-size: 15px; font-weight: 950; color: #ea580c; line-height: 1;">ViX</span>
+                    <span style="font-size: 7.5px; font-weight: 800; color: #ffffff; text-transform: uppercase; margin-top: 3px;">PREMIUM</span>
+                </div>
+
+                <!-- Y MÁS -->
+                <div style="background: #1e1338; border: 1.5px dashed #a855f7; box-shadow: 0 0 12px rgba(168, 85, 247, 0.4); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
+                    <span style="font-size: 11px; font-weight: 950; color: #c084fc; text-transform: uppercase; line-height: 1;">¡Y MÁS!</span>
+                    <span style="font-size: 11px; color: #a855f7; margin-top: 2px;">&bull;&bull;&bull;</span>
+                </div>
+
+            </div>
+
+            <!-- BLOQUE INFERIOR: GARANTÍA, CONFIANZA Y SOPORTE (LOS 3 SELLOS DE LA IMAGEN DE REFERENCIA) -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: rgba(10, 10, 20, 0.8); border: 1.5px solid rgba(255, 255, 255, 0.12); border-radius: 18px; padding: 10px 8px; margin-bottom: 14px; text-align: center;">
+                
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <span style="font-size: 14px; margin-bottom: 2px;">🛡️</span>
+                    <span style="font-size: 8.5px; font-weight: 900; color: #ffffff; text-transform: uppercase; display: block;">SOPORTE 24/7</span>
+                    <span style="font-size: 7px; color: #94a3b8; font-weight: 600;">Te ayudamos siempre</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center; border-left: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1);">
+                    <span style="font-size: 14px; margin-bottom: 2px;">🏅</span>
+                    <span style="font-size: 8.5px; font-weight: 900; color: #f59e0b; text-transform: uppercase; display: block;">GARANTÍA 100%</span>
+                    <span style="font-size: 7px; color: #cbd5e1; font-weight: 600;">Cuentas estables</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <span style="font-size: 14px; margin-bottom: 2px;">🔒</span>
+                    <span style="font-size: 8.5px; font-weight: 900; color: #10b981; text-transform: uppercase; display: block;">ACCESO SEGURO</span>
+                    <span style="font-size: 7px; color: #94a3b8; font-weight: 600;">Privado y confiable</span>
+                </div>
+
+            </div>
+
+            <!-- LLAMADO DE ACCIÓN Y CONTACTO WHATSAPP -->
+            <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border-radius: 16px; padding: 10px 12px; text-align: center; box-shadow: 0 4px 18px rgba(220, 38, 38, 0.5); margin-bottom: 10px;">
+                <p style="font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; margin: 0; color: #ffffff;">
+                    📲 ¡PIDE TU PANTALLA AHORA MISMO!
+                </p>
+                <p style="font-size: 9.5px; font-weight: 800; color: #fee2e2; margin: 2px 0 0 0;">
+                    Atención Inmediata por WhatsApp: 0414-7357549
+                </p>
+            </div>
+
+            <!-- PIE DE RESPALDO TUCOCEL -->
+            <div style="text-align: center;">
+                <p style="font-size: 8px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 0;">
+                    🏛️ Respaldo Absoluto de <span style="color: #ffffff; font-weight: 900;">TUCOCEL C.A.</span> &bull; Cordero, Táchira
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
 <footer id="footer-general-streaming" class="footer-glow border-t border-neutral-900/80 mt-12 py-5 px-3 text-center space-y-3 relative z-40 w-full">
         <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-4 sm:gap-8 glow-white">
             <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" class="h-4 w-auto object-contain">
@@ -2026,6 +2207,46 @@
     </footer>
 
     <!-- LÓGICA CORE FIREBASE & APIS EN VIVO BLINDADAS -->
+    
+    <!-- MODAL GLOBAL ADMINISTRATIVO: ENVIAR LISTA DE PRECIOS Y CUENTAS POR WHATSAPP -->
+    <div id="modal-lista-precios-wa" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[99990] p-4 hidden flex items-center justify-center overflow-y-auto">
+        <div class="bg-neutral-900 border border-neutral-800 w-full max-w-lg rounded-3xl p-5 sm:p-6 space-y-4 shadow-2xl my-auto">
+            <div class="flex justify-between items-center border-b border-neutral-800 pb-2.5">
+                <h3 class="font-black text-xs sm:text-sm uppercase tracking-wider text-amber-400 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-amber-400"></i> Enviar Lista de Precios y Cuentas
+                </h3>
+                <button type="button" onclick="document.getElementById('modal-lista-precios-wa').classList.add('hidden')" class="text-slate-400 hover:text-white bg-neutral-950 border border-neutral-800 w-7 h-7 rounded-xl flex items-center justify-center btn-interactive">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+
+            <p class="text-[10.5px] text-slate-300 font-medium leading-relaxed">
+                Mensaje personalizado con las cuentas disponibles en tu vitrina calculadas automáticamente a la tasa del día en <b>USDT</b>, <b>Pesos</b> y <b>Bolívares</b>.
+            </p>
+
+            <div class="space-y-3 text-xs font-bold text-slate-300">
+                <div>
+                    <label class="text-[9px] text-amber-400 font-black uppercase ml-1 block mb-1">WhatsApp del Cliente (Opcional — Déjalo vacío para elegir chat o grupo)</label>
+                    <input type="text" id="lista-precios-in-tlf" placeholder="Ej: 04141234567 o 584141234567" class="w-full bg-neutral-950 border border-neutral-800 text-white font-mono px-3.5 py-2.5 rounded-xl focus:outline-none focus:border-amber-500">
+                </div>
+
+                <div>
+                    <label class="text-[9px] text-slate-400 font-black uppercase ml-1 block mb-1">Vista Previa del Mensaje Actualizado:</label>
+                    <textarea id="lista-precios-textarea-preview" rows="8" class="w-full bg-neutral-950 border border-neutral-800 text-slate-200 p-3 rounded-2xl font-mono text-[10.5px] focus:outline-none focus:border-neutral-700 resize-y leading-relaxed select-all no-scrollbar"></textarea>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                    <button type="button" onclick="window.copiarListaPreciosAlPortapapeles()" class="w-full bg-neutral-800 hover:bg-neutral-700 text-slate-200 font-black py-3 rounded-xl uppercase tracking-wider text-[10.5px] flex items-center justify-center gap-1.5 transition-all btn-interactive">
+                        <i class="fa-solid fa-copy text-amber-400"></i> Copiar Mensaje
+                    </button>
+                    <button type="button" onclick="window.despacharListaPreciosWhatsApp()" class="w-full bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-black py-3 rounded-xl uppercase tracking-wider text-[10.5px] shadow-lg flex items-center justify-center gap-1.5 transition-all btn-interactive">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> Enviar a WhatsApp 📲
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -2412,10 +2633,9 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             const urlsP2P = [
                 `https://ve.dolarapi.com/v1/dolares/paralelo?_t=${timeAntiCache}`,
-                `https://api.yadio.io/json`,
                 `https://pydolarve.org/api/v1/dollar?page=binance&_t=${timeAntiCache}`,
-                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/dolares/paralelo')}`,
-                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://pydolarve.org/api/v1/dollar?page=binance')}`
+                `https://api.yadio.io/json?_t=${timeAntiCache}`,
+                `https://api.binance.com/api/v3/ticker/price?symbol=USDTBIDR&_t=${timeAntiCache}`
             ];
 
             for (const url of urlsP2P) {
@@ -2693,11 +2913,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
 
             let valTrmColombia = 0;
+            let prevTrmColombia = 0;
             const urlsTrm = [
-                `https://www.datos.gov.co/resource/ceyp-9c7c.json?$limit=1&$order=vigenciahasta%20DESC&_t=${timeAntiCache}`,
+                `https://www.datos.gov.co/resource/ceyp-9c7c.json?$limit=2&$order=vigenciahasta%20DESC&_t=${timeAntiCache}`,
                 `https://open.er-api.com/v6/latest/USD?_t=${timeAntiCache}`,
-                `https://api.exchangerate-api.com/v4/latest/USD?_t=${timeAntiCache}`,
-                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://www.datos.gov.co/resource/ceyp-9c7c.json?$limit=1&$order=vigenciahasta%20DESC')}`
+                `https://api.exchangerate-api.com/v4/latest/USD?_t=${timeAntiCache}`
             ];
 
             for (const url of urlsTrm) {
@@ -2705,8 +2925,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     const resTrm = await fetch(url, { cache: 'no-store' });
                     if (resTrm.ok) {
                         const dataTrm = await resTrm.json();
-                        if (Array.isArray(dataTrm) && dataTrm[0] && dataTrm[0].valor) {
+                        if (Array.isArray(dataTrm) && dataTrm.length >= 1 && dataTrm[0].valor) {
                             valTrmColombia = parseFloat(dataTrm[0].valor);
+                            if (dataTrm.length >= 2 && dataTrm[1].valor) {
+                                prevTrmColombia = parseFloat(dataTrm[1].valor);
+                            }
                             if (valTrmColombia > 0) break;
                         } else if (dataTrm && dataTrm.rates && dataTrm.rates.COP) {
                             valTrmColombia = parseFloat(dataTrm.rates.COP);
@@ -2717,11 +2940,15 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
 
             if (valTrmColombia > 0) {
-                const prevTrm = histTasas.trmCop || valTrmColombia;
-                histTasas.prevTrmCop = prevTrm;
+                // Conservar la variación real respecto al día anterior o valor histórico previo
+                let prevFinal = prevTrmColombia > 0 ? prevTrmColombia : (histTasas.prevTrmCop || valTrmColombia);
+                if (histTasas.trmCop && Math.abs(histTasas.trmCop - valTrmColombia) > 0.1) {
+                    prevFinal = histTasas.trmCop;
+                }
+                histTasas.prevTrmCop = prevFinal;
                 histTasas.trmCop = valTrmColombia;
 
-                const htmlTrend = generarIconoTendenciaHTML(valTrmColombia, prevTrm);
+                const htmlTrend = generarIconoTendenciaHTML(valTrmColombia, prevFinal);
                 const txt = `${valTrmColombia.toLocaleString('es-CO', {maximumFractionDigits: 0})} COP`;
 
                 document.getElementById('val-trm-cop').innerText = txt;
@@ -4270,6 +4497,8 @@ window.construirEstructurasDinamicasInterfaces = function() {
             document.getElementById('edit-field-cliente-nombre').value = match.cliente || "";
             document.getElementById('edit-field-cliente-tlf').value = match.telefono || "";
             document.getElementById('edit-field-cliente-dir').value = match.direccion || "";
+            const areaLegoEdit = document.getElementById('edit-succion-bruta-textarea');
+            if(areaLegoEdit) areaLegoEdit.value = "";
 
             window.alCambiarPlataformaEditorFormulario();
             document.getElementById('modal-editor-cliente-streaming').classList.remove('hidden');
@@ -4335,7 +4564,61 @@ window.construirEstructurasDinamicasInterfaces = function() {
             window.alCambiarPlataformaEditorFormulario();
         };
 
-        window.guardarCambiosEditorStreaming = async function() {
+        window.procesarSuccionLegoEditor = function() {
+            const text = document.getElementById('edit-succion-bruta-textarea').value.trim();
+            if(!text) return alert("Pegue un bloque de texto en el cuadro.");
+
+            const cuentaMatch = text.match(/(?:Cuenta|ID|Usuario):\s*([^\n\r]+)/i);
+            const passMatch = text.match(/(?:Contraseña|Clave|Calve):\s*([^\n\r]+)/i);
+            const perfilesMatch = text.match(/(?:Perfiles\s+contratados|Perfil\s+contratado|Pantallas\s+contratadas|Perfiles|Pantallas):\s*([^\n\r]+)/i);
+
+            if (cuentaMatch && passMatch) {
+                document.getElementById('edit-field-correo').value = cuentaMatch[1].trim();
+                document.getElementById('edit-field-clave').value = passMatch[1].trim();
+                if (perfilesMatch) {
+                    document.getElementById('edit-field-perfil').value = perfilesMatch[1].trim();
+                }
+                document.getElementById('edit-field-pin').value = "";
+                window.alCambiarPlataformaEditorFormulario();
+                alert("⚡ Datos IPTV separados en el formulario de edición.");
+                return;
+            }
+
+            const correoMatch = text.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/);
+            if(correoMatch) {
+                document.getElementById('edit-field-correo').value = correoMatch[0];
+            } else {
+                const lineas = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+                if(lineas.length >= 1) {
+                    document.getElementById('edit-field-correo').value = lineas[0].replace(/^(?:Correo|Cuenta|ID|Usuario):\s*/i, '').trim();
+                }
+            }
+
+            const claveMatch = text.match(/(?:Clave|Contraseña|Password|Calve):\s*([^\n\r]+)/i);
+            if (claveMatch) {
+                document.getElementById('edit-field-clave').value = claveMatch[1].trim();
+            } else {
+                const lineas = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+                if(lineas.length >= 2) {
+                    document.getElementById('edit-field-clave').value = lineas[1].replace(/^(?:Clave|Contraseña|Password|Calve):\s*/i, '').trim();
+                }
+            }
+
+            const pinMatch = text.match(/(?:Pin|PIN|pin):?\s*([0-9]{4})/);
+            if (pinMatch) {
+                document.getElementById('edit-field-pin').value = pinMatch[1];
+            }
+
+            const perfilMatch = text.match(/(?:Perfil|Usuario|Nombre):?\s*([^\n\r]+)/i);
+            if (perfilMatch) {
+                document.getElementById('edit-field-perfil').value = perfilMatch[1].replace(/(?:Pin|PIN|pin):?\s*[0-9]{4}/gi, '').trim().toUpperCase();
+            }
+
+            window.alCambiarPlataformaEditorFormulario();
+            alert("⚡ Datos separados y cargados al editor.");
+        };
+
+        window.guardarCambiosEditorStreaming = async function(enviarWhatsApp = false) {
             const id = document.getElementById('edit-cli-id').value;
             let match = localStreamingClientesArr.find(c => c.id === id);
             if(!match) return;
@@ -4395,7 +4678,12 @@ window.construirEstructurasDinamicasInterfaces = function() {
             window.renderizarMonitorMembresiasAdmin();
             window.construirEstructurasDinamicasInterfaces();
             document.getElementById('modal-editor-cliente-streaming').classList.add('hidden');
-            alert("💾 Membresía modificada y sincronizada con éxito.");
+
+            if(enviarWhatsApp) {
+                window.despacharMensajeWhatsAppStreaming(match.id, 'ACTIVACION');
+            } else {
+                alert("💾 Membresía modificada y guardada con éxito.");
+            }
         };
 
 
@@ -6373,6 +6661,132 @@ window.pintarTasasInmediatasDesdeCache = function() {
                 document.getElementById('flyer-trend-btc-usd').innerHTML = generarIconoTendenciaHTML(btc, pBtc);
             }
         };
+
+        
+        window.armarMensajeListaPreciosTexto = function() {
+            const urlWebOficial = "https://tucocel.github.io/StreamingCorderoMk/#";
+            
+            let msg = `🍿 *SERVICIOS STREAMING CORDERO MK* 🎬\n` +
+                      `📋 *LISTA DE PRECIOS Y CUENTAS DISPONIBLES*\n\n` +
+                      `Estimado cliente, te compartimos nuestros precios y cuentas disponibles:\n\n`;
+
+            const ordenPlataformas = [...ORDEN_PLATAFORMAS_ESTATICO];
+            Object.keys(catalogoPlataformasEstructura).forEach(k => {
+                if (!ordenPlataformas.includes(k)) ordenPlataformas.push(k);
+            });
+
+            ordenPlataformas.forEach(k => {
+                const item = catalogoPlataformasEstructura[k];
+                if (item) {
+                    const pUsdt = item.precio.toFixed(2);
+                    const pCop = Math.round(item.precio * tasaUsdtCopActualSincro).toLocaleString('es-CO');
+                    const pBs = (item.precio * tasaUsdtActualSincro).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    msg += `▪️ *${item.nombre}:*\n` +
+                           `   💵 *${pUsdt} USDT* | 🇨🇴 *${pCop} COP* | 🇻🇪 *${pBs} Bs*\n\n`;
+                }
+            });
+
+            msg += `💡 *¿Buscas otra pantalla o servicio que no ves en esta lista?* ¡Pregúntanos con total confianza!\n\n` +
+                   `📌 *INFORMACIÓN Y CONDICIONES DE PAGO:*\n` +
+                   `• Lista de precios ajustada a la tasa oficial del día.\n` +
+                   `• No se reciben pesos en efectivo.\n` +
+                   `• Se recibe Pago Móvil (Bs), pesos únicamente por Nequi, USDT por Binance y OKX, Zinli y PayPal.\n\n` +
+                   `👇 *Visita nuestra Taquilla Digital en vivo:*\n` +
+                   `🔗 ${urlWebOficial}\n` +
+                   `${RESPALDO_FIRMA_WHATSAPP}`;
+
+            return msg;
+        };
+
+        window.abrirModalListaPreciosWhatsApp = function(tlfPredefinido = "") {
+            const inTlf = document.getElementById('lista-precios-in-tlf');
+            const previewArea = document.getElementById('lista-precios-textarea-preview');
+            
+            if (inTlf) inTlf.value = tlfPredefinido || "";
+            if (previewArea) {
+                previewArea.value = window.armarMensajeListaPreciosTexto();
+            }
+
+            const modal = document.getElementById('modal-lista-precios-wa');
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+        };
+
+        window.copiarListaPreciosAlPortapapeles = function() {
+            const previewArea = document.getElementById('lista-precios-textarea-preview');
+            const txt = (previewArea && previewArea.value.trim()) ? previewArea.value.trim() : window.armarMensajeListaPreciosTexto();
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(txt).then(() => {
+                    alert("📋 ¡Lista de precios copiada con éxito al portapapeles!");
+                }).catch(() => {
+                    if (previewArea) {
+                        previewArea.focus();
+                        previewArea.select();
+                        document.execCommand('copy');
+                        alert("📋 ¡Lista de precios copiada al portapapeles!");
+                    }
+                });
+            } else {
+                if (previewArea) {
+                    previewArea.focus();
+                    previewArea.select();
+                    document.execCommand('copy');
+                    alert("📋 ¡Lista de precios copiada al portapapeles!");
+                }
+            }
+        };
+
+        window.despacharListaPreciosWhatsApp = function() {
+            const inTlf = document.getElementById('lista-precios-in-tlf');
+            const previewArea = document.getElementById('lista-precios-textarea-preview');
+            const phoneTarget = inTlf ? inTlf.value.trim() : "";
+            const msg = (previewArea && previewArea.value.trim()) ? previewArea.value.trim() : window.armarMensajeListaPreciosTexto();
+
+            const modal = document.getElementById('modal-lista-precios-wa');
+            if (modal) modal.classList.add('hidden');
+
+            abrirWhatsAppPersonal(phoneTarget, msg);
+        };
+
+        window.generarYCompartirFlyerStreamingHD = async function() {
+            const nodo = document.getElementById('plantilla-flyer-publicitario-render');
+            if(!nodo) return alert("Error: No se encontró la plantilla del flyer publicitario.");
+
+            try {
+                // Renderizar a ultra resolución 3x con html2canvas
+                const canvas = await html2canvas(nodo, {
+                    backgroundColor: '#030206',
+                    scale: 3,
+                    useCORS: true
+                });
+
+                canvas.toBlob(async (blob) => {
+                    const archivo = new File([blob], "Cuentas_Streaming_Cordero.png", { type: "image/png" });
+                    
+                    if(navigator.canShare && navigator.canShare({ files: [archivo] })) {
+                        try {
+                            await navigator.share({
+                                files: [archivo],
+                                title: "Cuentas Streaming Cordero MK",
+                                text: "🍿 ¡Las mejores cuentas y pantallas de streaming al mejor precio! Garantía y confianza."
+                            });
+                        } catch(e) {}
+                    } else {
+                        // Descargar la imagen automáticamente en el teléfono
+                        const link = document.createElement('a');
+                        link.download = 'Cuentas_Streaming_Cordero.png';
+                        link.href = canvas.toDataURL('image/png');
+                        link.click();
+                        alert("📸 ¡Flyer publicitario HD generado y descargado con éxito! Ya puedes subirlo directamente a tus Estados de WhatsApp.");
+                    }
+                }, 'image/png');
+            } catch(err) {
+                alert("Error al generar flyer: " + err.message);
+            }
+        };
+
 
         window.onload = async function() {
             window.pintarTasasInmediatasDesdeCache();
