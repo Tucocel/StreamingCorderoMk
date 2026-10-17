@@ -2760,7 +2760,13 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             for (const url of urls) {
                 try {
                     const res = await fetch(url, { cache: 'no-store' });
-                    if (res.ok) return await res.json();
+                    if (res.ok) {
+                        let data = await res.json();
+                        if (typeof data === 'string') {
+                            try { data = JSON.parse(data); } catch(e) {}
+                        }
+                        if (data) return data;
+                    }
                 } catch (e) {}
             }
             return null;
@@ -2839,257 +2845,103 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         window.sincronizarAutonomaBcvEnVivo = async function(notificarAlerta = true) {
             const esLlamadaManual = (notificarAlerta !== false);
             const timeAntiCache = Date.now();
+            let bcvUsdObtenido = null;
+            let bcvEurObtenido = null;
+            let fechaEmisionBcv = null;
+            let fuenteExitosa = "";
 
-            // Malla de APIs independientes + Proxies CORS de respaldo
-            const fuentesBcv = [
-                // 1. PyDolarVe Directo (Generalmente actualiza el cierre oficial vespertino inmediatamente)
-                {
-                    url: `https://pydolarve.org/api/v1/dollar?page=bcv&_t=${timeAntiCache}`,
-                    nombre: "PyDolarVe (Directo)",
-                    parser: (d) => {
-                        if (d && d.moneda && d.moneda.usd && parseFloat(d.moneda.usd.price) > 0) {
-                            return {
-                                usd: parseFloat(d.moneda.usd.price),
-                                eur: parseFloat(d.moneda.eur?.price || 0),
-                                fecha: d.moneda.usd.last_update || null
-                            };
-                        }
-                        if (d && d.bcv && parseFloat(d.bcv.price || d.bcv.usd || 0) > 0) {
-                            return {
-                                usd: parseFloat(d.bcv.price || d.bcv.usd),
-                                eur: parseFloat(d.bcv.eur || 0),
-                                fecha: d.bcv.last_update || d.bcv.fecha || null
-                            };
-                        }
-                        return null;
-                    }
-                },
-                // 2. BCV Exchange Deno Deploy Directo
-                {
-                    url: `https://bcv-api.deno.dev/v1/exchange?_t=${timeAntiCache}`,
-                    nombre: "BCV Exchange Deno (Directo)",
-                    parser: (d) => {
-                        if (d && d.rates && (d.rates.USD || d.rates.usd)) {
-                            return {
-                                usd: parseFloat(d.rates.USD || d.rates.usd),
-                                eur: parseFloat(d.rates.EUR || d.rates.eur || 0),
-                                fecha: d.date || null
-                            };
-                        }
-                        return null;
-                    }
-                },
-                // 3. Monitor Dólar BCV Directo
-                {
-                    url: `https://api.monitordolarvenezuela.com/v1/bcv?_t=${timeAntiCache}`,
-                    nombre: "Monitor Dólar BCV (Directo)",
-                    parser: (d) => {
-                        if (d && (d.bcv || d.promedio || d.price)) {
-                            return {
-                                usd: parseFloat(d.bcv || d.promedio || d.price),
-                                eur: parseFloat(d.eur || 0),
-                                fecha: d.fecha || d.date || null
-                            };
-                        }
-                        return null;
-                    }
-                },
-                // 4. DolarApi Oficial Directo
-                {
-                    url: `https://ve.dolarapi.com/v1/dolares/oficial?_t=${timeAntiCache}`,
-                    nombre: "DolarApi Oficial (Directo)",
-                    parser: (d) => {
-                        if (d && d.promedio && parseFloat(d.promedio) > 0) {
-                            return {
-                                usd: parseFloat(d.promedio),
-                                eur: 0,
-                                fecha: d.fechaActualizacion || null
-                            };
-                        }
-                        return null;
-                    }
-                },
-                // 5. Yadio Engine Directo
-                {
-                    url: `https://api.yadio.io/json?_t=${timeAntiCache}`,
-                    nombre: "Yadio Engine (Directo)",
-                    parser: (d) => {
-                        if (d && d.bcv && (d.bcv.price || d.bcv.rate)) {
-                            return {
-                                usd: parseFloat(d.bcv.price || d.bcv.rate),
-                                eur: 0,
-                                fecha: null
-                            };
-                        }
-                        if (d && d.USD && d.USD.bcv) {
-                            return {
-                                usd: parseFloat(d.USD.bcv),
-                                eur: 0,
-                                fecha: null
-                            };
-                        }
-                        return null;
-                    }
-                },
-                // 6. PyDolarVe vía CorsProxy
-                {
-                    url: `https://corsproxy.io/?url=${encodeURIComponent('https://pydolarve.org/api/v1/dollar?page=bcv&_t=' + timeAntiCache)}`,
-                    nombre: "PyDolarVe (vía CorsProxy)",
-                    parser: (d) => {
-                        if (d && d.moneda && d.moneda.usd && parseFloat(d.moneda.usd.price) > 0) {
-                            return {
-                                usd: parseFloat(d.moneda.usd.price),
-                                eur: parseFloat(d.moneda.eur?.price || 0),
-                                fecha: d.moneda.usd.last_update || null
-                            };
-                        }
-                        return null;
-                    }
-                },
-                // 7. BCV Exchange vía AllOrigins
-                {
-                    url: `https://api.allorigins.win/raw?url=${encodeURIComponent('https://bcv-api.deno.dev/v1/exchange?_t=' + timeAntiCache)}`,
-                    nombre: "BCV Exchange (vía AllOrigins)",
-                    parser: (d) => {
-                        if (d && d.rates && (d.rates.USD || d.rates.usd)) {
-                            return {
-                                usd: parseFloat(d.rates.USD || d.rates.usd),
-                                eur: parseFloat(d.rates.EUR || d.rates.eur || 0),
-                                fecha: d.date || null
-                            };
-                        }
-                        return null;
-                    }
-                },
-                // 8. DolarApi vía CorsProxy
-                {
-                    url: `https://corsproxy.io/?url=${encodeURIComponent('https://ve.dolarapi.com/v1/dolares/oficial?_t=' + timeAntiCache)}`,
-                    nombre: "DolarApi (vía CorsProxy)",
-                    parser: (d) => {
-                        if (d && d.promedio && parseFloat(d.promedio) > 0) {
-                            return {
-                                usd: parseFloat(d.promedio),
-                                eur: 0,
-                                fecha: d.fechaActualizacion || null
-                            };
-                        }
-                        return null;
-                    }
-                },
-                // 9. DolarApi vía AllOrigins
-                {
-                    url: `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/dolares/oficial?_t=' + timeAntiCache)}`,
-                    nombre: "DolarApi (vía AllOrigins)",
-                    parser: (d) => {
-                        if (d && d.promedio && parseFloat(d.promedio) > 0) {
-                            return {
-                                usd: parseFloat(d.promedio),
-                                eur: 0,
-                                fecha: d.fechaActualizacion || null
-                            };
-                        }
-                        return null;
-                    }
-                }
+            // 1. PRIORIDAD ABSOLUTA: PyDolarVe (Portal oficial BCV en tiempo real con Fecha Valor vespertina)
+            const urlsPy = [
+                `https://pydolarve.org/api/v1/dollar?page=bcv&_t=${timeAntiCache}`,
+                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://pydolarve.org/api/v1/dollar?page=bcv')}`,
+                `https://corsproxy.io/?url=${encodeURIComponent('https://pydolarve.org/api/v1/dollar?page=bcv')}`
             ];
-
-            // DISPARO SIMULTÁNEO PARALELO A TODAS LAS FUENTES
-            const promesasConsultas = fuentesBcv.map(async (fuente) => {
-                try {
-                    const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 4500);
-                    const res = await fetch(fuente.url, { cache: 'no-store', signal: controller.signal });
-                    clearTimeout(timeoutId);
-
-                    if (res.ok) {
-                        let data = await res.json();
-                        if (typeof data === 'string') {
-                            try { data = JSON.parse(data); } catch(e) {}
-                        }
-                        const p = fuente.parser(data);
-                        if (p && p.usd && p.usd > 0) {
-                            return {
-                                fuente: fuente.nombre,
-                                usd: p.usd,
-                                eur: p.eur || 0,
-                                fecha: p.fecha
-                            };
-                        }
-                    }
-                } catch(e) {}
-                return null;
-            });
-
-            const resultados = await Promise.allSettled(promesasConsultas);
-            const candidatosValidos = [];
-
-            for (const r of resultados) {
-                if (r.status === 'fulfilled' && r.value) {
-                    candidatosValidos.push(r.value);
+            const dataPy = await realizarPeticionConRespaldo(urlsPy);
+            if (dataPy && dataPy.moneda) {
+                if (dataPy.moneda.usd && parseFloat(dataPy.moneda.usd.price) > 0) {
+                    bcvUsdObtenido = parseFloat(dataPy.moneda.usd.price);
+                    fuenteExitosa = "PyDolarVe (BCV Oficial en Vivo)";
                 }
+                if (dataPy.moneda.eur && parseFloat(dataPy.moneda.eur.price) > 0) {
+                    bcvEurObtenido = parseFloat(dataPy.moneda.eur.price);
+                }
+                if (dataPy.moneda.usd && dataPy.moneda.usd.last_update) {
+                    fechaEmisionBcv = dataPy.moneda.usd.last_update;
+                }
+            } else if (dataPy && dataPy.bcv) {
+                if (dataPy.bcv.price || dataPy.bcv.usd) {
+                    bcvUsdObtenido = parseFloat(dataPy.bcv.price || dataPy.bcv.usd);
+                    fuenteExitosa = "PyDolarVe (BCV Oficial en Vivo)";
+                }
+                if (dataPy.bcv.eur) bcvEurObtenido = parseFloat(dataPy.bcv.eur);
+                if (dataPy.bcv.last_update || dataPy.bcv.fecha) fechaEmisionBcv = dataPy.bcv.last_update || dataPy.bcv.fecha;
             }
 
-            let mejorCandidato = null;
-
-            if (candidatosValidos.length > 0) {
-                // Función para extraer timestamp o ponderación de fecha
-                const obtenerScoreFecha = (c) => {
-                    if (!c.fecha) return 0;
-                    try {
-                        if (c.fecha.includes('T')) return new Date(c.fecha).getTime();
-                        if (c.fecha.includes('-')) {
-                            const partes = c.fecha.split('-');
-                            if (partes[0].length === 4) return new Date(partes[0], partes[1] - 1, partes[2]).getTime();
-                        }
-                        if (c.fecha.includes('/')) {
-                            const partes = c.fecha.split('/');
-                            if (partes[2].length === 4) return new Date(partes[2], partes[1] - 1, partes[0]).getTime();
-                        }
-                    } catch(e) {}
-                    return 0;
-                };
-
-                // Ordenar: primero por fecha más reciente, y si empatan, por la tasa más actualizada (la de mayor cotización de cierre)
-                candidatosValidos.sort((a, b) => {
-                    const scoreA = obtenerScoreFecha(a);
-                    const scoreB = obtenerScoreFecha(b);
-                    if (scoreB !== scoreA) {
-                        return scoreB - scoreA;
-                    }
-                    return b.usd - a.usd;
-                });
-
-                mejorCandidato = candidatosValidos[0];
-            }
-
-            let bcvUsdObtenido = mejorCandidato ? mejorCandidato.usd : null;
-            let bcvEurObtenido = mejorCandidato && mejorCandidato.eur > 0 ? mejorCandidato.eur : null;
-            let fechaEmisionBcv = mejorCandidato ? mejorCandidato.fecha : null;
-            let apiExitosa = mejorCandidato ? mejorCandidato.fuente : "";
-
-            // Consulta complementaria para Euro BCV si vino en 0
-            if (bcvUsdObtenido && (!bcvEurObtenido || bcvEurObtenido <= 0)) {
-                const fuentesEur = [
-                    `https://ve.dolarapi.com/v1/euros/oficial?_t=${timeAntiCache}`,
-                    `https://corsproxy.io/?url=${encodeURIComponent('https://ve.dolarapi.com/v1/euros/oficial?_t=' + timeAntiCache)}`,
-                    `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/euros/oficial?_t=' + timeAntiCache)}`
+            // 2. RESPALDO SECUNDARIO DIRECTO: BCV Exchange Deno
+            if (!bcvUsdObtenido || !bcvEurObtenido) {
+                const urlsDeno = [
+                    `https://bcv-api.deno.dev/v1/exchange?_t=${timeAntiCache}`,
+                    `https://api.allorigins.win/raw?url=${encodeURIComponent('https://bcv-api.deno.dev/v1/exchange?_t=' + timeAntiCache)}`
                 ];
-                for (const urlE of fuentesEur) {
-                    try {
-                        const resE = await fetch(urlE, { cache: 'no-store' });
-                        if (resE.ok) {
-                            let dataE = await resE.json();
-                            if (typeof dataE === 'string') { try { dataE = JSON.parse(dataE); } catch(err) {} }
-                            if (dataE && dataE.promedio && parseFloat(dataE.promedio) > 0) {
-                                bcvEurObtenido = parseFloat(dataE.promedio);
-                                break;
-                            }
-                        }
-                    } catch(e) {}
+                const dataDeno = await realizarPeticionConRespaldo(urlsDeno);
+                if (dataDeno && dataDeno.rates && dataDeno.rates.USD) {
+                    if (!bcvUsdObtenido) {
+                        bcvUsdObtenido = parseFloat(dataDeno.rates.USD);
+                        fuenteExitosa = "BCV Exchange Deno";
+                    }
+                    if (!bcvEurObtenido && dataDeno.rates.EUR) {
+                        bcvEurObtenido = parseFloat(dataDeno.rates.EUR);
+                    }
+                    if (!fechaEmisionBcv && dataDeno.date) fechaEmisionBcv = dataDeno.date;
                 }
             }
 
-            // Si aún no hay Euro, aplicar el ratio oficial promedio (~1.125 según emision BCV de referencia)
+            // 3. RESPALDO TERCIARIO: Monitor Dólar BCV
+            if (!bcvUsdObtenido || !bcvEurObtenido) {
+                const urlsMon = [
+                    `https://api.monitordolarvenezuela.com/v1/bcv?_t=${timeAntiCache}`,
+                    `https://api.allorigins.win/raw?url=${encodeURIComponent('https://api.monitordolarvenezuela.com/v1/bcv')}`
+                ];
+                const dataMon = await realizarPeticionConRespaldo(urlsMon);
+                if (dataMon && (dataMon.bcv || dataMon.promedio || dataMon.price)) {
+                    if (!bcvUsdObtenido) {
+                        bcvUsdObtenido = parseFloat(dataMon.bcv || dataMon.promedio || dataMon.price);
+                        fuenteExitosa = "Monitor Dólar BCV";
+                    }
+                    if (!bcvEurObtenido && dataMon.eur) bcvEurObtenido = parseFloat(dataMon.eur);
+                    if (!fechaEmisionBcv && (dataMon.fecha || dataMon.date)) fechaEmisionBcv = dataMon.fecha || dataMon.date;
+                }
+            }
+
+            // 4. RESPALDO FINAL: DolarApi Oficial (Solo en caso de que fallen las fuentes prioritarias)
+            if (!bcvUsdObtenido || !bcvEurObtenido) {
+                const urlsBcvUsd = [
+                    `https://ve.dolarapi.com/v1/dolares/oficial?_t=${timeAntiCache}`,
+                    `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/dolares/oficial')}`
+                ];
+                const urlsBcvEur = [
+                    `https://ve.dolarapi.com/v1/euros/oficial?_t=${timeAntiCache}`,
+                    `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/euros/oficial')}`
+                ];
+
+                if (!bcvUsdObtenido) {
+                    const dataBcv = await realizarPeticionConRespaldo(urlsBcvUsd);
+                    if (dataBcv && dataBcv.promedio) {
+                        bcvUsdObtenido = parseFloat(dataBcv.promedio);
+                        fuenteExitosa = "DolarApi Oficial (Respaldo)";
+                        if (dataBcv.fechaActualizacion) fechaEmisionBcv = new Date(dataBcv.fechaActualizacion).toLocaleDateString('es-ES');
+                    }
+                }
+
+                if (!bcvEurObtenido) {
+                    const dataEur = await realizarPeticionConRespaldo(urlsBcvEur);
+                    if (dataEur && dataEur.promedio) {
+                        bcvEurObtenido = parseFloat(dataEur.promedio);
+                    }
+                }
+            }
+
+            // Ratio de respaldo oficial para Euro si alguna API no lo incluyó (~1.12496 según cierre BCV)
             if (bcvUsdObtenido && (!bcvEurObtenido || bcvEurObtenido <= 0)) {
                 bcvEurObtenido = parseFloat((bcvUsdObtenido * 1.12496).toFixed(2));
             }
@@ -3131,7 +2983,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     prevUsd,
                     prevEur,
                     fechaEmision: fechaFinal,
-                    fuente: apiExitosa,
+                    fuente: fuenteExitosa,
                     ultimaSincro: timeStampConsola
                 };
 
@@ -3149,17 +3001,12 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 await sincronizarBcvDesdeFirebase();
 
                 if (esLlamadaManual) {
-                    alert(`⚡ ¡Tasa Oficial del BCV Sincronizada con Éxito!
-
-📡 Fuente Más Actualizada: ${apiExitosa}
-💵 Dólar BCV: ${bcvUsdObtenido.toFixed(2)} Bs.
-💶 Euro BCV: ${bcvEurObtenido.toFixed(2)} Bs.
-📅 Fecha de Emisión: ${fechaFinal}`);
+                    alert(`⚡ ¡Tasa Oficial del BCV Sincronizada con Éxito!\n\n📡 Fuente: ${fuenteExitosa}\n💵 Dólar BCV: ${bcvUsdObtenido.toFixed(2)} Bs.\n💶 Euro BCV: ${bcvEurObtenido.toFixed(2)} Bs.\n📅 Fecha de Emisión: ${fechaFinal}`);
                 }
                 return true;
             } else {
                 if (esLlamadaManual) {
-                    alert("⚠️ No se pudo obtener la tasa oficial en vivo a través de las APIs disponibles. Ingrese los valores manualmente y presione 'Guardar Ajuste Manual BCV'.");
+                    alert("⚠️ No se pudo obtener la tasa oficial del BCV en vivo por problemas de red en los servidores públicos. Por favor, coloque los montos en las casillas y presione 'Guardar Ajuste Manual BCV'.");
                 }
                 return false;
             }
