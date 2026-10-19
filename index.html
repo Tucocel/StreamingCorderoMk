@@ -2691,6 +2691,13 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     document.getElementById('pt-adm-usdt-compra').value = Math.round(baseVal);
                     document.getElementById('pt-adm-usdt-venta').value = Math.round(estVal);
 
+                    let histTasas = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
+                    histTasas.usdtCompra = baseVal;
+                    histTasas.usdtVenta = estVal;
+                    histTasas.prevUsdtCompra = prevBaseVal;
+                    histTasas.timeBinance = timeTxt;
+                    localStorage.setItem('tcl_hist_tasas', JSON.stringify(histTasas));
+
                     // Tasa de Streaming desacoplada para mantener fijada la tasa establecida por el administrador
 
                     document.getElementById('flyer-val-usdt-rango').innerText = `${Math.round(baseVal)} / ${Math.round(estVal)} Bs`;
@@ -2850,114 +2857,74 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             let fechaEmisionBcv = null;
             let fuenteExitosa = "";
 
-            // 1. PRIORIDAD ABSOLUTA: PyDolarVe (Portal oficial BCV en tiempo real con Fecha Valor vespertina)
-            const urlsPy = [
-                `https://pydolarve.org/api/v1/dollar?page=bcv&_t=${timeAntiCache}`,
-                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://pydolarve.org/api/v1/dollar?page=bcv')}`,
-                `https://corsproxy.io/?url=${encodeURIComponent('https://pydolarve.org/api/v1/dollar?page=bcv')}`
-            ];
-            const dataPy = await realizarPeticionConRespaldo(urlsPy);
-            if (dataPy && dataPy.moneda) {
-                if (dataPy.moneda.usd && parseFloat(dataPy.moneda.usd.price) > 0) {
-                    bcvUsdObtenido = parseFloat(dataPy.moneda.usd.price);
-                    fuenteExitosa = "PyDolarVe (BCV Oficial en Vivo)";
+            // 1. PRIORIDAD: CDN DolarVZLA (Sin CORS, ultra rápido, última tasa oficial publicada)
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 3500);
+                const resCDN = await fetch(`https://rates.dolarvzla.com/bcv/current.json?_t=${timeAntiCache}`, {
+                    cache: 'no-store',
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                if (resCDN.ok) {
+                    const dataCDN = await resCDN.json();
+                    if (dataCDN && dataCDN.current && parseFloat(dataCDN.current.usd) > 0) {
+                        bcvUsdObtenido = parseFloat(dataCDN.current.usd);
+                        bcvEurObtenido = parseFloat(dataCDN.current.eur);
+                        fechaEmisionBcv = dataCDN.current.date;
+                        fuenteExitosa = "BCV Oficial en Vivo (CDN Directo)";
+                    }
                 }
-                if (dataPy.moneda.eur && parseFloat(dataPy.moneda.eur.price) > 0) {
-                    bcvEurObtenido = parseFloat(dataPy.moneda.eur.price);
-                }
-                if (dataPy.moneda.usd && dataPy.moneda.usd.last_update) {
-                    fechaEmisionBcv = dataPy.moneda.usd.last_update;
-                }
-            } else if (dataPy && dataPy.bcv) {
-                if (dataPy.bcv.price || dataPy.bcv.usd) {
-                    bcvUsdObtenido = parseFloat(dataPy.bcv.price || dataPy.bcv.usd);
-                    fuenteExitosa = "PyDolarVe (BCV Oficial en Vivo)";
-                }
-                if (dataPy.bcv.eur) bcvEurObtenido = parseFloat(dataPy.bcv.eur);
-                if (dataPy.bcv.last_update || dataPy.bcv.fecha) fechaEmisionBcv = dataPy.bcv.last_update || dataPy.bcv.fecha;
+            } catch(e) {}
+
+            // 2. RESPALDO 1: DolarApi Oficial Venezuela (CORS Abierto)
+            if (!bcvUsdObtenido) {
+                try {
+                    const [resUsd, resEur] = await Promise.all([
+                        fetch(`https://ve.dolarapi.com/v1/dolares/oficial?_t=${timeAntiCache}`, { cache: 'no-store' }),
+                        fetch(`https://ve.dolarapi.com/v1/euros/oficial?_t=${timeAntiCache}`, { cache: 'no-store' })
+                    ]);
+                    if (resUsd.ok) {
+                        const dataU = await resUsd.json();
+                        if (dataU && dataU.promedio) {
+                            bcvUsdObtenido = parseFloat(dataU.promedio);
+                            fuenteExitosa = "DolarApi BCV Oficial";
+                            if (dataU.fechaActualizacion) {
+                                fechaEmisionBcv = new Date(dataU.fechaActualizacion).toLocaleDateString('es-ES');
+                            }
+                        }
+                    }
+                    if (resEur.ok) {
+                        const dataE = await resEur.json();
+                        if (dataE && dataE.promedio) {
+                            bcvEurObtenido = parseFloat(dataE.promedio);
+                        }
+                    }
+                } catch(e) {}
             }
 
-            // 2. RESPALDO SECUNDARIO DIRECTO: BCV Exchange Deno
-            if (!bcvUsdObtenido || !bcvEurObtenido) {
-                const urlsDeno = [
-                    `https://bcv-api.deno.dev/v1/exchange?_t=${timeAntiCache}`,
-                    `https://api.allorigins.win/raw?url=${encodeURIComponent('https://bcv-api.deno.dev/v1/exchange?_t=' + timeAntiCache)}`
-                ];
-                const dataDeno = await realizarPeticionConRespaldo(urlsDeno);
-                if (dataDeno && dataDeno.rates && dataDeno.rates.USD) {
-                    if (!bcvUsdObtenido) {
-                        bcvUsdObtenido = parseFloat(dataDeno.rates.USD);
-                        fuenteExitosa = "BCV Exchange Deno";
+            // 3. RESPALDO 2: PyDolarVe
+            if (!bcvUsdObtenido) {
+                try {
+                    const resPy = await fetch(`https://pydolarve.org/api/v1/dollar?page=bcv&_t=${timeAntiCache}`, { cache: 'no-store' });
+                    if (resPy.ok) {
+                        const dataPy = await resPy.json();
+                        if (dataPy && dataPy.moneda && dataPy.moneda.usd && parseFloat(dataPy.moneda.usd.price) > 0) {
+                            bcvUsdObtenido = parseFloat(dataPy.moneda.usd.price);
+                            fuenteExitosa = "PyDolarVe";
+                            if (dataPy.moneda.eur) bcvEurObtenido = parseFloat(dataPy.moneda.eur.price);
+                            if (dataPy.moneda.usd.last_update) fechaEmisionBcv = dataPy.moneda.usd.last_update;
+                        }
                     }
-                    if (!bcvEurObtenido && dataDeno.rates.EUR) {
-                        bcvEurObtenido = parseFloat(dataDeno.rates.EUR);
-                    }
-                    if (!fechaEmisionBcv && dataDeno.date) fechaEmisionBcv = dataDeno.date;
-                }
+                } catch(e) {}
             }
 
-            // 3. RESPALDO TERCIARIO: Monitor Dólar BCV
-            if (!bcvUsdObtenido || !bcvEurObtenido) {
-                const urlsMon = [
-                    `https://api.monitordolarvenezuela.com/v1/bcv?_t=${timeAntiCache}`,
-                    `https://api.allorigins.win/raw?url=${encodeURIComponent('https://api.monitordolarvenezuela.com/v1/bcv')}`
-                ];
-                const dataMon = await realizarPeticionConRespaldo(urlsMon);
-                if (dataMon && (dataMon.bcv || dataMon.promedio || dataMon.price)) {
-                    if (!bcvUsdObtenido) {
-                        bcvUsdObtenido = parseFloat(dataMon.bcv || dataMon.promedio || dataMon.price);
-                        fuenteExitosa = "Monitor Dólar BCV";
-                    }
-                    if (!bcvEurObtenido && dataMon.eur) bcvEurObtenido = parseFloat(dataMon.eur);
-                    if (!fechaEmisionBcv && (dataMon.fecha || dataMon.date)) fechaEmisionBcv = dataMon.fecha || dataMon.date;
-                }
-            }
-
-            // 4. RESPALDO FINAL: DolarApi Oficial (Solo en caso de que fallen las fuentes prioritarias)
-            if (!bcvUsdObtenido || !bcvEurObtenido) {
-                const urlsBcvUsd = [
-                    `https://ve.dolarapi.com/v1/dolares/oficial?_t=${timeAntiCache}`,
-                    `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/dolares/oficial')}`
-                ];
-                const urlsBcvEur = [
-                    `https://ve.dolarapi.com/v1/euros/oficial?_t=${timeAntiCache}`,
-                    `https://api.allorigins.win/raw?url=${encodeURIComponent('https://ve.dolarapi.com/v1/euros/oficial')}`
-                ];
-
-                if (!bcvUsdObtenido) {
-                    const dataBcv = await realizarPeticionConRespaldo(urlsBcvUsd);
-                    if (dataBcv && dataBcv.promedio) {
-                        bcvUsdObtenido = parseFloat(dataBcv.promedio);
-                        fuenteExitosa = "DolarApi Oficial (Respaldo)";
-                        if (dataBcv.fechaActualizacion) fechaEmisionBcv = new Date(dataBcv.fechaActualizacion).toLocaleDateString('es-ES');
-                    }
-                }
-
-                if (!bcvEurObtenido) {
-                    const dataEur = await realizarPeticionConRespaldo(urlsBcvEur);
-                    if (dataEur && dataEur.promedio) {
-                        bcvEurObtenido = parseFloat(dataEur.promedio);
-                    }
-                }
-            }
-
-            // Ratio de respaldo oficial para Euro si alguna API no lo incluyó (~1.12496 según cierre BCV)
             if (bcvUsdObtenido && (!bcvEurObtenido || bcvEurObtenido <= 0)) {
-                bcvEurObtenido = parseFloat((bcvUsdObtenido * 1.12496).toFixed(2));
+                bcvEurObtenido = parseFloat((bcvUsdObtenido * 1.09).toFixed(2));
             }
 
             if (bcvUsdObtenido && bcvUsdObtenido > 0) {
-                let fechaFinal = new Date().toLocaleDateString('es-ES');
-                if (fechaEmisionBcv) {
-                    try {
-                        fechaFinal = fechaEmisionBcv.includes('T') 
-                            ? new Date(fechaEmisionBcv).toLocaleDateString('es-ES') 
-                            : fechaEmisionBcv;
-                    } catch(e) {
-                        fechaFinal = fechaEmisionBcv;
-                    }
-                }
-
+                let fechaFinal = fechaEmisionBcv || new Date().toLocaleDateString('es-ES');
                 let histTasas = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
                 let prevUsd = histTasas.bcvUsd || bcvUsdObtenido;
                 let prevEur = histTasas.bcvEur || bcvEurObtenido;
@@ -3000,13 +2967,18 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
                 await sincronizarBcvDesdeFirebase();
 
+                const inUsd = document.getElementById('pt-adm-bcv-usd');
+                const inEur = document.getElementById('pt-adm-bcv-eur');
+                if (inUsd) inUsd.value = bcvUsdObtenido.toFixed(2);
+                if (inEur) inEur.value = bcvEurObtenido.toFixed(2);
+
                 if (esLlamadaManual) {
                     alert(`⚡ ¡Tasa Oficial del BCV Sincronizada con Éxito!\n\n📡 Fuente: ${fuenteExitosa}\n💵 Dólar BCV: ${bcvUsdObtenido.toFixed(2)} Bs.\n💶 Euro BCV: ${bcvEurObtenido.toFixed(2)} Bs.\n📅 Fecha de Emisión: ${fechaFinal}`);
                 }
                 return true;
             } else {
                 if (esLlamadaManual) {
-                    alert("⚠️ No se pudo obtener la tasa oficial del BCV en vivo por problemas de red en los servidores públicos. Por favor, coloque los montos en las casillas y presione 'Guardar Ajuste Manual BCV'.");
+                    alert("⚠️ No se pudo obtener la tasa oficial en vivo por problemas de red. Por favor ingrese los montos en las casillas y presione 'Guardar Ajuste Manual BCV'.");
                 }
                 return false;
             }
@@ -3664,7 +3636,29 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
         };
 
-        window.cambiarParticionAdmin = function(particion) {
+                window.precargarTasasAdminPubliTasa = function() {
+            const hist = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
+            
+            const inBcvUsd = document.getElementById('pt-adm-bcv-usd');
+            const inBcvEur = document.getElementById('pt-adm-bcv-eur');
+            const inBinCompra = document.getElementById('pt-adm-usdt-compra');
+            const inBinVenta = document.getElementById('pt-adm-usdt-venta');
+            const inFronteraCompra = document.getElementById('pt-adm-compra');
+            const inFronteraVenta = document.getElementById('pt-adm-venta');
+            const inTrm = document.getElementById('pt-adm-trm-cop');
+            const inEurCop = document.getElementById('pt-adm-eur-cop');
+
+            if (inBcvUsd && hist.bcvUsd) inBcvUsd.value = parseFloat(hist.bcvUsd).toFixed(2);
+            if (inBcvEur && hist.bcvEur) inBcvEur.value = parseFloat(hist.bcvEur).toFixed(2);
+            if (inBinCompra && hist.usdtCompra) inBinCompra.value = Math.round(hist.usdtCompra);
+            if (inBinVenta && hist.usdtVenta) inBinVenta.value = Math.round(hist.usdtVenta);
+            if (inFronteraCompra && hist.cucutaCompra) inFronteraCompra.value = Math.round(hist.cucutaCompra);
+            if (inFronteraVenta && hist.cucutaVenta) inFronteraVenta.value = Math.round(hist.cucutaVenta);
+            if (inTrm && hist.trmCop) inTrm.value = Math.round(hist.trmCop);
+            if (inEurCop && hist.eurCop) inEurCop.value = Math.round(hist.eurCop);
+        };
+
+window.cambiarParticionAdmin = function(particion) {
             const blockStreaming = document.getElementById('bloque-admin-particion-streaming');
             const blockPubliTasa = document.getElementById('bloque-admin-particion-publitasa');
             const blockCalc = document.getElementById('bloque-admin-particion-calculadora');
@@ -3687,6 +3681,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             if(particion === 'publitasa') {
                 if (blockPubliTasa) blockPubliTasa.classList.remove('hidden');
                 if (btnPubliTasa) btnPubliTasa.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-amber-500 text-neutral-950 transition-all btn-interactive";
+                window.precargarTasasAdminPubliTasa();
                 window.descargarBasePubliTasaFirebaseCompleta();
             } else if(particion === 'calculadora') {
                 if (blockCalc) blockCalc.classList.remove('hidden');
@@ -3752,6 +3747,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
                 const btnMando = document.getElementById('btn-mando-abrir-login');
                 if(btnMando) btnMando.innerHTML = `<i class="fa-solid fa-user-gear text-red-500"></i> <span>Consola</span>`;
+                window.precargarTasasAdminPubliTasa();
                 window.conmutarVistaAdminCliente();
             } else { alert("❌ Credenciales incorrectas."); }
         };
@@ -5377,10 +5373,18 @@ window.recalcularTasasBolivaresAdmin = function() {
                 }
             } catch(e) {}
 
+            // PERSISTENCIA LOCAL INMEDIATA
+            let histTasas = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
+            histTasas.usdtCompra = compra;
+            histTasas.usdtVenta = venta;
+            histTasas.prevUsdtCompra = esSoloMantener ? prevCompraVal : (compra !== prevCompraVal ? prevCompraVal : compra);
+            histTasas.timeBinance = timeStampConsola;
+            localStorage.setItem('tcl_hist_tasas', JSON.stringify(histTasas));
+
             try {
                 await setDoc(doc(db, "tcl_publitasa_pro", "binance_config"), { 
                     compra, venta, 
-                    prevCompra: esSoloMantener ? prevCompraVal : (compra !== prevCompraVal ? prevCompraVal : compra),
+                    prevCompra: histTasas.prevUsdtCompra,
                     ultimaActualizacion: timeStampConsola
                 });
                 
@@ -5391,11 +5395,9 @@ window.recalcularTasasBolivaresAdmin = function() {
                 document.getElementById('flyer-val-usdt-rango').innerText = `${Math.round(compra)} / ${Math.round(venta)} Bs`;
                 document.getElementById('flyer-trend-usdt-binance').innerHTML = htmlTrend;
 
-                // Tasa de Streaming desacoplada para respetar la tasa fija configurada en vitrina
-
-                alert(esSoloMantener ? `– Tasa marcada como 'Se Mantiene' (Hora: ${timeStampConsola})` : `🚀 Nueva Tasa de USDT publicada (Hora: ${timeStampConsola})`);
+                alert(esSoloMantener ? `– Tasa marcada como 'Se Mantiene' (Hora: ${timeStampConsola})` : `🚀 Nueva Tasa de USDT guardada y publicada (Hora: ${timeStampConsola})`);
             } catch(e) { 
-                alert("Guardado local registrado."); 
+                alert("Guardado local registrado con éxito."); 
             }
         };
 
