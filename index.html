@@ -2099,7 +2099,71 @@
 
 
     
-    <!-- PLANTILLA FLYER PUBLICITARIO PROFESIONAL STREAMING (ESTILO AFICHE PREMIUM NEON) -->
+        <!-- MODAL DETALLE DE MOVIMIENTO / COMPROBANTE AUDITORÍA NEQUI -->
+    <div id="modal-detalle-movimiento-nequi" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[13800] p-4 hidden flex items-center justify-center overflow-y-auto">
+        <div class="bg-neutral-900 border border-neutral-800 w-full max-w-md rounded-3xl p-5 sm:p-6 space-y-4 shadow-2xl my-auto">
+            <div class="flex justify-between items-center border-b border-neutral-800 pb-2.5">
+                <div class="flex items-center gap-2">
+                    <div id="nq-det-ico-box" class="w-8 h-8 rounded-xl bg-purple-950/80 border border-purple-500/40 flex items-center justify-center text-purple-400">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+                    <div>
+                        <h3 id="nq-det-titulo" class="font-black text-xs sm:text-sm uppercase tracking-wider text-purple-400">Comprobante de Operación</h3>
+                        <p id="nq-det-sub" class="text-[9px] text-slate-400 font-mono">Auditoría de Transacción</p>
+                    </div>
+                </div>
+                <button onclick="document.getElementById('modal-detalle-movimiento-nequi').classList.add('hidden')" class="text-slate-400 hover:text-white bg-neutral-950 border border-neutral-800 w-7 h-7 rounded-xl flex items-center justify-center btn-interactive">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+
+            <!-- FICHA COMPLETA -->
+            <div class="bg-neutral-950 p-4 rounded-2xl border border-neutral-800 space-y-2.5 font-mono text-xs">
+                <div class="flex justify-between items-center border-b border-neutral-900 pb-2">
+                    <span id="nq-det-tipo-badge" class="px-2.5 py-0.5 rounded-full font-black text-[9.5px] uppercase">[OPERACIÓN]</span>
+                    <span id="nq-det-fecha-hora" class="text-slate-400 text-[10px]">Fecha — Hora</span>
+                </div>
+                <div>
+                    <span class="text-[8.5px] text-slate-500 uppercase block font-bold font-sans">Titular / Comercio:</span>
+                    <strong id="nq-det-cliente-nombre" class="text-white text-xs sm:text-sm uppercase block font-sans">NOMBRE</strong>
+                    <span id="nq-det-cliente-tlf" class="text-purple-400 text-[10px] block font-mono">Teléfono</span>
+                </div>
+                <div class="bg-neutral-900/80 p-2.5 rounded-xl border border-neutral-800 flex justify-between items-center">
+                    <span id="nq-det-monto-label" class="text-[9.5px] uppercase font-bold text-slate-400 font-sans">Monto Operación:</span>
+                    <strong id="nq-det-monto-val" class="text-base sm:text-lg font-black block">$0 COP</strong>
+                </div>
+                <div>
+                    <span class="text-[8.5px] text-slate-500 uppercase block font-bold font-sans">Detalle / Concepto:</span>
+                    <p id="nq-det-nota-val" class="text-slate-200 text-[11px] font-sans break-words bg-neutral-900/50 p-2 rounded-lg border border-neutral-900">Nota</p>
+                </div>
+                <div class="flex justify-between items-center text-[10px] pt-1 border-t border-neutral-900">
+                    <span class="text-slate-400 font-sans">Saldo tras la operación:</span>
+                    <strong id="nq-det-saldo-posterior" class="text-slate-200">$0 COP</strong>
+                </div>
+
+                <!-- DESGLOSE DE DEPÓSITOS SI ES LIQUIDACIÓN -->
+                <div id="nq-det-desglose-box" class="hidden bg-amber-950/20 border border-amber-500/40 p-3 rounded-xl space-y-1.5 pt-2">
+                    <span class="text-[9px] font-black uppercase text-amber-400 tracking-wider flex items-center gap-1.5 font-sans">
+                        <i class="fa-solid fa-list-check"></i> Depósitos liquidados en este corte:
+                    </span>
+                    <div id="nq-det-desglose-lista" class="space-y-1 text-[9.5px] text-slate-300">
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTONES -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1 font-bold">
+                <button type="button" onclick="document.getElementById('modal-detalle-movimiento-nequi').classList.add('hidden')" class="w-full bg-neutral-950 border border-neutral-800 text-slate-400 hover:text-white py-2.5 rounded-xl uppercase text-xs btn-interactive">
+                    Cerrar
+                </button>
+                <button type="button" id="nq-det-btn-reenviar-wa" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 rounded-xl uppercase tracking-wider text-xs shadow-lg flex items-center justify-center gap-1.5 btn-interactive">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Reenviar Comprobante 📲
+                </button>
+            </div>
+        </div>
+    </div>
+
+<!-- PLANTILLA FLYER PUBLICITARIO PROFESIONAL STREAMING (ESTILO AFICHE PREMIUM NEON) -->
     <div class="fixed -left-[9999px] top-0 overflow-hidden">
         <div id="plantilla-flyer-publicitario-render" style="width: 440px; background: radial-gradient(circle at 50% 0%, #2a0408 0%, #0c0714 45%, #030206 100%); border: 3px solid #ef4444; border-radius: 32px; padding: 26px 20px; color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; position: relative; box-shadow: 0 0 50px rgba(239, 68, 68, 0.4);">
             
@@ -3678,6 +3742,7 @@ window.cambiarParticionAdmin = function(particion) {
             if (btnCalc) btnCalc.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-emerald-400 border border-neutral-800 hover:border-emerald-500/50 transition-all btn-interactive";
             if (btnNequi) btnNequi.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-neutral-900 text-purple-400 border border-neutral-800 hover:border-purple-500/50 transition-all btn-interactive";
 
+            localStorage.setItem('tcl_admin_last_partition', particion);
             if(particion === 'publitasa') {
                 if (blockPubliTasa) blockPubliTasa.classList.remove('hidden');
                 if (btnPubliTasa) btnPubliTasa.className = "flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl text-[9.5px] font-black uppercase tracking-wider bg-amber-500 text-neutral-950 transition-all btn-interactive";
@@ -6614,6 +6679,31 @@ ${lineasMovs}
             abrirWhatsAppPersonal(cli.telefono, msg);
         };
 
+        // Helper para extraer los depósitos que componen una liquidación
+        function obtenerDepositosDeLiquidacion(cli, movLiq) {
+            if (!cli || !cli.movimientos) return [];
+            if (movLiq && movLiq.depositosLiquidados && movLiq.depositosLiquidados.length > 0) {
+                return movLiq.depositosLiquidados;
+            }
+            // Si no los tiene guardados explícitamente, buscamos hacia atrás hasta la liquidación anterior
+            const idx = cli.movimientos.findIndex(m => m.id === movLiq.id);
+            const limFin = idx !== -1 ? idx : cli.movimientos.length;
+            const deps = [];
+            for (let i = limFin - 1; i >= 0; i--) {
+                const mPrev = cli.movimientos[i];
+                if (mPrev.tipo === 'LIQUIDACION') break;
+                if (mPrev.tipo === 'INGRESO') {
+                    deps.unshift({
+                        fecha: mPrev.fecha,
+                        hora: mPrev.hora,
+                        monto: mPrev.monto,
+                        nota: mPrev.nota || 'Depósito cliente'
+                    });
+                }
+            }
+            return deps;
+        }
+
         window.liquidarCuentaNequi = async function(cliId) {
             const cli = localNequiClientesArr.find(c => c.id === cliId);
             if(!cli) return;
@@ -6623,50 +6713,67 @@ ${lineasMovs}
                 return alert(`ℹ️ La cuenta de ${cli.nombre} no tiene saldo a favor pendiente por liquidar (Saldo actual: $${saldoPendiente.toLocaleString('es-CO')} COP).`);
             }
 
-            const confirmar = confirm(`🧾 ¿Confirmas la liquidación total de la cuenta de [${cli.nombre}]?
-
-Monto a entregar: $${saldoPendiente.toLocaleString('es-CO')} COP
-El saldo de la cuenta quedará en $0 COP.`);
+            const confirmar = confirm(`🧾 ¿Confirmas la liquidación y corte de saldo de [${cli.nombre}]?\n\nMonto a entregar: $${saldoPendiente.toLocaleString('es-CO')} COP\nEl saldo actual quedará en $0 COP (la cuenta continúa activa).`);
             if(!confirmar) return;
 
             const hoyStr = new Date().toLocaleDateString('es-ES');
             const ahoraHora = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
 
             if(!cli.movimientos) cli.movimientos = [];
-            cli.movimientos.push({
+
+            // Recopilar los depósitos que se están liquidando en este corte
+            const depsLiquidados = [];
+            for (let i = cli.movimientos.length - 1; i >= 0; i--) {
+                const mPrev = cli.movimientos[i];
+                if (mPrev.tipo === 'LIQUIDACION') break;
+                if (mPrev.tipo === 'INGRESO') {
+                    depsLiquidados.unshift({
+                        fecha: mPrev.fecha,
+                        hora: mPrev.hora,
+                        monto: mPrev.monto,
+                        nota: mPrev.nota || 'Depósito'
+                    });
+                }
+            }
+
+            const nuevoMovLiq = {
                 id: 'm-' + Date.now(),
                 fecha: hoyStr,
                 hora: ahoraHora,
                 tipo: 'LIQUIDACION',
                 monto: saldoPendiente,
                 saldoPosterior: 0,
-                nota: 'Liquidación y cierre de cuenta'
-            });
+                nota: 'Liquidación y corte de saldo',
+                depositosLiquidados: depsLiquidados
+            };
 
+            cli.movimientos.push(nuevoMovLiq);
             cli.saldo = 0;
             await window.sincronizarNequiNube();
             window.renderizarCajaNequiAdmin();
 
-            const enviarWA = confirm("¿Deseas enviar el comprobante de cuenta liquidada por WhatsApp al cliente?");
+            const enviarWA = confirm("¿Deseas enviar el comprobante de corte y liquidación por WhatsApp al cliente?");
             if(enviarWA) {
-                const msg = `🧾 *LIQUIDACIÓN Y CIERRE DE CUENTA — CAJA NEQUI*
-` +
-                            `👤 *Titular:* ${cli.nombre}
-` +
-                            `📅 *Fecha de Liquidación:* ${hoyStr} — ${ahoraHora}
-` +
-                            `💵 *Total Liquidado y Entregado:* *$${saldoPendiente.toLocaleString('es-CO')} COP*
-` +
-                            `━━━━━━━━━━━━━━━━
-` +
-                            `💰 *SALDO RESTANTE EN CUENTA:* *$0 COP*
-` +
-                            `━━━━━━━━━━━━━━━━
-` +
-                            `✅ *Cuenta saldada en su totalidad con éxito.*`;
+                let lineasDeps = '';
+                if (depsLiquidados.length > 0) {
+                    lineasDeps = '\n📦 *DEPÓSITOS LIQUIDADOS EN ESTE CORTE:*\n';
+                    depsLiquidados.forEach(d => {
+                        lineasDeps += `• ${d.fecha} ${d.hora}: +$${(d.monto || 0).toLocaleString('es-CO')} COP (${d.nota})\n`;
+                    });
+                }
+
+                const msg = `🧾 *LIQUIDACIÓN Y CORTE DE SALDO — CAJA NEQUI*\n` +
+                            `👤 *Titular:* ${cli.nombre}\n` +
+                            `📅 *Fecha de Liquidación:* ${hoyStr} — ${ahoraHora}\n` +
+                            `💵 *Total Liquidado y Entregado:* *$${saldoPendiente.toLocaleString('es-CO')} COP*\n` +
+                            lineasDeps +
+                            `━━━━━━━━━━━━━━━━\n` +
+                            `💰 *SALDO RESTANTE EN CUENTA:* *$0 COP*\n` +
+                            `━━━━━━━━━━━━━━━━\n` +
+                            `✅ *Saldo liquidado con éxito. Su cuenta continúa activa para nuevos depósitos.*`;
                 abrirWhatsAppPersonal(cli.telefono, msg);
             } else {
-                alert(`✅ Cuenta de ${cli.nombre} liquidada con éxito a $0 COP.`);
+                alert(`✅ Saldo de ${cli.nombre} liquidado con éxito.`);
             }
         };
         window.eliminarClienteNequi = async function(cliId) {
@@ -6726,19 +6833,22 @@ El saldo de la cuenta quedará en $0 COP.`);
                     }
 
                     contMovs.innerHTML += `
-                        <div class="border ${bgTipo} p-3 rounded-2xl flex justify-between items-start gap-2 text-xs font-mono">
+                        <div onclick="window.abrirDetalleMovimientoNequi('${cli.id}', '${m.id}')" title="Toca para ver detalle o reenviar comprobante" class="border ${bgTipo} hover:border-purple-400 p-3 rounded-2xl flex justify-between items-start gap-2 text-xs font-mono cursor-pointer transition-all active:scale-[0.99] group shadow-sm">
                             <div class="min-w-0 flex-1">
                                 <div class="flex items-center gap-2">
-                                    <span class="${colorTipo} font-black text-[10px] uppercase">[${m.tipo}]</span>
+                                    <span class="${colorTipo} font-black text-[10px] uppercase">${m.tipo === 'LIQUIDACION' ? '[CORTE / LIQUIDACIÓN]' : '[' + m.tipo + ']'}</span>
                                     <span class="text-slate-400 text-[9.5px] font-sans">${m.fecha} — ${m.hora}</span>
                                 </div>
                                 <p class="text-slate-200 text-[10.5px] font-sans mt-0.5 break-words">${m.nota || 'Sin nota'}</p>
                                 <span class="text-slate-500 text-[9px] block mt-0.5">Saldo tras operación: $${(m.saldoPosterior || 0).toLocaleString('es-CO')} COP</span>
                             </div>
-                            <div class="text-right shrink-0">
+                            <div class="text-right shrink-0 flex flex-col items-end gap-1.5">
                                 <strong class="${colorTipo} font-black text-sm block">
                                     ${signo}$${(m.monto || 0).toLocaleString('es-CO')}
                                 </strong>
+                                <span class="text-[9px] text-purple-400 group-hover:text-purple-300 font-bold bg-neutral-900 border border-neutral-800 px-2 py-0.5 rounded-lg flex items-center gap-1">
+                                    <i class="fa-solid fa-receipt"></i> Ver / Reenviar
+                                </span>
                             </div>
                         </div>`;
                 });
@@ -6747,7 +6857,129 @@ El saldo de la cuenta quedará en $0 COP.`);
             document.getElementById('modal-historial-nequi').classList.remove('hidden');
         };
 
-        window.sincronizarNequiNube = async function() {
+        
+        // Apertura de modal de detalle y auditoría para CUALQUIER movimiento
+        window.abrirDetalleMovimientoNequi = function(cliId, movId) {
+            const cli = localNequiClientesArr.find(c => c.id === cliId);
+            if (!cli) return;
+            const m = (cli.movimientos || []).find(x => x.id === movId);
+            if (!m) return;
+
+            document.getElementById('nq-det-cliente-nombre').innerText = cli.nombre;
+            document.getElementById('nq-det-cliente-tlf').innerText = cli.telefono;
+            document.getElementById('nq-det-fecha-hora').innerText = `${m.fecha} — ${m.hora}`;
+            document.getElementById('nq-det-nota-val').innerText = m.nota || 'Sin observaciones registradas';
+            document.getElementById('nq-det-saldo-posterior').innerText = `$${(m.saldoPosterior || 0).toLocaleString('es-CO')} COP`;
+
+            const badgeTipo = document.getElementById('nq-det-tipo-badge');
+            const lblMonto = document.getElementById('nq-det-monto-label');
+            const valMonto = document.getElementById('nq-det-monto-val');
+            const boxDesglose = document.getElementById('nq-det-desglose-box');
+            const listaDesglose = document.getElementById('nq-det-desglose-lista');
+            const icoBox = document.getElementById('nq-det-ico-box');
+
+            if (m.tipo === 'INGRESO') {
+                badgeTipo.className = "px-2.5 py-0.5 rounded-full font-black text-[9.5px] uppercase bg-emerald-950/80 text-emerald-400 border border-emerald-500/40";
+                badgeTipo.innerText = "📥 INGRESO (DEPÓSITO)";
+                lblMonto.innerText = "Monto Depositado:";
+                valMonto.className = "text-base sm:text-lg font-black text-emerald-400 block";
+                valMonto.innerText = `+$${(m.monto || 0).toLocaleString('es-CO')} COP`;
+                boxDesglose.classList.add('hidden');
+                icoBox.className = "w-8 h-8 rounded-xl bg-emerald-950/80 border border-emerald-500/40 flex items-center justify-center text-emerald-400";
+            } else if (m.tipo === 'RETIRO') {
+                badgeTipo.className = "px-2.5 py-0.5 rounded-full font-black text-[9.5px] uppercase bg-rose-950/80 text-rose-400 border border-rose-500/40";
+                badgeTipo.innerText = "📤 RETIRO (SALIDA)";
+                lblMonto.innerText = "Monto Retirado:";
+                valMonto.className = "text-base sm:text-lg font-black text-rose-400 block";
+                valMonto.innerText = `-$${(m.monto || 0).toLocaleString('es-CO')} COP`;
+                boxDesglose.classList.add('hidden');
+                icoBox.className = "w-8 h-8 rounded-xl bg-rose-950/80 border border-rose-500/40 flex items-center justify-center text-rose-400";
+            } else {
+                badgeTipo.className = "px-2.5 py-0.5 rounded-full font-black text-[9.5px] uppercase bg-amber-950/80 text-amber-400 border border-amber-500/40";
+                badgeTipo.innerText = "🧾 CORTE Y LIQUIDACIÓN";
+                lblMonto.innerText = "Total Liquidado:";
+                valMonto.className = "text-base sm:text-lg font-black text-amber-400 block";
+                valMonto.innerText = `√$${(m.monto || 0).toLocaleString('es-CO')} COP`;
+                icoBox.className = "w-8 h-8 rounded-xl bg-amber-950/80 border border-amber-500/40 flex items-center justify-center text-amber-400";
+
+                // Desglose de depósitos
+                const deps = obtenerDepositosDeLiquidacion(cli, m);
+                if (deps.length > 0) {
+                    boxDesglose.classList.remove('hidden');
+                    listaDesglose.innerHTML = '';
+                    deps.forEach(d => {
+                        listaDesglose.innerHTML += `
+                            <div class="flex justify-between items-center py-0.5 border-b border-neutral-900/60">
+                                <span>• ${d.fecha} ${d.hora} (${d.nota})</span>
+                                <strong class="text-emerald-400">+$${(d.monto || 0).toLocaleString('es-CO')}</strong>
+                            </div>`;
+                    });
+                } else {
+                    boxDesglose.classList.add('hidden');
+                }
+            }
+
+            const btnReenviar = document.getElementById('nq-det-btn-reenviar-wa');
+            btnReenviar.onclick = function() {
+                window.reenviarComprobanteMovimientoNequi(cli.id, m.id);
+            };
+
+            document.getElementById('modal-detalle-movimiento-nequi').classList.remove('hidden');
+        };
+
+        // Reenvío formal de comprobante de cualquier movimiento histórico por WhatsApp
+        window.reenviarComprobanteMovimientoNequi = function(cliId, movId) {
+            const cli = localNequiClientesArr.find(c => c.id === cliId);
+            if (!cli) return;
+            const m = (cli.movimientos || []).find(x => x.id === movId);
+            if (!m) return;
+
+            let msg = '';
+            if (m.tipo === 'INGRESO') {
+                msg = `📥 *CAJA NEQUI — COMPROBANTE DE INGRESO*\n` +
+                      `👤 *Titular:* ${cli.nombre}\n` +
+                      `📅 *Fecha:* ${m.fecha} — ${m.hora}\n` +
+                      `➕ *Monto Ingresado:* +$${(m.monto || 0).toLocaleString('es-CO')} COP\n` +
+                      `📝 *Nota:* ${m.nota || 'Depósito cliente'}\n` +
+                      `━━━━━━━━━━━━━━━━\n` +
+                      `💰 *SALDO TRAS OPERACIÓN:* *$${(m.saldoPosterior || 0).toLocaleString('es-CO')} COP*\n` +
+                      `━━━━━━━━━━━━━━━━\n` +
+                      `✅ *Comprobante de depósito conciliado.*`;
+            } else if (m.tipo === 'RETIRO') {
+                msg = `📤 *CAJA NEQUI — COMPROBANTE DE RETIRO*\n` +
+                      `👤 *Titular:* ${cli.nombre}\n` +
+                      `📅 *Fecha:* ${m.fecha} — ${m.hora}\n` +
+                      `➖ *Monto Retirado:* -$${(m.monto || 0).toLocaleString('es-CO')} COP\n` +
+                      `📝 *Nota:* ${m.nota || 'Retiro efectuado'}\n` +
+                      `━━━━━━━━━━━━━━━━\n` +
+                      `💰 *SALDO TRAS OPERACIÓN:* *$${(m.saldoPosterior || 0).toLocaleString('es-CO')} COP*\n` +
+                      `━━━━━━━━━━━━━━━━\n` +
+                      `✅ *Comprobante de retiro conciliado.*`;
+            } else {
+                const deps = obtenerDepositosDeLiquidacion(cli, m);
+                let lineasDeps = '';
+                if (deps.length > 0) {
+                    lineasDeps = '\n📦 *DEPÓSITOS LIQUIDADOS EN ESTE CORTE:*\n';
+                    deps.forEach(d => {
+                        lineasDeps += `• ${d.fecha} ${d.hora}: +$${(d.monto || 0).toLocaleString('es-CO')} COP (${d.nota})\n`;
+                    });
+                }
+
+                msg = `🧾 *LIQUIDACIÓN Y CORTE DE SALDO — CAJA NEQUI*\n` +
+                      `👤 *Titular:* ${cli.nombre}\n` +
+                      `📅 *Fecha de Liquidación:* ${m.fecha} — ${m.hora}\n` +
+                      `💵 *Total Liquidado y Entregado:* *$${(m.monto || 0).toLocaleString('es-CO')} COP*\n` +
+                      lineasDeps +
+                      `━━━━━━━━━━━━━━━━\n` +
+                      `💰 *SALDO TRAS LIQUIDACIÓN:* *$0 COP*\n` +
+                      `━━━━━━━━━━━━━━━━\n` +
+                      `✅ *Saldo liquidado con éxito. Su cuenta continúa activa para nuevos depósitos.*`;
+            }
+
+            abrirWhatsAppPersonal(cli.telefono, msg);
+        };
+
+window.sincronizarNequiNube = async function() {
             localStorage.setItem('tcl_nequi_cache', JSON.stringify(localNequiClientesArr));
             try {
                 // BLINDAJE READ-BEFORE-WRITE
@@ -7256,6 +7488,11 @@ window.pintarTasasInmediatasDesdeCache = function() {
                     window.abrirVistaCalculadoraMasterDirecto();
                 } else if (esRutaMonitor) {
                     window.abrirVistaMonitorDirecto();
+                } else if (window.verificarSesionAdminActiva()) {
+                    // Mantiene el sistema abierto durante los 20 minutos sin pedir login nuevamente
+                    window.mostrarVistaUnica('vista-streaming-admin');
+                    const lastPart = localStorage.getItem('tcl_admin_last_partition') || 'nequi';
+                    window.cambiarParticionAdmin(lastPart);
                 } else {
                     window.cerrarTodasVistasSecundarias();
                 }
