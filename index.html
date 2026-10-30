@@ -452,6 +452,85 @@
             </div>
         </div>
 
+
+        <!-- MODAL DE EDICIÓN FLOTANTE ESTILIZADO DE LICENCIAS PUBLITASA PRO -->
+        <div id="modal-editor-publitasa-pro" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[11100] p-4 hidden flex items-center justify-center overflow-y-auto">
+            <div class="bg-neutral-900 border border-neutral-800 w-full max-w-lg rounded-3xl p-5 sm:p-6 space-y-4 shadow-2xl my-auto">
+                <div class="flex justify-between items-center border-b border-neutral-800 pb-2.5">
+                    <h3 class="font-black text-xs sm:text-sm uppercase tracking-wider text-amber-400 flex items-center gap-2">
+                        <i class="fa-solid fa-user-pen text-amber-400"></i> Modificar Licencia PubliTasa Pro
+                    </h3>
+                    <button type="button" onclick="document.getElementById('modal-editor-publitasa-pro').classList.add('hidden')" class="text-slate-400 hover:text-white bg-neutral-950 border border-neutral-800 w-7 h-7 rounded-xl flex items-center justify-center btn-interactive">
+                        <i class="fa-solid fa-xmark text-xs"></i>
+                    </button>
+                </div>
+
+                <form onsubmit="event.preventDefault(); window.guardarCambiosEditorPubliTasa();" class="space-y-3 text-xs font-bold text-slate-300">
+                    <input type="hidden" id="edit-pt-id">
+
+                    <div class="bg-neutral-950 p-3 rounded-2xl border border-amber-500/30 flex justify-between items-center">
+                        <span class="text-[9px] uppercase font-bold text-slate-400">Token de Licencia:</span>
+                        <span id="edit-pt-lbl-token" class="text-xs sm:text-sm font-mono font-black text-amber-400">PUBLITASA-XXXX</span>
+                    </div>
+
+                    <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-800 space-y-2">
+                        <span class="text-[8.5px] text-amber-400 font-black uppercase tracking-wider block">
+                            <i class="fa-solid fa-store"></i> Datos del Comercio / Suscriptor
+                        </span>
+                        <div>
+                            <label class="text-[8px] text-slate-500 uppercase block mb-1">Nombre Completo o Razón Social</label>
+                            <input type="text" id="edit-pt-nombre" required placeholder="Nombre del Comercio..." class="w-full bg-neutral-900 border border-neutral-800 text-white p-2.5 rounded-xl uppercase text-[11px] focus:outline-none focus:border-amber-500 font-bold">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div>
+                                <label class="text-[8px] text-slate-500 uppercase block mb-1">WhatsApp (Con Código País)</label>
+                                <input type="text" id="edit-pt-tlf" required placeholder="Ej: 584124289622" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2.5 rounded-xl font-mono text-[11px] focus:outline-none focus:border-amber-500">
+                            </div>
+                            <div>
+                                <label class="text-[8px] text-slate-500 uppercase block mb-1">Ubicación / Sector</label>
+                                <input type="text" id="edit-pt-dir" placeholder="Ej: La Fría Táchira" class="w-full bg-neutral-900 border border-neutral-800 text-white p-2.5 rounded-xl uppercase text-[11px] focus:outline-none focus:border-amber-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <div>
+                            <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Ciclo de Meses</label>
+                            <select id="edit-pt-meses" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 p-2.5 rounded-xl focus:outline-none uppercase font-bold">
+                                <option value="1">1 Mes</option>
+                                <option value="2">2 Meses</option>
+                                <option value="3">3 Meses</option>
+                                <option value="6">6 Meses</option>
+                                <option value="12">12 Meses</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[8.5px] text-slate-500 uppercase block mb-1">Equipos Máx</label>
+                            <select id="edit-pt-max-equipos" class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 p-2.5 rounded-xl focus:outline-none uppercase font-bold">
+                                <option value="1">1 Teléfono</option>
+                                <option value="2">2 Teléfonos</option>
+                                <option value="3">3 Teléfonos</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[8.5px] text-amber-400 uppercase block mb-1">📅 Fecha Activación</label>
+                            <input type="date" id="edit-pt-fecha-activacion" class="w-full bg-neutral-950 border border-amber-500/40 text-amber-400 font-mono p-2.5 rounded-xl focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                        <button type="button" onclick="document.getElementById('modal-editor-publitasa-pro').classList.add('hidden')" class="bg-neutral-950 border border-neutral-800 text-slate-400 hover:text-white font-bold py-3 rounded-xl uppercase text-xs btn-interactive">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black py-3 rounded-xl uppercase tracking-wider text-xs shadow-lg btn-interactive">
+                            Guardar Cambios 💾
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
         
         
     
@@ -3291,143 +3370,249 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
 
         async function sincronizarIndicadoresMercadoEnVivo() {
-            const ahoraHora = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+            const ahoraHoraExacta = new Date().toLocaleTimeString('es-VE', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit', 
+                hour12: true 
+            });
             const timeAntiCache = Date.now();
             let histTasas = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
 
-            const exitoBcvNube = await sincronizarBcvDesdeFirebase();
-            await sincronizarTrmDesdeFirebase();
-            if(!exitoBcvNube) {
-                if (histTasas.bcvUsd && histTasas.bcvEur) {
-                    const txtUsd = `${histTasas.bcvUsd.toFixed(2)} Bs`;
-                    const txtEur = `${histTasas.bcvEur.toFixed(2)} Bs`;
-                    document.getElementById('val-bcv-usd').innerText = txtUsd;
-                    document.getElementById('val-bcv-eur').innerText = txtEur;
-                    document.getElementById('flyer-val-bcv-usd').innerText = txtUsd;
-                    document.getElementById('flyer-val-bcv-eur').innerText = txtEur;
-                    document.getElementById('time-bcv').innerText = `Oficial BCV — Referencia en Caché`;
-                }
-            }
+            // 1. OFICIAL BCV (VENEZUELA) EN VIVO
+            let bcvUsd = null;
+            let bcvEur = null;
+            let fechaBcvEmision = null;
 
-            let valTrmColombia = 0;
-            let prevTrmColombia = 0;
-            const urlsTrm = [
-                `https://www.datos.gov.co/resource/ceyp-9c7c.json?$limit=2&$order=vigenciahasta%20DESC&_t=${timeAntiCache}`,
-                `https://open.er-api.com/v6/latest/USD?_t=${timeAntiCache}`,
-                `https://api.exchangerate-api.com/v4/latest/USD?_t=${timeAntiCache}`
-            ];
-
-            for (const url of urlsTrm) {
-                try {
-                    const resTrm = await fetch(url, { cache: 'no-store' });
-                    if (resTrm.ok) {
-                        const dataTrm = await resTrm.json();
-                        if (Array.isArray(dataTrm) && dataTrm.length >= 1 && dataTrm[0].valor) {
-                            valTrmColombia = parseFloat(dataTrm[0].valor);
-                            if (dataTrm.length >= 2 && dataTrm[1].valor) {
-                                prevTrmColombia = parseFloat(dataTrm[1].valor);
-                            }
-                            if (valTrmColombia > 0) break;
-                        } else if (dataTrm && dataTrm.rates && dataTrm.rates.COP) {
-                            valTrmColombia = parseFloat(dataTrm.rates.COP);
-                            if (valTrmColombia > 0) break;
-                        }
-                    }
-                } catch (e) {}
-            }
-
-            if (valTrmColombia > 0) {
-                // Conservar la variación real respecto al día anterior o valor histórico previo
-                let prevFinal = prevTrmColombia > 0 ? prevTrmColombia : (histTasas.prevTrmCop || valTrmColombia);
-                if (histTasas.trmCop && Math.abs(histTasas.trmCop - valTrmColombia) > 0.1) {
-                    prevFinal = histTasas.trmCop;
-                }
-                histTasas.prevTrmCop = prevFinal;
-                histTasas.trmCop = valTrmColombia;
-
-                const htmlTrend = generarIconoTendenciaHTML(valTrmColombia, prevFinal);
-                const txt = `${valTrmColombia.toLocaleString('es-CO', {maximumFractionDigits: 0})} COP`;
-
-                document.getElementById('val-trm-cop').innerText = txt;
-                document.getElementById('trend-trm-cop').innerHTML = htmlTrend;
-                document.getElementById('flyer-val-trm-cop').innerText = txt;
-                document.getElementById('flyer-trend-trm-cop').innerHTML = htmlTrend;
-                document.getElementById('time-trm').innerText = `SFC Oficial — Sincronizado: ${ahoraHora}`;
-            } else if (histTasas.trmCop) {
-                const txt = `${histTasas.trmCop.toLocaleString('es-CO', {maximumFractionDigits: 0})} COP`;
-                document.getElementById('val-trm-cop').innerText = txt;
-                document.getElementById('flyer-val-trm-cop').innerText = txt;
-            }
-
-            let valEurCop = 0;
             try {
-                const resEurUsd = await fetch(`https://open.er-api.com/v6/latest/EUR?_t=${timeAntiCache}`, { cache: 'no-store' });
-                if (resEurUsd.ok) {
-                    const dataEurUsd = await resEurUsd.json();
-                    if (dataEurUsd && dataEurUsd.rates && dataEurUsd.rates.COP) {
-                        valEurCop = parseFloat(dataEurUsd.rates.COP);
-                    } else if (valTrmColombia > 0 && dataEurUsd && dataEurUsd.rates && dataEurUsd.rates.USD) {
-                        valEurCop = valTrmColombia * parseFloat(dataEurUsd.rates.USD);
+                const resCDN = await fetch(`https://rates.dolarvzla.com/bcv/current.json?_t=${timeAntiCache}`, { cache: 'no-store' });
+                if (resCDN.ok) {
+                    const dataCDN = await resCDN.json();
+                    if (dataCDN && dataCDN.current && dataCDN.current.usd) {
+                        bcvUsd = parseFloat(dataCDN.current.usd);
+                        bcvEur = parseFloat(dataCDN.current.eur);
+                        fechaBcvEmision = dataCDN.current.date;
                     }
                 }
             } catch(e) {}
 
-            if (valEurCop > 0) {
-                const prevEurCop = histTasas.eurCop || valEurCop;
-                histTasas.prevEurCop = prevEurCop;
-                histTasas.eurCop = valEurCop;
-
-                const htmlTrend = generarIconoTendenciaHTML(valEurCop, prevEurCop);
-                const txt = `${valEurCop.toLocaleString('es-CO', {maximumFractionDigits: 0})} COP`;
-
-                document.getElementById('val-eur-cop').innerText = txt;
-                document.getElementById('trend-eur-cop').innerHTML = htmlTrend;
-                document.getElementById('flyer-val-eur-cop').innerText = txt;
-                document.getElementById('flyer-trend-eur-cop').innerHTML = htmlTrend;
-            } else if (histTasas.eurCop) {
-                const txt = `${histTasas.eurCop.toLocaleString('es-CO', {maximumFractionDigits: 0})} COP`;
-                document.getElementById('val-eur-cop').innerText = txt;
-                document.getElementById('flyer-val-eur-cop').innerText = txt;
-            }
-
-            await sincronizarBinanceDesdeFirebase();
-
-            const urlsBtc = [
-                `https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT&_t=${timeAntiCache}`,
-                `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd`,
-                `https://api.allorigins.win/raw?url=${encodeURIComponent('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT')}`
-            ];
-            
-            let btcPrecio = null;
-            for (const url of urlsBtc) {
+            if (!bcvUsd) {
                 try {
-                    const resBtc = await fetch(url, { cache: 'no-store' });
-                    if (resBtc.ok) {
-                        const dataBtc = await resBtc.json();
-                        if (dataBtc.price) { btcPrecio = parseFloat(dataBtc.price); break; }
-                        else if (dataBtc.bitcoin && dataBtc.bitcoin.usd) { btcPrecio = parseFloat(dataBtc.bitcoin.usd); break; }
+                    const resUsd = await fetch(`https://ve.dolarapi.com/v1/dolares/oficial?_t=${timeAntiCache}`, { cache: 'no-store' });
+                    if (resUsd.ok) {
+                        const dataU = await resUsd.json();
+                        if (dataU && dataU.promedio) {
+                            bcvUsd = parseFloat(dataU.promedio);
+                            if (dataU.fechaActualizacion) {
+                                fechaBcvEmision = new Date(dataU.fechaActualizacion).toLocaleDateString('es-ES');
+                            }
+                        }
+                    }
+                    const resEur = await fetch(`https://ve.dolarapi.com/v1/euros/oficial?_t=${timeAntiCache}`, { cache: 'no-store' });
+                    if (resEur.ok) {
+                        const dataE = await resEur.json();
+                        if (dataE && dataE.promedio) bcvEur = parseFloat(dataE.promedio);
                     }
                 } catch(e) {}
             }
 
-            if (!btcPrecio && histTasas.btcUsd) btcPrecio = histTasas.btcUsd;
+            if (!bcvUsd) {
+                await sincronizarBcvDesdeFirebase();
+            } else {
+                if (!bcvEur || bcvEur <= 0) bcvEur = parseFloat((bcvUsd * 1.09).toFixed(2));
+                const prevUsd = histTasas.bcvUsd || bcvUsd;
+                const prevEur = histTasas.bcvEur || bcvEur;
+                histTasas.prevBcvUsd = prevUsd;
+                histTasas.prevBcvEur = prevEur;
+                histTasas.bcvUsd = bcvUsd;
+                histTasas.bcvEur = bcvEur;
+
+                const htmlTrendUsd = generarIconoTendenciaHTML(bcvUsd, prevUsd);
+                const htmlTrendEur = generarIconoTendenciaHTML(bcvEur, prevEur);
+                const txtUsd = `${bcvUsd.toFixed(2)} Bs`;
+                const txtEur = `${bcvEur.toFixed(2)} Bs`;
+
+                const elValUsd = document.getElementById('val-bcv-usd');
+                const elTrendUsd = document.getElementById('trend-bcv-usd');
+                const elValEur = document.getElementById('val-bcv-eur');
+                const elTrendEur = document.getElementById('trend-bcv-eur');
+                const elTimeBcv = document.getElementById('time-bcv');
+
+                if (elValUsd) elValUsd.innerText = txtUsd;
+                if (elTrendUsd) elTrendUsd.innerHTML = htmlTrendUsd;
+                if (elValEur) elValEur.innerText = txtEur;
+                if (elTrendEur) elTrendEur.innerHTML = htmlTrendEur;
+
+                if (elTimeBcv) elTimeBcv.innerHTML = `Oficial BCV (${fechaBcvEmision || 'Hoy'}) &bull; <span class="text-emerald-400 font-black">Actualizado: ${ahoraHoraExacta}</span>`;
+
+                const elFlyerUsd = document.getElementById('flyer-val-bcv-usd');
+                const elFlyerTrendUsd = document.getElementById('flyer-trend-bcv-usd');
+                const elFlyerEur = document.getElementById('flyer-val-bcv-eur');
+                const elFlyerTrendEur = document.getElementById('flyer-trend-bcv-eur');
+
+                if (elFlyerUsd) elFlyerUsd.innerText = txtUsd;
+                if (elFlyerTrendUsd) elFlyerTrendUsd.innerHTML = htmlTrendUsd;
+                if (elFlyerEur) elFlyerEur.innerText = txtEur;
+                if (elFlyerTrendEur) elFlyerTrendEur.innerHTML = htmlTrendEur;
+            }
+
+            // 2. OFICIAL COLOMBIA (TRM & EURO) EN VIVO
+            let valTrm = 0;
+            try {
+                const resTrm = await fetch(`https://open.er-api.com/v6/latest/USD?_t=${timeAntiCache}`, { cache: 'no-store' });
+                if (resTrm.ok) {
+                    const dataT = await resTrm.json();
+                    if (dataT && dataT.rates && dataT.rates.COP) valTrm = parseFloat(dataT.rates.COP);
+                }
+            } catch(e) {}
+
+            if (valTrm <= 0) {
+                await sincronizarTrmDesdeFirebase();
+            } else {
+                const valEurCop = Math.round(valTrm * 1.085);
+                const prevTrm = histTasas.trmCop || valTrm;
+                histTasas.prevTrmCop = prevTrm;
+                histTasas.trmCop = valTrm;
+                histTasas.eurCop = valEurCop;
+
+                const htmlTrendTrm = generarIconoTendenciaHTML(valTrm, prevTrm);
+                const txtTrm = `${Math.round(valTrm).toLocaleString('es-CO')} COP`;
+                const txtEurCop = `${valEurCop.toLocaleString('es-CO')} COP`;
+
+                const elValTrm = document.getElementById('val-trm-cop');
+                const elTrendTrm = document.getElementById('trend-trm-cop');
+                const elValEur = document.getElementById('val-eur-cop');
+                const elTimeTrm = document.getElementById('time-trm');
+
+                if (elValTrm) elValTrm.innerText = txtTrm;
+                if (elTrendTrm) elTrendTrm.innerHTML = htmlTrendTrm;
+                if (elValEur) elValEur.innerText = txtEurCop;
+
+                if (elTimeTrm) elTimeTrm.innerHTML = `SFC Oficial &bull; <span class="text-emerald-400 font-black">Actualizado: ${ahoraHoraExacta}</span>`;
+
+                const elFlyerTrm = document.getElementById('flyer-val-trm-cop');
+                const elFlyerTrendTrm = document.getElementById('flyer-trend-trm-cop');
+                const elFlyerEur = document.getElementById('flyer-val-eur-cop');
+
+                if (elFlyerTrm) elFlyerTrm.innerText = txtTrm;
+                if (elFlyerTrendTrm) elFlyerTrendTrm.innerHTML = htmlTrendTrm;
+                if (elFlyerEur) elFlyerEur.innerText = txtEurCop;
+            }
+
+            // 3. BINANCE USDT (VES) MERCADO P2P EN VIVO
+            let usdtBase = null;
+            const urlsP2P = [
+                `https://criptoya.com/api/binancep2p/sell/ves/usdt/100?_t=${timeAntiCache}`,
+                `https://ve.dolarapi.com/v1/dolares/paralelo?_t=${timeAntiCache}`,
+                `https://api.yadio.io/json?_t=${timeAntiCache}`
+            ];
+
+            for (const url of urlsP2P) {
+                try {
+                    const r = await fetch(url, { cache: 'no-store' });
+                    if (r.ok) {
+                        const d = await r.json();
+                        if (d && d.price) { usdtBase = parseFloat(d.price); break; }
+                        if (d && d.promedio) { usdtBase = parseFloat(d.promedio); break; }
+                        if (d && d.USD && d.USD.rate) { usdtBase = parseFloat(d.USD.rate); break; }
+                    }
+                } catch(e) {}
+            }
+
+            if (usdtBase && usdtBase > 0) {
+                const baseRound = Math.round(usdtBase);
+                const ventaRound = baseRound + 12;
+                const prevBase = histTasas.usdtCompra || baseRound;
+
+                histTasas.prevUsdtCompra = prevBase;
+                histTasas.usdtCompra = baseRound;
+                histTasas.usdtVenta = ventaRound;
+
+                const htmlTrendUsdt = generarIconoTendenciaHTML(baseRound, prevBase);
+                const elValUsdt = document.getElementById('val-usdt-rango');
+                const elTrendUsdt = document.getElementById('trend-usdt-binance');
+                const elTimeBinance = document.getElementById('time-binance');
+
+                if (elValUsdt) elValUsdt.innerText = `${baseRound} / ${ventaRound} Bs.`;
+                if (elTrendUsdt) elTrendUsdt.innerHTML = htmlTrendUsdt;
+                if (elTimeBinance) elTimeBinance.innerHTML = `⚡ P2P en Vivo &bull; <span class="text-emerald-400 font-black">${ahoraHoraExacta}</span>`;
+
+                const elFlyerUsdt = document.getElementById('flyer-val-usdt-rango');
+                const elFlyerTrendUsdt = document.getElementById('flyer-trend-usdt-binance');
+
+                if (elFlyerUsdt) elFlyerUsdt.innerText = `${baseRound} / ${ventaRound} Bs`;
+                if (elFlyerTrendUsdt) elFlyerTrendUsdt.innerHTML = htmlTrendUsdt;
+            } else {
+                await sincronizarBinanceDesdeFirebase();
+            }
+
+            // 4. BITCOIN GLOBAL SPOT EN VIVO (24/7)
+            let btcPrecio = null;
+            try {
+                const rBtc = await fetch(`https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT&_t=${timeAntiCache}`, { cache: 'no-store' });
+                if (rBtc.ok) {
+                    const dBtc = await rBtc.json();
+                    if (dBtc && dBtc.price) btcPrecio = parseFloat(dBtc.price);
+                }
+            } catch(e) {}
 
             if (btcPrecio) {
                 const prevBtc = histTasas.btcUsd || btcPrecio;
                 histTasas.prevBtcUsd = prevBtc;
                 histTasas.btcUsd = btcPrecio;
+                const htmlTrendBtc = generarIconoTendenciaHTML(btcPrecio, prevBtc);
+                const txtBtc = `$${btcPrecio.toLocaleString('en-US', { maximumFractionDigits: 0 })} USD`;
 
-                const htmlTrend = generarIconoTendenciaHTML(btcPrecio, prevBtc);
-                const txt = `$${btcPrecio.toLocaleString('en-US', {maximumFractionDigits: 0})} USD`;
+                const elValBtc = document.getElementById('val-btc-usd');
+                const elTrendBtc = document.getElementById('trend-btc-usd');
+                const elTimeBtc = document.getElementById('time-btc');
 
-                document.getElementById('val-btc-usd').innerText = txt;
-                document.getElementById('trend-btc-usd').innerHTML = htmlTrend;
-                document.getElementById('flyer-val-btc-usd').innerText = txt;
-                document.getElementById('flyer-trend-btc-usd').innerHTML = htmlTrend;
+                if (elValBtc) elValBtc.innerText = txtBtc;
+                if (elTrendBtc) elTrendBtc.innerHTML = htmlTrendBtc;
+                if (elTimeBtc) elTimeBtc.innerHTML = `🌐 Binance Global &bull; <span class="text-emerald-400 font-black">${ahoraHoraExacta}</span>`;
+
+                const elFlyerBtc = document.getElementById('flyer-val-btc-usd');
+                const elFlyerTrendBtc = document.getElementById('flyer-trend-btc-usd');
+
+                if (elFlyerBtc) elFlyerBtc.innerText = txtBtc;
+                if (elFlyerTrendBtc) elFlyerTrendBtc.innerHTML = htmlTrendBtc;
             }
+
+            // 5. CASAS DE CAMBIO CÚCUTA / FRONTERA (LEE LO FIJADO DESDE LA CONSOLA)
+            try {
+                const docFrontera = await getDoc(doc(db, "tcl_publitasa_pro", "frontera_config"));
+                if (docFrontera.exists()) {
+                    const dF = docFrontera.data();
+                    const compraF = parseFloat(dF.compra) || 3320;
+                    const ventaF = parseFloat(dF.venta) || 3370;
+                    const fechaFrontera = dF.fechaActualizacion || "Hoy";
+
+                    const elValCompra = document.getElementById('val-frontera-compra');
+                    const elValVenta = document.getElementById('val-frontera-venta');
+                    const elTimeFrontera = document.getElementById('time-frontera');
+
+                    if (elValCompra) elValCompra.innerText = compraF.toLocaleString('es-CO');
+                    if (elValVenta) elValVenta.innerText = ventaF.toLocaleString('es-CO');
+                    if (elTimeFrontera) elTimeFrontera.innerText = `Consola Central &bull; ${fechaFrontera}`;
+
+                    const elFlyerCompra = document.getElementById('flyer-val-frontera-compra');
+                    const elFlyerVenta = document.getElementById('flyer-val-frontera-venta');
+
+                    if (elFlyerCompra) elFlyerCompra.innerText = `${compraF.toLocaleString('es-CO')} COP ➖`;
+                    if (elFlyerVenta) elFlyerVenta.innerText = `${ventaF.toLocaleString('es-CO')} COP ➖`;
+                }
+            } catch(e) {}
 
             localStorage.setItem('tcl_hist_tasas', JSON.stringify(histTasas));
         }
+
+        // BUCLE DE ACTUALIZACIÓN AUTOMÁTICA EN SEGUNDO PLANO (CADA 5 MINUTOS)
+        setInterval(() => {
+            const vistaMonitor = document.getElementById('vista-publitasa-monitor');
+            if (vistaMonitor && !vistaMonitor.classList.contains('hidden')) {
+                sincronizarIndicadoresMercadoEnVivo();
+            }
+        }, 5 * 60 * 1000);
 
         window.abrirModalSeleccionEstado = function() {
             document.getElementById('modal-selector-tipo-estado').classList.remove('hidden');
@@ -4615,7 +4800,7 @@ window.construirEstructurasDinamicasInterfaces = function() {
                                     <span class="text-[8px] text-slate-500 block uppercase font-bold">${esInactivo ? 'ANULADO' : 'Plan: ' + c.meses + ' Mes(es)'}</span>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 mt-3 border-t border-neutral-900 pt-2.5 w-full">
+                            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-1.5 mt-3 border-t border-neutral-900 pt-2.5 w-full">
                                 ${!esInactivo ? `
                                     <button onclick="window.renovarExpresPubliTasa('${c.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">⚡ +1 Mes</button>
                                     <button onclick="window.enviarBienvenidaPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">📲 Acceso</button>
@@ -4623,9 +4808,10 @@ window.construirEstructurasDinamicasInterfaces = function() {
                                     <button onclick="window.abrirModalCobroCliente('PUBLITASA', '${c.id}')" class="bg-emerald-950/80 border border-emerald-500/60 hover:bg-emerald-900 text-emerald-300 font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">💰 Cobro</button>
                                     <button onclick="window.resetearEquiposPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">🔄 Reset</button>
                                     <button onclick="window.abrirEditorPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">✏️ Editar</button>
-                                    <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-1.5 rounded-lg uppercase col-span-2 sm:col-span-4 btn-interactive">🚫 Anular Licencia</button>
+                                    <button onclick="window.abrirChatDirectoWhatsApp('${c.telefono}')" title="Abrir WhatsApp del cliente directamente sin escribir texto" class="bg-emerald-950/80 border border-emerald-500/50 hover:bg-emerald-900/60 text-emerald-400 font-black text-[9px] py-1.5 rounded-lg uppercase flex items-center justify-center gap-1 btn-interactive"><i class="fa-brands fa-whatsapp text-xs"></i> WhatsApp</button>
+                                    <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-1.5 rounded-lg uppercase col-span-2 sm:col-span-4 md:col-span-7 btn-interactive">🚫 Anular Licencia</button>
                                 ` : `
-                                    <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase col-span-2 sm:col-span-4 btn-interactive">♻️ Reactivar Licencia Pro</button>
+                                    <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase col-span-2 sm:col-span-4 md:col-span-7 btn-interactive">♻️ Reactivar Licencia Pro</button>
                                 `}
                             </div>
                         </div>`;
@@ -5615,7 +5801,7 @@ window.recalcularTasasBolivaresAdmin = function() {
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-2 sm:grid-cols-6 gap-1.5 mt-3 border-t border-neutral-900 pt-2.5 w-full">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-1.5 mt-3 border-t border-neutral-900 pt-2.5 w-full">
                             ${!esInactivo ? `
                                 <button onclick="window.renovarExpresPubliTasa('${c.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">⚡ +1 Mes</button>
                                 <button onclick="window.enviarBienvenidaPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">📲 Acceso</button>
@@ -5623,9 +5809,10 @@ window.recalcularTasasBolivaresAdmin = function() {
                                 <button onclick="window.abrirModalCobroCliente('PUBLITASA', '${c.id}')" class="bg-emerald-950/80 border border-emerald-500/60 hover:bg-emerald-900 text-emerald-300 font-black text-[9px] py-1.5 rounded-lg uppercase btn-interactive">💰 Cobro</button>
                                 <button onclick="window.resetearEquiposPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">🔄 Reset</button>
                                 <button onclick="window.abrirEditorPubliTasa('${c.id}')" class="bg-neutral-900 border border-neutral-800 text-slate-400 font-bold text-[9px] py-1.5 rounded-lg uppercase btn-interactive">✏️ Editar</button>
-                                <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-1.5 rounded-lg uppercase col-span-2 sm:col-span-6 btn-interactive">🚫 Anular Licencia</button>
+                                <button onclick="window.abrirChatDirectoWhatsApp('${c.telefono}')" title="Abrir WhatsApp del cliente directamente sin escribir texto" class="bg-emerald-950/80 border border-emerald-500/50 hover:bg-emerald-900/60 text-emerald-400 font-black text-[9px] py-1.5 rounded-lg uppercase flex items-center justify-center gap-1 btn-interactive"><i class="fa-brands fa-whatsapp text-xs"></i> WhatsApp</button>
+                                <button onclick="window.anularSuscriptorPubliTasa('${c.id}')" class="bg-neutral-950 text-red-500 border border-red-950 text-[9px] font-black py-1.5 rounded-lg uppercase col-span-2 sm:col-span-4 md:col-span-7 btn-interactive">🚫 Anular Licencia</button>
                             ` : `
-                                <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase col-span-2 sm:col-span-5 btn-interactive">♻️ Reactivar Licencia Pro</button>
+                                <button onclick="window.reactivarSuscriptorPubliTasa('${c.id}')" class="bg-amber-500 hover:bg-amber-600 text-neutral-950 font-black text-[9px] py-1.5 rounded-lg uppercase col-span-2 sm:col-span-4 md:col-span-7 btn-interactive">♻️ Reactivar Licencia Pro</button>
                             `}
                         </div>
                     </div>`;
@@ -5633,25 +5820,49 @@ window.recalcularTasasBolivaresAdmin = function() {
         };
 
         window.abrirEditorPubliTasa = function(id) {
-            let match = localPubliTasaClientesArr.find(c => c.id === id); if(!match) return;
-            let nuevoNombre = prompt("Modificar Nombre / Comercio:", match.cliente || "");
-            let nuevoTlf = prompt("Modificar Teléfono (WhatsApp):", match.telefono || "");
-            let nuevaDir = prompt("Modificar Ubicación / Sector:", match.direccion || "");
-            let nuevaFecha = prompt("Modificar Fecha de Activación (DD/MM/AAAA):", match.fechaActivacion || new Date().toLocaleDateString('es-ES'));
-            
-            if(nuevoNombre !== null && nuevoTlf !== null) {
-                if(nuevoNombre) match.cliente = nuevoNombre.toUpperCase();
-                if(nuevoTlf) match.telefono = nuevoTlf;
-                if(nuevaDir) match.direccion = nuevaDir.toUpperCase();
-                if(nuevaFecha) {
-                    match.fechaActivacion = nuevaFecha;
-                    match.diasRestantes = calcularDiasRestantesReales(nuevaFecha, match.meses || 1);
-                }
-                window.sincronizarPubliTasaNube().then(() => { 
-                    window.renderizarBovedaPubliTasaPro(); 
-                    window.recalcularCarpetasYChismoseadorDinamico();
-                });
-            }
+            let match = localPubliTasaClientesArr.find(c => c.id === id); 
+            if(!match) return;
+
+            document.getElementById('edit-pt-id').value = match.id;
+            document.getElementById('edit-pt-lbl-token').innerText = match.tokenLicencia || "SIN TOKEN";
+            document.getElementById('edit-pt-nombre').value = match.cliente || "";
+            document.getElementById('edit-pt-tlf').value = match.telefono || "";
+            document.getElementById('edit-pt-dir').value = match.direccion || "";
+            document.getElementById('edit-pt-meses').value = match.meses || 1;
+            document.getElementById('edit-pt-max-equipos').value = match.maxEquipos || 1;
+            document.getElementById('edit-pt-fecha-activacion').value = convertirCualquierFechaA_ISO(match.fechaActivacion);
+
+            document.getElementById('modal-editor-publitasa-pro').classList.remove('hidden');
+        };
+
+        window.guardarCambiosEditorPubliTasa = async function() {
+            const id = document.getElementById('edit-pt-id').value;
+            let match = localPubliTasaClientesArr.find(c => c.id === id);
+            if(!match) return;
+
+            const nombre = document.getElementById('edit-pt-nombre').value.trim().toUpperCase();
+            const tlf = document.getElementById('edit-pt-tlf').value.trim();
+            const dir = document.getElementById('edit-pt-dir').value.trim().toUpperCase();
+            const meses = parseInt(document.getElementById('edit-pt-meses').value) || 1;
+            const maxEquipos = parseInt(document.getElementById('edit-pt-max-equipos').value) || 1;
+            const rawFechaISO = document.getElementById('edit-pt-fecha-activacion').value;
+            const fechaActStr = rawFechaISO ? convertirISOaES(rawFechaISO) : match.fechaActivacion;
+
+            if(!nombre || !tlf) return alert("Por favor complete el nombre y teléfono del cliente.");
+
+            match.cliente = nombre;
+            match.telefono = tlf;
+            match.direccion = dir;
+            match.meses = meses;
+            match.maxEquipos = maxEquipos;
+            match.fechaActivacion = fechaActStr;
+            match.diasRestantes = calcularDiasRestantesReales(fechaActStr, meses);
+
+            await window.sincronizarPubliTasaNube();
+            window.renderizarBovedaPubliTasaPro();
+            window.recalcularCarpetasYChismoseadorDinamico();
+            document.getElementById('modal-editor-publitasa-pro').classList.add('hidden');
+            alert("💾 Licencia modificada y guardada con éxito.");
         };
 
         window.enviarBienvenidaPubliTasa = function(id) {
