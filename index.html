@@ -2478,6 +2478,14 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        async function calcularHashSHA256(texto) {
+            if (!texto) return '';
+            const msgBuffer = new TextEncoder().encode(texto);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
         const MI_NUMERO_CELULAR_UNICO = "584147357549";
         const URL_VITRINA_OFICIAL = "https://tucocel.github.io/StreamingCorderoMk/";
         const LINK_COMUNIDAD_WHATSAPP = "https://chat.whatsapp.com/H2R94IHBLQhBEthrZcxUHK";
@@ -2634,18 +2642,8 @@
             HBO_MAX: { nombre: "HBO Max", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg", desc: "Series mundiales galardedonas, estrenos de cine de Warner Bros y documentales." }
         };
 
-        let cuentasFijasMasterDict = {
-            NETFLIX: [
-                { id: "net-1", correo: "ServiciosNetflixmk@gmail.com", clave: "razu2020.+" },
-                { id: "net-2", correo: "Netflixmk2026@gmail.com", clave: "razu2020.+" },
-                { id: "net-3", correo: "servicioscorderomk@gmail.com", clave: "Razu0202" },
-                { id: "net-4", correo: "Netflixcorderomk@gmail.com", clave: "Razu0202." }
-            ],
-            TELE_LATINO: [
-                { id: "tl-1", correo: "561157030", clave: "202020" },
-                { id: "tl-2", correo: "610664494", clave: "razu2020" }
-            ]
-        };
+                // Cuentas fijas protegidas: se inicializan vacías y se cargan desde Firestore sin exponer contraseñas en el código fuente
+        let cuentasFijasMasterDict = {};
 
         let tarifasPubliTasaEstructura = { plan1: 5.00, plan2: 8.00, plan3: 12.00 };
         let tarifasCalculadoraEstructura = { plan1: 5.00, plan2: 8.00, plan3: 12.00 };
@@ -2669,8 +2667,11 @@
         let configMonedasVisibles = JSON.parse(localStorage.getItem('tcl_visibilidad_monedas')) || { usdt: true, cop: true, bs: true };
         let soloAlertasTableroBool = false;
         
-        let masterUsuarioIdDinamico = "TUCOCEL";
-        let masterClaveDinamica = "Razu2020.";
+        // Credenciales administrativas protegidas mediante firmas criptográficas SHA-256 (inmunes a 'Ver código fuente')
+        const HASH_MASTER_USER_DEF = "aa9624c200ea774156fbd2ea732d8d3d1c43f7e7441c936381f90929c9904b59";
+        const HASH_MASTER_PASS_DEF = "f59a4c0b11174c113859147ba94a0c637460dfd8b38a9862c18a02b0a946f9ec";
+        let masterUsuarioIdDinamico = "";
+        let masterClaveDinamica = "";
         let conexionNubeSeguraActiva = false;
 
         function actualizarEstadoVisualConexion(exito, mensaje = "") {
@@ -3846,8 +3847,14 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
         window.autenticarClienteMonitorPro = async function() {
             const token = document.getElementById('pt-token-input').value.trim().toUpperCase();
+            const tokenHash = await calcularHashSHA256(token);
+            const esClaveMaster = (masterClaveDinamica && token === masterClaveDinamica.toUpperCase()) || 
+                                  (masterUsuarioIdDinamico && token === masterUsuarioIdDinamico.toUpperCase()) ||
+                                  (tokenHash === HASH_MASTER_USER_DEF) || 
+                                  (tokenHash === "3c5691fa2d034b589d2cee674b1f7314adc7d66e71b5a0b9fd8e624bad4b8376") ||
+                                  (tokenHash === HASH_MASTER_PASS_DEF);
             
-            if(token === masterClaveDinamica.toUpperCase() || token === "TUCOCEL") {
+            if(esClaveMaster) {
                 localStorage.setItem('tcl_pt_active_token', token);
                 document.getElementById('wrapper-login-monitor-pro').classList.add('hidden');
                 document.getElementById('wrapper-indicadores-pantalla').classList.remove('hidden');
@@ -3984,10 +3991,17 @@ window.cambiarParticionAdmin = function(particion) {
             }
         };
 
-        window.validarCredencialesMasterStreaming = function() {
+        window.validarCredencialesMasterStreaming = async function() {
             const user = document.getElementById('master-user-field').value.trim().toUpperCase();
             const pass = document.getElementById('master-pass-field').value.trim();
-            if(user === masterUsuarioIdDinamico && pass === masterClaveDinamica) {
+            
+            const hashUser = await calcularHashSHA256(user);
+            const hashPass = await calcularHashSHA256(pass);
+            
+            const usuarioValido = masterUsuarioIdDinamico ? (user === masterUsuarioIdDinamico.toUpperCase()) : (hashUser === HASH_MASTER_USER_DEF);
+            const passValido = masterClaveDinamica ? (pass === masterClaveDinamica) : (hashPass === HASH_MASTER_PASS_DEF);
+
+            if(usuarioValido && passValido) {
                 esAdminStreamingSession = true;
                 localStorage.setItem('tcl_admin_session_time', Date.now()); // Guarda timestamp de 20 minutos
                 document.getElementById('streaming-modal-login-raiz').classList.add('hidden');
@@ -6077,8 +6091,14 @@ window.recalcularTasasBolivaresAdmin = function() {
 
         window.autenticarClienteCalculadoraMaster = async function() {
             const token = document.getElementById('cm-token-input').value.trim().toUpperCase();
+            const tokenHash = await calcularHashSHA256(token);
+            const esClaveMaster = (masterClaveDinamica && token === masterClaveDinamica.toUpperCase()) || 
+                                  (masterUsuarioIdDinamico && token === masterUsuarioIdDinamico.toUpperCase()) ||
+                                  (tokenHash === HASH_MASTER_USER_DEF) || 
+                                  (tokenHash === "3c5691fa2d034b589d2cee674b1f7314adc7d66e71b5a0b9fd8e624bad4b8376") ||
+                                  (tokenHash === HASH_MASTER_PASS_DEF);
             
-            if(token === masterClaveDinamica.toUpperCase() || token === "TUCOCEL") {
+            if(esClaveMaster) {
                 localStorage.setItem('tcl_cm_active_token', token);
                 document.getElementById('wrapper-login-calculadora-master').classList.add('hidden');
                 document.getElementById('wrapper-cuerpo-calculadora-master').classList.remove('hidden');
