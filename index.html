@@ -4395,10 +4395,10 @@ window.construirEstructurasDinamicasInterfaces = function() {
                 return `
                     <div class="cinema-card rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between min-h-[265px] sm:min-h-[280px] w-full">
                         <div class="space-y-1.5 sm:space-y-2">
-                            <div class="h-10 sm:h-11 flex items-center justify-start overflow-hidden">
-                                ${imgLogo}
+                            <div class="h-10 sm:h-11 flex items-center justify-start logo-container w-full overflow-hidden">
+                                <div class="flex items-center justify-start overflow-hidden w-full">${imgLogo}</div>
                             </div>
-                            <div class="flex items-center justify-between gap-1">
+                            <div class="flex justify-between items-center w-full">
                                 <div class="text-amber-400 text-[8px] sm:text-[9px] flex items-center gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                                 ${badgeMesesHtml}
                             </div>
