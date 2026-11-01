@@ -1238,7 +1238,7 @@
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </button>
                         <div id="acc-add-plataforma" class="hidden p-4 sm:p-5 border-t border-neutral-800 bg-neutral-950/40 space-y-3 text-xs font-bold text-slate-300 w-full">
-                            <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5 w-full">
+                            <div class="grid grid-cols-1 sm:grid-cols-5 gap-2.5 w-full">
                                 <div>
                                     <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">ID Único (Ej: VIX, SPOTIFY)</label>
                                     <input type="text" id="new-plat-id" placeholder="ID..." class="w-full bg-neutral-950 border border-neutral-800 p-2 rounded-xl text-white font-mono uppercase">
@@ -1250,6 +1250,10 @@
                                 <div>
                                     <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Precio USDT</label>
                                     <input type="number" id="new-plat-precio" value="5.00" step="0.1" class="w-full bg-neutral-950 border border-neutral-800 p-2 rounded-xl text-white font-mono">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-[8.5px] text-amber-400 uppercase font-black">Duración (Meses)</label>
+                                    <input type="number" id="new-plat-meses" value="1" min="1" max="24" class="w-full bg-neutral-950 border border-amber-500/50 p-2 rounded-xl text-amber-300 font-mono font-bold">
                                 </div>
                                 <div>
                                     <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">URL Logo (Opcional)</label>
@@ -2423,6 +2427,63 @@
 
     <!-- LÓGICA CORE FIREBASE & APIS EN VIVO BLINDADAS -->
     
+    
+    <!-- MODAL CONFIGURAR DURACIÓN EN MESES DE PLATAFORMA -->
+    <div id="modal-configurar-meses-tarifa" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[99995] p-4 hidden flex items-center justify-center overflow-y-auto">
+        <div class="bg-neutral-900 border border-neutral-800 w-full max-w-sm rounded-3xl p-5 space-y-4 shadow-2xl my-auto">
+            <div class="flex justify-between items-center border-b border-neutral-800 pb-2.5">
+                <h3 class="font-black text-xs sm:text-sm uppercase tracking-wider text-amber-400 flex items-center gap-2">
+                    <i class="fa-regular fa-calendar-days text-amber-400"></i> Duración de la Membresía
+                </h3>
+                <button type="button" onclick="document.getElementById('modal-configurar-meses-tarifa').classList.add('hidden')" class="text-slate-400 hover:text-white bg-neutral-950 border border-neutral-800 w-7 h-7 rounded-xl flex items-center justify-center btn-interactive">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+
+            <div class="bg-neutral-950 p-3 rounded-2xl border border-neutral-800 text-center space-y-1">
+                <span class="text-[8.5px] text-slate-400 uppercase font-mono block">Plataforma Seleccionada:</span>
+                <h4 id="modal-meses-plat-nombre" class="text-sm font-black text-white uppercase truncate">CANVA</h4>
+                <p id="modal-meses-plat-precio" class="text-[10.5px] text-emerald-400 font-mono font-bold">Precio actual: 9.00 USDT</p>
+                <input type="hidden" id="modal-meses-plat-key">
+            </div>
+
+            <p class="text-[10px] text-slate-300 font-medium leading-relaxed text-center">
+                Selecciona la cantidad de meses que cubre este precio para que se especifique con total claridad en la lista de WhatsApp y vitrina:
+            </p>
+
+            <!-- BOTONES RÁPIDOS 1 A 12 MESES EN GRILLA ELEGANTE 4x3 -->
+            <div id="modal-meses-grid-botones" class="grid grid-cols-4 gap-1.5 font-mono text-center">
+                <button type="button" onclick="window.seleccionarMesEnModal(1)" class="btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 p-2 rounded-xl text-xs font-bold btn-interactive" data-mes="1">1 Mes</button>
+                <button type="button" onclick="window.seleccionarMesEnModal(2)" class="btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 p-2 rounded-xl text-xs font-bold btn-interactive" data-mes="2">2 Meses</button>
+                <button type="button" onclick="window.seleccionarMesEnModal(3)" class="btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 p-2 rounded-xl text-xs font-bold btn-interactive" data-mes="3">3 Meses</button>
+                <button type="button" onclick="window.seleccionarMesEnModal(4)" class="btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 p-2 rounded-xl text-xs font-bold btn-interactive" data-mes="4">4 Meses</button>
+                <button type="button" onclick="window.seleccionarMesEnModal(5)" class="btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 p-2 rounded-xl text-xs font-bold btn-interactive" data-mes="5">5 Meses</button>
+                <button type="button" onclick="window.seleccionarMesEnModal(6)" class="btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 p-2 rounded-xl text-xs font-bold btn-interactive" data-mes="6">6 Meses</button>
+                <button type="button" onclick="window.seleccionarMesEnModal(7)" class="btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 p-2 rounded-xl text-xs font-bold btn-interactive" data-mes="7">7 Meses</button>
+                <button type="button" onclick="window.seleccionarMesEnModal(8)" class="btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 p-2 rounded-xl text-xs font-bold btn-interactive" data-mes="8">8 Meses</button>
+                <button type="button" onclick="window.seleccionarMesEnModal(9)" class="btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 p-2 rounded-xl text-xs font-bold btn-interactive" data-mes="9">9 Meses</button>
+                <button type="button" onclick="window.seleccionarMesEnModal(10)" class="btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 p-2 rounded-xl text-xs font-bold btn-interactive" data-mes="10">10 Meses</button>
+                <button type="button" onclick="window.seleccionarMesEnModal(11)" class="btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 p-2 rounded-xl text-xs font-bold btn-interactive" data-mes="11">11 Meses</button>
+                <button type="button" onclick="window.seleccionarMesEnModal(12)" class="btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 p-2 rounded-xl text-xs font-bold btn-interactive" data-mes="12">12 Meses</button>
+            </div>
+
+            <!-- ENTRADA MANUAL POR SI DESEA MÁS MESES -->
+            <div class="flex items-center gap-2 bg-neutral-950 p-2.5 rounded-xl border border-neutral-800">
+                <span class="text-[9px] text-slate-400 uppercase font-bold shrink-0">O escribe número:</span>
+                <input type="number" id="in-modal-meses-custom" min="1" max="36" value="1" oninput="window.alEscribirMesManual(this.value)" class="w-full bg-neutral-900 border border-neutral-700 text-amber-400 font-mono text-center font-black p-1.5 rounded-lg text-xs focus:outline-none focus:border-amber-500">
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 pt-1 font-bold">
+                <button type="button" onclick="document.getElementById('modal-configurar-meses-tarifa').classList.add('hidden')" class="w-full bg-neutral-950 border border-neutral-800 text-slate-400 hover:text-white py-2.5 rounded-xl uppercase text-xs btn-interactive">
+                    Cancelar
+                </button>
+                <button type="button" onclick="window.aplicarMesesDesdeModal()" class="w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black py-2.5 rounded-xl uppercase tracking-wider text-xs shadow-lg btn-interactive">
+                    Aplicar Meses 💾
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL GLOBAL ADMINISTRATIVO: ENVIAR LISTA DE PRECIOS Y CUENTAS POR WHATSAPP -->
     <div id="modal-lista-precios-wa" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[99990] p-4 hidden flex items-center justify-center overflow-y-auto">
         <div class="bg-neutral-900 border border-neutral-800 w-full max-w-lg rounded-3xl p-5 sm:p-6 space-y-4 shadow-2xl my-auto">
@@ -2637,7 +2698,7 @@
             TELE_LATINO: { nombre: "Tele Latino", precio: 5.00, logo: "", desc: "Programación en vivo, canales de deportes, series de estreno y películas sin límites." },
             FLUJO_TV: { nombre: "Flujo TV", precio: 5.00, logo: "", desc: "Parrilla premium fluida de canales de televisión abierta, deportes e infantiles en vivo." },
             XUPER_TV: { nombre: "Xuper TV", precio: 5.00, logo: "", desc: "Televisión digital por IP estable con películas, series y eventos especiales continuos." },
-            DISNEY: { nombre: "Disney+", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", desc: "Contenido infantil y familiar de Pixar, Marvel, Star Wars y transmisiones de ESPN." },
+            DISNEY: { nombre: "Disney+", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", desc: "Contenido infantil y familiar de Pixar, Marvel, Star Wars y transmisiones de ESPN.", meses: 1 },
             AMAZON: { nombre: "Amazon Prime", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg", desc: "Series y películas originales de taquilla, deportes y transmisiones exclusivas Prime." },
             HBO_MAX: { nombre: "HBO Max", precio: 4.50, logo: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg", desc: "Series mundiales galardedonas, estrenos de cine de Warner Bros y documentales." }
         };
@@ -4062,6 +4123,8 @@ window.cambiarParticionAdmin = function(particion) {
             const id = idInput.value.trim().toUpperCase();
             const nombre = nombreInput.value.trim();
             const precio = parseFloat(precioInput.value) || 5.00;
+            const mesesInput = document.getElementById('new-plat-meses');
+            const meses = parseInt(mesesInput ? mesesInput.value : 1) || 1;
             let logo = logoInput.value.trim();
             const desc = descInput.value.trim();
 
@@ -4074,7 +4137,7 @@ window.cambiarParticionAdmin = function(particion) {
                 logo = "https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg";
             }
 
-            catalogoPlataformasEstructura[id] = { nombre, precio, logo, desc };
+            catalogoPlataformasEstructura[id] = { nombre, precio, logo, desc, meses };
             
             if(!ORDEN_PLATAFORMAS_ESTATICO.includes(id)) {
                 ORDEN_PLATAFORMAS_ESTATICO.push(id);
@@ -4092,6 +4155,7 @@ window.cambiarParticionAdmin = function(particion) {
                 idInput.value = "";
                 nombreInput.value = "";
                 precioInput.value = "5.00";
+                if (mesesInput) mesesInput.value = "1";
                 logoInput.value = "";
                 descInput.value = "";
 
@@ -4110,6 +4174,7 @@ La plataforma [${nombre}] fue inyectada, guardada en la base de datos y publicad
                 idInput.value = "";
                 nombreInput.value = "";
                 precioInput.value = "5.00";
+                if (mesesInput) mesesInput.value = "1";
                 logoInput.value = "";
                 descInput.value = "";
                 const acordeonCrear = document.getElementById('acc-add-plataforma');
@@ -4324,10 +4389,16 @@ window.construirEstructurasDinamicasInterfaces = function() {
                     filasPreciosHtml = itemsFilas.join('');
                 }
 
+                const mesesPlan = item.meses || 1;
+                const badgeMesesHtml = `<span class="bg-neutral-900 border border-amber-500/40 text-amber-300 text-[8px] sm:text-[8.5px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider font-mono shrink-0 shadow-sm" title="Duración del servicio: ${mesesPlan} ${mesesPlan === 1 ? 'Mes' : 'Meses'}"><i class="fa-regular fa-clock text-[7.5px] mr-0.5"></i> ${mesesPlan} ${mesesPlan === 1 ? 'Mes' : 'Meses'}</span>`;
+
                 return `
                     <div class="cinema-card rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between min-h-[265px] sm:min-h-[280px] w-full">
                         <div class="space-y-1.5 sm:space-y-2">
-                            <div class="h-10 sm:h-11 flex items-center justify-start logo-container">${imgLogo}</div>
+                            <div class="h-10 sm:h-11 flex items-center justify-between logo-container gap-1.5">
+                                <div class="flex items-center justify-start overflow-hidden">${imgLogo}</div>
+                                ${badgeMesesHtml}
+                            </div>
                             <div class="text-amber-400 text-[8px] sm:text-[9px] flex items-center gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                             <p class="text-[9.5px] sm:text-[10.5px] text-slate-400 leading-tight font-medium min-h-[38px]">${item.desc}</p>
                         </div>
@@ -4343,13 +4414,27 @@ window.construirEstructurasDinamicasInterfaces = function() {
                     </div>`;
             };
 
-            // Helper para renderizar celda de plataforma en regulador
-            const renderCeldaTarifador = (k, item) => `
-                <div class="bg-neutral-950 p-2 rounded-xl border border-neutral-800">
-                    <span class="block text-[8.5px] text-slate-400 font-bold uppercase truncate">${item.nombre}</span>
-                    <input type="number" id="cfg-p-${k}" value="${item.precio}" step="0.1" class="w-full bg-transparent font-bold text-xs text-white focus:outline-none" onkeyup="window.recalcularTasasBolivaresAdmin()">
+            // Helper para renderizar celda de plataforma en regulador con selector modal de meses
+            const renderCeldaTarifador = (k, item) => {
+                const numMeses = item.meses || 1;
+                const txtMeses = numMeses === 1 ? '1 Mes' : `${numMeses} Meses`;
+                return `
+                <div class="bg-neutral-950 p-2.5 rounded-2xl border border-neutral-800 space-y-1 shadow-sm">
+                    <div class="flex justify-between items-center gap-1">
+                        <span class="block text-[8.5px] text-slate-400 font-bold uppercase truncate">${item.nombre}</span>
+                        <button type="button" onclick="window.abrirModalConfigurarMeses('${k}')" class="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 font-mono text-[8px] font-black px-1.5 py-0.5 rounded-md flex items-center gap-1 transition-all btn-interactive" title="Cambiar duración en meses">
+                            <i class="fa-regular fa-calendar-days text-[7.5px]"></i>
+                            <span id="lbl-meses-${k}">${txtMeses}</span>
+                        </button>
+                    </div>
+                    <div class="flex items-center gap-1 bg-neutral-900 px-2 py-0.5 rounded-xl border border-neutral-800 focus-within:border-amber-500">
+                        <input type="number" id="cfg-p-${k}" value="${item.precio}" step="0.1" class="w-full bg-transparent font-bold text-xs text-white focus:outline-none font-mono" onkeyup="window.recalcularTasasBolivaresAdmin()">
+                        <span class="text-[8px] text-slate-400 font-mono font-bold">USDT</span>
+                    </div>
+                    <input type="hidden" id="cfg-m-${k}" value="${numMeses}">
                     <span class="block text-[8px] text-emerald-400 font-mono mt-0.5" id="bs-p-${k}">${(item.precio * tasaUsdtActualSincro).toFixed(2)} Bs | ${Math.round(item.precio * tasaUsdtCopActualSincro).toLocaleString('es-CO')} COP</span>
                 </div>`;
+            };
 
             // 1. CONSTRUCCIÓN CON ORDEN ESTÁTICO (NETFLIX #1 SIEMPRE)
             ORDEN_PLATAFORMAS_ESTATICO.forEach(k => {
@@ -5445,6 +5530,8 @@ window.recalcularTasasBolivaresAdmin = function() {
                 Object.keys(catalogoPlataformasEstructura).forEach(k => {
                     const input = document.getElementById(`cfg-p-${k}`);
                     if(input) catalogoPlataformasEstructura[k].precio = parseFloat(input.value) || 5.00;
+                    const inputM = document.getElementById(`cfg-m-${k}`);
+                    if(inputM) catalogoPlataformasEstructura[k].meses = parseInt(inputM.value) || 1;
                 });
 
                 // Sincronizar PubliTasa Pro si se modificó en el regulador
@@ -7489,6 +7576,101 @@ window.pintarTasasInmediatasDesdeCache = function() {
         };
 
         
+        
+        // ==================== LÓGICA DE GESTIÓN MODAL DE MESES ====================
+        let platKeyEnEdicionMeses = null;
+
+        window.abrirModalConfigurarMeses = function(platKey) {
+            platKeyEnEdicionMeses = platKey;
+            const item = catalogoPlataformasEstructura[platKey];
+            if (!item) return;
+
+            const modal = document.getElementById('modal-configurar-meses-tarifa');
+            const lblNombre = document.getElementById('modal-meses-plat-nombre');
+            const lblPrecio = document.getElementById('modal-meses-plat-precio');
+            const inKey = document.getElementById('modal-meses-plat-key');
+            const inCustom = document.getElementById('in-modal-meses-custom');
+
+            if (lblNombre) lblNombre.innerText = item.nombre;
+            if (lblPrecio) lblPrecio.innerText = `Precio actual: ${item.precio.toFixed(2)} USDT`;
+            if (inKey) inKey.value = platKey;
+
+            const mesesActuales = item.meses || 1;
+            if (inCustom) inCustom.value = mesesActuales;
+
+            window.actualizarResaltadoBotonesMeses(mesesActuales);
+
+            if (modal) modal.classList.remove('hidden');
+        };
+
+        window.actualizarResaltadoBotonesMeses = function(mesSeleccionado) {
+            const btns = document.querySelectorAll('.btn-mes-rapido');
+            btns.forEach(btn => {
+                const mesBtn = parseInt(btn.getAttribute('data-mes'));
+                if (mesBtn === parseInt(mesSeleccionado)) {
+                    btn.className = "btn-mes-rapido bg-amber-500 border-2 border-white text-neutral-950 p-2 rounded-xl text-xs font-black shadow-lg btn-interactive";
+                } else {
+                    btn.className = "btn-mes-rapido bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 text-slate-200 hover:text-white p-2 rounded-xl text-xs font-bold btn-interactive";
+                }
+            });
+        };
+
+        window.seleccionarMesEnModal = function(mes) {
+            const inCustom = document.getElementById('in-modal-meses-custom');
+            if (inCustom) inCustom.value = mes;
+            window.actualizarResaltadoBotonesMeses(mes);
+        };
+
+        window.alEscribirMesManual = function(val) {
+            const num = parseInt(val) || 1;
+            window.actualizarResaltadoBotonesMeses(num);
+        };
+
+        window.aplicarMesesDesdeModal = async function() {
+            if (!platKeyEnEdicionMeses) return;
+            const inCustom = document.getElementById('in-modal-meses-custom');
+            const numMeses = Math.max(1, parseInt(inCustom ? inCustom.value : 1) || 1);
+
+            if (catalogoPlataformasEstructura[platKeyEnEdicionMeses]) {
+                catalogoPlataformasEstructura[platKeyEnEdicionMeses].meses = numMeses;
+            }
+
+            // Actualizar etiqueta del botón en el card del regulador
+            const lbl = document.getElementById(`lbl-meses-${platKeyEnEdicionMeses}`);
+            if (lbl) {
+                lbl.innerText = numMeses === 1 ? '1 Mes' : `${numMeses} Meses`;
+            }
+
+            // Actualizar input oculto
+            const hiddenInput = document.getElementById(`cfg-m-${platKeyEnEdicionMeses}`);
+            if (hiddenInput) hiddenInput.value = numMeses;
+
+            // Cerrar modal
+            const modal = document.getElementById('modal-configurar-meses-tarifa');
+            if (modal) modal.classList.add('hidden');
+
+            // Guardar automáticamente en Firebase Firestore para blindar el cambio
+            try {
+                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), {
+                    catalogo: catalogoPlataformasEstructura,
+                    tasaUsdt: tasaUsdtActualSincro,
+                    tasaUsdtCop: tasaUsdtCopActualSincro,
+                    ultimaActualizacion: Date.now()
+                });
+                console.log(`Meses de ${platKeyEnEdicionMeses} guardados en Firebase:`, numMeses);
+            } catch(e) {
+                console.warn("Fallo guardado de meses en Firebase:", e);
+            }
+
+            // Reconstruir vitrina y lista de precios con el nuevo valor
+            window.construirEstructurasDinamicasInterfaces();
+
+            const nomPlat = catalogoPlataformasEstructura[platKeyEnEdicionMeses]?.nombre || platKeyEnEdicionMeses;
+            alert(`✅ ¡Duración asignada con éxito!
+
+${nomPlat} quedó configurado para ${numMeses} ${numMeses === 1 ? 'Mes' : 'Meses'}. Ahora se verá reflejado en la vitrina y en la lista de WhatsApp.`);
+        };
+
         window.armarMensajeListaPreciosTexto = function() {
             const urlWebOficial = "https://tucocel.github.io/StreamingCorderoMk/#";
             
@@ -7507,7 +7689,9 @@ window.pintarTasasInmediatasDesdeCache = function() {
                     const pUsdt = item.precio.toFixed(2);
                     const pCop = Math.round(item.precio * tasaUsdtCopActualSincro).toLocaleString('es-CO');
                     const pBs = (item.precio * tasaUsdtActualSincro).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    msg += `▪️ *${item.nombre}:*\n` +
+                    const duracionM = item.meses || 1;
+                    const duracionTxt = duracionM === 1 ? '1 Mes' : `${duracionM} Meses`;
+                    msg += `▪️ *${item.nombre}* (${duracionTxt}):\n` +
                            `   💵 *${pUsdt} USDT* | 🇨🇴 *${pCop} COP* | 🇻🇪 *${pBs} Bs*\n\n`;
                 }
             });
