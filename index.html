@@ -1256,8 +1256,14 @@
                                     <input type="number" id="new-plat-meses" value="1" min="1" max="24" class="w-full bg-neutral-950 border border-amber-500/50 p-2 rounded-xl text-amber-300 font-mono font-bold">
                                 </div>
                                 <div>
-                                    <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">URL Logo (Opcional)</label>
-                                    <input type="text" id="new-plat-logo" placeholder="Link de imagen..." class="w-full bg-neutral-950 border border-neutral-800 p-2 rounded-xl text-white font-mono">
+                                    <label class="block mb-1 text-[8.5px] text-slate-500 uppercase">Logo (Subir archivo o Link)</label>
+                                    <div class="flex gap-1.5">
+                                        <input type="file" id="in-file-logo-auto" accept="image/*" class="hidden" onchange="window.procesarYLimpiarLogoAuto(event)">
+                                        <button type="button" onclick="document.getElementById('in-file-logo-auto').click()" class="bg-neutral-800 hover:bg-neutral-700 text-amber-400 border border-neutral-700 text-[10px] px-2.5 py-2 rounded-xl font-black uppercase shrink-0 btn-interactive flex items-center gap-1" title="Cargar y recortar fondo automáticamente">
+                                            <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> Auto-Logo
+                                        </button>
+                                        <input type="text" id="new-plat-logo" placeholder="O pega link directo..." class="w-full bg-neutral-950 border border-neutral-800 p-2 rounded-xl text-white font-mono text-xs">
+                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -2428,7 +2434,66 @@
     <!-- LÓGICA CORE FIREBASE & APIS EN VIVO BLINDADAS -->
     
     
-    <!-- MODAL CONFIGURAR DURACIÓN EN MESES DE PLATAFORMA -->
+        <!-- MODAL EDITAR SERVICIO DE LA VITRINA -->
+    <div id="modal-editor-servicio-catalogo" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[99996] p-4 hidden flex items-center justify-center overflow-y-auto">
+        <div class="bg-neutral-900 border border-neutral-800 w-full max-w-md rounded-3xl p-5 space-y-4 shadow-2xl my-auto">
+            <div class="flex justify-between items-center border-b border-neutral-800 pb-2.5">
+                <h3 id="modal-editor-servicio-titulo" class="font-black text-xs sm:text-sm uppercase tracking-wider text-amber-400 flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square text-amber-400"></i> Editar Servicio de Vitrina
+                </h3>
+                <button type="button" onclick="document.getElementById('modal-editor-servicio-catalogo').classList.add('hidden')" class="text-slate-400 hover:text-white bg-neutral-950 border border-neutral-800 w-7 h-7 rounded-xl flex items-center justify-center btn-interactive">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+
+            <form onsubmit="event.preventDefault(); window.guardarCambiosEditorServicio();" class="space-y-3 text-xs font-bold text-slate-300">
+                <input type="hidden" id="edit-plat-key">
+
+                <div>
+                    <label class="text-[8.5px] text-slate-400 uppercase block mb-1">Nombre Comercial</label>
+                    <input type="text" id="edit-plat-nombre" required placeholder="Ej: Netflix, Gemini Pro..." class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl uppercase text-xs focus:outline-none focus:border-amber-500 font-bold">
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="text-[8.5px] text-slate-400 uppercase block mb-1">Precio USDT</label>
+                        <input type="number" id="edit-plat-precio" step="0.1" required class="w-full bg-neutral-950 border border-neutral-800 text-amber-400 font-mono text-xs p-2.5 rounded-xl focus:outline-none focus:border-amber-500 font-bold">
+                    </div>
+                    <div>
+                        <label class="text-[8.5px] text-slate-400 uppercase block mb-1">Duración (Meses)</label>
+                        <input type="number" id="edit-plat-meses" min="1" max="36" required class="w-full bg-neutral-950 border border-neutral-800 text-emerald-400 font-mono text-xs p-2.5 rounded-xl focus:outline-none focus:border-emerald-500 font-bold">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-[8.5px] text-slate-400 uppercase block mb-1">Logo (Subir archivo o Link)</label>
+                    <div class="flex gap-1.5">
+                        <input type="file" id="in-file-logo-edit" accept="image/*" class="hidden" onchange="window.procesarYLimpiarLogoAutoEdit(event)">
+                        <button type="button" onclick="document.getElementById('in-file-logo-edit').click()" class="bg-neutral-800 hover:bg-neutral-700 text-amber-400 border border-neutral-700 text-[10px] px-2.5 py-2 rounded-xl font-black uppercase shrink-0 btn-interactive flex items-center gap-1" title="Cargar y recortar fondo automáticamente">
+                            <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> Auto-Logo
+                        </button>
+                        <input type="text" id="edit-plat-logo" placeholder="O pega link directo..." class="w-full bg-neutral-950 border border-neutral-800 p-2 rounded-xl text-white font-mono text-xs">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-[8.5px] text-slate-400 uppercase block mb-1">Descripción de la Tarjeta</label>
+                    <textarea id="edit-plat-desc" rows="3" required placeholder="Descripción del servicio..." class="w-full bg-neutral-950 border border-neutral-800 text-white p-2.5 rounded-xl text-xs focus:outline-none focus:border-amber-500 leading-relaxed resize-y"></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 pt-1 font-bold">
+                    <button type="button" onclick="document.getElementById('modal-editor-servicio-catalogo').classList.add('hidden')" class="w-full bg-neutral-950 border border-neutral-800 text-slate-400 hover:text-white py-2.5 rounded-xl uppercase text-xs btn-interactive">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="w-full bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-neutral-950 font-black py-2.5 rounded-xl uppercase tracking-wider text-xs shadow-lg btn-interactive">
+                        Guardar Cambios 💾
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<!-- MODAL CONFIGURAR DURACIÓN EN MESES DE PLATAFORMA -->
     <div id="modal-configurar-meses-tarifa" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[99995] p-4 hidden flex items-center justify-center overflow-y-auto">
         <div class="bg-neutral-900 border border-neutral-800 w-full max-w-sm rounded-3xl p-5 space-y-4 shadow-2xl my-auto">
             <div class="flex justify-between items-center border-b border-neutral-800 pb-2.5">
@@ -4113,6 +4178,211 @@ window.cambiarParticionAdmin = function(particion) {
             }
         };
 
+                window.procesarYLimpiarLogoAuto = function(event) {
+            const archivo = event.target.files && event.target.files[0];
+            if (!archivo) return;
+
+            if (archivo.type === "image/svg+xml") {
+                const lector = new FileReader();
+                lector.onload = (e) => {
+                    const inLogo = document.getElementById('new-plat-logo');
+                    if (inLogo) inLogo.value = e.target.result;
+                    alert("✅ Logo SVG cargado con éxito.");
+                };
+                lector.readAsDataURL(archivo);
+                return;
+            }
+
+            const lector = new FileReader();
+            lector.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ANCHO_MAESTRO = 160;
+                    const ALTO_MAESTRO = 40;
+                    canvas.width = ANCHO_MAESTRO;
+                    canvas.height = ALTO_MAESTRO;
+                    const ctx = canvas.getContext('2d');
+
+                    const ratio = Math.min(ANCHO_MAESTRO / img.width, ALTO_MAESTRO / img.height);
+                    const wFinal = img.width * ratio;
+                    const hFinal = img.height * ratio;
+                    const xOffset = (ANCHO_MAESTRO - wFinal) / 2;
+                    const yOffset = (ALTO_MAESTRO - hFinal) / 2;
+
+                    ctx.clearRect(0, 0, ANCHO_MAESTRO, ALTO_MAESTRO);
+                    ctx.drawImage(img, xOffset, yOffset, wFinal, hFinal);
+
+                    try {
+                        const imgData = ctx.getImageData(0, 0, ANCHO_MAESTRO, ALTO_MAESTRO);
+                        const data = imgData.data;
+                        for (let i = 0; i < data.length; i += 4) {
+                            const r = data[i];
+                            const g = data[i + 1];
+                            const b = data[i + 2];
+                            if (r > 225 && g > 225 && b > 225) {
+                                data[i + 3] = 0;
+                            }
+                        }
+                        ctx.putImageData(imgData, 0, 0);
+                    } catch(err) {
+                        console.warn("Filtro croma omitido:", err);
+                    }
+
+                    const base64Comprimido = canvas.toDataURL('image/png');
+                    const inLogo = document.getElementById('new-plat-logo');
+                    if (inLogo) inLogo.value = base64Comprimido;
+                    alert("✨ ¡Logo procesado! Fondo eliminado y escalado a la proporción estándar.");
+                };
+                img.src = e.target.result;
+            };
+            lector.readAsDataURL(archivo);
+        };
+
+        
+        window.procesarYLimpiarLogoAutoEdit = function(event) {
+            const archivo = event.target.files && event.target.files[0];
+            if (!archivo) return;
+
+            if (archivo.type === "image/svg+xml") {
+                const lector = new FileReader();
+                lector.onload = (e) => {
+                    const inLogo = document.getElementById('edit-plat-logo');
+                    if (inLogo) inLogo.value = e.target.result;
+                    alert("✅ Logo SVG cargado con éxito.");
+                };
+                lector.readAsDataURL(archivo);
+                return;
+            }
+
+            const lector = new FileReader();
+            lector.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ANCHO_MAESTRO = 160;
+                    const ALTO_MAESTRO = 40;
+                    canvas.width = ANCHO_MAESTRO;
+                    canvas.height = ALTO_MAESTRO;
+                    const ctx = canvas.getContext('2d');
+
+                    const ratio = Math.min(ANCHO_MAESTRO / img.width, ALTO_MAESTRO / img.height);
+                    const wFinal = img.width * ratio;
+                    const hFinal = img.height * ratio;
+                    const xOffset = (ANCHO_MAESTRO - wFinal) / 2;
+                    const yOffset = (ALTO_MAESTRO - hFinal) / 2;
+
+                    ctx.clearRect(0, 0, ANCHO_MAESTRO, ALTO_MAESTRO);
+                    ctx.drawImage(img, xOffset, yOffset, wFinal, hFinal);
+
+                    try {
+                        const imgData = ctx.getImageData(0, 0, ANCHO_MAESTRO, ALTO_MAESTRO);
+                        const data = imgData.data;
+                        for (let i = 0; i < data.length; i += 4) {
+                            const r = data[i];
+                            const g = data[i + 1];
+                            const b = data[i + 2];
+                            if (r > 225 && g > 225 && b > 225) {
+                                data[i + 3] = 0;
+                            }
+                        }
+                        ctx.putImageData(imgData, 0, 0);
+                    } catch(err) {
+                        console.warn("Filtro croma omitido:", err);
+                    }
+
+                    const base64Comprimido = canvas.toDataURL('image/png');
+                    const inLogo = document.getElementById('edit-plat-logo');
+                    if (inLogo) inLogo.value = base64Comprimido;
+                    alert("✨ ¡Logo procesado! Fondo eliminado y escalado a la proporción estándar.");
+                };
+                img.src = e.target.result;
+            };
+            lector.readAsDataURL(archivo);
+        };
+
+        window.abrirModalEditorServicio = function(platKey) {
+            const item = catalogoPlataformasEstructura[platKey];
+            if(!item) return;
+
+            document.getElementById('edit-plat-key').value = platKey;
+            document.getElementById('edit-plat-nombre').value = item.nombre || "";
+            document.getElementById('edit-plat-desc').value = item.desc || "";
+            document.getElementById('edit-plat-logo').value = item.logo || "";
+            document.getElementById('edit-plat-precio').value = item.precio || 5.00;
+            document.getElementById('edit-plat-meses').value = item.meses || 1;
+            document.getElementById('modal-editor-servicio-titulo').innerHTML = `<i class="fa-solid fa-pen-to-square text-amber-400"></i> Editar Servicio: ${item.nombre}`;
+
+            document.getElementById('modal-editor-servicio-catalogo').classList.remove('hidden');
+        };
+
+        window.guardarCambiosEditorServicio = async function() {
+            const k = document.getElementById('edit-plat-key').value;
+            if(!k || !catalogoPlataformasEstructura[k]) return;
+            
+            const nombre = document.getElementById('edit-plat-nombre').value.trim();
+            const desc = document.getElementById('edit-plat-desc').value.trim();
+            const logo = document.getElementById('edit-plat-logo').value.trim();
+            const precio = parseFloat(document.getElementById('edit-plat-precio').value) || 5.00;
+            const meses = parseInt(document.getElementById('edit-plat-meses').value) || 1;
+
+            if(!nombre || !desc) return alert("Por favor complete el nombre y la descripción.");
+
+            catalogoPlataformasEstructura[k].nombre = nombre;
+            catalogoPlataformasEstructura[k].desc = desc;
+            catalogoPlataformasEstructura[k].logo = logo;
+            catalogoPlataformasEstructura[k].precio = precio;
+            catalogoPlataformasEstructura[k].meses = meses;
+
+            try {
+                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), { 
+                    catalogo: catalogoPlataformasEstructura, 
+                    tasaUsdt: tasaUsdtActualSincro,
+                    tasaUsdtCop: tasaUsdtCopActualSincro,
+                    ultimaActualizacion: Date.now()
+                });
+                document.getElementById('modal-editor-servicio-catalogo').classList.add('hidden');
+                window.construirEstructurasDinamicasInterfaces();
+                alert(`✅ Servicio [${nombre}] actualizado con éxito.`);
+            } catch(e) {
+                document.getElementById('modal-editor-servicio-catalogo').classList.add('hidden');
+                window.construirEstructurasDinamicasInterfaces();
+                alert(`✨ Servicio [${nombre}] actualizado localmente.`);
+            }
+        };
+
+        window.eliminarServicioDelCatalogo = async function(platKey) {
+            const item = catalogoPlataformasEstructura[platKey];
+            if(!item) return;
+
+            if(!confirm(`⚠️ ¿Estás seguro de que deseas ELIMINAR permanentemente la plataforma [${item.nombre}] de la vitrina?\n\nEsta acción quitará la tarjeta de la vitrina pública y de los selectores.\n(Los clientes existentes en la bóveda no se borrarán).`)) {
+                return;
+            }
+
+            delete catalogoPlataformasEstructura[platKey];
+
+            const idx = ORDEN_PLATAFORMAS_ESTATICO.indexOf(platKey);
+            if(idx > -1) {
+                ORDEN_PLATAFORMAS_ESTATICO.splice(idx, 1);
+            }
+
+            try {
+                await setDoc(doc(db, "tcl_streaming_core", "tarifas_config"), { 
+                    catalogo: catalogoPlataformasEstructura, 
+                    tasaUsdt: tasaUsdtActualSincro,
+                    tasaUsdtCop: tasaUsdtCopActualSincro,
+                    ultimaActualizacion: Date.now()
+                });
+                window.construirEstructurasDinamicasInterfaces();
+                window.renderizarMonitorMembresiasAdmin();
+                alert(`🗑️ Plataforma [${item.nombre}] eliminada con éxito de la vitrina.`);
+            } catch(e) {
+                window.construirEstructurasDinamicasInterfaces();
+                window.renderizarMonitorMembresiasAdmin();
+                alert(`✨ Plataforma [${item.nombre}] eliminada localmente.`);
+            }
+        };
+
         window.ejecutarCreacionAutonomaNuevaPlataforma = async function() {
             const idInput = document.getElementById('new-plat-id');
             const nombreInput = document.getElementById('new-plat-nombre');
@@ -4340,7 +4610,7 @@ window.construirEstructurasDinamicasInterfaces = function() {
                 const precioBs = item.precio * tasaUsdtActualSincro;
                 const precioCop = Math.round(item.precio * tasaUsdtCopActualSincro);
 
-                let imgLogo = (item.logo && item.logo.trim().startsWith("http")) 
+                let imgLogo = (item.logo && (item.logo.trim().startsWith("http") || item.logo.trim().startsWith("data:image/"))) 
                     ? `<img src="${item.logo}" alt="${item.nombre}" class="h-6 object-contain max-h-6" onerror="this.outerHTML=\'<span class=\\'text-white font-black text-xs bg-gradient-to-r from-red-600 to-neutral-800 px-2.5 py-1 rounded-lg uppercase truncate max-w-full inline-block\\'>${item.nombre}</span>\'">` 
                     : `<span class="text-white font-black text-xs bg-gradient-to-r from-red-600 to-neutral-800 px-2.5 py-1 rounded-lg uppercase truncate max-w-full inline-block">${item.nombre}</span>`;
 
@@ -4421,20 +4691,30 @@ window.construirEstructurasDinamicasInterfaces = function() {
                 const numMeses = item.meses || 1;
                 const txtMeses = numMeses === 1 ? '1 Mes' : `${numMeses} Meses`;
                 return `
-                <div class="bg-neutral-950 p-2.5 rounded-2xl border border-neutral-800 space-y-1 shadow-sm">
-                    <div class="flex justify-between items-center gap-1">
-                        <span class="block text-[8.5px] text-slate-400 font-bold uppercase truncate">${item.nombre}</span>
-                        <button type="button" onclick="window.abrirModalConfigurarMeses('${k}')" class="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 font-mono text-[8px] font-black px-1.5 py-0.5 rounded-md flex items-center gap-1 transition-all btn-interactive" title="Cambiar duración en meses">
-                            <i class="fa-regular fa-calendar-days text-[7.5px]"></i>
-                            <span id="lbl-meses-${k}">${txtMeses}</span>
+                <div class="bg-neutral-950 p-2.5 rounded-2xl border border-neutral-800 space-y-1.5 shadow-sm flex flex-col justify-between">
+                    <div class="space-y-1">
+                        <div class="flex justify-between items-center gap-1">
+                            <span class="block text-[8.5px] text-slate-300 font-bold uppercase truncate" title="${item.nombre}">${item.nombre}</span>
+                            <button type="button" onclick="window.abrirModalConfigurarMeses('${k}')" class="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 font-mono text-[8px] font-black px-1.5 py-0.5 rounded-md flex items-center gap-1 transition-all btn-interactive shrink-0" title="Cambiar duración en meses">
+                                <i class="fa-regular fa-calendar-days text-[7.5px]"></i>
+                                <span id="lbl-meses-${k}">${txtMeses}</span>
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-1 bg-neutral-900 px-2 py-0.5 rounded-xl border border-neutral-800 focus-within:border-amber-500">
+                            <input type="number" id="cfg-p-${k}" value="${item.precio}" step="0.1" class="w-full bg-transparent font-bold text-xs text-white focus:outline-none font-mono" onkeyup="window.recalcularTasasBolivaresAdmin()">
+                            <span class="text-[8px] text-slate-400 font-mono font-bold">USDT</span>
+                        </div>
+                        <input type="hidden" id="cfg-m-${k}" value="${numMeses}">
+                        <span class="block text-[8px] text-emerald-400 font-mono mt-0.5" id="bs-p-${k}">${(item.precio * tasaUsdtActualSincro).toFixed(2)} Bs | ${Math.round(item.precio * tasaUsdtCopActualSincro).toLocaleString('es-CO')} COP</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-1 pt-1 border-t border-neutral-900">
+                        <button type="button" onclick="window.abrirModalEditorServicio('${k}')" class="bg-neutral-900 hover:bg-neutral-800 text-amber-400 border border-neutral-800 hover:border-amber-500/40 text-[8px] font-bold py-1 px-1 rounded-lg uppercase transition-all flex items-center justify-center gap-1 btn-interactive" title="Editar nombre, logo y descripción">
+                            <i class="fa-solid fa-pen text-[7.5px]"></i> Editar
+                        </button>
+                        <button type="button" onclick="window.eliminarServicioDelCatalogo('${k}')" class="bg-neutral-900 hover:bg-red-950/60 text-slate-400 hover:text-red-400 border border-neutral-800 hover:border-red-500/40 text-[8px] font-bold py-1 px-1 rounded-lg uppercase transition-all flex items-center justify-center gap-1 btn-interactive" title="Eliminar servicio de la vitrina">
+                            <i class="fa-solid fa-trash text-[7.5px]"></i> Borrar
                         </button>
                     </div>
-                    <div class="flex items-center gap-1 bg-neutral-900 px-2 py-0.5 rounded-xl border border-neutral-800 focus-within:border-amber-500">
-                        <input type="number" id="cfg-p-${k}" value="${item.precio}" step="0.1" class="w-full bg-transparent font-bold text-xs text-white focus:outline-none font-mono" onkeyup="window.recalcularTasasBolivaresAdmin()">
-                        <span class="text-[8px] text-slate-400 font-mono font-bold">USDT</span>
-                    </div>
-                    <input type="hidden" id="cfg-m-${k}" value="${numMeses}">
-                    <span class="block text-[8px] text-emerald-400 font-mono mt-0.5" id="bs-p-${k}">${(item.precio * tasaUsdtActualSincro).toFixed(2)} Bs | ${Math.round(item.precio * tasaUsdtCopActualSincro).toLocaleString('es-CO')} COP</span>
                 </div>`;
             };
 
@@ -4458,13 +4738,22 @@ window.construirEstructurasDinamicasInterfaces = function() {
                 }
             });
 
-            // 2.1 TARJETA ESPECIAL: EN ESPERA DE NUEVO SERVICIO (LLENA ESPACIOS VACÍOS PARA SIMETRÍA 4X2)
+                        // 2.1 TARJETA ESPECIAL RESPONSIVA (AUTO-AJUSTE PERFECTO EN MÓVIL Y PC)
             if(vitrina) {
                 const totalTarjetas = Object.keys(catalogoPlataformasEstructura).length;
-                // Si hay 7 plataformas (o número impar / no múltiplo de 4), mostramos la tarjeta de nuevo servicio
-                if (totalTarjetas % 4 !== 0 || totalTarjetas === 7) {
+                const faltaEnMovil = (totalTarjetas % 2 !== 0); // En móvil (2 cols), si es impar falta 1 para completar fila
+                const sobranteEnPC = totalTarjetas % 4; // En PC (4 cols)
+                const faltaEnPC = sobranteEnPC === 0 ? 0 : (4 - sobranteEnPC);
+
+                // Solo se dibuja si falta espacio en celular O falta espacio en PC
+                if (faltaEnMovil || faltaEnPC > 0) {
+                    let claseVisibilidadMovil = faltaEnMovil ? "flex" : "hidden md:flex";
+                    let claseSpanPC = "md:col-span-1";
+                    if (faltaEnPC === 2) claseSpanPC = "md:col-span-2";
+                    if (faltaEnPC === 3) claseSpanPC = "md:col-span-3";
+
                     vitrina.innerHTML += `
-                        <div class="cinema-card rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between min-h-[265px] sm:min-h-[280px] w-full border border-dashed border-amber-500/40 bg-gradient-to-b from-neutral-900/60 via-[#0a0a14] to-neutral-950/90 shadow-xl">
+                        <div class="cinema-card rounded-2xl p-3.5 sm:p-4 ${claseVisibilidadMovil} ${claseSpanPC} flex-col justify-between min-h-[265px] sm:min-h-[280px] w-full border border-dashed border-amber-500/40 bg-gradient-to-b from-neutral-900/60 via-[#0a0a14] to-neutral-950/90 shadow-xl">
                             <div class="space-y-1.5 sm:space-y-2">
                                 <div class="h-9 sm:h-10 flex items-center justify-start">
                                     <span class="text-amber-300 border border-amber-500/50 bg-amber-950/40 font-black text-xs px-2.5 py-1 rounded-lg uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
