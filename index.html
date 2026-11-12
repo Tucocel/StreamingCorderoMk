@@ -2174,8 +2174,18 @@
                 <span id="nq-hist-saldo-badge" class="text-sm sm:text-base font-black">$0 COP</span>
             </div>
 
+            <!-- PESTAÑAS DE SEPARACIÓN: CICLO ACTIVO VS CAJA LIQUIDADA -->
+            <div class="grid grid-cols-2 gap-2 bg-neutral-950 p-1.5 rounded-2xl border border-neutral-800 text-[10px] font-black uppercase tracking-wider">
+                <button type="button" id="nq-tab-ciclo-activo" onclick="window.cambiarTabHistorialNequi('ACTIVO')" class="py-2 px-2.5 rounded-xl bg-emerald-600 text-white shadow-md flex items-center justify-center gap-1.5 transition-all btn-interactive">
+                    <i class="fa-solid fa-bolt"></i> <span id="nq-lbl-tab-activo">Ciclo Activo (0)</span>
+                </button>
+                <button type="button" id="nq-tab-caja-liquidada" onclick="window.cambiarTabHistorialNequi('LIQUIDADA')" class="py-2 px-2.5 rounded-xl bg-neutral-900 text-amber-400 border border-neutral-800 hover:border-amber-500/40 flex items-center justify-center gap-1.5 transition-all btn-interactive">
+                    <i class="fa-solid fa-box-archive"></i> <span id="nq-lbl-tab-liquidada">Caja Liquidada (0)</span>
+                </button>
+            </div>
+
             <!-- CONTENEDOR CON SCROLL DE MOVIMIENTOS -->
-            <div id="nq-hist-lista-movimientos" class="space-y-2 overflow-y-auto pr-1 no-scrollbar flex-1 max-h-[50vh]">
+            <div id="nq-hist-lista-movimientos" class="space-y-2.5 overflow-y-auto pr-1 no-scrollbar flex-1 max-h-[48vh]">
             </div>
 
             <div class="pt-2 border-t border-neutral-800 flex justify-end">
@@ -5416,6 +5426,20 @@ window.construirEstructurasDinamicasInterfaces = function() {
                         `🍿 ¡Gracias por mantener su servicio al día y preferirnos! Disfrute su entretenimiento.\n` +
                         `🔗 ${URL_VITRINA_OFICIAL}${RESPALDO_FIRMA_WHATSAPP}`;
             }
+            if(tipo === 'MODIFICACION') {
+                text = `🔄 *ACTUALIZACIÓN DE CREDENCIALES / CAMBIO DE CUENTA — STREAMING CORDERO MK* 🛠️\n\n` +
+                       `Hola *${match.cliente}*, te informamos que se ha realizado una *actualización en los datos de acceso* de tu membresía de *${nombrePlat}* para mantener la estabilidad de tu servicio. ✨\n\n` +
+                       `🔐 *NUEVAS CREDENCIALES DE ACCESO:*\n`;
+                if(match.correo) text += `📧 *Correo / Cuenta ID:* \`${match.correo}\`\n`;
+                text += `🔑 *Contraseña / Clave:* \`${match.clave}\`\n`;
+                if(match.perfil) text += `👤 *Perfil Asignado:* *${match.perfil}*\n`;
+                if(match.pin && match.pin.trim()) text += `📌 *PIN Perfil:* *${match.pin}*\n`;
+                text += `\n📅 *Fecha de Activación:* ${fAct}\n` +
+                        `✂️ *Fecha de Renovación:* ${fVencExacta} *(tu tiempo vigente se mantiene intacto)*\n\n` +
+                        `⚠️ *Nota:* Por favor ingresa con estos nuevos datos de acceso.\n\n` +
+                        `${REGLAS_DE_ORO_TEXTO}\n\n` +
+                        `🔗 Vitrina Digital Oficial:\n${URL_VITRINA_OFICIAL}${RESPALDO_FIRMA_WHATSAPP}`;
+            }
 
             abrirWhatsAppPersonal(match.telefono, text);
         };
@@ -5678,7 +5702,7 @@ window.construirEstructurasDinamicasInterfaces = function() {
             document.getElementById('modal-editor-cliente-streaming').classList.add('hidden');
 
             if(enviarWhatsApp) {
-                window.despacharMensajeWhatsAppStreaming(match.id, 'ACTIVACION');
+                window.despacharMensajeWhatsAppStreaming(match.id, 'MODIFICACION');
             } else {
                 alert("💾 Membresía modificada y guardada con éxito.");
             }
@@ -7154,7 +7178,9 @@ window.recalcularTasasBolivaresAdmin = function() {
             document.getElementById('modal-operacion-nequi').classList.remove('hidden');
         };
 
+        let procesandoOpNequiLock = false;
         window.procesarOperacionNequi = async function(enviarWA) {
+            if(procesandoOpNequiLock) return;
             const cliId = document.getElementById('nq-op-cli-id').value;
             const tipo = document.getElementById('nq-op-tipo').value;
             const monto = parsearMontoCOP(document.getElementById('nq-op-monto-input').value);
@@ -7172,15 +7198,21 @@ window.recalcularTasasBolivaresAdmin = function() {
                 saldoPosterior = saldoPrevio + monto;
             } else {
                 if(monto > saldoPrevio) {
-                    const confirmar = confirm(`⚠️ ATENCIÓN:
-
-El monto a retirar ($${monto.toLocaleString('es-CO')} COP) supera el saldo disponible actual ($${saldoPrevio.toLocaleString('es-CO')} COP).
-
-¿Deseas permitir que la cuenta quede con saldo en contra ($${(saldoPrevio - monto).toLocaleString('es-CO')} COP)?`);
-                    if(!confirmar) return;
+                    const confirmarSobre = confirm(`⚠️ ATENCIÓN:\n\nEl monto a retirar ($${monto.toLocaleString('es-CO')} COP) supera el saldo disponible actual ($${saldoPrevio.toLocaleString('es-CO')} COP).\n\n¿Deseas permitir que la cuenta quede con saldo en contra ($${(saldoPrevio - monto).toLocaleString('es-CO')} COP)?`);
+                    if(!confirmarSobre) return;
                 }
                 saldoPosterior = saldoPrevio - monto;
             }
+
+            const etiquetaTipoOp = tipo === 'INGRESO' ? 'INGRESO (Depósito)' : 'RETIRO (Salida)';
+            const msgConfirmacion = enviarWA
+                ? `⚠️ CONFIRMACIÓN DE OPERACIÓN Y ENVÍO\n\n¿Estás seguro de hacer efectivo el ${etiquetaTipoOp} para [${cli.nombre}] por $${monto.toLocaleString('es-CO')} COP y enviarlo por WhatsApp?\n\n• Saldo anterior: $${saldoPrevio.toLocaleString('es-CO')} COP\n• Nuevo saldo: $${saldoPosterior.toLocaleString('es-CO')} COP`
+                : `⚠️ CONFIRMACIÓN DE REGISTRO\n\n¿Estás seguro de hacer efectivo el ${etiquetaTipoOp} para [${cli.nombre}] por $${monto.toLocaleString('es-CO')} COP en el sistema?\n\n• Saldo anterior: $${saldoPrevio.toLocaleString('es-CO')} COP\n• Nuevo saldo: $${saldoPosterior.toLocaleString('es-CO')} COP`;
+
+            if(!confirm(msgConfirmacion)) return;
+
+            procesandoOpNequiLock = true;
+            try {
 
             const hoyStr = new Date().toLocaleDateString('es-ES');
             const ahoraHora = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
@@ -7243,6 +7275,9 @@ El monto a retirar ($${monto.toLocaleString('es-CO')} COP) supera el saldo dispo
                 abrirWhatsAppPersonal(cli.telefono, msg);
             } else {
                 alert(`💾 ${tipo === 'INGRESO' ? 'Ingreso' : 'Retiro'} de $${monto.toLocaleString('es-CO')} COP registrado en el sistema.`);
+            }
+            } finally {
+                procesandoOpNequiLock = false;
             }
         };
 
@@ -7313,7 +7348,9 @@ ${lineasMovs}
             return deps;
         }
 
+        let procesandoLiqNequiLock = false;
         window.liquidarCuentaNequi = async function(cliId) {
+            if(procesandoLiqNequiLock) return;
             const cli = localNequiClientesArr.find(c => c.id === cliId);
             if(!cli) return;
 
@@ -7322,8 +7359,11 @@ ${lineasMovs}
                 return alert(`ℹ️ La cuenta de ${cli.nombre} no tiene saldo a favor pendiente por liquidar (Saldo actual: $${saldoPendiente.toLocaleString('es-CO')} COP).`);
             }
 
-            const confirmar = confirm(`🧾 ¿Confirmas la liquidación y corte de saldo de [${cli.nombre}]?\n\nMonto a entregar: $${saldoPendiente.toLocaleString('es-CO')} COP\nEl saldo actual quedará en $0 COP (la cuenta continúa activa).`);
+            const confirmar = confirm(`⚠️ CONFIRMACIÓN DE LIQUIDACIÓN TOTAL\n\n¿Estás seguro de hacer efectiva la LIQUIDACIÓN y corte de saldo de [${cli.nombre}]?\n\n• Total a entregar: $${saldoPendiente.toLocaleString('es-CO')} COP\n• El saldo quedará en $0 COP (la cuenta continúa activa).`);
             if(!confirmar) return;
+
+            procesandoLiqNequiLock = true;
+            try {
 
             const hoyStr = new Date().toLocaleDateString('es-ES');
             const ahoraHora = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
@@ -7384,6 +7424,9 @@ ${lineasMovs}
             } else {
                 alert(`✅ Saldo de ${cli.nombre} liquidado con éxito.`);
             }
+            } finally {
+                procesandoLiqNequiLock = false;
+            }
         };
         window.eliminarClienteNequi = async function(cliId) {
             const cli = localNequiClientesArr.find(c => c.id === cliId);
@@ -7408,9 +7451,23 @@ ${lineasMovs}
         };
 
 
-        window.abrirModalHistorialNequi = function(cliId) {
+        let nqHistorialCliActualId = null;
+        let nqHistorialTabActual = 'ACTIVO';
+
+        window.cambiarTabHistorialNequi = function(tab) {
+            nqHistorialTabActual = tab;
+            if(nqHistorialCliActualId) {
+                window.abrirModalHistorialNequi(nqHistorialCliActualId, tab);
+            }
+        };
+
+        window.abrirModalHistorialNequi = function(cliId, tabForzado = null) {
             const cli = localNequiClientesArr.find(c => c.id === cliId);
             if(!cli) return;
+
+            nqHistorialCliActualId = cliId;
+            if(tabForzado) nqHistorialTabActual = tabForzado;
+            else nqHistorialTabActual = 'ACTIVO';
 
             document.getElementById('nq-hist-cli-sub').innerText = `${cli.nombre} • ${cli.telefono}`;
             const badge = document.getElementById('nq-hist-saldo-badge');
@@ -7418,15 +7475,65 @@ ${lineasMovs}
             badge.innerText = `$${saldo.toLocaleString('es-CO')} COP`;
             badge.className = saldo > 0 ? 'text-sm sm:text-base font-black text-emerald-400' : (saldo < 0 ? 'text-sm sm:text-base font-black text-red-400' : 'text-sm sm:text-base font-black text-slate-300');
 
+            // Separar cronológicamente: todo lo posterior a la última LIQUIDACION es "Ciclo Activo",
+            // y todo lo anterior (incluyendo las liquidaciones y sus movimientos cerrados) va a "Caja Liquidada"
+            const todosMovs = cli.movimientos || [];
+            let ultimoIdxLiq = -1;
+            for(let i = todosMovs.length - 1; i >= 0; i--) {
+                if(todosMovs[i].tipo === 'LIQUIDACION') {
+                    ultimoIdxLiq = i;
+                    break;
+                }
+            }
+
+            const movsCicloActivo = ultimoIdxLiq === -1 ? [...todosMovs] : todosMovs.slice(ultimoIdxLiq + 1);
+            const movsCajaLiquidada = ultimoIdxLiq === -1 ? [] : todosMovs.slice(0, ultimoIdxLiq + 1);
+            const totalCortesLiquidados = movsCajaLiquidada.filter(m => m.tipo === 'LIQUIDACION').length;
+
+            // Actualizar contadores y estilos de pestañas
+            const btnActivo = document.getElementById('nq-tab-ciclo-activo');
+            const btnLiq = document.getElementById('nq-tab-caja-liquidada');
+            const lblActivo = document.getElementById('nq-lbl-tab-activo');
+            const lblLiq = document.getElementById('nq-lbl-tab-liquidada');
+
+            if(lblActivo) lblActivo.innerText = `Ciclo Activo (${movsCicloActivo.length})`;
+            if(lblLiq) lblLiq.innerText = `Caja Liquidada (${totalCortesLiquidados})`;
+
+            if(nqHistorialTabActual === 'ACTIVO') {
+                if(btnActivo) btnActivo.className = "py-2 px-2.5 rounded-xl bg-emerald-600 text-white shadow-md flex items-center justify-center gap-1.5 transition-all btn-interactive";
+                if(btnLiq) btnLiq.className = "py-2 px-2.5 rounded-xl bg-neutral-900 text-amber-400 border border-neutral-800 hover:border-amber-500/40 flex items-center justify-center gap-1.5 transition-all btn-interactive";
+            } else {
+                if(btnActivo) btnActivo.className = "py-2 px-2.5 rounded-xl bg-neutral-900 text-emerald-400 border border-neutral-800 hover:border-emerald-500/40 flex items-center justify-center gap-1.5 transition-all btn-interactive";
+                if(btnLiq) btnLiq.className = "py-2 px-2.5 rounded-xl bg-amber-500 text-neutral-950 shadow-md flex items-center justify-center gap-1.5 transition-all btn-interactive";
+            }
+
             const contMovs = document.getElementById('nq-hist-lista-movimientos');
             contMovs.innerHTML = '';
 
-            const movs = [...(cli.movimientos || [])].reverse(); // Más recientes primero
+            const listaMostrar = (nqHistorialTabActual === 'ACTIVO' ? movsCicloActivo : movsCajaLiquidada).slice().reverse();
 
-            if(movs.length === 0) {
-                contMovs.innerHTML = `<p class="text-center text-slate-500 italic py-6 text-xs">No hay movimientos registrados para este cliente.</p>`;
+            if(listaMostrar.length === 0) {
+                if(nqHistorialTabActual === 'ACTIVO') {
+                    contMovs.innerHTML = `<div class="text-center py-7 px-4 bg-neutral-950/60 border border-neutral-800/80 rounded-2xl space-y-1">
+                        <p class="text-slate-300 font-bold text-xs">🟢 Cuenta en cero — Lista para nuevo ciclo</p>
+                        <p class="text-slate-500 text-[10px]">No hay movimientos pendientes por liquidar en la semana actual.</p>
+                    </div>`;
+                } else {
+                    contMovs.innerHTML = `<div class="text-center py-7 px-4 bg-neutral-950/60 border border-neutral-800/80 rounded-2xl space-y-1">
+                        <p class="text-slate-300 font-bold text-xs">📦 Sin cortes liquidados aún</p>
+                        <p class="text-slate-500 text-[10px]">Cuando liquides una semana o corte de saldo, el historial cerrado aparecerá aquí.</p>
+                    </div>`;
+                }
             } else {
-                movs.forEach(m => {
+                if(nqHistorialTabActual === 'LIQUIDADA') {
+                    contMovs.innerHTML += `
+                        <div class="bg-amber-950/25 border border-amber-500/30 px-3 py-2 rounded-xl text-[9.5px] text-amber-300 font-sans flex items-center gap-2">
+                            <i class="fa-solid fa-lock text-amber-400"></i>
+                            <span>Historial de cortes ya liquidados y cerrados (no afectan el saldo activo actual).</span>
+                        </div>`;
+                }
+
+                listaMostrar.forEach(m => {
                     let colorTipo = 'text-emerald-400';
                     let bgTipo = 'bg-emerald-950/40 border-emerald-500/30';
                     let signo = '+';
@@ -7442,28 +7549,75 @@ ${lineasMovs}
                     }
 
                     contMovs.innerHTML += `
-                        <div onclick="window.abrirDetalleMovimientoNequi('${cli.id}', '${m.id}')" title="Toca para ver detalle o reenviar comprobante" class="border ${bgTipo} hover:border-purple-400 p-3 rounded-2xl flex justify-between items-start gap-2 text-xs font-mono cursor-pointer transition-all active:scale-[0.99] group shadow-sm">
-                            <div class="min-w-0 flex-1">
-                                <div class="flex items-center gap-2">
-                                    <span class="${colorTipo} font-black text-[10px] uppercase">${m.tipo === 'LIQUIDACION' ? '[CORTE / LIQUIDACIÓN]' : '[' + m.tipo + ']'}</span>
-                                    <span class="text-slate-400 text-[9.5px] font-sans">${m.fecha} — ${m.hora}</span>
+                        <div onclick="window.abrirDetalleMovimientoNequi('${cli.id}', '${m.id}')" title="Toca para ver detalle o reenviar comprobante" class="border ${bgTipo} hover:border-purple-400 p-3.5 rounded-2xl flex flex-col gap-2.5 text-xs font-mono cursor-pointer transition-all group shadow-sm w-full">
+                            <!-- FILA 1: TIPO, FECHA/HORA Y MONTO -->
+                            <div class="flex justify-between items-start gap-2 w-full">
+                                <div class="min-w-0 flex-1 space-y-0.5">
+                                    <span class="${colorTipo} font-black text-[10px] uppercase block leading-tight">${m.tipo === 'LIQUIDACION' ? '[CORTE / LIQUIDACIÓN]' : '[' + m.tipo + ']'}</span>
+                                    <span class="text-slate-400 text-[9.5px] font-sans block leading-tight">${m.fecha} &bull; ${m.hora}</span>
                                 </div>
-                                <p class="text-slate-200 text-[10.5px] font-sans mt-0.5 break-words">${m.nota || 'Sin nota'}</p>
-                                <span class="text-slate-500 text-[9px] block mt-0.5">Saldo tras operación: $${(m.saldoPosterior || 0).toLocaleString('es-CO')} COP</span>
-                            </div>
-                            <div class="text-right shrink-0 flex flex-col items-end gap-1.5">
-                                <strong class="${colorTipo} font-black text-sm block">
+                                <strong class="${colorTipo} font-black text-sm sm:text-base shrink-0 text-right leading-tight">
                                     ${signo}$${(m.monto || 0).toLocaleString('es-CO')}
                                 </strong>
-                                <span class="text-[9px] text-purple-400 group-hover:text-purple-300 font-bold bg-neutral-900 border border-neutral-800 px-2 py-0.5 rounded-lg flex items-center gap-1">
+                            </div>
+
+                            <!-- FILA 2: CONCEPTO Y SALDO POSTERIOR -->
+                            <div class="space-y-0.5 w-full">
+                                <p class="text-slate-200 text-[11px] font-sans font-medium break-words leading-snug">${m.nota || 'Sin nota'}</p>
+                                <span class="text-slate-400 text-[9.5px] block">Saldo tras operación: <strong class="text-slate-300">$${(m.saldoPosterior || 0).toLocaleString('es-CO')} COP</strong></span>
+                            </div>
+
+                            <!-- FILA 3: BOTONERA LIMPIA SIN SUPERPOSICIONES -->
+                            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-white/10 w-full font-sans">
+                                <button type="button" onclick="event.stopPropagation(); window.abrirDetalleMovimientoNequi('${cli.id}', '${m.id}');" class="w-full text-[9.5px] text-purple-300 hover:text-white font-bold bg-neutral-900/90 hover:bg-purple-900/60 border border-purple-500/30 py-1.5 px-2 rounded-xl flex items-center justify-center gap-1.5 transition-all btn-interactive">
                                     <i class="fa-solid fa-receipt"></i> Ver / Reenviar
-                                </span>
+                                </button>
+                                <button type="button" onclick="event.stopPropagation(); window.eliminarMovimientoNequi('${cli.id}', '${m.id}');" title="Eliminar movimiento y recalcular saldo" class="w-full text-[9.5px] text-rose-400 hover:text-white bg-neutral-900/90 hover:bg-rose-600 border border-rose-500/40 py-1.5 px-2 rounded-xl font-bold flex items-center justify-center gap-1.5 transition-all btn-interactive">
+                                    <i class="fa-solid fa-trash-can"></i> Eliminar
+                                </button>
                             </div>
                         </div>`;
                 });
             }
 
             document.getElementById('modal-historial-nequi').classList.remove('hidden');
+        };
+
+        window.eliminarMovimientoNequi = async function(cliId, movId) {
+            const cli = localNequiClientesArr.find(c => c.id === cliId);
+            if(!cli || !cli.movimientos) return;
+
+            const idx = cli.movimientos.findIndex(x => x.id === movId);
+            if(idx === -1) return;
+            const m = cli.movimientos[idx];
+
+            const tipoEtiqueta = m.tipo === 'LIQUIDACION' ? 'CORTE / LIQUIDACIÓN' : m.tipo;
+            const confirmar = confirm(`🗑️ ¿Estás seguro de que deseas ELIMINAR este movimiento?\n\n• Titular: ${cli.nombre}\n• Tipo: ${tipoEtiqueta}\n• Fecha: ${m.fecha} — ${m.hora}\n• Monto: $${(m.monto || 0).toLocaleString('es-CO')} COP\n• Nota: ${m.nota || 'Sin nota'}\n\nEl saldo consolidado de la cuenta se recalculará automáticamente.`);
+            if(!confirmar) return;
+
+            // Eliminar movimiento y recalcular cronológicamente los saldos posteriores y el saldo final
+            cli.movimientos.splice(idx, 1);
+
+            let saldoRecalculado = 0;
+            cli.movimientos.forEach(mov => {
+                if(mov.tipo === 'INGRESO') {
+                    saldoRecalculado += (mov.monto || 0);
+                } else if(mov.tipo === 'RETIRO') {
+                    saldoRecalculado -= (mov.monto || 0);
+                } else if(mov.tipo === 'LIQUIDACION') {
+                    saldoRecalculado = 0;
+                }
+                mov.saldoPosterior = saldoRecalculado;
+            });
+
+            cli.saldo = saldoRecalculado;
+
+            await window.sincronizarNequiNube();
+            window.renderizarCajaNequiAdmin();
+            document.getElementById('modal-detalle-movimiento-nequi')?.classList.add('hidden');
+            window.abrirModalHistorialNequi(cliId, nqHistorialTabActual);
+
+            alert(`✅ Movimiento eliminado correctamente.\n\nNuevo saldo consolidado de ${cli.nombre}: $${saldoRecalculado.toLocaleString('es-CO')} COP`);
         };
 
         
