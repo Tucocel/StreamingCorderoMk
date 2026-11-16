@@ -1872,146 +1872,226 @@
 
         </div>
     </div>
-<!-- PLANTILLA FLYER COMPACTA ULTRA HD (CORRECCIÓN TOTAL ENCABEZADO Y CANVAS HTML2CANVAS) -->
+<!-- PLANTILLA FLYER EJECUTIVO 3D ULTRA HD (TERMINAL FINANCIERA EN TIEMPO REAL) -->
     <div class="fixed -left-[9999px] top-0 overflow-hidden">
-        <div id="plantilla-flyer-render-nube" style="width: 380px; background: #020c1e; border: 2px solid rgba(212, 175, 55, 0.55); border-radius: 24px; padding: 20px 16px; color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; position: relative; box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);">
-            
-            <!-- ENCABEZADO EJECUTIVO CON LOGO Y TÍTULO ORO NÍTIDO -->
-            <div style="text-align: center; padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid rgba(212, 175, 55, 0.35);">
-                <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 6px;">
-                    <div style="width: 30px; height: 30px; min-width: 30px; border-radius: 50%; background: #FFD700; display: inline-flex; align-items: center; justify-content: center; color: #020617; font-size: 14px; font-weight: 900; box-shadow: 0 2px 8px rgba(0,0,0,0.5);">
-                        <i class="fa-solid fa-arrow-trend-up"></i>
+        <div id="flyer-export-canvas-wrap" style="background-color: #010308; padding: 16px; display: inline-block; box-sizing: border-box;">
+            <div id="plantilla-flyer-render-nube" style="width: 420px; background: linear-gradient(180deg, #0b2554 0%, #040d21 50%, #020611 100%); border: 2px solid #d4af37; border-radius: 26px; padding: 20px 18px 20px 18px; color: #ffffff; font-family: 'Plus Jakarta Sans', Arial, sans-serif; box-sizing: border-box; position: relative;">
+
+                <!-- ENCABEZADO EJECUTIVO 3D -->
+                <div style="text-align: center; padding-bottom: 13px; margin-bottom: 13px; border-bottom: 1px solid rgba(212, 175, 55, 0.4);">
+                    <div style="font-size: 8.5px; font-weight: 800; letter-spacing: 2.2px; text-transform: uppercase; color: #93c5fd; margin-bottom: 8px; line-height: 1;">
+                        TERMINAL FINANCIERA EN TIEMPO REAL
                     </div>
-                    <h2 style="font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; margin: 0; color: #FFDF00; line-height: 1.2;">
-                        PUBLI-TASA-MK PRO
-                    </h2>
+
+                    <!-- LOGO MEDALLA 3D + TÍTULO EXTRUIDO -->
+                    <div style="display: table; margin: 0 auto 9px auto;">
+                        <div style="display: table-cell; vertical-align: middle; padding-right: 10px;">
+                            <div style="width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(145deg, #fff3b0 0%, #ffd700 45%, #b45309 100%); border: 2px solid #fef08a; box-shadow: 0 3px 0 #78350f, 0 6px 14px rgba(0, 0, 0, 0.75); text-align: center; line-height: 32px;">
+                                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0f172a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;">
+                                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                                    <polyline points="16 7 22 7 22 13"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                        <div style="display: table-cell; vertical-align: middle;">
+                            <h2 style="font-size: 21px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; margin: 0; color: #ffe033; line-height: 1.1; text-shadow: 0 2px 0 #78350f, 0 4px 12px rgba(0, 0, 0, 0.9);">
+                                PUBLI-TASA-MK PRO
+                            </h2>
+                        </div>
+                    </div>
+
+                    <!-- CÁPSULA DE JORNADA (APERTURA / CIERRE) CENTRADA AL MILÍMETRO -->
+                    <div style="display: inline-block; background: linear-gradient(180deg, #1a1405 0%, #090702 100%); border: 1.5px solid #d4af37; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); padding: 6px 16px; border-radius: 999px;">
+                        <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background-color: #22c55e; vertical-align: middle; margin-right: 6px;"></span>
+                        <span id="flyer-titular-dinamico-txt" style="color: #fef08a; font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4px; vertical-align: middle; line-height: 1;">
+                            CIERRE OFICIAL DE MERCADOS • HOY
+                        </span>
+                    </div>
                 </div>
-                
-                <div style="background-color: rgba(25, 15, 2, 0.85); border: 1px solid rgba(212, 175, 55, 0.5); padding: 4px 12px; border-radius: 9999px; display: inline-block;">
-                    <p style="color: #FFE885; font-size: 9.5px; font-weight: 800; text-transform: uppercase; margin: 0; letter-spacing: 0.02em;">
-                        <span id="flyer-titular-dinamico-txt">📊 CIERRE OFICIAL DE MERCADOS • HOY</span>
+
+                <!-- BLOQUE 1: INDICADORES OFICIALES (2 COLUMNAS CON RELIEVE 3D) -->
+                <table style="width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 10px;">
+                    <tr>
+                        <!-- TARJETA VENEZUELA BCV (DORADO IMPERIAL) -->
+                        <td style="width: 48.5%; vertical-align: top; background: linear-gradient(170deg, #0d2654 0%, #051126 100%); border: 1px solid rgba(255, 215, 0, 0.35); border-top: 3px solid #ffd700; border-radius: 16px; padding: 10px 11px; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.65);">
+                            <table style="width: 100%; border-collapse: collapse; border-bottom: 1px solid rgba(255, 255, 255, 0.12); margin-bottom: 7px;">
+                                <tr>
+                                    <td style="padding-bottom: 5px; font-size: 9px; font-weight: 900; text-transform: uppercase; color: #f8fafc;">🇻🇪 OFICIAL BCV</td>
+                                    <td style="padding-bottom: 5px; text-align: right;">
+                                        <span style="font-size: 7px; font-weight: 800; color: #fde047; background: rgba(234, 179, 8, 0.2); border: 1px solid rgba(250, 204, 21, 0.4); padding: 2px 5px; border-radius: 5px;">BCV</span>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div style="margin-bottom: 6px;">
+                                <span style="font-size: 7.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Dólar BCV</span>
+                                <div>
+                                    <span id="flyer-val-bcv-usd" style="font-size: 15.5px; font-weight: 900; color: #ffd700; vertical-align: middle;">Cargando...</span>
+                                    <span id="flyer-trend-bcv-usd" style="font-size: 9.5px; font-weight: 900; color: #f87171; vertical-align: middle; margin-left: 3px;">•</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <span style="font-size: 7.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Euro BCV</span>
+                                <div>
+                                    <span id="flyer-val-bcv-eur" style="font-size: 13.5px; font-weight: 800; color: #fef08a; vertical-align: middle;">Cargando...</span>
+                                    <span id="flyer-trend-bcv-eur" style="font-size: 9.5px; font-weight: 900; color: #f87171; vertical-align: middle; margin-left: 3px;">•</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td style="width: 3%;"></td>
+
+                        <!-- TARJETA COLOMBIA SFC (AZUL ZAFIRO ELÉCTRICO) -->
+                        <td style="width: 48.5%; vertical-align: top; background: linear-gradient(170deg, #0d2654 0%, #051126 100%); border: 1px solid rgba(56, 189, 248, 0.35); border-top: 3px solid #38bdf8; border-radius: 16px; padding: 10px 11px; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.65);">
+                            <table style="width: 100%; border-collapse: collapse; border-bottom: 1px solid rgba(255, 255, 255, 0.12); margin-bottom: 7px;">
+                                <tr>
+                                    <td style="padding-bottom: 5px; font-size: 9px; font-weight: 900; text-transform: uppercase; color: #f8fafc;">🇨🇴 OFICIAL SFC</td>
+                                    <td style="padding-bottom: 5px; text-align: right;">
+                                        <span style="font-size: 7px; font-weight: 800; color: #7dd3fc; background: rgba(56, 189, 248, 0.2); border: 1px solid rgba(56, 189, 248, 0.4); padding: 2px 5px; border-radius: 5px;">TRM</span>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div style="margin-bottom: 6px;">
+                                <span style="font-size: 7.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Dólar TRM</span>
+                                <div>
+                                    <span id="flyer-val-trm-cop" style="font-size: 15.5px; font-weight: 900; color: #38bdf8; vertical-align: middle;">Cargando...</span>
+                                    <span id="flyer-trend-trm-cop" style="font-size: 9.5px; font-weight: 900; color: #34d399; vertical-align: middle; margin-left: 3px;">•</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <span style="font-size: 7.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Euro Colombia</span>
+                                <div>
+                                    <span id="flyer-val-eur-cop" style="font-size: 13.5px; font-weight: 800; color: #bae6fd; vertical-align: middle;">Cargando...</span>
+                                    <span id="flyer-trend-eur-cop" style="font-size: 9.5px; font-weight: 900; color: #f87171; vertical-align: middle; margin-left: 3px;">•</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- BLOQUE 2: PROTAGONISTA — CASAS DE CAMBIO FRONTERA (MARCO 3D ORO + CAJAS HUNDIDAS) -->
+                <div style="background: linear-gradient(180deg, #0e2959 0%, #06132b 100%); border: 1.5px solid #d4af37; border-top: 3px solid #fde047; border-radius: 16px; padding: 10px 12px; margin-bottom: 10px; box-shadow: 0 8px 18px rgba(0, 0, 0, 0.7);">
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 7px;">
+                        <tr>
+                            <td style="font-size: 9.5px; font-weight: 900; text-transform: uppercase; color: #ffe033; vertical-align: middle;">
+                                <span style="font-size: 13px; vertical-align: middle; margin-right: 4px;">💱</span>
+                                <span style="vertical-align: middle;">CASAS DE CAMBIO CÚCUTA / LA PARADA</span>
+                            </td>
+                            <td style="text-align: right; vertical-align: middle;">
+                                <span style="font-size: 7.5px; font-weight: 800; color: #fde68a; background: rgba(212, 175, 55, 0.18); border: 1px solid rgba(212, 175, 55, 0.45); padding: 2px 7px; border-radius: 999px;">
+                                    Frontera
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width: 100%; border-collapse: separate; border-spacing: 0;">
+                        <tr>
+                            <!-- CAJA COMPRA EFECTIVO -->
+                            <td style="width: 48.5%; background: #030b1a; border: 1px solid rgba(52, 211, 153, 0.4); border-radius: 12px; padding: 8px 6px; text-align: center; box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.85);">
+                                <span style="font-size: 7.5px; color: #6ee7b7; text-transform: uppercase; font-weight: 800; letter-spacing: 0.4px; display: block; margin-bottom: 3px;">
+                                    COMPRA EFECTIVO
+                                </span>
+                                <span id="flyer-val-frontera-compra" style="font-size: 16px; font-weight: 900; color: #34d399; display: block;">
+                                    3.320 COP
+                                </span>
+                            </td>
+
+                            <td style="width: 3%;"></td>
+
+                            <!-- CAJA VENTA EFECTIVO -->
+                            <td style="width: 48.5%; background: #030b1a; border: 1px solid rgba(251, 191, 36, 0.45); border-radius: 12px; padding: 8px 6px; text-align: center; box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.85);">
+                                <span style="font-size: 7.5px; color: #fde68a; text-transform: uppercase; font-weight: 800; letter-spacing: 0.4px; display: block; margin-bottom: 3px;">
+                                    VENTA EFECTIVO
+                                </span>
+                                <span id="flyer-val-frontera-venta" style="font-size: 16px; font-weight: 900; color: #ffd700; display: block;">
+                                    3.370 COP
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- BLOQUE 3: MERCADO CRIPTO & GLOBAL (ESMERALDA NEÓN) -->
+                <div style="background: linear-gradient(170deg, #0d2654 0%, #051126 100%); border: 1px solid rgba(52, 211, 153, 0.35); border-top: 3px solid #10b981; border-radius: 16px; padding: 10px 12px; margin-bottom: 12px; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.65);">
+                    <table style="width: 100%; border-collapse: collapse; border-bottom: 1px solid rgba(255, 255, 255, 0.12); margin-bottom: 7px;">
+                        <tr>
+                            <td style="padding-bottom: 5px; font-size: 9px; font-weight: 900; text-transform: uppercase; color: #f8fafc; vertical-align: middle;">
+                                <span style="font-size: 12px; vertical-align: middle; margin-right: 4px;">🪙</span>
+                                <span style="vertical-align: middle;">MERCADO CRIPTO &amp; GLOBAL</span>
+                            </td>
+                            <td style="padding-bottom: 5px; text-align: right; vertical-align: middle;">
+                                <span style="font-size: 7px; font-weight: 800; color: #34d399; background: rgba(16, 185, 129, 0.18); border: 1px solid rgba(52, 211, 153, 0.45); padding: 2px 8px; border-radius: 999px;">
+                                    EN VIVO 24/7
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="width: 56%; vertical-align: middle;">
+                                <span style="font-size: 7.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Binance USDT (VES)</span>
+                                <div>
+                                    <span id="flyer-val-usdt-rango" style="font-size: 14.5px; font-weight: 900; color: #34d399; vertical-align: middle;">800 / 812 Bs</span>
+                                    <span id="flyer-trend-usdt-binance" style="font-size: 9.5px; font-weight: 900; color: #34d399; vertical-align: middle; margin-left: 3px;">•</span>
+                                </div>
+                            </td>
+                            <td style="width: 44%; vertical-align: middle; text-align: right; border-left: 1px solid rgba(255, 255, 255, 0.1); padding-left: 8px;">
+                                <span style="font-size: 7.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Bitcoin Global</span>
+                                <div>
+                                    <span id="flyer-val-btc-usd" style="font-size: 14px; font-weight: 900; color: #fde047; vertical-align: middle;">$64,514 USD</span>
+                                    <span id="flyer-trend-btc-usd" style="font-size: 9.5px; font-weight: 900; color: #f87171; vertical-align: middle; margin-left: 3px;">•</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- BLOQUE 4: LLAMADO DE ACCIÓN ORO RADIANTE Y LUMINOSO -->
+                <div style="background-color: #ffd633; background-image: linear-gradient(180deg, #fff5b8 0%, #ffd633 55%, #f5b800 100%); border: 2px solid #ffffff; border-radius: 16px; padding: 12px 12px; text-align: center; box-shadow: 0 4px 0 #b45309, 0 8px 20px rgba(255, 214, 51, 0.35); margin-bottom: 12px;">
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 6px;">
+                        <tr>
+                            <td style="text-align: center; vertical-align: middle;">
+                                <span style="display: inline-block; width: 21px; height: 21px; border-radius: 6px; background-color: #040d21; text-align: center; line-height: 19px; vertical-align: middle; margin-right: 6px;">
+                                    <span style="font-size: 11px; vertical-align: middle;">💻</span>
+                                </span>
+                                <span style="font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.3px; color: #030712; vertical-align: middle;">
+                                    ¿QUIERES ESTA PANTALLA EN VIVO EN TU NEGOCIO?
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="font-size: 9.5px; font-weight: 800; color: #090d16; line-height: 1.35;">
+                        Suscríbete a <strong style="color: #000000; font-weight: 900;">PubliTasa Pro</strong> desde solo
+                        <span id="flyer-precio-plan1-badge" style="display: inline-block; background-color: #040d21; color: #ffe033; font-weight: 900; font-size: 9.5px; padding: 3px 10px; border-radius: 999px; margin-left: 4px; vertical-align: middle; letter-spacing: 0.4px; border: 1px solid rgba(255,255,255,0.2);">
+                            $5,00 USDT / MES
+                        </span>
+                    </div>
+                </div>
+
+                <!-- BLOQUE 5: TARJETA DE PRESENTACIÓN CORPORATIVA (TUCOCEL C.A. & @PUBLIONLINEMK) -->
+                <div style="background: linear-gradient(180deg, #0e2247 0%, #061024 100%); border: 1.5px solid rgba(212, 175, 55, 0.65); border-radius: 15px; padding: 12px 14px; text-align: center; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7);">
+                    <div style="margin-bottom: 6px;">
+                        <span style="display: inline-block; width: 19px; height: 19px; border-radius: 50%; background: linear-gradient(145deg, #fde047, #d97706); text-align: center; line-height: 17px; vertical-align: middle; margin-right: 6px;">
+                            <span style="font-size: 10px; vertical-align: middle;">🛡️</span>
+                        </span>
+                        <span style="font-size: 9.5px; color: #f8fafc; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: middle;">
+                            CON EL RESPALDO ABSOLUTO DE <span style="color: #ffe033; font-weight: 900; font-size: 11px;">TUCOCEL C.A.</span>
+                        </span>
+                    </div>
+                    <div style="height: 1px; background: rgba(212, 175, 55, 0.3); width: 84%; margin: 0 auto 7px auto;"></div>
+                    <p style="font-size: 9.5px; color: #e2e8f0; font-weight: 700; margin: 0; letter-spacing: 0.3px;">
+                        Desarrollado corporativamente por <span style="color: #38bdf8; font-weight: 900;">@publionlinemk</span>
                     </p>
                 </div>
+
             </div>
-
-            <!-- INDICADORES 2 COLUMNAS (BCV Y COLOMBIA) -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
-                <!-- VENEZUELA BCV -->
-                <div style="background: #05152e; border: 1px solid rgba(255, 255, 255, 0.1); border-left: 3px solid #FFD700; border-radius: 16px; padding: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 4px; margin-bottom: 6px;">
-                        <span style="font-size: 9px; font-weight: 900; text-transform: uppercase; color: #e2e8f0;">🇻🇪 Oficial BCV</span>
-                        <span style="font-size: 7.5px; font-weight: 700; color: #3FB950;">Oficial</span>
-                    </div>
-                    <div style="font-family: monospace; line-height: 1.3;">
-                        <div style="margin-bottom: 4px;">
-                            <span style="font-size: 8px; color: #94a3b8; text-transform: uppercase; font-family: 'Plus Jakarta Sans', sans-serif; display: block;">Dólar BCV</span>
-                            <span style="font-size: 13px; font-weight: 900; color: #FFD700; display: flex; align-items: center; gap: 3px;">
-                                <span id="flyer-val-bcv-usd">Cargando...</span>
-                                <span id="flyer-trend-bcv-usd" style="font-size: 9px;">•</span>
-                            </span>
-                        </div>
-                        <div>
-                            <span style="font-size: 8px; color: #94a3b8; text-transform: uppercase; font-family: 'Plus Jakarta Sans', sans-serif; display: block;">Euro BCV</span>
-                            <span style="font-size: 12px; font-weight: 900; color: #FFE885; display: flex; align-items: center; gap: 3px;">
-                                <span id="flyer-val-bcv-eur">Cargando...</span>
-                                <span id="flyer-trend-bcv-eur" style="font-size: 8px;">•</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- COLOMBIA SFC -->
-                <div style="background: #05152e; border: 1px solid rgba(255, 255, 255, 0.1); border-left: 3px solid #38bdf8; border-radius: 16px; padding: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 4px; margin-bottom: 6px;">
-                        <span style="font-size: 9px; font-weight: 900; text-transform: uppercase; color: #e2e8f0;">🇨🇴 Oficial SFC</span>
-                        <span style="font-size: 7.5px; font-weight: 700; color: #38bdf8;">TRM</span>
-                    </div>
-                    <div style="font-family: monospace; line-height: 1.3;">
-                        <div style="margin-bottom: 4px;">
-                            <span style="font-size: 8px; color: #94a3b8; text-transform: uppercase; font-family: 'Plus Jakarta Sans', sans-serif; display: block;">Dólar TRM</span>
-                            <span style="font-size: 13px; font-weight: 900; color: #7dd3fc; display: flex; align-items: center; gap: 3px;">
-                                <span id="flyer-val-trm-cop">Cargando...</span>
-                                <span id="flyer-trend-trm-cop" style="font-size: 9px;">•</span>
-                            </span>
-                        </div>
-                        <div>
-                            <span style="font-size: 8px; color: #94a3b8; text-transform: uppercase; font-family: 'Plus Jakarta Sans', sans-serif; display: block;">Euro Colombia</span>
-                            <span style="font-size: 12px; font-weight: 900; color: #bae6fd; display: flex; align-items: center; gap: 3px;">
-                                <span id="flyer-val-eur-cop">Cargando...</span>
-                                <span id="flyer-trend-eur-cop" style="font-size: 8px;">•</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CASAS DE CAMBIO CÚCUTA / FRONTERA -->
-            <div style="background: #05152e; border: 1px solid rgba(212, 175, 55, 0.45); border-radius: 16px; padding: 10px; margin-bottom: 10px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <span style="font-size: 9.5px; font-weight: 900; text-transform: uppercase; color: #FFD700;">
-                        💱 Casas de Cambio Cúcuta / La Parada
-                    </span>
-                    <span style="font-size: 8px; font-weight: 700; font-family: monospace; color: #94a3b8;">Referencia Real</span>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: center; font-family: monospace;">
-                    <div style="background-color: rgba(0, 0, 0, 0.45); border: 1px solid rgba(255,255,255,0.06); padding: 6px; border-radius: 12px;">
-                        <span style="font-size: 8px; color: #94a3b8; text-transform: uppercase; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; display: block;">Compra Efectivo</span>
-                        <span id="flyer-val-frontera-compra" style="font-size: 13px; font-weight: 900; color: #3FB950;">3.260 COP ➖</span>
-                    </div>
-                    <div style="background-color: rgba(0, 0, 0, 0.45); border: 1px solid rgba(255,255,255,0.06); padding: 6px; border-radius: 12px;">
-                        <span style="font-size: 8px; color: #94a3b8; text-transform: uppercase; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; display: block;">Venta Efectivo</span>
-                        <span id="flyer-val-frontera-venta" style="font-size: 13px; font-weight: 900; color: #FFD700;">3.330 COP ➖</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CRIPTO / BINANCE & BITCOIN -->
-            <div style="background: #05152e; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 10px; margin-bottom: 12px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 4px; margin-bottom: 6px;">
-                    <span style="font-size: 9px; font-weight: 900; text-transform: uppercase; color: #e2e8f0;">🪙 Mercado Cripto & Global</span>
-                    <span style="font-size: 7.5px; font-weight: 700; color: #3FB950; background: rgba(5, 46, 22, 0.7); border: 1px solid rgba(63, 185, 80, 0.4); padding: 1px 6px; border-radius: 9999px;">En Vivo 24/7</span>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-family: monospace;">
-                    <div>
-                        <span style="font-size: 8px; color: #94a3b8; text-transform: uppercase; font-family: 'Plus Jakarta Sans', sans-serif; display: block;">Binance USDT (VES)</span>
-                        <span style="font-size: 12px; font-weight: 900; color: #3FB950; display: flex; align-items: center; gap: 3px;">
-                            <span id="flyer-val-usdt-rango">800 / 812 Bs</span>
-                            <span id="flyer-trend-usdt-binance">•</span>
-                        </span>
-                    </div>
-                    <div style="text-align: right;">
-                        <span style="font-size: 8px; color: #94a3b8; text-transform: uppercase; font-family: 'Plus Jakarta Sans', sans-serif; display: block;">Bitcoin Global</span>
-                        <span style="font-size: 12px; font-weight: 900; color: #3FB950; display: flex; align-items: center; justify-content: flex-end; gap: 3px;">
-                            <span id="flyer-val-btc-usd">$64,514 USD</span>
-                            <span id="flyer-trend-btc-usd" style="font-size: 8px;">•</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- LLAMADO DE ACCIÓN COMERCIAL (FOOTER) -->
-            <div style="background: linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #b8860b 100%); border-radius: 14px; padding: 10px 8px; text-align: center; color: #020617; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35); margin-bottom: 8px;">
-                <p style="font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.03em; margin: 0; color: #020617;">
-                    🚀 ¿QUIERES ESTA PANTALLA EN VIVO EN TU NEGOCIO?
-                </p>
-                <p style="font-size: 9px; font-weight: 800; margin: 2px 0 0 0; color: #0f172a;">
-                    Suscríbete a PubliTasa Pro desde solo <span style="text-decoration: underline; font-weight: 900;">$5,00 USDT/mes</span>
-                </p>
-            </div>
-
-            <!-- RESIDUO Y FIRMA TUCOCEL -->
-            <div style="text-align: center; margin-top: 4px;">
-                <p style="font-size: 8px; color: #cbd5e1; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 0;">
-                    🏛️ Con el respaldo absoluto de <span style="color: #FFD700; font-weight: 900;">TUCOCEL C.A.</span>
-                </p>
-                <p style="font-size: 7.5px; color: #64748b; font-weight: 500; margin: 2px 0 0 0;">
-                    Desarrollado corporativamente por @publionlinemk
-                </p>
-            </div>
-
         </div>
+    </div>
     </div>
 <!-- CINTILLO INFERIOR GENERAL -->
     
@@ -3753,8 +3833,8 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     const elFlyerCompra = document.getElementById('flyer-val-frontera-compra');
                     const elFlyerVenta = document.getElementById('flyer-val-frontera-venta');
 
-                    if (elFlyerCompra) elFlyerCompra.innerText = `${compraF.toLocaleString('es-CO')} COP ➖`;
-                    if (elFlyerVenta) elFlyerVenta.innerText = `${ventaF.toLocaleString('es-CO')} COP ➖`;
+                    if (elFlyerCompra) elFlyerCompra.innerText = `${compraF.toLocaleString('es-CO')} COP`;
+                    if (elFlyerVenta) elFlyerVenta.innerText = `${ventaF.toLocaleString('es-CO')} COP`;
                 }
             } catch(e) {}
 
@@ -3783,14 +3863,20 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const elTitular = document.getElementById('flyer-titular-dinamico-txt');
             if(elTitular) {
                 elTitular.innerText = esApertura 
-                    ? `📊 APERTURA • ${nombreDia.toUpperCase()} ${fechaStr}`
-                    : `📊 CIERRE • ${nombreDia.toUpperCase()} ${fechaStr}`;
+                    ? `APERTURA • ${nombreDia.toUpperCase()} ${fechaStr}`
+                    : `CIERRE • ${nombreDia.toUpperCase()} ${fechaStr}`;
             }
 
-            const nodoPlantilla = document.getElementById('plantilla-flyer-render-nube');
+            const elPrecioBadge = document.getElementById('flyer-precio-plan1-badge');
+            if(elPrecioBadge) {
+                const pBase = (tarifasPubliTasaEstructura.plan1 || 5.00).toFixed(2).replace('.', ',');
+                elPrecioBadge.innerText = `$${pBase} USDT / MES`;
+            }
+
+            const nodoPlantilla = document.getElementById('flyer-export-canvas-wrap') || document.getElementById('plantilla-flyer-render-nube');
             
             const canvas = await html2canvas(nodoPlantilla, {
-                backgroundColor: '#000c1e',
+                backgroundColor: '#010308',
                 scale: 3,
                 useCORS: true
             });
