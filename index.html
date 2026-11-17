@@ -3911,7 +3911,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const esApertura = modo === 'APERTURA';
             const jornadaTxt = esApertura
                 ? `APERTURA • ${nombreDia} ${fechaStr}`
-                : `CIERRE OFICIAL DE MERCADOS • ${nombreDia} ${fechaStr}`;
+                : `CIERRE OFICIAL • ${nombreDia} ${fechaStr}`;
 
             const hist = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
 
@@ -3925,7 +3925,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 const a = parseFloat(valAct);
                 const p = parseFloat(valPrev);
                 if (!p || isNaN(p) || isNaN(a) || Math.abs(a - p) < 0.0001) {
-                    return { sym: '=', color: '#facc15' };
+                    return { sym: '', color: '#facc15' }; // Sin símbolo si es igual
                 }
                 return a > p
                     ? { sym: '▲', color: '#f87171' }
@@ -3950,15 +3950,23 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const trBcvEur = getTrendInfo(hist.bcvEur, hist.prevBcvEur);
             const trTrmCop = getTrendInfo(hist.trmCop, hist.prevTrmCop);
             const trEurCop = getTrendInfo(hist.eurCop, hist.prevEurCop);
+            
+            // NUEVO: Tendencias en Frontera
+            const trFronteraC = getTrendInfo(hist.cucutaCompra, hist.prevCucutaCompra);
+            const trFronteraV = getTrendInfo(hist.cucutaVenta, hist.prevCucutaVenta);
+            
             const trUsdt = getTrendInfo(hist.usdtCompra, hist.prevUsdtCompra);
             const trBtc = getTrendInfo(hist.btcUsd, hist.prevBtcUsd);
 
             const pBasePlan1 = (tarifasPubliTasaEstructura.plan1 || 5.00).toFixed(2).replace('.', ',');
             const precioPlanTxt = `$${pBasePlan1} USDT / MES`;
 
+            // Lienzo HD 720x1280 optimizado anti-compresión WhatsApp para letras y números grandes
+            const W = 720;
+            const H = 1280;
             const canvas = document.createElement('canvas');
-            canvas.width = 1080;
-            canvas.height = 1920;
+            canvas.width = W;
+            canvas.height = H;
             const ctx = canvas.getContext('2d');
 
             const drawRoundRect = (x, y, w, h, r) => {
@@ -3976,321 +3984,448 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 }
             };
 
-            // 1. Fondo general
-            ctx.fillStyle = '#070b14';
-            ctx.fillRect(0, 0, 1080, 1920);
+            // 1. Fondo OLED profundo con iluminación radial ambiental
+            ctx.fillStyle = '#04070f';
+            ctx.fillRect(0, 0, W, H);
 
-            // 2. Marco principal ejecutivo (con margen inferior amplio de seguridad anti-Filtros WhatsApp)
-            ctx.fillStyle = '#0b0f17';
-            ctx.strokeStyle = '#2b384e';
-            ctx.lineWidth = 3;
-            drawRoundRect(36, 36, 1008, 1740, 32);
+            const glowTop = ctx.createRadialGradient(360, 120, 20, 360, 120, 460);
+            glowTop.addColorStop(0, 'rgba(37, 99, 235, 0.32)');
+            glowTop.addColorStop(0.5, 'rgba(234, 179, 8, 0.10)');
+            glowTop.addColorStop(1, 'rgba(4, 7, 15, 0)');
+            ctx.fillStyle = glowTop;
+            ctx.fillRect(0, 0, W, 600);
+
+            const glowMid = ctx.createRadialGradient(200, 740, 10, 200, 740, 340);
+            glowMid.addColorStop(0, 'rgba(16, 185, 129, 0.16)');
+            glowMid.addColorStop(1, 'rgba(4, 7, 15, 0)');
+            ctx.fillStyle = glowMid;
+            ctx.fillRect(0, 500, W, 500);
+
+            // 2. Contenedor principal con margen inferior anti-Filtros WhatsApp (y=18 hasta y=1186, dejando 94px libres abajo)
+            const cardGrad = ctx.createLinearGradient(0, 18, 0, 1186);
+            cardGrad.addColorStop(0, '#0d1526');
+            cardGrad.addColorStop(0.5, '#090e1a');
+            cardGrad.addColorStop(1, '#060911');
+            ctx.fillStyle = cardGrad;
+            ctx.strokeStyle = 'rgba(212, 175, 55, 0.55)';
+            ctx.lineWidth = 2.5;
+            drawRoundRect(20, 18, 680, 1168, 24);
             ctx.fill();
             ctx.stroke();
 
-            // 3. Cabecera Azul Real (#0f213e) con línea dorada inferior
-            ctx.fillStyle = '#0f213e';
-            drawRoundRect(39, 39, 1002, 290, [30, 30, 0, 0]);
+            // 3. Cabecera Azul Zafiro con degradado metálico y brillo dorado
+            const headerGrad = ctx.createLinearGradient(20, 18, 700, 224);
+            headerGrad.addColorStop(0, '#0f2854');
+            headerGrad.addColorStop(0.5, '#163873');
+            headerGrad.addColorStop(1, '#0c1f42');
+            ctx.fillStyle = headerGrad;
+            drawRoundRect(22, 20, 676, 204, [22, 22, 0, 0]);
             ctx.fill();
 
-            ctx.strokeStyle = '#d4af37';
-            ctx.lineWidth = 4;
+            // Filete de luz superior
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+            ctx.lineWidth = 1.5;
             ctx.beginPath();
-            ctx.moveTo(39, 329);
-            ctx.lineTo(1041, 329);
+            ctx.moveTo(42, 21);
+            ctx.lineTo(678, 21);
+            ctx.stroke();
+
+            // Línea divisoria dorada brillante bajo cabecera
+            const goldLineGrad = ctx.createLinearGradient(22, 224, 698, 224);
+            goldLineGrad.addColorStop(0, '#b45309');
+            goldLineGrad.addColorStop(0.5, '#fde047');
+            goldLineGrad.addColorStop(1, '#b45309');
+            ctx.strokeStyle = goldLineGrad;
+            ctx.lineWidth = 3.5;
+            ctx.beginPath();
+            ctx.moveTo(22, 224);
+            ctx.lineTo(698, 224);
             ctx.stroke();
 
             // Subtítulo superior
             ctx.fillStyle = '#93c5fd';
-            ctx.font = '800 22px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '800 16px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText('REPORTE FINANCIERO • TIEMPO REAL', 540, 95);
+            ctx.fillText('REPORTE FINANCIERO • TIEMPO REAL', 360, 56);
 
-            // Título principal centrado matemáticamente con measureText (cero encimado)
-            const boxW = 68;
-            const boxH = 68;
-            const gapLogo = 22;
-            ctx.font = '900 48px "Plus Jakarta Sans", Arial, sans-serif';
+            // Logo MK oro metálico 3D + Título grande medido con measureText
+            const boxW = 50;
+            const boxH = 50;
+            const gapLogo = 14;
+            ctx.font = '900 36px "Plus Jakarta Sans", Arial, sans-serif';
             const txtPart1 = 'PUBLI-TASA-MK';
             const txtPart2 = 'PRO';
-            const gapWords = 16;
+            const gapWords = 11;
             const wPart1 = ctx.measureText(txtPart1).width;
             const wPart2 = ctx.measureText(txtPart2).width;
             const totalHeaderW = boxW + gapLogo + wPart1 + gapWords + wPart2;
-            const startHeaderX = (1080 - totalHeaderW) / 2;
+            const startHeaderX = (W - totalHeaderW) / 2;
 
-            ctx.fillStyle = '#eab308';
-            drawRoundRect(startHeaderX, 130, boxW, boxH, 14);
+            const goldBadgeGrad = ctx.createLinearGradient(startHeaderX, 76, startHeaderX + boxW, 76 + boxH);
+            goldBadgeGrad.addColorStop(0, '#fef08a');
+            goldBadgeGrad.addColorStop(0.5, '#eab308');
+            goldBadgeGrad.addColorStop(1, '#ca8a04');
+
+            ctx.save();
+            ctx.shadowColor = 'rgba(250, 204, 21, 0.55)';
+            ctx.shadowBlur = 14;
+            ctx.fillStyle = goldBadgeGrad;
+            drawRoundRect(startHeaderX, 76, boxW, boxH, 11);
             ctx.fill();
+            ctx.restore();
 
             ctx.fillStyle = '#09111e';
-            ctx.font = '900 28px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '900 22px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText('MK', startHeaderX + boxW / 2, 174);
+            ctx.fillText('MK', startHeaderX + boxW / 2, 109);
 
-            ctx.font = '900 48px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '900 36px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.textAlign = 'left';
             ctx.fillStyle = '#ffffff';
-            ctx.fillText(txtPart1, startHeaderX + boxW + gapLogo, 181);
+            ctx.fillText(txtPart1, startHeaderX + boxW + gapLogo, 114);
+
+            ctx.save();
+            ctx.shadowColor = 'rgba(250, 204, 21, 0.5)';
+            ctx.shadowBlur = 12;
             ctx.fillStyle = '#facc15';
-            ctx.fillText(txtPart2, startHeaderX + boxW + gapLogo + wPart1 + gapWords, 181);
+            ctx.fillText(txtPart2, startHeaderX + boxW + gapLogo + wPart1 + gapWords, 114);
+            ctx.restore();
 
-            // Cápsula de jornada (Apertura / Cierre)
-            ctx.font = '800 22px "Plus Jakarta Sans", Arial, sans-serif';
+            // Píldora de jornada (Apertura / Cierre)
+            ctx.font = '800 16px "Plus Jakarta Sans", Arial, sans-serif';
             const wJornada = ctx.measureText(jornadaTxt).width;
-            const pillW = Math.max(660, wJornada + 95);
-            const pillX = (1080 - pillW) / 2;
+            const pillW = Math.min(636, Math.max(460, wJornada + 68));
+            const pillX = (W - pillW) / 2;
 
-            ctx.fillStyle = '#081224';
-            ctx.strokeStyle = '#d4af37';
-            ctx.lineWidth = 2;
-            drawRoundRect(pillX, 232, pillW, 60, 14);
+            ctx.fillStyle = 'rgba(6, 14, 30, 0.92)';
+            ctx.strokeStyle = '#eab308';
+            ctx.lineWidth = 1.8;
+            drawRoundRect(pillX, 150, pillW, 44, 12);
             ctx.fill();
             ctx.stroke();
 
+            ctx.save();
+            ctx.shadowColor = '#22c55e';
+            ctx.shadowBlur = 10;
             ctx.fillStyle = '#22c55e';
             ctx.beginPath();
-            ctx.arc(pillX + 36, 262, 8, 0, 2 * Math.PI);
+            ctx.arc(pillX + 26, 172, 6, 0, 2 * Math.PI);
             ctx.fill();
+            ctx.restore();
 
             ctx.fillStyle = '#fef08a';
             ctx.textAlign = 'center';
-            ctx.fillText(jornadaTxt, pillX + pillW / 2 + 12, 270);
+            ctx.fillText(jornadaTxt, pillX + pillW / 2 + 8, 178);
 
-            // Helper para tarjetas apiladas (BCV y SFC)
-            const dibujarTarjetaApilada = (x, y, w, h, accentColor, titulo, items) => {
-                ctx.fillStyle = '#131a26';
-                ctx.strokeStyle = '#243044';
-                ctx.lineWidth = 2;
-                drawRoundRect(x, y, w, h, 20);
+            // Helper para tarjetas estilo cristal oscuro con números grandes
+            const dibujarTarjetaCristal = (x, y, w, h, accentColor, glowColor, titulo, items) => {
+                const boxGrad = ctx.createLinearGradient(x, y, x, y + h);
+                boxGrad.addColorStop(0, '#172236');
+                boxGrad.addColorStop(1, '#0f1624');
+                ctx.fillStyle = boxGrad;
+                ctx.strokeStyle = 'rgba(148, 163, 184, 0.24)';
+                ctx.lineWidth = 1.8;
+                drawRoundRect(x, y, w, h, 16);
                 ctx.fill();
                 ctx.stroke();
 
-                ctx.fillStyle = accentColor;
-                drawRoundRect(x, y, 10, h, [20, 0, 0, 20]);
-                ctx.fill();
-
-                ctx.fillStyle = '#ffffff';
-                ctx.font = '900 26px "Plus Jakarta Sans", Arial, sans-serif';
-                ctx.textAlign = 'left';
-                ctx.fillText(titulo, x + 34, y + 52);
-
-                ctx.strokeStyle = '#1f293a';
-                ctx.lineWidth = 2;
+                // Reflejo superior de cristal
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
+                ctx.lineWidth = 1.2;
                 ctx.beginPath();
-                ctx.moveTo(x + 30, y + 72);
-                ctx.lineTo(x + w - 30, y + 72);
+                ctx.moveTo(x + 14, y + 1.5);
+                ctx.lineTo(x + w - 14, y + 1.5);
                 ctx.stroke();
 
-                let curY = y + 114;
+                // Barra lateral con neón suave
+                ctx.save();
+                ctx.shadowColor = glowColor;
+                ctx.shadowBlur = 12;
+                ctx.fillStyle = accentColor;
+                drawRoundRect(x, y, 7, h, [16, 0, 0, 16]);
+                ctx.fill();
+                ctx.restore();
+
+                // Título tarjeta
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(titulo, x + 22, y + 36);
+
+                // Línea divisoria
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.09)';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(x + 20, y + 50);
+                ctx.lineTo(x + w - 20, y + 50);
+                ctx.stroke();
+
+                let curY = y + 80;
                 items.forEach(item => {
                     ctx.fillStyle = '#94a3b8';
-                    ctx.font = '700 18px "Plus Jakarta Sans", Arial, sans-serif';
+                    ctx.font = '800 13.5px "Plus Jakarta Sans", Arial, sans-serif';
                     ctx.textAlign = 'left';
-                    ctx.fillText(item.label, x + 34, curY);
+                    ctx.fillText(item.label, x + 22, curY);
 
+                    ctx.save();
+                    ctx.shadowColor = item.glow || 'transparent';
+                    ctx.shadowBlur = item.glow ? 10 : 0;
                     ctx.fillStyle = item.color;
                     ctx.font = `900 ${item.size}px "Plus Jakarta Sans", Arial, sans-serif`;
-                    ctx.fillText(item.val, x + 34, curY + 46);
+                    ctx.fillText(item.val, x + 22, curY + 36);
                     const valW = ctx.measureText(item.val).width;
+                    ctx.restore();
 
                     ctx.fillStyle = item.trend.color;
-                    ctx.font = '900 24px "Plus Jakarta Sans", Arial, sans-serif';
-                    ctx.fillText(item.trend.sym, x + 34 + valW + 12, curY + 44);
+                    ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
+                    ctx.fillText(item.trend.sym, x + 22 + valW + 8, curY + 34);
 
-                    curY += 108;
+                    curY += 82;
                 });
             };
 
-            // FILA 1: OFICIAL BCV (Izquierda) y OFICIAL SFC (Derecha)
-            dibujarTarjetaApilada(72, 365, 452, 335, '#eab308', 'OFICIAL BCV', [
-                { label: 'DÓLAR BCV', val: valBcvUsd, color: '#facc15', size: 37, trend: trBcvUsd },
-                { label: 'EURO BCV', val: valBcvEur, color: '#ffffff', size: 35, trend: trBcvEur }
+            // FILA 1: OFICIAL BCV (Izquierda) y OFICIAL SFC (Derecha) — Números grandes
+            dibujarTarjetaCristal(42, 246, 310, 245, '#facc15', 'rgba(250, 204, 21, 0.5)', '🇻🇪 OFICIAL BCV', [
+                { label: 'DÓLAR BCV', val: valBcvUsd, color: '#fde047', glow: 'rgba(250, 204, 21, 0.35)', size: 30, trend: trBcvUsd },
+                { label: 'EURO BCV', val: valBcvEur, color: '#ffffff', size: 28, trend: trBcvEur }
             ]);
 
-            dibujarTarjetaApilada(556, 365, 452, 335, '#38bdf8', 'OFICIAL SFC', [
-                { label: 'DÓLAR TRM', val: valTrmCop, color: '#38bdf8', size: 37, trend: trTrmCop },
-                { label: 'EURO COLOMBIA', val: valEurCop, color: '#ffffff', size: 35, trend: trEurCop }
+            dibujarTarjetaCristal(368, 246, 310, 245, '#38bdf8', 'rgba(56, 189, 248, 0.5)', '🇨🇴 OFICIAL SFC', [
+                { label: 'DÓLAR TRM', val: valTrmCop, color: '#38bdf8', glow: 'rgba(56, 189, 248, 0.35)', size: 30, trend: trTrmCop },
+                { label: 'EURO COLOMBIA', val: valEurCop, color: '#ffffff', size: 28, trend: trEurCop }
             ]);
 
             // FILA 2: CASAS DE CAMBIO CÚCUTA / LA PARADA
-            ctx.fillStyle = '#131a26';
-            ctx.strokeStyle = '#c5a036';
-            ctx.lineWidth = 2.5;
-            drawRoundRect(72, 730, 936, 235, 22);
+            const frontGrad = ctx.createLinearGradient(42, 510, 42, 682);
+            frontGrad.addColorStop(0, '#182438');
+            frontGrad.addColorStop(1, '#0f1624');
+            ctx.fillStyle = frontGrad;
+            ctx.strokeStyle = 'rgba(234, 179, 8, 0.65)';
+            ctx.lineWidth = 2;
+            drawRoundRect(42, 510, 636, 172, 18);
             ctx.fill();
             ctx.stroke();
 
-            ctx.fillStyle = '#facc15';
-            ctx.font = '900 25px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillStyle = '#fde047';
+            ctx.font = '900 18.5px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.textAlign = 'left';
-            ctx.fillText('CASAS DE CAMBIO CÚCUTA / LA PARADA', 104, 782);
+            ctx.fillText('💱 CASAS DE CAMBIO CÚCUTA / LA PARADA', 62, 546);
 
             // Caja interna Compra Efectivo
-            ctx.fillStyle = '#0b1019';
-            ctx.strokeStyle = '#1e2d42';
-            ctx.lineWidth = 2;
-            drawRoundRect(104, 808, 424, 130, 16);
+            ctx.fillStyle = '#090e18';
+            ctx.strokeStyle = 'rgba(16, 185, 129, 0.45)';
+            ctx.lineWidth = 1.8;
+            drawRoundRect(62, 564, 290, 100, 14);
             ctx.fill();
             ctx.stroke();
 
             ctx.fillStyle = '#10b981';
-            drawRoundRect(104, 808, 424, 6, [16, 16, 0, 0]);
+            drawRoundRect(62, 564, 290, 5, [14, 14, 0, 0]);
             ctx.fill();
 
             ctx.fillStyle = '#94a3b8';
-            ctx.font = '700 18px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '800 13.5px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText('COMPRA EFECTIVO', 316, 852);
+            ctx.fillText('COMPRA EFECTIVO', 207, 596);
+
+            ctx.save();
+            ctx.shadowColor = 'rgba(52, 211, 153, 0.45)';
+            ctx.shadowBlur = 12;
             ctx.fillStyle = '#34d399';
-            ctx.font = '900 38px "Plus Jakarta Sans", Arial, sans-serif';
-            ctx.fillText(valCompraF, 316, 906);
+            ctx.font = '900 32px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(valCompraF, 207, 639);
+            const wComp = ctx.measureText(valCompraF).width;
+            ctx.restore();
+            
+            ctx.fillStyle = trFronteraC.color;
+            ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(trFronteraC.sym, 207 + wComp/2 + 10, 637);
 
             // Caja interna Venta Efectivo
-            ctx.fillStyle = '#0b1019';
-            ctx.strokeStyle = '#1e2d42';
-            ctx.lineWidth = 2;
-            drawRoundRect(552, 808, 424, 130, 16);
+            ctx.fillStyle = '#090e18';
+            ctx.strokeStyle = 'rgba(234, 179, 8, 0.45)';
+            ctx.lineWidth = 1.8;
+            drawRoundRect(368, 564, 290, 100, 14);
             ctx.fill();
             ctx.stroke();
 
             ctx.fillStyle = '#eab308';
-            drawRoundRect(552, 808, 424, 6, [16, 16, 0, 0]);
+            drawRoundRect(368, 564, 290, 5, [14, 14, 0, 0]);
             ctx.fill();
 
             ctx.fillStyle = '#94a3b8';
-            ctx.font = '700 18px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '800 13.5px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText('VENTA EFECTIVO', 764, 852);
-            ctx.fillStyle = '#facc15';
-            ctx.font = '900 38px "Plus Jakarta Sans", Arial, sans-serif';
-            ctx.fillText(valVentaF, 764, 906);
+            ctx.fillText('VENTA EFECTIVO', 513, 596);
+
+            ctx.save();
+            ctx.shadowColor = 'rgba(250, 204, 21, 0.45)';
+            ctx.shadowBlur = 12;
+            ctx.fillStyle = '#fde047';
+            ctx.font = '900 32px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(valVentaF, 513, 639);
+            const wVent = ctx.measureText(valVentaF).width;
+            ctx.restore();
+
+            ctx.fillStyle = trFronteraV.color;
+            ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(trFronteraV.sym, 513 + wVent/2 + 10, 637);
 
             // FILA 3: MERCADO CRIPTO & GLOBAL (2 Columnas Simétricas)
-            ctx.fillStyle = '#131a26';
-            ctx.strokeStyle = '#243044';
-            ctx.lineWidth = 2;
-            drawRoundRect(72, 995, 936, 225, 22);
+            const cripGrad = ctx.createLinearGradient(42, 700, 42, 864);
+            cripGrad.addColorStop(0, '#172236');
+            cripGrad.addColorStop(1, '#0f1624');
+            ctx.fillStyle = cripGrad;
+            ctx.strokeStyle = 'rgba(148, 163, 184, 0.24)';
+            ctx.lineWidth = 1.8;
+            drawRoundRect(42, 700, 636, 164, 18);
             ctx.fill();
             ctx.stroke();
 
+            ctx.save();
+            ctx.shadowColor = 'rgba(16, 185, 129, 0.5)';
+            ctx.shadowBlur = 12;
             ctx.fillStyle = '#10b981';
-            drawRoundRect(72, 995, 10, 225, [22, 0, 0, 22]);
+            drawRoundRect(42, 700, 7, 164, [18, 0, 0, 18]);
             ctx.fill();
+            ctx.restore();
 
             ctx.fillStyle = '#ffffff';
-            ctx.font = '900 25px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.textAlign = 'left';
-            ctx.fillText('MERCADO CRIPTO & GLOBAL', 106, 1046);
+            ctx.fillText('🪙 MERCADO CRIPTO & GLOBAL', 64, 736);
 
-            ctx.strokeStyle = '#1f293a';
-            ctx.lineWidth = 2;
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.09)';
+            ctx.lineWidth = 1.5;
             ctx.beginPath();
-            ctx.moveTo(102, 1066);
-            ctx.lineTo(978, 1066);
+            ctx.moveTo(62, 750);
+            ctx.lineTo(658, 750);
             ctx.stroke();
 
-            // Línea divisoria central vertical
+            // Divisor vertical central
             ctx.beginPath();
-            ctx.moveTo(540, 1085);
-            ctx.lineTo(540, 1195);
+            ctx.moveTo(368, 764);
+            ctx.lineTo(368, 848);
             ctx.stroke();
 
             // Columna Izquierda: Binance USDT
             ctx.fillStyle = '#94a3b8';
-            ctx.font = '700 18px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '800 13.5px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.textAlign = 'left';
-            ctx.fillText('BINANCE USDT (VES)', 106, 1114);
+            ctx.fillText('BINANCE USDT (VES)', 64, 784);
 
+            ctx.save();
+            ctx.shadowColor = 'rgba(52, 211, 153, 0.4)';
+            ctx.shadowBlur = 10;
             ctx.fillStyle = '#34d399';
-            ctx.font = '900 37px "Plus Jakarta Sans", Arial, sans-serif';
-            ctx.fillText(valUsdt, 106, 1172);
+            ctx.font = '900 28px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(valUsdt, 64, 828);
             const wUsdt = ctx.measureText(valUsdt).width;
+            ctx.restore();
 
             ctx.fillStyle = trUsdt.color;
-            ctx.font = '900 24px "Plus Jakarta Sans", Arial, sans-serif';
-            ctx.fillText(trUsdt.sym, 106 + wUsdt + 12, 1170);
+            ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(trUsdt.sym, 64 + wUsdt + 8, 826);
 
-            // Columna Derecha: Bitcoin Global (alineado a la derecha)
+            // Columna Derecha: Bitcoin Global
             ctx.fillStyle = '#94a3b8';
-            ctx.font = '700 18px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '800 13.5px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.textAlign = 'right';
-            ctx.fillText('BITCOIN GLOBAL', 974, 1114);
+            ctx.fillText('BITCOIN GLOBAL', 656, 784);
 
-            ctx.font = '900 24px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
             const wTrBtc = ctx.measureText(trBtc.sym).width;
             ctx.fillStyle = trBtc.color;
-            ctx.fillText(trBtc.sym, 974, 1170);
+            ctx.fillText(trBtc.sym, 656, 826);
 
             ctx.fillStyle = '#ffffff';
-            ctx.font = '900 37px "Plus Jakarta Sans", Arial, sans-serif';
-            ctx.fillText(valBtc, 974 - wTrBtc - 12, 1172);
+            ctx.font = '900 28px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(valBtc, 656 - wTrBtc - 8, 828);
 
-            // FILA 4: LLAMADO A LA ACCIÓN COMERCIAL
-            ctx.fillStyle = '#102547';
-            ctx.strokeStyle = '#d4af37';
-            ctx.lineWidth = 2.5;
-            drawRoundRect(72, 1250, 936, 245, 22);
+            // FILA 4: LLAMADO A LA ACCIÓN COMERCIAL CON BOTÓN ORO METÁLICO
+            const ctaGrad = ctx.createLinearGradient(42, 882, 678, 1028);
+            ctaGrad.addColorStop(0, '#0f2752');
+            ctaGrad.addColorStop(1, '#173a78');
+            ctx.fillStyle = ctaGrad;
+            ctx.strokeStyle = '#eab308';
+            ctx.lineWidth = 2;
+            drawRoundRect(42, 882, 636, 146, 18);
             ctx.fill();
             ctx.stroke();
 
-            ctx.fillStyle = '#facc15';
-            ctx.font = '900 26px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillStyle = '#fde047';
+            ctx.font = '900 18.5px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText('¿QUIERES ESTA PANTALLA EN VIVO EN TU NEGOCIO?', 540, 1306);
+            ctx.fillText('¿QUIERES ESTA PANTALLA EN VIVO EN TU NEGOCIO?', 360, 916);
 
             ctx.fillStyle = '#e2e8f0';
-            ctx.font = '700 21px "Plus Jakarta Sans", Arial, sans-serif';
-            ctx.fillText('¡La herramienta financiera que tu negocio necesita para destacar y crecer!', 540, 1352);
+            ctx.font = '700 14.5px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText('¡La herramienta financiera que tu negocio necesita para destacar!', 360, 944);
 
             ctx.textAlign = 'left';
-            ctx.font = '700 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '700 15px "Plus Jakarta Sans", Arial, sans-serif';
             const ctaPart1 = 'Suscríbete a ';
             const ctaPart2 = 'PubliTasa Pro';
-            const ctaPart3 = ' desde solo';
+            const ctaPart3 = ' desde';
             const wCta1 = ctx.measureText(ctaPart1).width;
-            ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '900 15px "Plus Jakarta Sans", Arial, sans-serif';
             const wCta2 = ctx.measureText(ctaPart2).width;
 
-            ctx.font = '700 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '700 15px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.fillStyle = '#cbd5e1';
-            ctx.fillText(ctaPart1, 112, 1428);
-            ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(ctaPart1, 64, 994);
+            ctx.font = '900 15px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.fillStyle = '#ffffff';
-            ctx.fillText(ctaPart2, 112 + wCta1, 1428);
-            ctx.font = '700 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(ctaPart2, 64 + wCta1, 994);
+            ctx.font = '700 15px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.fillStyle = '#cbd5e1';
-            ctx.fillText(ctaPart3, 112 + wCta1 + wCta2, 1428);
+            ctx.fillText(ctaPart3, 64 + wCta1 + wCta2, 994);
 
-            ctx.fillStyle = '#eab308';
-            drawRoundRect(635, 1386, 338, 68, 14);
+            const btnGoldGrad = ctx.createLinearGradient(418, 964, 656, 1012);
+            btnGoldGrad.addColorStop(0, '#fef08a');
+            btnGoldGrad.addColorStop(0.5, '#eab308');
+            btnGoldGrad.addColorStop(1, '#ca8a04');
+
+            ctx.save();
+            ctx.shadowColor = 'rgba(250, 204, 21, 0.5)';
+            ctx.shadowBlur = 14;
+            ctx.fillStyle = btnGoldGrad;
+            drawRoundRect(418, 964, 238, 48, 12);
             ctx.fill();
+            ctx.restore();
 
             ctx.fillStyle = '#09111e';
-            ctx.font = '900 23px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '900 17px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText(precioPlanTxt, 804, 1428);
+            ctx.fillText(precioPlanTxt, 537, 994);
 
-            // FILA 5: FIRMA INSTITUCIONAL GRANDE Y DESTACADA DE TUCOCEL C.A.
-            ctx.fillStyle = '#080b12';
-            ctx.strokeStyle = '#1e293b';
-            ctx.lineWidth = 2;
-            drawRoundRect(72, 1525, 936, 225, 22);
+            // FILA 5: SELLO INSTITUCIONAL DE TUCOCEL C.A. CLONADO EXACTO Y PROTEGIDO
+            const footGrad = ctx.createLinearGradient(42, 1044, 42, 1172);
+            footGrad.addColorStop(0, '#0c1322');
+            footGrad.addColorStop(1, '#060911');
+            ctx.fillStyle = footGrad;
+            ctx.strokeStyle = 'rgba(212, 175, 55, 0.38)';
+            ctx.lineWidth = 1.8;
+            drawRoundRect(42, 1044, 636, 128, 18);
             ctx.fill();
             ctx.stroke();
 
             ctx.fillStyle = '#facc15';
-            ctx.font = '900 27px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.font = '900 23px "Plus Jakarta Sans", Arial, sans-serif';
             ctx.textAlign = 'center';
-            ctx.fillText('CON EL RESPALDO ABSOLUTO', 540, 1584);
+            ctx.fillText('CON EL RESPALDO ABSOLUTO', 360, 1084);
 
+            ctx.save();
+            ctx.shadowColor = 'rgba(255, 255, 255, 0.45)';
+            ctx.shadowBlur = 16;
             ctx.fillStyle = '#ffffff';
-            ctx.font = '900 50px "Plus Jakarta Sans", Arial, sans-serif';
-            ctx.fillText('DE TUCOCEL C.A.', 540, 1650);
+            ctx.font = '900 44px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText('DE TUCOCEL C.A.', 360, 1132);
+            ctx.restore();
 
             ctx.fillStyle = '#38bdf8';
-            ctx.font = '700 22px "Plus Jakarta Sans", Arial, sans-serif';
-            ctx.fillText('Desarrollado corporativamente por @publionlinemk', 540, 1712);
+            ctx.font = '800 15px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText('Desarrollado corporativamente por @publionlinemk', 360, 1162);
 
             canvas.toBlob(async (blob) => {
                 const nombreArchivo = esApertura ? 'Reporte_Apertura_PubliTasa.png' : 'Reporte_Cierre_PubliTasa.png';
