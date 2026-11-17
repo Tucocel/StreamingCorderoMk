@@ -3900,42 +3900,401 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
         };
 
         window.generarYCompartirImagenEstadoWhatsApp = async function(modo = 'CIERRE') {
-            const diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
-            const ahora = new Date();
-            const nombreDia = diasSemana[ahora.getDay()];
-            const fechaStr = ahora.toLocaleDateString('es-ES');
-            const esApertura = modo === 'APERTURA';
-            
-            const elTitular = document.getElementById('flyer-titular-dinamico-txt');
-            if(elTitular) {
-                elTitular.innerText = esApertura 
-                    ? `APERTURA • ${nombreDia.toUpperCase()} ${fechaStr}`
-                    : `CIERRE • ${nombreDia.toUpperCase()} ${fechaStr}`;
-            }
-
-            const elPrecioBadge = document.getElementById('flyer-precio-plan1-badge');
-            if(elPrecioBadge) {
-                const pBase = (tarifasPubliTasaEstructura.plan1 || 5.00).toFixed(2).replace('.', ',');
-                elPrecioBadge.innerText = `$${pBase} USDT / MES`;
-            }
-
             if (document.fonts && document.fonts.ready) {
                 try { await document.fonts.ready; } catch (e) {}
             }
 
-            const nodoPlantilla = document.getElementById('flyer-export-canvas-wrap') || document.getElementById('plantilla-flyer-render-nube');
-            
-            const canvas = await html2canvas(nodoPlantilla, {
-                backgroundColor: '#05070c',
-                scale: 3,
-                useCORS: true,
-                logging: false
-            });
+            const diasSemana = ['DOMINGO', 'LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO'];
+            const ahora = new Date();
+            const nombreDia = diasSemana[ahora.getDay()];
+            const fechaStr = ahora.toLocaleDateString('es-ES');
+            const esApertura = modo === 'APERTURA';
+            const jornadaTxt = esApertura
+                ? `APERTURA • ${nombreDia} ${fechaStr}`
+                : `CIERRE OFICIAL DE MERCADOS • ${nombreDia} ${fechaStr}`;
+
+            const hist = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
+
+            const limpiarTextoValor = (domId, fallbackVal) => {
+                const raw = document.getElementById(domId)?.innerText?.trim() || "";
+                if (!raw || raw.includes("Cargando")) return fallbackVal;
+                return raw;
+            };
+
+            const getTrendInfo = (valAct, valPrev) => {
+                const a = parseFloat(valAct);
+                const p = parseFloat(valPrev);
+                if (!p || isNaN(p) || isNaN(a) || Math.abs(a - p) < 0.0001) {
+                    return { sym: '=', color: '#facc15' };
+                }
+                return a > p
+                    ? { sym: '▲', color: '#f87171' }
+                    : { sym: '▼', color: '#34d399' };
+            };
+
+            const valBcvUsd = limpiarTextoValor('val-bcv-usd', hist.bcvUsd ? `${parseFloat(hist.bcvUsd).toFixed(2)} Bs` : '0.00 Bs');
+            const valBcvEur = limpiarTextoValor('val-bcv-eur', hist.bcvEur ? `${parseFloat(hist.bcvEur).toFixed(2)} Bs` : '0.00 Bs');
+            const valTrmCop = limpiarTextoValor('val-trm-cop', hist.trmCop ? `${Math.round(hist.trmCop).toLocaleString('es-CO')} COP` : '0 COP');
+            const valEurCop = limpiarTextoValor('val-eur-cop', hist.eurCop ? `${Math.round(hist.eurCop).toLocaleString('es-CO')} COP` : '0 COP');
+
+            let valCompraF = limpiarTextoValor('val-frontera-compra', hist.cucutaCompra ? Math.round(hist.cucutaCompra).toLocaleString('es-CO') : '3.320');
+            if (!valCompraF.includes('COP')) valCompraF += ' COP';
+            let valVentaF = limpiarTextoValor('val-frontera-venta', hist.cucutaVenta ? Math.round(hist.cucutaVenta).toLocaleString('es-CO') : '3.370');
+            if (!valVentaF.includes('COP')) valVentaF += ' COP';
+
+            let valUsdt = limpiarTextoValor('val-usdt-rango', hist.usdtCompra ? `${Math.round(hist.usdtCompra)} / ${Math.round(hist.usdtVenta || (hist.usdtCompra + 12))} Bs` : '800 / 812 Bs');
+            valUsdt = valUsdt.replace(/Bs\.$/, 'Bs');
+            const valBtc = limpiarTextoValor('val-btc-usd', hist.btcUsd ? `$${Math.round(hist.btcUsd).toLocaleString('en-US')} USD` : '$80,000 USD');
+
+            const trBcvUsd = getTrendInfo(hist.bcvUsd, hist.prevBcvUsd);
+            const trBcvEur = getTrendInfo(hist.bcvEur, hist.prevBcvEur);
+            const trTrmCop = getTrendInfo(hist.trmCop, hist.prevTrmCop);
+            const trEurCop = getTrendInfo(hist.eurCop, hist.prevEurCop);
+            const trUsdt = getTrendInfo(hist.usdtCompra, hist.prevUsdtCompra);
+            const trBtc = getTrendInfo(hist.btcUsd, hist.prevBtcUsd);
+
+            const pBasePlan1 = (tarifasPubliTasaEstructura.plan1 || 5.00).toFixed(2).replace('.', ',');
+            const precioPlanTxt = `$${pBasePlan1} USDT / MES`;
+
+            const canvas = document.createElement('canvas');
+            canvas.width = 1080;
+            canvas.height = 1920;
+            const ctx = canvas.getContext('2d');
+
+            const drawRoundRect = (x, y, w, h, r) => {
+                ctx.beginPath();
+                if (typeof ctx.roundRect === 'function') {
+                    ctx.roundRect(x, y, w, h, r);
+                } else {
+                    const rad = Array.isArray(r) ? r[0] : r;
+                    ctx.moveTo(x + rad, y);
+                    ctx.arcTo(x + w, y, x + w, y + h, rad);
+                    ctx.arcTo(x + w, y + h, x, y + h, rad);
+                    ctx.arcTo(x, y + h, x, y, rad);
+                    ctx.arcTo(x, y, x + w, y, rad);
+                    ctx.closePath();
+                }
+            };
+
+            // 1. Fondo general
+            ctx.fillStyle = '#070b14';
+            ctx.fillRect(0, 0, 1080, 1920);
+
+            // 2. Marco principal ejecutivo (con margen inferior amplio de seguridad anti-Filtros WhatsApp)
+            ctx.fillStyle = '#0b0f17';
+            ctx.strokeStyle = '#2b384e';
+            ctx.lineWidth = 3;
+            drawRoundRect(36, 36, 1008, 1740, 32);
+            ctx.fill();
+            ctx.stroke();
+
+            // 3. Cabecera Azul Real (#0f213e) con línea dorada inferior
+            ctx.fillStyle = '#0f213e';
+            drawRoundRect(39, 39, 1002, 290, [30, 30, 0, 0]);
+            ctx.fill();
+
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(39, 329);
+            ctx.lineTo(1041, 329);
+            ctx.stroke();
+
+            // Subtítulo superior
+            ctx.fillStyle = '#93c5fd';
+            ctx.font = '800 22px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('REPORTE FINANCIERO • TIEMPO REAL', 540, 95);
+
+            // Título principal centrado matemáticamente con measureText (cero encimado)
+            const boxW = 68;
+            const boxH = 68;
+            const gapLogo = 22;
+            ctx.font = '900 48px "Plus Jakarta Sans", Arial, sans-serif';
+            const txtPart1 = 'PUBLI-TASA-MK';
+            const txtPart2 = 'PRO';
+            const gapWords = 16;
+            const wPart1 = ctx.measureText(txtPart1).width;
+            const wPart2 = ctx.measureText(txtPart2).width;
+            const totalHeaderW = boxW + gapLogo + wPart1 + gapWords + wPart2;
+            const startHeaderX = (1080 - totalHeaderW) / 2;
+
+            ctx.fillStyle = '#eab308';
+            drawRoundRect(startHeaderX, 130, boxW, boxH, 14);
+            ctx.fill();
+
+            ctx.fillStyle = '#09111e';
+            ctx.font = '900 28px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('MK', startHeaderX + boxW / 2, 174);
+
+            ctx.font = '900 48px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(txtPart1, startHeaderX + boxW + gapLogo, 181);
+            ctx.fillStyle = '#facc15';
+            ctx.fillText(txtPart2, startHeaderX + boxW + gapLogo + wPart1 + gapWords, 181);
+
+            // Cápsula de jornada (Apertura / Cierre)
+            ctx.font = '800 22px "Plus Jakarta Sans", Arial, sans-serif';
+            const wJornada = ctx.measureText(jornadaTxt).width;
+            const pillW = Math.max(660, wJornada + 95);
+            const pillX = (1080 - pillW) / 2;
+
+            ctx.fillStyle = '#081224';
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 2;
+            drawRoundRect(pillX, 232, pillW, 60, 14);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#22c55e';
+            ctx.beginPath();
+            ctx.arc(pillX + 36, 262, 8, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.fillStyle = '#fef08a';
+            ctx.textAlign = 'center';
+            ctx.fillText(jornadaTxt, pillX + pillW / 2 + 12, 270);
+
+            // Helper para tarjetas apiladas (BCV y SFC)
+            const dibujarTarjetaApilada = (x, y, w, h, accentColor, titulo, items) => {
+                ctx.fillStyle = '#131a26';
+                ctx.strokeStyle = '#243044';
+                ctx.lineWidth = 2;
+                drawRoundRect(x, y, w, h, 20);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = accentColor;
+                drawRoundRect(x, y, 10, h, [20, 0, 0, 20]);
+                ctx.fill();
+
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '900 26px "Plus Jakarta Sans", Arial, sans-serif';
+                ctx.textAlign = 'left';
+                ctx.fillText(titulo, x + 34, y + 52);
+
+                ctx.strokeStyle = '#1f293a';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(x + 30, y + 72);
+                ctx.lineTo(x + w - 30, y + 72);
+                ctx.stroke();
+
+                let curY = y + 114;
+                items.forEach(item => {
+                    ctx.fillStyle = '#94a3b8';
+                    ctx.font = '700 18px "Plus Jakarta Sans", Arial, sans-serif';
+                    ctx.textAlign = 'left';
+                    ctx.fillText(item.label, x + 34, curY);
+
+                    ctx.fillStyle = item.color;
+                    ctx.font = `900 ${item.size}px "Plus Jakarta Sans", Arial, sans-serif`;
+                    ctx.fillText(item.val, x + 34, curY + 46);
+                    const valW = ctx.measureText(item.val).width;
+
+                    ctx.fillStyle = item.trend.color;
+                    ctx.font = '900 24px "Plus Jakarta Sans", Arial, sans-serif';
+                    ctx.fillText(item.trend.sym, x + 34 + valW + 12, curY + 44);
+
+                    curY += 108;
+                });
+            };
+
+            // FILA 1: OFICIAL BCV (Izquierda) y OFICIAL SFC (Derecha)
+            dibujarTarjetaApilada(72, 365, 452, 335, '#eab308', 'OFICIAL BCV', [
+                { label: 'DÓLAR BCV', val: valBcvUsd, color: '#facc15', size: 37, trend: trBcvUsd },
+                { label: 'EURO BCV', val: valBcvEur, color: '#ffffff', size: 35, trend: trBcvEur }
+            ]);
+
+            dibujarTarjetaApilada(556, 365, 452, 335, '#38bdf8', 'OFICIAL SFC', [
+                { label: 'DÓLAR TRM', val: valTrmCop, color: '#38bdf8', size: 37, trend: trTrmCop },
+                { label: 'EURO COLOMBIA', val: valEurCop, color: '#ffffff', size: 35, trend: trEurCop }
+            ]);
+
+            // FILA 2: CASAS DE CAMBIO CÚCUTA / LA PARADA
+            ctx.fillStyle = '#131a26';
+            ctx.strokeStyle = '#c5a036';
+            ctx.lineWidth = 2.5;
+            drawRoundRect(72, 730, 936, 235, 22);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#facc15';
+            ctx.font = '900 25px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('CASAS DE CAMBIO CÚCUTA / LA PARADA', 104, 782);
+
+            // Caja interna Compra Efectivo
+            ctx.fillStyle = '#0b1019';
+            ctx.strokeStyle = '#1e2d42';
+            ctx.lineWidth = 2;
+            drawRoundRect(104, 808, 424, 130, 16);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#10b981';
+            drawRoundRect(104, 808, 424, 6, [16, 16, 0, 0]);
+            ctx.fill();
+
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '700 18px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('COMPRA EFECTIVO', 316, 852);
+            ctx.fillStyle = '#34d399';
+            ctx.font = '900 38px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(valCompraF, 316, 906);
+
+            // Caja interna Venta Efectivo
+            ctx.fillStyle = '#0b1019';
+            ctx.strokeStyle = '#1e2d42';
+            ctx.lineWidth = 2;
+            drawRoundRect(552, 808, 424, 130, 16);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#eab308';
+            drawRoundRect(552, 808, 424, 6, [16, 16, 0, 0]);
+            ctx.fill();
+
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '700 18px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('VENTA EFECTIVO', 764, 852);
+            ctx.fillStyle = '#facc15';
+            ctx.font = '900 38px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(valVentaF, 764, 906);
+
+            // FILA 3: MERCADO CRIPTO & GLOBAL (2 Columnas Simétricas)
+            ctx.fillStyle = '#131a26';
+            ctx.strokeStyle = '#243044';
+            ctx.lineWidth = 2;
+            drawRoundRect(72, 995, 936, 225, 22);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#10b981';
+            drawRoundRect(72, 995, 10, 225, [22, 0, 0, 22]);
+            ctx.fill();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '900 25px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('MERCADO CRIPTO & GLOBAL', 106, 1046);
+
+            ctx.strokeStyle = '#1f293a';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(102, 1066);
+            ctx.lineTo(978, 1066);
+            ctx.stroke();
+
+            // Línea divisoria central vertical
+            ctx.beginPath();
+            ctx.moveTo(540, 1085);
+            ctx.lineTo(540, 1195);
+            ctx.stroke();
+
+            // Columna Izquierda: Binance USDT
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '700 18px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('BINANCE USDT (VES)', 106, 1114);
+
+            ctx.fillStyle = '#34d399';
+            ctx.font = '900 37px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(valUsdt, 106, 1172);
+            const wUsdt = ctx.measureText(valUsdt).width;
+
+            ctx.fillStyle = trUsdt.color;
+            ctx.font = '900 24px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(trUsdt.sym, 106 + wUsdt + 12, 1170);
+
+            // Columna Derecha: Bitcoin Global (alineado a la derecha)
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '700 18px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'right';
+            ctx.fillText('BITCOIN GLOBAL', 974, 1114);
+
+            ctx.font = '900 24px "Plus Jakarta Sans", Arial, sans-serif';
+            const wTrBtc = ctx.measureText(trBtc.sym).width;
+            ctx.fillStyle = trBtc.color;
+            ctx.fillText(trBtc.sym, 974, 1170);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '900 37px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(valBtc, 974 - wTrBtc - 12, 1172);
+
+            // FILA 4: LLAMADO A LA ACCIÓN COMERCIAL
+            ctx.fillStyle = '#102547';
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 2.5;
+            drawRoundRect(72, 1250, 936, 245, 22);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#facc15';
+            ctx.font = '900 26px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('¿QUIERES ESTA PANTALLA EN VIVO EN TU NEGOCIO?', 540, 1306);
+
+            ctx.fillStyle = '#e2e8f0';
+            ctx.font = '700 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText('¡La herramienta financiera que tu negocio necesita para destacar y crecer!', 540, 1352);
+
+            ctx.textAlign = 'left';
+            ctx.font = '700 21px "Plus Jakarta Sans", Arial, sans-serif';
+            const ctaPart1 = 'Suscríbete a ';
+            const ctaPart2 = 'PubliTasa Pro';
+            const ctaPart3 = ' desde solo';
+            const wCta1 = ctx.measureText(ctaPart1).width;
+            ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
+            const wCta2 = ctx.measureText(ctaPart2).width;
+
+            ctx.font = '700 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillStyle = '#cbd5e1';
+            ctx.fillText(ctaPart1, 112, 1428);
+            ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(ctaPart2, 112 + wCta1, 1428);
+            ctx.font = '700 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillStyle = '#cbd5e1';
+            ctx.fillText(ctaPart3, 112 + wCta1 + wCta2, 1428);
+
+            ctx.fillStyle = '#eab308';
+            drawRoundRect(635, 1386, 338, 68, 14);
+            ctx.fill();
+
+            ctx.fillStyle = '#09111e';
+            ctx.font = '900 23px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(precioPlanTxt, 804, 1428);
+
+            // FILA 5: FIRMA INSTITUCIONAL GRANDE Y DESTACADA DE TUCOCEL C.A.
+            ctx.fillStyle = '#080b12';
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 2;
+            drawRoundRect(72, 1525, 936, 225, 22);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = '#facc15';
+            ctx.font = '900 27px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('CON EL RESPALDO ABSOLUTO', 540, 1584);
+
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '900 50px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText('DE TUCOCEL C.A.', 540, 1650);
+
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = '700 22px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText('Desarrollado corporativamente por @publionlinemk', 540, 1712);
 
             canvas.toBlob(async (blob) => {
-                const nombreArchivo = esApertura ? "Reporte_Apertura_PubliTasa.png" : "Reporte_Cierre_PubliTasa.png";
-                const archivoImagen = new File([blob], nombreArchivo, { type: "image/png" });
-
+                const nombreArchivo = esApertura ? 'Reporte_Apertura_PubliTasa.png' : 'Reporte_Cierre_PubliTasa.png';
+                const archivoImagen = new File([blob], nombreArchivo, { type: 'image/png' });
                 if (navigator.canShare && navigator.canShare({ files: [archivoImagen] })) {
                     try {
                         await navigator.share({
@@ -3945,10 +4304,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                         });
                     } catch (e) {}
                 } else {
-                    const mensajeTexto = esApertura
-                        ? `📊 Apertura Oficial de Indicadores Económicos — PubliTasaMK Pro\n📅 Fecha: ${fechaStr}\n\n🏛️ Respaldo Corporativo: Tucocel C.A.`
-                        : `📊 Cierre Oficial de Indicadores Económicos — PubliTasaMK Pro\n📅 Fecha: ${fechaStr}\n\n🏛️ Respaldo Corporativo: Tucocel C.A.`;
-                    abrirWhatsAppPersonal('', mensajeTexto);
+                    const link = document.createElement('a');
+                    link.download = nombreArchivo;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
                 }
             }, 'image/png');
         };
