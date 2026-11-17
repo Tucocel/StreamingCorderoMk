@@ -30,18 +30,8 @@
     <meta name="twitter:description" content="⭐ Calidad Premium Virtual | Disponibilidad Inmediata | Soporte 24/7 — Bajo el respaldo de Tucocel C.A. 🚀">
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1567443024551-f3e3cc2be870?auto=format&fit=crop&w=1200&h=630&q=80">
 
-    <!-- CONFIGURACIÓN PWA Y MANIFIESTO -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="PubliTasa Pro">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#00112b">
-
-    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22PubliTasaMK%20Pro%22%2C%22short_name%22%3A%22PubliTasa%20Pro%22%2C%22start_url%22%3A%22.%2Findex.html%23publitasa%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23030306%22%2C%22theme_color%22%3A%22%2300112b%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fpublionlinemk%2Fstreaming%2Fmain%2Fimagen%2520para%2520Streaming%2520-clean.jpg%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fjpeg%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fraw.githubusercontent.com%2Fpublionlinemk%2Fstreaming%2Fmain%2Fimagen%2520para%2520Streaming%2520-clean.jpg%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fjpeg%22%7D%5D%7D">
-
-    <!-- TAILWIND, FONTS Y LIBRERÍA HTML2CANVAS PARA RENDERIZAR FLYER -->
+    <!-- TAILWIND Y FONTS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap');
@@ -91,12 +81,6 @@
             touch-action: manipulation;
         }
 
-        .flyer-estado-compacto {
-            width: 380px;
-            background-color: #000c1e;
-            border: 3px solid #d4af37;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
     </style>
 </head>
 <body class="min-h-screen overflow-x-hidden no-scrollbar flex flex-col justify-between w-full">
@@ -813,7 +797,10 @@
                         </div>
                         <div class="grid grid-cols-2 gap-3 pt-0.5 text-center">
                             <div class="bg-neutral-900 p-2 rounded-xl border border-neutral-800">
-                                <span class="text-[8.5px] text-slate-400 uppercase block font-bold">Compran Dólar (COP)</span>
+                                <span class="text-[8.5px] text-slate-400 uppercase block font-bold flex items-center justify-center gap-1">
+                                    <span>Compran Dólar (COP)</span>
+                                    <span id="trend-frontera-compra"></span>
+                                </span>
                                 <span id="val-frontera-compra" class="text-xl sm:text-2xl font-mono font-black text-emerald-400">3.320</span>
                             </div>
                             <div class="bg-neutral-900 p-2 rounded-xl border border-neutral-800">
@@ -1910,235 +1897,6 @@
 
         </div>
     </div>
-<!-- PLANTILLA FLYER CORPORATIVO BANCA PRIVADA ULTRA HD (PROPUESTA 2) -->
-    <div class="fixed -left-[9999px] top-0">
-        <div id="flyer-export-canvas-wrap" style="background-color: #05070c; padding: 16px; display: inline-block; box-sizing: border-box;">
-            <div id="plantilla-flyer-render-nube" style="width: 420px; background-color: #0b0f17; border: 1.5px solid #2b384e; border-radius: 18px; color: #f8fafc; font-family: 'Plus Jakarta Sans', Arial, sans-serif; box-sizing: border-box;">
-
-                <!-- CABECERA SUPERIOR TIPO REPORTE BURSÁTIL / BANCA PRIVADA -->
-                <div style="background-color: #0f213e; border-bottom: 2px solid #d4af37; border-top-left-radius: 16px; border-top-right-radius: 16px; padding: 18px 18px 15px 18px; text-align: center;">
-                    <div style="font-size: 8px; font-weight: 800; letter-spacing: 2.4px; text-transform: uppercase; color: #93c5fd; margin-bottom: 8px; line-height: 1.2;">
-                        REPORTE FINANCIERO &bull; TIEMPO REAL
-                    </div>
-
-                    <!-- MARCA CORPORATIVA -->
-                    <table style="margin: 0 auto 10px auto; border-collapse: collapse;">
-                        <tr>
-                            <td style="vertical-align: middle; padding-right: 9px;">
-                                <div style="width: 28px; height: 28px; border-radius: 6px; background-color: #eab308; color: #09111e; font-size: 12px; font-weight: 900; text-align: center; line-height: 28px;">
-                                    MK
-                                </div>
-                            </td>
-                            <td style="vertical-align: middle;">
-                                <h2 style="font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.7px; margin: 0; color: #ffffff; line-height: 1.1; white-space: nowrap;">
-                                    PUBLI-TASA-MK <span style="color: #facc15;">PRO</span>
-                                </h2>
-                            </td>
-                        </tr>
-                    </table>
-
-                    <!-- FRANJA DE JORNADA (APERTURA / CIERRE) -->
-                    <table style="margin: 0 auto; border-collapse: collapse; background-color: #081224; border: 1px solid #d4af37; border-radius: 6px;">
-                        <tr>
-                            <td style="padding: 6px 6px 6px 12px; vertical-align: middle;">
-                                <div style="width: 7px; height: 7px; border-radius: 50%; background-color: #22c55e;"></div>
-                            </td>
-                            <td style="padding: 6px 14px 6px 2px; vertical-align: middle;">
-                                <span id="flyer-titular-dinamico-txt" style="color: #fef08a; font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; line-height: 1; display: block; white-space: nowrap;">
-                                    CIERRE OFICIAL DE MERCADOS • HOY
-                                </span>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <!-- CUERPO DE INDICADORES -->
-                <div style="padding: 14px 16px 16px 16px;">
-
-                    <!-- FILA 1: BCV Y COLOMBIA CON BARRA LATERAL EJECUTIVA -->
-                    <table style="width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; margin-bottom: 10px;">
-                        <tr>
-                            <!-- VENEZUELA BCV -->
-                            <td style="width: 48.5%; vertical-align: top; background-color: #131a26; border: 1px solid #243044; border-left: 3.5px solid #eab308; border-radius: 10px; padding: 10px 11px;">
-                                <table style="width: 100%; border-collapse: collapse; border-bottom: 1px solid #1f293a; margin-bottom: 8px;">
-                                    <tr>
-                                        <td style="padding-bottom: 5px; font-size: 9px; font-weight: 800; text-transform: uppercase; color: #f1f5f9; vertical-align: middle; white-space: nowrap;">
-                                            🇻🇪 OFICIAL BCV
-                                        </td>
-                                        <td style="padding-bottom: 5px; text-align: right; vertical-align: middle;">
-                                            <span style="display: inline-block; font-size: 7px; font-weight: 800; color: #facc15; background-color: #262112; border: 1px solid #715b18; padding: 2px 5px; border-radius: 4px; line-height: 1.1; white-space: nowrap;">
-                                                BCV
-                                            </span>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <div style="margin-bottom: 7px;">
-                                    <span style="font-size: 7.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Dólar BCV</span>
-                                    <div style="white-space: nowrap;">
-                                        <span id="flyer-val-bcv-usd" style="font-size: 15px; font-weight: 900; color: #facc15; vertical-align: middle;">Cargando...</span>
-                                        <span id="flyer-trend-bcv-usd" style="font-size: 9.5px; font-weight: 800; color: #f87171; vertical-align: middle; margin-left: 3px;">•</span>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <span style="font-size: 7.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Euro BCV</span>
-                                    <div style="white-space: nowrap;">
-                                        <span id="flyer-val-bcv-eur" style="font-size: 13.5px; font-weight: 800; color: #ffffff; vertical-align: middle;">Cargando...</span>
-                                        <span id="flyer-trend-bcv-eur" style="font-size: 9.5px; font-weight: 800; color: #f87171; vertical-align: middle; margin-left: 3px;">•</span>
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td style="width: 3%;"></td>
-
-                            <!-- COLOMBIA SFC -->
-                            <td style="width: 48.5%; vertical-align: top; background-color: #131a26; border: 1px solid #243044; border-left: 3.5px solid #38bdf8; border-radius: 10px; padding: 10px 11px;">
-                                <table style="width: 100%; border-collapse: collapse; border-bottom: 1px solid #1f293a; margin-bottom: 8px;">
-                                    <tr>
-                                        <td style="padding-bottom: 5px; font-size: 9px; font-weight: 800; text-transform: uppercase; color: #f1f5f9; vertical-align: middle; white-space: nowrap;">
-                                            🇨🇴 OFICIAL SFC
-                                        </td>
-                                        <td style="padding-bottom: 5px; text-align: right; vertical-align: middle;">
-                                            <span style="display: inline-block; font-size: 7px; font-weight: 800; color: #38bdf8; background-color: #102438; border: 1px solid #1d4e78; padding: 2px 5px; border-radius: 4px; line-height: 1.1; white-space: nowrap;">
-                                                TRM
-                                            </span>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <div style="margin-bottom: 7px;">
-                                    <span style="font-size: 7.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Dólar TRM</span>
-                                    <div style="white-space: nowrap;">
-                                        <span id="flyer-val-trm-cop" style="font-size: 15px; font-weight: 900; color: #38bdf8; vertical-align: middle;">Cargando...</span>
-                                        <span id="flyer-trend-trm-cop" style="font-size: 9.5px; font-weight: 800; color: #34d399; vertical-align: middle; margin-left: 3px;">•</span>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <span style="font-size: 7.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Euro Colombia</span>
-                                    <div style="white-space: nowrap;">
-                                        <span id="flyer-val-eur-cop" style="font-size: 13.5px; font-weight: 800; color: #ffffff; vertical-align: middle;">Cargando...</span>
-                                        <span id="flyer-trend-eur-cop" style="font-size: 9.5px; font-weight: 800; color: #f87171; vertical-align: middle; margin-left: 3px;">•</span>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-
-                    <!-- FILA 2: CASAS DE CAMBIO FRONTERA (PROTAGONISTA CENTRAL) -->
-                    <div style="background-color: #131a26; border: 1px solid #c5a036; border-radius: 10px; padding: 11px 12px; margin-bottom: 10px;">
-                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 8px;">
-                            <tr>
-                                <td style="font-size: 9.5px; font-weight: 900; text-transform: uppercase; color: #facc15; vertical-align: middle; white-space: nowrap;">
-                                    CASAS DE CAMBIO CÚCUTA / LA PARADA
-                                </td>
-                                <td style="text-align: right; vertical-align: middle;">
-                                    <span style="display: inline-block; font-size: 7px; font-weight: 800; color: #fef08a; background-color: #262112; border: 1px solid #8c7326; padding: 2px 7px; border-radius: 4px; line-height: 1.1; text-transform: uppercase; white-space: nowrap;">
-                                        FRONTERA
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <table style="width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0;">
-                            <tr>
-                                <!-- COMPRA -->
-                                <td style="width: 48.5%; background-color: #0b1019; border: 1px solid #1e2d42; border-top: 2px solid #10b981; border-radius: 8px; padding: 8px 6px; text-align: center;">
-                                    <span style="font-size: 7.5px; color: #94a3b8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; display: block; margin-bottom: 3px;">
-                                        COMPRA EFECTIVO
-                                    </span>
-                                    <span id="flyer-val-frontera-compra" style="font-size: 16px; font-weight: 900; color: #34d399; display: block; line-height: 1.1; white-space: nowrap;">
-                                        3.320 COP
-                                    </span>
-                                </td>
-
-                                <td style="width: 3%;"></td>
-
-                                <!-- VENTA -->
-                                <td style="width: 48.5%; background-color: #0b1019; border: 1px solid #1e2d42; border-top: 2px solid #eab308; border-radius: 8px; padding: 8px 6px; text-align: center;">
-                                    <span style="font-size: 7.5px; color: #94a3b8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; display: block; margin-bottom: 3px;">
-                                        VENTA EFECTIVO
-                                    </span>
-                                    <span id="flyer-val-frontera-venta" style="font-size: 16px; font-weight: 900; color: #facc15; display: block; line-height: 1.1; white-space: nowrap;">
-                                        3.370 COP
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <!-- FILA 3: MERCADO CRIPTO & GLOBAL -->
-                    <div style="background-color: #131a26; border: 1px solid #243044; border-left: 3.5px solid #10b981; border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;">
-                        <table style="width: 100%; border-collapse: collapse; border-bottom: 1px solid #1f293a; margin-bottom: 8px;">
-                            <tr>
-                                <td style="padding-bottom: 5px; font-size: 9px; font-weight: 800; text-transform: uppercase; color: #f1f5f9; vertical-align: middle; white-space: nowrap;">
-                                    MERCADO CRIPTO &amp; GLOBAL
-                                </td>
-                                <td style="padding-bottom: 5px; text-align: right; vertical-align: middle;">
-                                    <span style="display: inline-block; font-size: 7px; font-weight: 800; color: #34d399; background-color: #0d2620; border: 1px solid #1b5c4b; padding: 2px 7px; border-radius: 4px; line-height: 1.1; white-space: nowrap;">
-                                        EN VIVO 24/7
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-
-                        <table style="width: 100%; table-layout: fixed; border-collapse: collapse;">
-                            <tr>
-                                <td style="width: 55%; vertical-align: middle;">
-                                    <span style="font-size: 7.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Binance USDT (VES)</span>
-                                    <div style="white-space: nowrap;">
-                                        <span id="flyer-val-usdt-rango" style="font-size: 14.5px; font-weight: 900; color: #34d399; vertical-align: middle;">800 / 812 Bs</span>
-                                        <span id="flyer-trend-usdt-binance" style="font-size: 9.5px; font-weight: 800; color: #34d399; vertical-align: middle; margin-left: 3px;">•</span>
-                                    </div>
-                                </td>
-                                <td style="width: 45%; vertical-align: middle; text-align: right; border-left: 1px solid #1f293a; padding-left: 8px;">
-                                    <span style="font-size: 7.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; display: block; margin-bottom: 2px;">Bitcoin Global</span>
-                                    <div style="white-space: nowrap;">
-                                        <span id="flyer-val-btc-usd" style="font-size: 14px; font-weight: 900; color: #ffffff; vertical-align: middle;">$64,514 USD</span>
-                                        <span id="flyer-trend-btc-usd" style="font-size: 9.5px; font-weight: 800; color: #f87171; vertical-align: middle; margin-left: 3px;">•</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <!-- FILA 4: LLAMADO DE ACCIÓN CORPORATIVO (OPCIÓN 3) -->
-                    <div style="background-color: #102547; border: 1.5px solid #d4af37; border-radius: 10px; padding: 12px 13px; text-align: center; margin-bottom: 10px;">
-                        <p style="font-size: 10.5px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.4px; color: #facc15; margin: 0 0 4px 0; line-height: 1.2;">
-                            ¿QUIERES ESTA PANTALLA EN VIVO EN TU NEGOCIO?
-                        </p>
-                        <p style="font-size: 9px; font-weight: 700; color: #e2e8f0; margin: 0 0 8px 0; line-height: 1.3;">
-                            ¡La herramienta financiera que tu negocio necesita para destacar y crecer!
-                        </p>
-                        <table style="margin: 0 auto; border-collapse: collapse;">
-                            <tr>
-                                <td style="vertical-align: middle; padding-right: 7px; font-size: 9px; font-weight: 700; color: #cbd5e1; white-space: nowrap;">
-                                    Suscríbete a <strong style="color: #ffffff;">PubliTasa Pro</strong> desde solo
-                                </td>
-                                <td style="vertical-align: middle;">
-                                    <span id="flyer-precio-plan1-badge" style="display: inline-block; background-color: #eab308; color: #09111e; font-weight: 900; font-size: 9.5px; padding: 4px 10px; border-radius: 5px; letter-spacing: 0.4px; line-height: 1.1; white-space: nowrap;">
-                                        $5,00 USDT / MES
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <!-- FILA 5: FIRMA INSTITUCIONAL -->
-                    <div style="background-color: #080b12; border: 1px solid #1e293b; border-radius: 10px; padding: 10px 12px; text-align: center;">
-                        <p style="font-size: 9px; color: #e2e8f0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 3px 0; line-height: 1.2;">
-                            CON EL RESPALDO ABSOLUTO DE <span style="color: #facc15; font-weight: 900;">TUCOCEL C.A.</span>
-                        </p>
-                        <p style="font-size: 8.5px; color: #94a3b8; font-weight: 700; margin: 0; letter-spacing: 0.3px; line-height: 1.2;">
-                            Desarrollado corporativamente por <span style="color: #38bdf8; font-weight: 900;">@publionlinemk</span>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
 <!-- CINTILLO INFERIOR GENERAL -->
     
     <!-- MODAL DE COBRO MULTIMONEDA INDEPENDIENTE CON REGLA NEQUI -->
@@ -2387,167 +2145,6 @@
             </div>
         </div>
     </div>
-
-<!-- PLANTILLA FLYER PUBLICITARIO PROFESIONAL STREAMING (ESTILO AFICHE PREMIUM NEON) -->
-    <div class="fixed -left-[9999px] top-0 overflow-hidden">
-        <div id="plantilla-flyer-publicitario-render" style="width: 440px; background: radial-gradient(circle at 50% 0%, #2a0408 0%, #0c0714 45%, #030206 100%); border: 3px solid #ef4444; border-radius: 32px; padding: 26px 20px; color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; box-sizing: border-box; position: relative; box-shadow: 0 0 50px rgba(239, 68, 68, 0.4);">
-            
-            <!-- MARCA SUPERIOR DISCRETA -->
-            <div style="text-align: center; margin-bottom: 8px;">
-                <span style="font-size: 10px; font-weight: 900; letter-spacing: 0.25em; text-transform: uppercase; color: #f87171; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); padding: 4px 14px; border-radius: 9999px; display: inline-block;">
-                    🚀 SERVICIOS STREAMING CORDERO MK
-                </span>
-            </div>
-
-            <!-- TITULAR GIGANTE 3D IMPACTANTE -->
-            <div style="text-align: center; margin-bottom: 12px; line-height: 0.95;">
-                <h1 style="font-size: 42px; font-weight: 950; text-transform: uppercase; letter-spacing: -0.02em; margin: 0; color: #ffffff; text-shadow: 0 4px 10px rgba(0,0,0,0.9), 0 0 20px rgba(255,255,255,0.2);">
-                    CUENTAS
-                </h1>
-                <h1 style="font-size: 44px; font-weight: 950; text-transform: uppercase; letter-spacing: -0.01em; margin: 0; color: #ff2a4b; text-shadow: 0 0 25px rgba(255, 42, 75, 0.85), 0 4px 12px rgba(0,0,0,0.9);">
-                    STREAMING
-                </h1>
-            </div>
-
-            <!-- CINTILLO NEON: AL MEJOR PRECIO -->
-            <div style="text-align: center; margin-bottom: 12px;">
-                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 0, 0, 0.7); border: 2px solid #ff2a4b; box-shadow: 0 0 18px rgba(255, 42, 75, 0.5); padding: 6px 18px; border-radius: 9999px;">
-                    <span style="font-size: 13px; font-weight: 900; text-transform: uppercase; color: #ffffff; letter-spacing: 0.05em;">
-                        AL MEJOR PRECIO
-                    </span>
-                    <span style="background: #ffffff; color: #000000; font-size: 12px; font-weight: 900; width: 22px; height: 22px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;">
-                        🏷️
-                    </span>
-                </div>
-            </div>
-
-            <!-- SUBTÍTULO CALIDAD -->
-            <div style="text-align: center; margin-bottom: 18px;">
-                <p style="font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #cbd5e1; margin: 0;">
-                    ACCESO PREMIUM &bull; <span style="color: #ef4444;">100% PRIVADO</span> &bull; CALIDAD GARANTIZADA
-                </p>
-            </div>
-
-            <!-- MOSAICO DE CUENTAS / LOGOS BRILLANTES (GRILLA 4 COLUMNAS) -->
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px;">
-                
-                <!-- NETFLIX -->
-                <div style="background: #0d0f1a; border: 1.5px solid #ef4444; box-shadow: 0 0 12px rgba(239, 68, 68, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
-                    <span style="font-size: 20px; font-weight: 900; color: #e50914; font-family: sans-serif; line-height: 1; letter-spacing: -1px;">N</span>
-                    <span style="font-size: 8px; font-weight: 900; color: #ffffff; text-transform: uppercase; margin-top: 3px;">NETFLIX</span>
-                </div>
-
-                <!-- DISNEY+ -->
-                <div style="background: #0d0f1a; border: 1.5px solid #38bdf8; box-shadow: 0 0 12px rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
-                    <span style="font-size: 15px; font-weight: 900; color: #38bdf8; line-height: 1;">Disney+</span>
-                    <span style="font-size: 7.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-top: 3px;">PREMIUM</span>
-                </div>
-
-                <!-- PRIME VIDEO -->
-                <div style="background: #0d0f1a; border: 1.5px solid #00a8e1; box-shadow: 0 0 12px rgba(0, 168, 225, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
-                    <span style="font-size: 13px; font-weight: 900; color: #00a8e1; line-height: 1;">prime</span>
-                    <span style="font-size: 7.5px; font-weight: 800; color: #ffffff; text-transform: uppercase; margin-top: 3px;">VIDEO</span>
-                </div>
-
-                <!-- MAX -->
-                <div style="background: #0d0f1a; border: 1.5px solid #6366f1; box-shadow: 0 0 12px rgba(99, 102, 241, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
-                    <span style="font-size: 17px; font-weight: 950; color: #ffffff; letter-spacing: 1px; line-height: 1;">max</span>
-                    <span style="font-size: 7.5px; font-weight: 800; color: #818cf8; text-transform: uppercase; margin-top: 3px;">HBO</span>
-                </div>
-
-                <!-- TELE LATINO -->
-                <div style="background: #0d0f1a; border: 1.5px solid #f59e0b; box-shadow: 0 0 12px rgba(245, 158, 11, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
-                    <i class="fa-solid fa-tv" style="color: #f59e0b; font-size: 16px; margin-bottom: 2px;"></i>
-                    <span style="font-size: 8px; font-weight: 900; color: #ffffff; text-transform: uppercase;">TELE LATINO</span>
-                </div>
-
-                <!-- FLUJO TV -->
-                <div style="background: #0d0f1a; border: 1.5px solid #10b981; box-shadow: 0 0 12px rgba(16, 185, 129, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
-                    <i class="fa-solid fa-play" style="color: #10b981; font-size: 16px; margin-bottom: 2px;"></i>
-                    <span style="font-size: 8px; font-weight: 900; color: #ffffff; text-transform: uppercase;">FLUJO TV</span>
-                </div>
-
-                <!-- XUPER TV -->
-                <div style="background: #0d0f1a; border: 1.5px solid #ec4899; box-shadow: 0 0 12px rgba(236, 72, 153, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
-                    <i class="fa-solid fa-satellite-dish" style="color: #ec4899; font-size: 16px; margin-bottom: 2px;"></i>
-                    <span style="font-size: 8px; font-weight: 900; color: #ffffff; text-transform: uppercase;">XUPER TV</span>
-                </div>
-
-                <!-- CANVA PRO -->
-                <div style="background: #0d0f1a; border: 1.5px solid #06b6d4; box-shadow: 0 0 12px rgba(6, 182, 212, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
-                    <span style="font-size: 13px; font-weight: 900; color: #06b6d4; line-height: 1;">Canva</span>
-                    <span style="font-size: 7.5px; font-weight: 800; color: #fbbf24; text-transform: uppercase; margin-top: 3px;">👑 PRO</span>
-                </div>
-
-                <!-- SPOTIFY -->
-                <div style="background: #0d0f1a; border: 1.5px solid #22c55e; box-shadow: 0 0 12px rgba(34, 197, 94, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
-                    <i class="fa-brands fa-spotify" style="color: #22c55e; font-size: 18px; margin-bottom: 2px;"></i>
-                    <span style="font-size: 7.5px; font-weight: 900; color: #ffffff; text-transform: uppercase;">SPOTIFY</span>
-                </div>
-
-                <!-- YOUTUBE -->
-                <div style="background: #0d0f1a; border: 1.5px solid #ef4444; box-shadow: 0 0 12px rgba(239, 68, 68, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
-                    <i class="fa-brands fa-youtube" style="color: #ef4444; font-size: 18px; margin-bottom: 2px;"></i>
-                    <span style="font-size: 7.5px; font-weight: 900; color: #ffffff; text-transform: uppercase;">PREMIUM</span>
-                </div>
-
-                <!-- VIX+ -->
-                <div style="background: #0d0f1a; border: 1.5px solid #ea580c; box-shadow: 0 0 12px rgba(234, 88, 12, 0.3); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
-                    <span style="font-size: 15px; font-weight: 950; color: #ea580c; line-height: 1;">ViX</span>
-                    <span style="font-size: 7.5px; font-weight: 800; color: #ffffff; text-transform: uppercase; margin-top: 3px;">PREMIUM</span>
-                </div>
-
-                <!-- Y MÁS -->
-                <div style="background: #1e1338; border: 1.5px dashed #a855f7; box-shadow: 0 0 12px rgba(168, 85, 247, 0.4); border-radius: 14px; padding: 12px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60px;">
-                    <span style="font-size: 11px; font-weight: 950; color: #c084fc; text-transform: uppercase; line-height: 1;">¡Y MÁS!</span>
-                    <span style="font-size: 11px; color: #a855f7; margin-top: 2px;">&bull;&bull;&bull;</span>
-                </div>
-
-            </div>
-
-            <!-- BLOQUE INFERIOR: GARANTÍA, CONFIANZA Y SOPORTE (LOS 3 SELLOS DE LA IMAGEN DE REFERENCIA) -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: rgba(10, 10, 20, 0.8); border: 1.5px solid rgba(255, 255, 255, 0.12); border-radius: 18px; padding: 10px 8px; margin-bottom: 14px; text-align: center;">
-                
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <span style="font-size: 14px; margin-bottom: 2px;">🛡️</span>
-                    <span style="font-size: 8.5px; font-weight: 900; color: #ffffff; text-transform: uppercase; display: block;">SOPORTE 24/7</span>
-                    <span style="font-size: 7px; color: #94a3b8; font-weight: 600;">Te ayudamos siempre</span>
-                </div>
-
-                <div style="display: flex; flex-direction: column; align-items: center; border-left: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1);">
-                    <span style="font-size: 14px; margin-bottom: 2px;">🏅</span>
-                    <span style="font-size: 8.5px; font-weight: 900; color: #f59e0b; text-transform: uppercase; display: block;">GARANTÍA 100%</span>
-                    <span style="font-size: 7px; color: #cbd5e1; font-weight: 600;">Cuentas estables</span>
-                </div>
-
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                    <span style="font-size: 14px; margin-bottom: 2px;">🔒</span>
-                    <span style="font-size: 8.5px; font-weight: 900; color: #10b981; text-transform: uppercase; display: block;">ACCESO SEGURO</span>
-                    <span style="font-size: 7px; color: #94a3b8; font-weight: 600;">Privado y confiable</span>
-                </div>
-
-            </div>
-
-            <!-- LLAMADO DE ACCIÓN Y CONTACTO WHATSAPP -->
-            <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border-radius: 16px; padding: 10px 12px; text-align: center; box-shadow: 0 4px 18px rgba(220, 38, 38, 0.5); margin-bottom: 10px;">
-                <p style="font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; margin: 0; color: #ffffff;">
-                    📲 ¡PIDE TU PANTALLA AHORA MISMO!
-                </p>
-                <p style="font-size: 9.5px; font-weight: 800; color: #fee2e2; margin: 2px 0 0 0;">
-                    Atención Inmediata por WhatsApp: 0414-7357549
-                </p>
-            </div>
-
-            <!-- PIE DE RESPALDO TUCOCEL -->
-            <div style="text-align: center;">
-                <p style="font-size: 8px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin: 0;">
-                    🏛️ Respaldo Absoluto de <span style="color: #ffffff; font-weight: 900;">TUCOCEL C.A.</span> &bull; Cordero, Táchira
-                </p>
-            </div>
-
-        </div>
-    </div>
-
 
 <footer id="footer-general-streaming" class="footer-glow border-t border-neutral-900/80 mt-12 py-5 px-3 text-center space-y-3 relative z-40 w-full">
         <div class="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-4 sm:gap-8 glow-white">
@@ -3124,8 +2721,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
                     // Tasa de Streaming desacoplada para mantener fijada la tasa establecida por el administrador
 
-                    document.getElementById('flyer-val-usdt-rango').innerText = `${Math.round(baseVal)} / ${Math.round(estVal)} Bs`;
-                    document.getElementById('flyer-trend-usdt-binance').innerHTML = htmlTrend;
                 }
             } catch(e) {}
         }
@@ -3187,22 +2782,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             }
         };
 
-        async function realizarPeticionConRespaldo(urls) {
-            for (const url of urls) {
-                try {
-                    const res = await fetch(url, { cache: 'no-store' });
-                    if (res.ok) {
-                        let data = await res.json();
-                        if (typeof data === 'string') {
-                            try { data = JSON.parse(data); } catch(e) {}
-                        }
-                        if (data) return data;
-                    }
-                } catch (e) {}
-            }
-            return null;
-        }
-
         async function sincronizarBcvDesdeFirebase() {
             try {
                 let histTasas = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
@@ -3244,10 +2823,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 document.getElementById('val-bcv-eur').innerText = txtEur;
                 document.getElementById('trend-bcv-eur').innerHTML = htmlTrendEur;
 
-                document.getElementById('flyer-val-bcv-usd').innerText = txtUsd;
-                document.getElementById('flyer-trend-bcv-usd').innerHTML = htmlTrendUsd;
-                document.getElementById('flyer-val-bcv-eur').innerText = txtEur;
-                document.getElementById('flyer-trend-bcv-eur').innerHTML = htmlTrendEur;
 
                 document.getElementById('time-bcv').innerText = `Oficial BCV — Emisión Valor: ${fechaTxt}`;
 
@@ -3265,8 +2840,6 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     const txtEur = `${(histTasas.bcvEur || 0).toFixed(2)} Bs`;
                     document.getElementById('val-bcv-usd').innerText = txtUsd;
                     document.getElementById('val-bcv-eur').innerText = txtEur;
-                    document.getElementById('flyer-val-bcv-usd').innerText = txtUsd;
-                    document.getElementById('flyer-val-bcv-eur').innerText = txtEur;
                     return true;
                 }
             }
@@ -3453,15 +3026,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 if (elValEur) elValEur.innerText = txtEur;
                 if (elTrendEur) elTrendEur.innerHTML = htmlTrendEur;
 
-                const elFlyerTrm = document.getElementById('flyer-val-trm-cop');
-                const elFlyerTrendTrm = document.getElementById('flyer-trend-trm-cop');
-                const elFlyerEur = document.getElementById('flyer-val-eur-cop');
-                const elFlyerTrendEur = document.getElementById('flyer-trend-eur-cop');
 
-                if (elFlyerTrm) elFlyerTrm.innerText = txtTrm;
-                if (elFlyerTrendTrm) elFlyerTrendTrm.innerHTML = htmlTrendTrm;
-                if (elFlyerEur) elFlyerEur.innerText = txtEur;
-                if (elFlyerTrendEur) elFlyerTrendEur.innerHTML = htmlTrendEur;
 
                 const elTimeTrm = document.getElementById('time-trm');
                 if (elTimeTrm) elTimeTrm.innerText = `SFC Oficial — Actualizado: ${timeTxt}`;
@@ -3726,15 +3291,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
                 if (elTimeBcv) elTimeBcv.innerHTML = `Oficial BCV (${fechaBcvEmision || 'Hoy'}) &bull; <span class="text-emerald-400 font-black">Actualizado: ${ahoraHoraExacta}</span>`;
 
-                const elFlyerUsd = document.getElementById('flyer-val-bcv-usd');
-                const elFlyerTrendUsd = document.getElementById('flyer-trend-bcv-usd');
-                const elFlyerEur = document.getElementById('flyer-val-bcv-eur');
-                const elFlyerTrendEur = document.getElementById('flyer-trend-bcv-eur');
 
-                if (elFlyerUsd) elFlyerUsd.innerText = txtUsd;
-                if (elFlyerTrendUsd) elFlyerTrendUsd.innerHTML = htmlTrendUsd;
-                if (elFlyerEur) elFlyerEur.innerText = txtEur;
-                if (elFlyerTrendEur) elFlyerTrendEur.innerHTML = htmlTrendEur;
             }
 
             // 2. OFICIAL COLOMBIA (TRM & EURO) EN VIVO
@@ -3771,13 +3328,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
                 if (elTimeTrm) elTimeTrm.innerHTML = `SFC Oficial &bull; <span class="text-emerald-400 font-black">Actualizado: ${ahoraHoraExacta}</span>`;
 
-                const elFlyerTrm = document.getElementById('flyer-val-trm-cop');
-                const elFlyerTrendTrm = document.getElementById('flyer-trend-trm-cop');
-                const elFlyerEur = document.getElementById('flyer-val-eur-cop');
 
-                if (elFlyerTrm) elFlyerTrm.innerText = txtTrm;
-                if (elFlyerTrendTrm) elFlyerTrendTrm.innerHTML = htmlTrendTrm;
-                if (elFlyerEur) elFlyerEur.innerText = txtEurCop;
             }
 
             // 3. BINANCE USDT (VES) MERCADO P2P EN VIVO
@@ -3818,11 +3369,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 if (elTrendUsdt) elTrendUsdt.innerHTML = htmlTrendUsdt;
                 if (elTimeBinance) elTimeBinance.innerHTML = `⚡ P2P en Vivo &bull; <span class="text-emerald-400 font-black">${ahoraHoraExacta}</span>`;
 
-                const elFlyerUsdt = document.getElementById('flyer-val-usdt-rango');
-                const elFlyerTrendUsdt = document.getElementById('flyer-trend-usdt-binance');
 
-                if (elFlyerUsdt) elFlyerUsdt.innerText = `${baseRound} / ${ventaRound} Bs`;
-                if (elFlyerTrendUsdt) elFlyerTrendUsdt.innerHTML = htmlTrendUsdt;
             } else {
                 await sincronizarBinanceDesdeFirebase();
             }
@@ -3852,11 +3399,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 if (elTrendBtc) elTrendBtc.innerHTML = htmlTrendBtc;
                 if (elTimeBtc) elTimeBtc.innerHTML = `🌐 Binance Global &bull; <span class="text-emerald-400 font-black">${ahoraHoraExacta}</span>`;
 
-                const elFlyerBtc = document.getElementById('flyer-val-btc-usd');
-                const elFlyerTrendBtc = document.getElementById('flyer-trend-btc-usd');
 
-                if (elFlyerBtc) elFlyerBtc.innerText = txtBtc;
-                if (elFlyerTrendBtc) elFlyerTrendBtc.innerHTML = htmlTrendBtc;
             }
 
             // 5. CASAS DE CAMBIO CÚCUTA / FRONTERA (LEE LO FIJADO DESDE LA CONSOLA)
@@ -3872,15 +3415,22 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     const elValVenta = document.getElementById('val-frontera-venta');
                     const elTimeFrontera = document.getElementById('time-frontera');
 
+                    const prevCF = parseFloat(dF.prevCompra) || compraF;
+                    const prevVF = parseFloat(dF.prevVenta) || ventaF;
+                    histTasas.cucutaCompra = compraF;
+                    histTasas.cucutaVenta = ventaF;
+                    histTasas.prevCucutaCompra = prevCF;
+                    histTasas.prevCucutaVenta = prevVF;
+
                     if (elValCompra) elValCompra.innerText = compraF.toLocaleString('es-CO');
                     if (elValVenta) elValVenta.innerText = ventaF.toLocaleString('es-CO');
-                    if (elTimeFrontera) elTimeFrontera.innerText = `Consola Central &bull; ${fechaFrontera}`;
+                    const elTFC = document.getElementById('trend-frontera-compra');
+                    if (elTFC) elTFC.innerHTML = generarIconoTendenciaHTML(compraF, prevCF);
+                    const elTF = document.getElementById('trend-frontera');
+                    if (elTF) elTF.innerHTML = generarIconoTendenciaHTML(ventaF, prevVF);
+                    if (elTimeFrontera) elTimeFrontera.innerHTML = `Consola Central &bull; ${fechaFrontera}`;
 
-                    const elFlyerCompra = document.getElementById('flyer-val-frontera-compra');
-                    const elFlyerVenta = document.getElementById('flyer-val-frontera-venta');
 
-                    if (elFlyerCompra) elFlyerCompra.innerText = `${compraF.toLocaleString('es-CO')} COP`;
-                    if (elFlyerVenta) elFlyerVenta.innerText = `${ventaF.toLocaleString('es-CO')} COP`;
                 }
             } catch(e) {}
 
@@ -3926,14 +3476,25 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 return txt;
             };
 
+            const getTrendInfo = (valAct, valPrev) => {
+                const a = parseFloat(valAct);
+                const p = parseFloat(valPrev);
+                if (!p || isNaN(p) || isNaN(a) || Math.abs(a - p) < 0.0001) {
+                    return { sym: '=', color: '#94a3b8' };
+                }
+                return a > p
+                    ? { sym: '▲', color: '#f87171' }
+                    : { sym: '▼', color: '#34d399' };
+            };
+
             // Función para leer el símbolo EXACTO que tiene la app en ese momento
             const leerSimboloApp = (domId) => {
                 const el = document.getElementById(domId);
-                if(!el) return { sym: '', color: '#facc15' };
+                if(!el) return { sym: '=', color: '#94a3b8' };
                 const txt = el.innerText.trim();
                 if(txt.includes('▲') || txt.includes('🔺')) return { sym: '▲', color: '#f87171' }; // Sube (Rojo)
                 if(txt.includes('▼') || txt.includes('🔻')) return { sym: '▼', color: '#34d399' }; // Baja (Verde)
-                return { sym: '', color: '#facc15' }; // Se mantiene igual (SIN SÍMBOLO)
+                return { sym: '=', color: '#94a3b8' }; // Se mantiene igual
             };
 
             const valBcvUsd = extraerNumeroLimpio('val-bcv-usd', hist.bcvUsd ? `${parseFloat(hist.bcvUsd).toFixed(2)} Bs` : '0.00 Bs');
@@ -3956,10 +3517,8 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const trTrmCop = leerSimboloApp('trend-trm-cop');
             const trEurCop = leerSimboloApp('trend-eur-cop');
             
-            // Cúcuta Frontera no tiene un id de tendencia separado por compra/venta, pero el usuario dice que sí lo muestra la app.
-            // En tu código HTML actual, Frontera Venta tiene un ID 'trend-frontera', vamos a leerlo:
-            const trFronteraV = leerSimboloApp('trend-frontera');
-            const trFronteraC = { sym: '', color: '#facc15' }; // Compra no tiene tendencia en tu HTML, la dejamos vacía.
+            const trFronteraC = getTrendInfo(hist.cucutaCompra, hist.prevCucutaCompra);
+            const trFronteraV = getTrendInfo(hist.cucutaVenta, hist.prevCucutaVenta);
 
             const trUsdt = leerSimboloApp('trend-usdt-binance');
             const trBtc = leerSimboloApp('trend-btc-usd');
@@ -4198,7 +3757,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 { label: 'EURO BCV', val: valBcvEur, color: '#ffffff', size: 28, trend: trBcvEur }
             ]);
 
-            dibujarTarjetaCristal(368, 246, 310, 245, '#38bdf8', 'rgba(56, 189, 248, 0.5)', '🇨🇴 OFICIAL SFC', [
+            dibujarTarjetaCristal(368, 246, 310, 245, '#38bdf8', 'rgba(56, 189, 248, 0.5)', '🇨🇴 OFICIAL COLOMBIA', [
                 { label: 'DÓLAR TRM', val: valTrmCop, color: '#38bdf8', glow: 'rgba(56, 189, 248, 0.35)', size: 30, trend: trTrmCop },
                 { label: 'EURO COLOMBIA', val: valEurCop, color: '#ffffff', size: 28, trend: trEurCop }
             ]);
@@ -4245,11 +3804,9 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const wComp = ctx.measureText(valCompraF).width;
             ctx.restore();
             
-            if(trFronteraC.sym !== '') {
-                ctx.fillStyle = trFronteraC.color;
-                ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
-                ctx.fillText(trFronteraC.sym, 207 + wComp/2 + 10, 637);
-            }
+            ctx.fillStyle = trFronteraC.color;
+            ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(trFronteraC.sym, 207 + wComp/2 + 10, 637);
 
             // Caja interna Venta Efectivo
             ctx.fillStyle = '#090e18';
@@ -4277,11 +3834,9 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const wVent = ctx.measureText(valVentaF).width;
             ctx.restore();
 
-            if(trFronteraV.sym !== '') {
-                ctx.fillStyle = trFronteraV.color;
-                ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
-                ctx.fillText(trFronteraV.sym, 513 + wVent/2 + 10, 637);
-            }
+            ctx.fillStyle = trFronteraV.color;
+            ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(trFronteraV.sym, 513 + wVent/2 + 10, 637);
 
             // FILA 3: MERCADO CRIPTO & GLOBAL (2 Columnas Simétricas) — TEXTO LIMPIO
             const cripGrad = ctx.createLinearGradient(42, 700, 42, 864);
@@ -4335,11 +3890,9 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const wUsdt = ctx.measureText(valUsdt).width;
             ctx.restore();
 
-            if(trUsdt.sym !== '') {
-                ctx.fillStyle = trUsdt.color;
-                ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
-                ctx.fillText(trUsdt.sym, 64 + wUsdt + 8, 826);
-            }
+            ctx.fillStyle = trUsdt.color;
+            ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(trUsdt.sym, 64 + wUsdt + 8, 826);
 
             // Columna Derecha: Bitcoin Global
             ctx.fillStyle = '#94a3b8';
@@ -4348,13 +3901,10 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             ctx.fillText('BITCOIN GLOBAL', 656, 784);
 
             ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
-            let btcOffset = 0;
-            if(trBtc.sym !== '') {
-                const wTrBtc = ctx.measureText(trBtc.sym).width;
-                ctx.fillStyle = trBtc.color;
-                ctx.fillText(trBtc.sym, 656, 826);
-                btcOffset = wTrBtc + 8;
-            }
+            const wTrBtc = ctx.measureText(trBtc.sym).width;
+            ctx.fillStyle = trBtc.color;
+            ctx.fillText(trBtc.sym, 656, 826);
+            let btcOffset = wTrBtc + 8;
 
             ctx.fillStyle = '#ffffff';
             ctx.font = '900 28px "Plus Jakarta Sans", Arial, sans-serif';
@@ -7093,8 +6643,6 @@ window.recalcularTasasBolivaresAdmin = function() {
                 document.getElementById('val-usdt-rango').innerText = `${Math.round(compra)} / ${Math.round(venta)} Bs.`;
                 document.getElementById('trend-usdt-binance').innerHTML = htmlTrend;
                 document.getElementById('time-binance').innerText = `⚡ Última actualización: Hoy a las ${timeStampConsola}`;
-                document.getElementById('flyer-val-usdt-rango').innerText = `${Math.round(compra)} / ${Math.round(venta)} Bs`;
-                document.getElementById('flyer-trend-usdt-binance').innerHTML = htmlTrend;
 
                 alert(esSoloMantener ? `– Tasa marcada como 'Se Mantiene' (Hora: ${timeStampConsola})` : `🚀 Nueva Tasa de USDT guardada y publicada (Hora: ${timeStampConsola})`);
             } catch(e) { 
@@ -7136,6 +6684,10 @@ window.recalcularTasasBolivaresAdmin = function() {
                 histTasas.prevCucutaVenta = prevVenta;
                 localStorage.setItem('tcl_hist_tasas', JSON.stringify(histTasas));
 
+                const htmlTrendFronteraCompra = generarIconoTendenciaHTML(compra, prevCompra);
+                const elTrendFC = document.getElementById('trend-frontera-compra');
+                if(elTrendFC) elTrendFC.innerHTML = htmlTrendFronteraCompra;
+
                 const htmlTrendFrontera = generarIconoTendenciaHTML(venta, prevVenta);
                 const elTrendF = document.getElementById('trend-frontera');
                 if(elTrendF) elTrendF.innerHTML = htmlTrendFrontera;
@@ -7144,8 +6696,6 @@ window.recalcularTasasBolivaresAdmin = function() {
                 document.getElementById('val-frontera-compra').innerText = compra.toLocaleString('es-CO');
                 document.getElementById('val-frontera-venta').innerText = venta.toLocaleString('es-CO');
                 document.getElementById('time-frontera').innerText = `Última actualización en consola: Hoy a las ${timeStampConsola}`;
-                document.getElementById('flyer-val-frontera-compra').innerText = `${compra.toLocaleString('es-CO')} COP`;
-                document.getElementById('flyer-val-frontera-venta').innerText = `${venta.toLocaleString('es-CO')} COP`;
 
                 // Tasa USDT COP en Streaming se mantiene independiente y fijada por el administrador
             } catch(e) {
@@ -7435,8 +6985,10 @@ window.recalcularTasasBolivaresAdmin = function() {
                     document.getElementById('val-frontera-compra').innerText = c.toLocaleString('es-CO');
                     document.getElementById('val-frontera-venta').innerText = v.toLocaleString('es-CO');
                     document.getElementById('time-frontera').innerText = `Última actualización en consola: ${u.includes(':') ? 'Hoy a las ' + u : u}`;
-                    document.getElementById('flyer-val-frontera-compra').innerText = `${c.toLocaleString('es-CO')} COP`;
-                    document.getElementById('flyer-val-frontera-venta').innerText = `${v.toLocaleString('es-CO')} COP`;
+
+                    const htmlTrendFronteraC = generarIconoTendenciaHTML(c, prevC);
+                    const elTFC = document.getElementById('trend-frontera-compra');
+                    if(elTFC) elTFC.innerHTML = htmlTrendFronteraC;
 
                     const htmlTrendFrontera = generarIconoTendenciaHTML(v, prevV);
                     const elTF = document.getElementById('trend-frontera');
@@ -7467,10 +7019,6 @@ window.recalcularTasasBolivaresAdmin = function() {
                     document.getElementById('val-bcv-eur').innerText = txtEur;
                     document.getElementById('trend-bcv-eur').innerHTML = htmlTrendEur;
 
-                    document.getElementById('flyer-val-bcv-usd').innerText = txtUsd;
-                    document.getElementById('flyer-trend-bcv-usd').innerHTML = htmlTrendUsd;
-                    document.getElementById('flyer-val-bcv-eur').innerText = txtEur;
-                    document.getElementById('flyer-trend-bcv-eur').innerHTML = htmlTrendEur;
 
                     document.getElementById('time-bcv').innerText = `Oficial BCV — Emisión Valor: ${fTxt}`;
                     const inUsd = document.getElementById('pt-adm-bcv-usd');
@@ -7497,8 +7045,6 @@ window.recalcularTasasBolivaresAdmin = function() {
                     document.getElementById('pt-adm-usdt-compra').value = Math.round(bCompra);
                     document.getElementById('pt-adm-usdt-venta').value = Math.round(bVenta);
 
-                    document.getElementById('flyer-val-usdt-rango').innerText = `${Math.round(bCompra)} / ${Math.round(bVenta)} Bs`;
-                    document.getElementById('flyer-trend-usdt-binance').innerHTML = htmlTrendBin;
                 }
 
                 localStorage.setItem('tcl_hist_tasas', JSON.stringify(histTasas));
@@ -9001,10 +8547,6 @@ window.pintarTasasInmediatasDesdeCache = function() {
                 document.getElementById('trend-bcv-usd').innerHTML = generarIconoTendenciaHTML(valU, prevU);
                 document.getElementById('trend-bcv-eur').innerHTML = generarIconoTendenciaHTML(valE, prevE);
 
-                document.getElementById('flyer-val-bcv-usd').innerText = txtU;
-                document.getElementById('flyer-val-bcv-eur').innerText = txtE;
-                document.getElementById('flyer-trend-bcv-usd').innerHTML = generarIconoTendenciaHTML(valU, prevU);
-                document.getElementById('flyer-trend-bcv-eur').innerHTML = generarIconoTendenciaHTML(valE, prevE);
 
                 if(histTasas.fechaBcv) {
                     document.getElementById('time-bcv').innerText = `Oficial BCV — Emisión Valor: ${histTasas.fechaBcv}`;
@@ -9021,8 +8563,6 @@ window.pintarTasasInmediatasDesdeCache = function() {
                 const pC = histTasas.prevUsdtCompra || bC;
                 document.getElementById('val-usdt-rango').innerText = `${Math.round(bC)} / ${Math.round(bV)} Bs.`;
                 document.getElementById('trend-usdt-binance').innerHTML = generarIconoTendenciaHTML(bC, pC);
-                document.getElementById('flyer-val-usdt-rango').innerText = `${Math.round(bC)} / ${Math.round(bV)} Bs`;
-                document.getElementById('flyer-trend-usdt-binance').innerHTML = generarIconoTendenciaHTML(bC, pC);
                 document.getElementById('pt-adm-usdt-compra').value = Math.round(bC);
                 document.getElementById('pt-adm-usdt-venta').value = Math.round(bV);
             }
@@ -9030,11 +8570,12 @@ window.pintarTasasInmediatasDesdeCache = function() {
             if(histTasas.cucutaCompra) {
                 const cC = histTasas.cucutaCompra;
                 const cV = histTasas.cucutaVenta || 0;
+                const pC = histTasas.prevCucutaCompra || cC;
                 const pV = histTasas.prevCucutaVenta || cV;
                 document.getElementById('val-frontera-compra').innerText = cC.toLocaleString('es-CO');
                 document.getElementById('val-frontera-venta').innerText = cV.toLocaleString('es-CO');
-                document.getElementById('flyer-val-frontera-compra').innerText = `${cC.toLocaleString('es-CO')} COP`;
-                document.getElementById('flyer-val-frontera-venta').innerText = `${cV.toLocaleString('es-CO')} COP`;
+                const elTFC = document.getElementById('trend-frontera-compra');
+                if(elTFC) elTFC.innerHTML = generarIconoTendenciaHTML(cC, pC);
                 const elTF = document.getElementById('trend-frontera');
                 if(elTF) elTF.innerHTML = generarIconoTendenciaHTML(cV, pV);
             }
@@ -9044,9 +8585,7 @@ window.pintarTasasInmediatasDesdeCache = function() {
                 const pCop = histTasas.prevTrmCop || tCop;
                 const txt = `${tCop.toLocaleString('es-CO', {maximumFractionDigits: 0})} COP`;
                 document.getElementById('val-trm-cop').innerText = txt;
-                document.getElementById('flyer-val-trm-cop').innerText = txt;
                 document.getElementById('trend-trm-cop').innerHTML = generarIconoTendenciaHTML(tCop, pCop);
-                document.getElementById('flyer-trend-trm-cop').innerHTML = generarIconoTendenciaHTML(tCop, pCop);
             }
 
             if(histTasas.eurCop) {
@@ -9054,9 +8593,7 @@ window.pintarTasasInmediatasDesdeCache = function() {
                 const peCop = histTasas.prevEurCop || eCop;
                 const txt = `${eCop.toLocaleString('es-CO', {maximumFractionDigits: 0})} COP`;
                 document.getElementById('val-eur-cop').innerText = txt;
-                document.getElementById('flyer-val-eur-cop').innerText = txt;
                 document.getElementById('trend-eur-cop').innerHTML = generarIconoTendenciaHTML(eCop, peCop);
-                document.getElementById('flyer-trend-eur-cop').innerHTML = generarIconoTendenciaHTML(eCop, peCop);
             }
 
             if(histTasas.btcUsd) {
@@ -9064,9 +8601,7 @@ window.pintarTasasInmediatasDesdeCache = function() {
                 const pBtc = histTasas.prevBtcUsd || btc;
                 const txt = `$${btc.toLocaleString('en-US', {maximumFractionDigits: 0})} USD`;
                 document.getElementById('val-btc-usd').innerText = txt;
-                document.getElementById('flyer-val-btc-usd').innerText = txt;
                 document.getElementById('trend-btc-usd').innerHTML = generarIconoTendenciaHTML(btc, pBtc);
-                document.getElementById('flyer-trend-btc-usd').innerHTML = generarIconoTendenciaHTML(btc, pBtc);
             }
         };
 
@@ -9347,11 +8882,6 @@ ${nomPlat} quedó configurado para ${numMeses} ${numMeses === 1 ? 'Mes' : 'Meses
             }
         };
 
-        // Sobrescribir compatibilidad de llamada anterior
-        window.generarYCompartirFlyerStreamingHD = function() {
-            window.abrirModalSelectorFlyerStreaming();
-        };
-
 
         window.onload = async function() {
             window.pintarTasasInmediatasDesdeCache();
@@ -9425,74 +8955,5 @@ ${nomPlat} quedó configurado para ${numMeses} ${numMeses === 1 ? 'Mes' : 'Meses
         };
     </script>
 
-<!-- PWA SERVICE WORKER REGISTRATION & INSTALL HANDLER -->
-<script>
-(function() {
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            try {
-                const swCode = `
-                    const CACHE_NAME = 'cordero-mk-pwa-v1';
-                    self.addEventListener('install', (e) => {
-                        self.skipWaiting();
-                    });
-                    self.addEventListener('activate', (e) => {
-                        e.waitUntil(clients.claim());
-                    });
-                    self.addEventListener('fetch', (e) => {
-                        e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
-                    });
-                `;
-                const blob = new Blob([swCode], { type: 'application/javascript' });
-                const swUrl = URL.createObjectURL(blob);
-                navigator.serviceWorker.register(swUrl)
-                    .then(function(reg) {
-                        console.log('[PWA] Service Worker registrado exitosamente');
-                    })
-                    .catch(function(err) {
-                        console.warn('[PWA] Service Worker no registrado:', err);
-                    });
-            } catch(e) {
-                console.warn('[PWA] SW Init error:', e);
-            }
-        });
-    }
-
-    let deferredPrompt = null;
-    window.addEventListener('beforeinstallprompt', function(e) {
-        e.preventDefault();
-        deferredPrompt = e;
-        window.deferredPWAInstallPrompt = e;
-        
-        window.triggerPWAInstall = function() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then(function(choiceResult) {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('[PWA] Instalación aceptada');
-                    }
-                    deferredPrompt = null;
-                    window.deferredPWAInstallPrompt = null;
-                });
-            }
-        };
-
-        const installBtns = document.querySelectorAll('[data-pwa-install], #btn-install-pwa, .btn-pwa-install');
-        installBtns.forEach(function(btn) {
-            btn.style.display = 'inline-flex';
-            btn.onclick = function(ev) {
-                ev.preventDefault();
-                window.triggerPWAInstall();
-            };
-        });
-    });
-
-    window.addEventListener('appinstalled', function() {
-        console.log('[PWA] Aplicación instalada correctamente.');
-        deferredPrompt = null;
-        window.deferredPWAInstallPrompt = null;
-    });
-})();
-</script>
 </body>
 </html>
