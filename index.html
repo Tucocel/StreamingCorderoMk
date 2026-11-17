@@ -3915,48 +3915,54 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
 
             const hist = JSON.parse(localStorage.getItem('tcl_hist_tasas')) || {};
 
-            const limpiarTextoValor = (domId, fallbackVal) => {
-                const raw = document.getElementById(domId)?.innerText?.trim() || "";
-                if (!raw || raw.includes("Cargando")) return fallbackVal;
-                return raw;
+            // Función ultra robusta para extraer solo el número limpio del DOM
+            const extraerNumeroLimpio = (domId, fallbackVal) => {
+                const el = document.getElementById(domId);
+                if(!el) return fallbackVal;
+                let txt = el.innerText.trim();
+                if(txt.includes('Cargando')) return fallbackVal;
+                // Si el texto de la app tiene un igual '=' al principio, se lo quitamos para la imagen
+                txt = txt.replace(/^=\s*/, '');
+                return txt;
             };
 
-            const getTrendInfo = (valAct, valPrev) => {
-                const a = parseFloat(valAct);
-                const p = parseFloat(valPrev);
-                if (!p || isNaN(p) || isNaN(a) || Math.abs(a - p) < 0.0001) {
-                    return { sym: '', color: '#facc15' }; // Sin símbolo si es igual
-                }
-                return a > p
-                    ? { sym: '▲', color: '#f87171' }
-                    : { sym: '▼', color: '#34d399' };
+            // Función para leer el símbolo EXACTO que tiene la app en ese momento
+            const leerSimboloApp = (domId) => {
+                const el = document.getElementById(domId);
+                if(!el) return { sym: '', color: '#facc15' };
+                const txt = el.innerText.trim();
+                if(txt.includes('▲') || txt.includes('🔺')) return { sym: '▲', color: '#f87171' }; // Sube (Rojo)
+                if(txt.includes('▼') || txt.includes('🔻')) return { sym: '▼', color: '#34d399' }; // Baja (Verde)
+                return { sym: '', color: '#facc15' }; // Se mantiene igual (SIN SÍMBOLO)
             };
 
-            const valBcvUsd = limpiarTextoValor('val-bcv-usd', hist.bcvUsd ? `${parseFloat(hist.bcvUsd).toFixed(2)} Bs` : '0.00 Bs');
-            const valBcvEur = limpiarTextoValor('val-bcv-eur', hist.bcvEur ? `${parseFloat(hist.bcvEur).toFixed(2)} Bs` : '0.00 Bs');
-            const valTrmCop = limpiarTextoValor('val-trm-cop', hist.trmCop ? `${Math.round(hist.trmCop).toLocaleString('es-CO')} COP` : '0 COP');
-            const valEurCop = limpiarTextoValor('val-eur-cop', hist.eurCop ? `${Math.round(hist.eurCop).toLocaleString('es-CO')} COP` : '0 COP');
+            const valBcvUsd = extraerNumeroLimpio('val-bcv-usd', hist.bcvUsd ? `${parseFloat(hist.bcvUsd).toFixed(2)} Bs` : '0.00 Bs');
+            const valBcvEur = extraerNumeroLimpio('val-bcv-eur', hist.bcvEur ? `${parseFloat(hist.bcvEur).toFixed(2)} Bs` : '0.00 Bs');
+            const valTrmCop = extraerNumeroLimpio('val-trm-cop', hist.trmCop ? `${Math.round(hist.trmCop).toLocaleString('es-CO')} COP` : '0 COP');
+            const valEurCop = extraerNumeroLimpio('val-eur-cop', hist.eurCop ? `${Math.round(hist.eurCop).toLocaleString('es-CO')} COP` : '0 COP');
 
-            let valCompraF = limpiarTextoValor('val-frontera-compra', hist.cucutaCompra ? Math.round(hist.cucutaCompra).toLocaleString('es-CO') : '3.320');
+            let valCompraF = extraerNumeroLimpio('val-frontera-compra', hist.cucutaCompra ? Math.round(hist.cucutaCompra).toLocaleString('es-CO') : '3.320');
             if (!valCompraF.includes('COP')) valCompraF += ' COP';
-            let valVentaF = limpiarTextoValor('val-frontera-venta', hist.cucutaVenta ? Math.round(hist.cucutaVenta).toLocaleString('es-CO') : '3.370');
+            let valVentaF = extraerNumeroLimpio('val-frontera-venta', hist.cucutaVenta ? Math.round(hist.cucutaVenta).toLocaleString('es-CO') : '3.370');
             if (!valVentaF.includes('COP')) valVentaF += ' COP';
 
-            let valUsdt = limpiarTextoValor('val-usdt-rango', hist.usdtCompra ? `${Math.round(hist.usdtCompra)} / ${Math.round(hist.usdtVenta || (hist.usdtCompra + 12))} Bs` : '800 / 812 Bs');
-            valUsdt = valUsdt.replace(/Bs\.$/, 'Bs');
-            const valBtc = limpiarTextoValor('val-btc-usd', hist.btcUsd ? `$${Math.round(hist.btcUsd).toLocaleString('en-US')} USD` : '$80,000 USD');
+            let valUsdt = extraerNumeroLimpio('val-usdt-rango', hist.usdtCompra ? `${Math.round(hist.usdtCompra)} / ${Math.round(hist.usdtVenta || (hist.usdtCompra + 12))} Bs` : '800 / 812 Bs');
+            valUsdt = valUsdt.replace(/Bs\.$/, 'Bs'); // Quitar punto final si lo tiene
+            const valBtc = extraerNumeroLimpio('val-btc-usd', hist.btcUsd ? `$${Math.round(hist.btcUsd).toLocaleString('en-US')} USD` : '$80,000 USD');
 
-            const trBcvUsd = getTrendInfo(hist.bcvUsd, hist.prevBcvUsd);
-            const trBcvEur = getTrendInfo(hist.bcvEur, hist.prevBcvEur);
-            const trTrmCop = getTrendInfo(hist.trmCop, hist.prevTrmCop);
-            const trEurCop = getTrendInfo(hist.eurCop, hist.prevEurCop);
+            // Leer símbolos de tendencia reales de la APP
+            const trBcvUsd = leerSimboloApp('trend-bcv-usd');
+            const trBcvEur = leerSimboloApp('trend-bcv-eur');
+            const trTrmCop = leerSimboloApp('trend-trm-cop');
+            const trEurCop = leerSimboloApp('trend-eur-cop');
             
-            // NUEVO: Tendencias en Frontera
-            const trFronteraC = getTrendInfo(hist.cucutaCompra, hist.prevCucutaCompra);
-            const trFronteraV = getTrendInfo(hist.cucutaVenta, hist.prevCucutaVenta);
-            
-            const trUsdt = getTrendInfo(hist.usdtCompra, hist.prevUsdtCompra);
-            const trBtc = getTrendInfo(hist.btcUsd, hist.prevBtcUsd);
+            // Cúcuta Frontera no tiene un id de tendencia separado por compra/venta, pero el usuario dice que sí lo muestra la app.
+            // En tu código HTML actual, Frontera Venta tiene un ID 'trend-frontera', vamos a leerlo:
+            const trFronteraV = leerSimboloApp('trend-frontera');
+            const trFronteraC = { sym: '', color: '#facc15' }; // Compra no tiene tendencia en tu HTML, la dejamos vacía.
+
+            const trUsdt = leerSimboloApp('trend-usdt-binance');
+            const trBtc = leerSimboloApp('trend-btc-usd');
 
             const pBasePlan1 = (tarifasPubliTasaEstructura.plan1 || 5.00).toFixed(2).replace('.', ',');
             const precioPlanTxt = `$${pBasePlan1} USDT / MES`;
@@ -4146,7 +4152,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 ctx.fill();
                 ctx.restore();
 
-                // Título tarjeta
+                // Título tarjeta (TEXTO LIMPIO SIN EMOJIS)
                 ctx.fillStyle = '#ffffff';
                 ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
                 ctx.textAlign = 'left';
@@ -4176,15 +4182,17 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                     const valW = ctx.measureText(item.val).width;
                     ctx.restore();
 
-                    ctx.fillStyle = item.trend.color;
-                    ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
-                    ctx.fillText(item.trend.sym, x + 22 + valW + 8, curY + 34);
+                    if(item.trend && item.trend.sym !== '') {
+                        ctx.fillStyle = item.trend.color;
+                        ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
+                        ctx.fillText(item.trend.sym, x + 22 + valW + 8, curY + 34);
+                    }
 
                     curY += 82;
                 });
             };
 
-            // FILA 1: OFICIAL BCV (Izquierda) y OFICIAL SFC (Derecha) — Números grandes
+            // FILA 1: OFICIAL BCV (Izquierda) y OFICIAL SFC (Derecha) — TEXTOS LIMPIOS
             dibujarTarjetaCristal(42, 246, 310, 245, '#facc15', 'rgba(250, 204, 21, 0.5)', '🇻🇪 OFICIAL BCV', [
                 { label: 'DÓLAR BCV', val: valBcvUsd, color: '#fde047', glow: 'rgba(250, 204, 21, 0.35)', size: 30, trend: trBcvUsd },
                 { label: 'EURO BCV', val: valBcvEur, color: '#ffffff', size: 28, trend: trBcvEur }
@@ -4195,7 +4203,7 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
                 { label: 'EURO COLOMBIA', val: valEurCop, color: '#ffffff', size: 28, trend: trEurCop }
             ]);
 
-            // FILA 2: CASAS DE CAMBIO CÚCUTA / LA PARADA
+            // FILA 2: CASAS DE CAMBIO CÚCUTA / LA PARADA — TEXTO LIMPIO
             const frontGrad = ctx.createLinearGradient(42, 510, 42, 682);
             frontGrad.addColorStop(0, '#182438');
             frontGrad.addColorStop(1, '#0f1624');
@@ -4237,9 +4245,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const wComp = ctx.measureText(valCompraF).width;
             ctx.restore();
             
-            ctx.fillStyle = trFronteraC.color;
-            ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
-            ctx.fillText(trFronteraC.sym, 207 + wComp/2 + 10, 637);
+            if(trFronteraC.sym !== '') {
+                ctx.fillStyle = trFronteraC.color;
+                ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
+                ctx.fillText(trFronteraC.sym, 207 + wComp/2 + 10, 637);
+            }
 
             // Caja interna Venta Efectivo
             ctx.fillStyle = '#090e18';
@@ -4267,11 +4277,13 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const wVent = ctx.measureText(valVentaF).width;
             ctx.restore();
 
-            ctx.fillStyle = trFronteraV.color;
-            ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
-            ctx.fillText(trFronteraV.sym, 513 + wVent/2 + 10, 637);
+            if(trFronteraV.sym !== '') {
+                ctx.fillStyle = trFronteraV.color;
+                ctx.font = '900 21px "Plus Jakarta Sans", Arial, sans-serif';
+                ctx.fillText(trFronteraV.sym, 513 + wVent/2 + 10, 637);
+            }
 
-            // FILA 3: MERCADO CRIPTO & GLOBAL (2 Columnas Simétricas)
+            // FILA 3: MERCADO CRIPTO & GLOBAL (2 Columnas Simétricas) — TEXTO LIMPIO
             const cripGrad = ctx.createLinearGradient(42, 700, 42, 864);
             cripGrad.addColorStop(0, '#172236');
             cripGrad.addColorStop(1, '#0f1624');
@@ -4323,9 +4335,11 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             const wUsdt = ctx.measureText(valUsdt).width;
             ctx.restore();
 
-            ctx.fillStyle = trUsdt.color;
-            ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
-            ctx.fillText(trUsdt.sym, 64 + wUsdt + 8, 826);
+            if(trUsdt.sym !== '') {
+                ctx.fillStyle = trUsdt.color;
+                ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
+                ctx.fillText(trUsdt.sym, 64 + wUsdt + 8, 826);
+            }
 
             // Columna Derecha: Bitcoin Global
             ctx.fillStyle = '#94a3b8';
@@ -4334,13 +4348,17 @@ El incumplimiento de estas reglas causará la pérdida de la garantía sin derec
             ctx.fillText('BITCOIN GLOBAL', 656, 784);
 
             ctx.font = '900 19px "Plus Jakarta Sans", Arial, sans-serif';
-            const wTrBtc = ctx.measureText(trBtc.sym).width;
-            ctx.fillStyle = trBtc.color;
-            ctx.fillText(trBtc.sym, 656, 826);
+            let btcOffset = 0;
+            if(trBtc.sym !== '') {
+                const wTrBtc = ctx.measureText(trBtc.sym).width;
+                ctx.fillStyle = trBtc.color;
+                ctx.fillText(trBtc.sym, 656, 826);
+                btcOffset = wTrBtc + 8;
+            }
 
             ctx.fillStyle = '#ffffff';
             ctx.font = '900 28px "Plus Jakarta Sans", Arial, sans-serif';
-            ctx.fillText(valBtc, 656 - wTrBtc - 8, 828);
+            ctx.fillText(valBtc, 656 - btcOffset, 828);
 
             // FILA 4: LLAMADO A LA ACCIÓN COMERCIAL CON BOTÓN ORO METÁLICO
             const ctaGrad = ctx.createLinearGradient(42, 882, 678, 1028);
